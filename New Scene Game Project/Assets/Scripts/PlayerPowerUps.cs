@@ -3,12 +3,7 @@ using System.Collections;
 
 public class PlayerPowerUps : MonoBehaviour
 {
-    [SerializeField] RageBarUI rageBarUIScript;
-
-    public bool beatenRed = false; // bool for now cuz lazy can make it better latter
-    [SerializeField] float rage = 0f; 
-    [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup
-
+    [Header("NonPowerUp Variables")]
     [SerializeField] private Animator tentacleAnim;
     [SerializeField] private Animator EyeAnim;
 
@@ -17,7 +12,28 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] SpriteRenderer attackTentacle;
     [SerializeField] SpriteRenderer legTentacles;
 
+    [Header("Rage Variables")]
+    #region Rage Variables
+    [SerializeField] RageBarUI rageBarUIScript;
+
+    public bool beatenRed = false; // bool for now cuz lazy can make it better latter
+    [SerializeField] float rage = 0f; 
+    [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup
     [SerializeField] float rageDuration;
+    #endregion
+
+    [Header("Dash Variables")]
+    [SerializeField] private PlayerMovement movementScript;
+    [SerializeField] private DashBarUI dashBarUIScript;
+
+    public bool beatenYellow = false;
+
+    [SerializeField] private float curDashCooldown;
+    [SerializeField] private float maxDashCooldown;
+
+    [SerializeField] private float dashMoveSpeed;
+    [SerializeField] private float dashDuration;
+    [SerializeField] private GameObject player;
 
     void Start()
     {
@@ -29,9 +45,14 @@ public class PlayerPowerUps : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && beatenRed && rage >= maxRage)
         {
             RagePowerUpEffect();
+        } // i know this fucking else if is gonna fuck me over
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && beatenYellow && curDashCooldown >= maxDashCooldown)
+        {
+            Debug.Log("bojpaijjgapijg");
         }
     }
 
+    #region Rage PowerUp Methods
     public void IncreaseRage(float amount)
     {
         rage += amount;
@@ -85,4 +106,11 @@ public class PlayerPowerUps : MonoBehaviour
     {
         return maxRage;
     }
+    #endregion
+
+    #region Lightning Dash PowerUp Methods
+    
+    #endregion
+
+
 }
