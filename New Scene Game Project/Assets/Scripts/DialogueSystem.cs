@@ -36,7 +36,7 @@ public class DialogueSystem : MonoBehaviour
 
     void Update()
     {
-        if (isTalking && canAdvance && Input.GetKeyDown(KeyCode.E))
+        if (isTalking && canAdvance && Input.GetKeyDown(KeyCode.Space))
         {
             if (isTyping)
                 SkipTyping();
@@ -117,6 +117,8 @@ public class DialogueSystem : MonoBehaviour
         isTalking = false;
         canAdvance = false;
         dialoguePanel.SetActive(false);
+        playerImage.gameObject.SetActive(false);
+        redImage.gameObject.SetActive(false);
         StartCoroutine(DialogueCooldown());
     }
 
