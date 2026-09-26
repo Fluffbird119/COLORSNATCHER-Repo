@@ -4,7 +4,6 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private PlayerPowerUps playerPowerUpScript;
-    [SerializeField] private PlayerHealth healthScript;
 
     public float speed = 3f;
     public float stoppingDistance = 0f;
@@ -19,8 +18,10 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
 
+    [SerializeField] private PlayerHealth healthScript;
+
     // change this to change how fix are roatated
-    public float spriteAngleOffset = 0;
+    public float spriteAngleOffset = -90f;
 
     void Start()
     {
@@ -31,7 +32,6 @@ public class EnemyScript : MonoBehaviour
         {
             playerTransform = player.transform;
             playerPowerUpScript = player.GetComponent<PlayerPowerUps>();
-            healthScript = player.GetComponent<PlayerHealth>();
         }
         lastSpeedBoostTime = Time.time;
     }
@@ -77,12 +77,8 @@ public class EnemyScript : MonoBehaviour
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
         }
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
-            Debug.Log("hit player");
             healthScript.ChangeHealth(-1);
         }
     }
