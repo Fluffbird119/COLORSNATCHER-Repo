@@ -30,4 +30,9 @@ public class PlayerMovement : MonoBehaviour
             playerAnimation.SetBool("Player Walking", false);
         }
     }
+
+    public void setSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 }
