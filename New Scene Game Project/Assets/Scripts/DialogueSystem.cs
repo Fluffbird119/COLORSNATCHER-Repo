@@ -57,6 +57,11 @@ public class DialogueSystem : MonoBehaviour
             playerImage.gameObject.SetActive(false);
             redImage.gameObject.SetActive(true);
         }
+        else if (characterName.Equals("none"))
+        {
+            playerImage.gameObject.SetActive(false);
+            redImage.gameObject.SetActive(false);
+        }
         dialoguePanel.SetActive(true);
         ShowLine(currentLines[currentLine]);
         StartCoroutine(EnableAdvance());
@@ -171,22 +176,25 @@ public class DialogueSystem : MonoBehaviour
             isCutscenePlaying = true;
             StartDialogue(new string[] { "GRR, you taking down all these enemies makes me SUPER ANGRY", "I'm boiling with rage... im steaming out of my ears", "you could even say",
             "im SMOKIN HOTTTTTTTTTTTTTTTTT"}, "red");
-            isCutscenePlaying = false;
-        }
-        else if (cutsceneNumber == 3)
-        {
-            isCutscenePlaying = true;
-            StartDialogue(new string[] { "Why do you do this? Why? I send more of my men out and you just kill them ALL!." }, "red");
             while (isTalking)
             {
                 yield return null;
             }
             isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 3)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "Why do you do this? Why? I send more of my men out and you just kill them ALL!" }, "red");
+            while (isTalking)
+            {
+                yield return null;
+            }
             StartDialogue(new string[] { "You have something I need, lord of red.",
             "There are problems with me. Problems that must be solved.",
             "I can not live with myself. I have no purpose, no meaning.",
             "And your world is so beautiful. So crimson. So Vibrant.",
-            "I live with nothing. And here I was. No color. No soul. No beauty",
+            "I live with nothing. And here I was. No color. No soul. No beauty.",
             "I want your color. I wan't your red. I want the passion you feel and the anger you hold."}, "player");
             while (isTalking)
             {
@@ -195,6 +203,55 @@ public class DialogueSystem : MonoBehaviour
             StartDialogue(new string[] { "On my beautiful chiseled body and my mighty shrimp head",
             "YOU WILL DIEEEEEEEEE!!!!!!!!!",
             "and other dramatic war cries"}, "red");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 4)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "I...I lost... I actually LOST???", "ITS IMPOSSIBLE!!!", 
+                "I CANT LOSE TO SOMEONE LIKE YOU. SOMEBODY WITH NO PURPOSE, NO COLOR, NO FEELINGS, NO THOUGHTS, YOU'RE COMPLETELY FLAVORLESS!" }, "red");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] {"It's okay.", "I will be killing you now."}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "I thought with all of my might that no mere gray little b---- could f---ing kill me.",
+                "That my pure anger could be channeled into fire and fight.",
+                "Yet how could someone with no feelings possibly muster up the will to do this?",}, "red");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "..." }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Hah, I believe I see it now.",
+                "You are nothing. You had no purpose, no meaning, no will. And that absence became the significance. You had nothing but a will to be something.",
+                "And that blind obsession due to a lack of anything else gave you the meaning and purpose to kill me",
+                "I assume you're going to kill the other color lords and take their feelings too?",
+                "Well good f___ing luck."}, "red");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "...","You killed him." }, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] {"What... is this feeling? Is this it? The red anger of rage?",
+                "I can feel it now! The anger! The will! The motivation! The pure malice to kill everything! The adrenaline to achieve my goals!",
+                "I'm going to take every color. One kill at a time" }, "player");
             isCutscenePlaying = false;
         }
     }

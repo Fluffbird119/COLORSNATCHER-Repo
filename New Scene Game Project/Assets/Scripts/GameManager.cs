@@ -4,10 +4,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject smallEnemyPrefab;
+    public GameObject bigEnemyPrefab;
     public int waveOneCount = 10;
     public float minBounds = -100f;
     public float maxBounds = 100f;
     public int killsThisWave = 0;
+    public int waveTwoCount = 20;
+    public int waveThreeCount = 20;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -39,19 +43,72 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         StartCoroutine(DialogueSystem.instance.StartCutscene(2));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        killsThisWave = 0;
+        CreateWave(2);
+        while (killsThisWave < waveTwoCount)
+        {
+            yield return null;
+        }
+        StartCoroutine(DialogueSystem.instance.StartCutscene(3));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        killsThisWave = 0;
+        CreateWave(3);
+        while (killsThisWave < waveThreeCount)
+        {
+            yield return null;
+        }
+        StartCoroutine(DialogueSystem.instance.StartCutscene(4));
     }
 
     public void CreateWave(int waveNumber)
     {
-        if(waveNumber == 1)
+        if (waveNumber == 1)
         {
-            for (int i = 0; i < waveOneCount; i++)
+            SpawnEnemies(enemyPrefab, waveOneCount);
+        }
+        else if (waveNumber == 2)
+        {
+            SpawnEnemies(smallEnemyPrefab, waveTwoCount / 2);
+            SpawnEnemies(enemyPrefab, waveTwoCount / 2);
+        }
+        else if (waveNumber == 3)
+        {
+            SpawnEnemies(smallEnemyPrefab, waveTwoCount / 4);
+            SpawnEnemies(enemyPrefab, waveTwoCount / 2);
+            SpawnEnemies(bigEnemyPrefab, waveTwoCount / 4);
+        }
+    }
+
+    private void SpawnEnemies(GameObject prefabToSpawn, int count)
+    {
+        float checkRadius = 1.5f;
+        int maxAttempts = 30;
+        for (int i = 0; i < count; i++)
+        {
+            Vector2 spawnPosition = Vector2.zero;
+            bool validPositionFound = false;
+            int attempts = 0;
+            while (!validPositionFound && attempts < maxAttempts)
             {
                 float randomX = Random.Range(minBounds, maxBounds);
                 float randomY = Random.Range(minBounds, maxBounds);
-                Vector2 spawnPosition = new Vector2(randomX, randomY);
-                Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
+                spawnPosition = new Vector2(randomX, randomY);
+                Collider2D hitCollider = Physics2D.OverlapCircle(spawnPosition, checkRadius);
+                if (hitCollider == null)
+                {
+                    validPositionFound = true;
+                }
+
+                attempts++;
             }
+            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
         }
     }
 }
