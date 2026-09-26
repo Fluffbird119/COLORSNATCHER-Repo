@@ -12,6 +12,7 @@ public class EnemyScript : MonoBehaviour
     public float knockbackForce = 5f;
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
+    public int damage = 1;
 
     private Transform playerTransform;
     private Rigidbody2D rb;
