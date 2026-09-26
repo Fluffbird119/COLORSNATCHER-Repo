@@ -67,9 +67,10 @@ MonoBehaviour:
   enemyPrefab: {fileID: 8719147511489265977, guid: 3bd1c4bb03260a349b755884bc8c92ad, type: 3}
   smallEnemyPrefab: {fileID: 2855841578704052247, guid: d2f299c45c9349448b6ae9a076aae85a, type: 3}
   bigEnemyPrefab: {fileID: 2855841578704052247, guid: b02dba09b1876d346b1186a78e610689, type: 3}
-  waveOneCount: 10
+  speedEnemyPrefab: {fileID: 8719147511489265977, guid: 8b7ef972b8097d84bac7b5d53bb62bd6, type: 3}
+  shooterPrefab: {fileID: 8719147511489265977, guid: 825b1b4b74ab1ca4fa0ca50e2a09d36f, type: 3}
+  waveCount: 0a00000014000000140000000a0000000a000000
   minBounds: -100
   maxBounds: 100
   killsThisWave: 0
-  waveTwoCount: 20
-  waveThreeCount: 20
+  waveNumber: 0

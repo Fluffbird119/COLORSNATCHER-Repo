@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [SerializeField] PlayerAttack attackScript;
     [SerializeField] HealthBarUI healthBarUIScript;
     [SerializeField] GameObject youDiedMessageAndButton;
     [SerializeField] GameObject player;
@@ -26,6 +27,8 @@ public class PlayerHealth : MonoBehaviour
             {
                 Destroy(enemy);
             }
+
+            attackScript.ResumeEye();
 
             youDiedMessageAndButton.SetActive(true);
             player.SetActive(false);

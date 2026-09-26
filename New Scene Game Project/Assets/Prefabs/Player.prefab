@@ -523,9 +523,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5eb1996538c02743a57eb13c1b7ddba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackScript: {fileID: 7512916471692935934}
   healthBarUIScript: {fileID: 0}
   youDiedMessageAndButton: {fileID: 0}
   player: {fileID: 4667962735266773042}
+  playerTransform: {fileID: 5016473435061172441}
   health: 0
   maxHealth: 20
 --- !u!50 &665813947060500010
