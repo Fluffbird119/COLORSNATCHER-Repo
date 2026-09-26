@@ -52,7 +52,6 @@ public class PlayerAttack : MonoBehaviour
     // the blink eye animation should call this 
     public void PauseEye()
     {
-        Debug.Log("pause eye");
         eyeAnim.speed = 0;
         tentacleObject.SetActive(true);
         tentacleAnim.SetTrigger("Tentacle Attack");
@@ -62,7 +61,6 @@ public class PlayerAttack : MonoBehaviour
     // the end of the tentecle animatiion should call this
     public void ResumeEye()
     {
-        Debug.Log("resume eye");
         tentacleObject.SetActive(false);
         eyeAnim.speed = 0.5f;
         AnimatorStateInfo stateInfo = eyeAnim.GetCurrentAnimatorStateInfo(0);
