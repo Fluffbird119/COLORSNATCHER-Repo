@@ -14,7 +14,7 @@ public class HeadLookAtMouse : MonoBehaviour
     {
         Vector3 mousePos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
         float angleRad = Mathf.Atan2(mousePos.y - head.transform.position.y, mousePos.x - head.transform.position.x);
-        float angleDeg = (180 / Mathf.PI) * angleRad - 180;
+        float angleDeg = (180 / Mathf.PI) * angleRad - 90;
 
         head.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
     }

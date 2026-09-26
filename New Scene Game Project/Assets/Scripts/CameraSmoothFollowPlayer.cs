@@ -4,7 +4,7 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
 {
     [SerializeField] private Transform player;
     [SerializeField] private float smoothTime = 0.3f;
-    [SerializeField] private Vector3 offset = new Vector3(0f, 0f, -10f);
+    [SerializeField] private Vector3 offset = new Vector3(0f, -100f, -10f);
 
     private Vector3 velocity = Vector3.zero;
 

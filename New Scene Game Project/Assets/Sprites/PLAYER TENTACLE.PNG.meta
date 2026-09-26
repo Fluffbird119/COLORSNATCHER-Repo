@@ -112,10 +112,10 @@ TextureImporter:
       name: PLAYER TENTACLE_0
       rect:
         serializedVersion: 2
-        x: 100
-        y: 105
-        width: 1008
-        height: 722
+        x: 97
+        y: 103
+        width: 1012
+        height: 726
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -134,10 +134,10 @@ TextureImporter:
       name: PLAYER TENTACLE_1
       rect:
         serializedVersion: 2
-        x: 1287
+        x: 1286
         y: 195
-        width: 1007
-        height: 628
+        width: 1008
+        height: 629
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -156,10 +156,10 @@ TextureImporter:
       name: PLAYER TENTACLE_2
       rect:
         serializedVersion: 2
-        x: 2502
-        y: 290
-        width: 1064
-        height: 527
+        x: 2501
+        y: 289
+        width: 1065
+        height: 529
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -178,10 +178,10 @@ TextureImporter:
       name: PLAYER TENTACLE_3
       rect:
         serializedVersion: 2
-        x: 3698
-        y: 104
-        width: 1066
-        height: 721
+        x: 3695
+        y: 103
+        width: 1071
+        height: 723
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,7 +200,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c9c2fd51808a3a546bac8fc723fd057f
     internalID: 0
     vertices: []
     indices: 

@@ -10,11 +10,11 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        rb.linearVelocity = new Vector2(moveHorizontal, moveVertical) * speed;
+        rb.linearVelocity = new Vector2(moveHorizontal, moveVertical).normalized * speed;
     }
 }
