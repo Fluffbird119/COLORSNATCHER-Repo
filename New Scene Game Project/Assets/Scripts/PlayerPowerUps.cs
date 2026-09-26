@@ -63,14 +63,17 @@ public class PlayerPowerUps : MonoBehaviour
     #region Rage PowerUp Methods
     public void IncreaseRage(float amount)
     {
-        rage += amount;
-
-        if (rage > maxRage)
+        if (beatenRed)
         {
-            rage = maxRage;
-        }
+            rage += amount;
 
-        rageBarUIScript.UpdateRageVisual();
+            if (rage > maxRage)
+            {
+                rage = maxRage;
+            }
+
+            rageBarUIScript.UpdateRageVisual();
+        }
     }
 
     void RagePowerUpEffect()
