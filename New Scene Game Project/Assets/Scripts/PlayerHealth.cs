@@ -4,6 +4,8 @@ public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] HealthBarUI healthBarUIScript;
     [SerializeField] GameObject youDiedMessageAndButton;
+    [SerializeField] GameObject player;
+    [SerializeField] Transform playerTransform;
 
     public float health;
     public float maxHealth;
@@ -24,11 +26,15 @@ public class PlayerHealth : MonoBehaviour
             {
                 Destroy(enemy);
             }
+
+            youDiedMessageAndButton.SetActive(true);
+            player.SetActive(false);
         }
 
-        // turn on your died dialouge and set active on player to false
-        youDiedMessageAndButton.SetActive(true);
-        // then return player to 0,0 and call the start wave coroutnine
+        if (Input.GetMouseButtonDown(0))
+        {
+            ChangeHealth(-1);
+        }
     }
 
     // adds passed in amount to health
@@ -42,6 +48,31 @@ public class PlayerHealth : MonoBehaviour
         }
 
         healthBarUIScript.ChangeHealthVisual();
+    }
+
+    public void ResetPlayerStuff()
+    {
+        ChangeHealth(maxHealth);
+        playerTransform.position = new Vector2(0, 0);
+        player.SetActive(true);
+    }
+
+    public void ResetWaveStuff()
+    {
+        youDiedMessageAndButton.SetActive(false);
+
+        if (GameManager.Instance.waveNumber == 1)
+        {
+            StartCoroutine(GameManager.Instance.WaveOne());
+        }
+        else if (GameManager.Instance.waveNumber == 2)
+        {
+            StartCoroutine(GameManager.Instance.WaveTwo());
+        }
+        else if (GameManager.Instance.waveNumber == 3)
+        {
+            StartCoroutine(GameManager.Instance.WaveThree());
+        }
     }
 
     public float GetHealth()

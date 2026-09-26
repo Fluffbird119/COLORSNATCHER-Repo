@@ -524,7 +524,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarUIScript: {fileID: 0}
-  health: 20
+  youDiedMessageAndButton: {fileID: 0}
+  player: {fileID: 4667962735266773042}
+  health: 0
   maxHealth: 20
 --- !u!50 &665813947060500010
 Rigidbody2D:

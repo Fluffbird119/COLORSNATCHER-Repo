@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaveOne());
     }
 
-    private IEnumerator WaveOne()
+    public IEnumerator WaveOne()
     {
         waveNumber = 1;
         StartCoroutine(DialogueSystem.instance.StartCutscene(1));
@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        killsThisWave = 0;
         CreateWave();
         while(killsThisWave < waveOneCount)
         {
@@ -63,7 +64,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaveThree());
     }
 
-    private IEnumerator WaveThree()
+    public IEnumerator WaveThree()
     {
         waveNumber = 3;
         StartCoroutine(DialogueSystem.instance.StartCutscene(3));
