@@ -3,26 +3,23 @@ using UnityEngine.UI;
 
 public class HealthBarUI : MonoBehaviour
 {
-    public float Health;
-    public float MaxHealth;
-    public float Width;
-    public float Height;
+    [SerializeField] PlayerHealth healthScript;
 
+    private float health;
+    private float maxHealth;
+    public float width;
+    public float height;
 
     [SerializeField] private RectTransform healthBar;
 
-    public void SetMaxHealth(float newMaxHeath)
+
+    public void ChangeHealthVisual()
     {
-        MaxHealth = newMaxHeath;
-    }
+        health = healthScript.GetHealth();
+        maxHealth = healthScript.GetMaxHealth();
 
+        float newWidth = (health / maxHealth) * width;
 
-    // adds passed value to current health so pass in negatives for damage and positives for healing
-    public void ChangeHealth(float health)
-    {
-        Health += health;
-        float newWidth = (Health / MaxHealth) * Width;
-
-        healthBar.sizeDelta = new Vector2(newWidth, Height);
+        healthBar.sizeDelta = new Vector2(newWidth, height);
     }
 }

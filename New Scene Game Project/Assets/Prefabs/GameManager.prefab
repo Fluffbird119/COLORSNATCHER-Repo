@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2237931821375546553
 Transform:
   m_ObjectHideFlags: 0
@@ -64,7 +64,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54bc85ef50261b4388e794b1aa80bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 2855841578704052247, guid: 3bd1c4bb03260a349b755884bc8c92ad, type: 3}
+  enemyPrefab: {fileID: 8719147511489265977, guid: 3bd1c4bb03260a349b755884bc8c92ad, type: 3}
+  smallEnemyPrefab: {fileID: 2855841578704052247, guid: d2f299c45c9349448b6ae9a076aae85a, type: 3}
+  bigEnemyPrefab: {fileID: 2855841578704052247, guid: b02dba09b1876d346b1186a78e610689, type: 3}
   waveOneCount: 10
   minBounds: -100
   maxBounds: 100
+  killsThisWave: 0
+  waveTwoCount: 20
+  waveThreeCount: 20

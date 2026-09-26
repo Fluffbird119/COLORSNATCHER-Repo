@@ -51,7 +51,12 @@ public class PlayerPowerUps : MonoBehaviour
         } // i know this fucking else if is gonna fuck me over
         else if (Input.GetKeyDown(KeyCode.Alpha2) && beatenYellow && curDashCooldown >= maxDashCooldown)
         {
-            Debug.Log("bojpaijjgapijg");
+            Dash();
+        }
+
+        if (beatenYellow)
+        {
+            RechargeDash();
         }
     }
 
@@ -112,7 +117,33 @@ public class PlayerPowerUps : MonoBehaviour
     #endregion
 
     #region Lightning Dash PowerUp Methods
+    private void Dash()
+    {
+        // set cooldown back to zero
+        curDashCooldown = 0;
+        // set movespeed really high for dashDuration
+    }
+    private void RechargeDash()
+    {
+        if (curDashCooldown < maxDashCooldown)
+        {
+            Debug.Log("dash recharging");
+            curDashCooldown += 1f * Time.deltaTime;
+            curDashCooldown = Mathf.Clamp(curDashCooldown, 0f, maxDashCooldown); // Keep within bound
+
+            dashBarUIScript.UpdateDashVisual();
+        }
+    }
+
+    public float getCurCooldown()
+    {
+        return curDashCooldown;
+    }
     
+    public float getMaxCooldown()
+    {
+        return maxDashCooldown;
+    }
     #endregion
 
 

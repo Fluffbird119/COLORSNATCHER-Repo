@@ -10,4 +10,14 @@ public class DashBarUI : MonoBehaviour
     public float Height;
 
     [SerializeField] private RectTransform dashBar;
+
+    public void UpdateDashVisual()
+    {
+        curCooldown = playerPowerUpsScript.getCurCooldown();
+        maxCooldown = playerPowerUpsScript.getMaxCooldown();
+
+        float newHeight = (curCooldown / maxCooldown) * Height;
+
+        dashBar.sizeDelta = new Vector2(Width, newHeight);
+    }
 }
