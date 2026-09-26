@@ -55,7 +55,6 @@ public class PlayerAttack : MonoBehaviour
         eyeAnim.speed = 0;
         tentacleObject.SetActive(true);
         tentacleAnim.SetTrigger("Tentacle Attack");
-
     }
 
     // the end of the tentecle animatiion should call this
@@ -64,6 +63,6 @@ public class PlayerAttack : MonoBehaviour
         tentacleObject.SetActive(false);
         eyeAnim.speed = 2f;
         AnimatorStateInfo stateInfo = eyeAnim.GetCurrentAnimatorStateInfo(0);
-        eyeAnim.Play(stateInfo.shortNameHash, 0, stateInfo.normalizedTime + 0.01f);
+        eyeAnim.Play(stateInfo.shortNameHash, 0, stateInfo.normalizedTime + 0.1f);
     }
 }

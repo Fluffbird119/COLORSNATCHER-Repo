@@ -12,6 +12,8 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] SpriteRenderer attackTentacle;
     [SerializeField] SpriteRenderer legTentacles;
 
+    [SerializeField] private GameObject player;
+
     [Header("Rage Variables")]
     #region Rage Variables
     [SerializeField] RageBarUI rageBarUIScript;
@@ -23,6 +25,7 @@ public class PlayerPowerUps : MonoBehaviour
     #endregion
 
     [Header("Dash Variables")]
+    #region Dash variables
     [SerializeField] private PlayerMovement movementScript;
     [SerializeField] private DashBarUI dashBarUIScript;
 
@@ -33,7 +36,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     [SerializeField] private float dashMoveSpeed;
     [SerializeField] private float dashDuration;
-    [SerializeField] private GameObject player;
+    #endregion
 
     void Start()
     {
