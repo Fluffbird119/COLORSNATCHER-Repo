@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField] private PlayerPowerUps playerPowerUpScript;
+
     public float speed = 3f;
     public float stoppingDistance = 0f;
     public int maxHealth = 5;
@@ -74,6 +76,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Die()
     {
+        playerPowerUpScript.IncreaseRage(1f);
         Destroy(gameObject);
     }
 }
