@@ -3,6 +3,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float lifetime = 5f;
+    public PlayerHealth healthScript;
 
     void Start()
     {
@@ -14,6 +15,7 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
+            healthScript.ChangeHealth(-1);
         }
     }
 }

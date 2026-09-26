@@ -18,6 +18,11 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
 
+    [SerializeField] private PlayerHealth healthScript;
+
+    // change this to change how fix are roatated
+    public float spriteAngleOffset = -90f;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -44,6 +49,14 @@ public class EnemyScript : MonoBehaviour
         }
         if (playerTransform != null)
         {
+            Vector2 direction = (Vector2)playerTransform.position - rb.position;
+
+            // 2. Turn that vector into an angle in degrees
+            float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+            // 3. Apply the angle offset and set the Rigidbody's rotation
+            rb.rotation = targetAngle + spriteAngleOffset;
+
             float distance = Vector2.Distance(rb.position, playerTransform.position);
             if (distance > stoppingDistance)
             {
@@ -63,6 +76,10 @@ public class EnemyScript : MonoBehaviour
         {
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
+        }
+        if (collision.CompareTag("Player"))
+        {
+            healthScript.ChangeHealth(-1);
         }
     }
 

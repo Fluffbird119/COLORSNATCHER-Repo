@@ -33,11 +33,6 @@ public class PlayerHealth : MonoBehaviour
             youDiedMessageAndButton.SetActive(true);
             player.SetActive(false);
         }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            ChangeHealth(-1);
-        }
     }
 
     // adds passed in amount to health
