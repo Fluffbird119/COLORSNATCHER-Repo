@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public int waveOneCount = 10;
     public float minBounds = -100f;
     public float maxBounds = 100f;
+    public int killsThisWave = 0;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -33,6 +34,11 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         CreateWave(1);
+        while(killsThisWave < waveOneCount)
+        {
+            yield return null;
+        }
+        StartCoroutine(DialogueSystem.instance.StartCutscene(2));
     }
 
     public void CreateWave(int waveNumber)

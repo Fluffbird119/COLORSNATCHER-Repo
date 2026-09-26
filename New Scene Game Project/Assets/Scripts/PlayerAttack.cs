@@ -62,7 +62,7 @@ public class PlayerAttack : MonoBehaviour
     public void ResumeEye()
     {
         tentacleObject.SetActive(false);
-        eyeAnim.speed = 0.5f;
+        eyeAnim.speed = 2f;
         AnimatorStateInfo stateInfo = eyeAnim.GetCurrentAnimatorStateInfo(0);
         eyeAnim.Play(stateInfo.shortNameHash, 0, stateInfo.normalizedTime + 0.01f);
     }
