@@ -9,17 +9,16 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animation Stuff")]
     [SerializeField] Animator playerAnimation;
 
-    void Start()
-    {
-        
-    }
+    Vector2 input;
 
-    void FixedUpdate()
+    void Update()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
 
-        rb.linearVelocity = new Vector2(moveHorizontal, moveVertical).normalized * speed;
+        input = new Vector2(moveHorizontal, moveVertical);
+
+        rb.linearVelocity = input.normalized * speed;
 
         if (rb.linearVelocity.magnitude > 0)
         {
