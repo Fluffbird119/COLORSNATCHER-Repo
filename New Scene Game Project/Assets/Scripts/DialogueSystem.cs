@@ -30,6 +30,16 @@ public class DialogueSystem : MonoBehaviour
         instance = this;
     }
 
+    /*
+    void Start()
+    {
+        dialoguePanel.SetActive(false);
+        playerImage.gameObject.SetActive(false);
+        redImage.gameObject.SetActive(false);
+    }
+    */
+    
+
     void Update()
     {
         if (isTalking && canAdvance && Input.GetKeyDown(KeyCode.Space))
