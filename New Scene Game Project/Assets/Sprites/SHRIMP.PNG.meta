@@ -1,37 +1,37 @@
 fileFormatVersion: 2
-guid: 487d3a3ad07f3b147a33934dc73c3957
+guid: fb1e30d963376ee48ba2aa9f2eb4fddf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8415842772135936743
-    second: IMG_0149_0
+      213: 4557199824344711955
+    second: SHRIMP_0
   - first:
-      213: -6752288328765006160
-    second: IMG_0149_1
+      213: 7727478119946055798
+    second: SHRIMP_1
   - first:
-      213: -2721845091136078195
-    second: IMG_0149_2
+      213: -8024587425895165089
+    second: SHRIMP_2
   - first:
-      213: -6461190312804109914
-    second: IMG_0149_3
+      213: -8505578826085756607
+    second: SHRIMP_3
   - first:
-      213: -7255982017981963705
-    second: IMG_0149_4
+      213: -4017624056141753336
+    second: SHRIMP_4
   - first:
-      213: 4951630026995416320
-    second: IMG_0149_5
+      213: -6223511189916552185
+    second: SHRIMP_5
   - first:
-      213: -4174784480169700820
-    second: IMG_0149_6
+      213: -2715246925944422497
+    second: SHRIMP_6
   - first:
-      213: 1413017877169154762
-    second: IMG_0149_7
+      213: -3110958531021060885
+    second: SHRIMP_7
   - first:
-      213: -5905538558911065390
-    second: IMG_0149_8
+      213: -755593659730143382
+    second: SHRIMP_8
   - first:
-      213: 3206724692667353689
-    second: IMG_0149_9
+      213: 2027680518268510991
+    second: SHRIMP_9
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -64,7 +64,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -102,7 +102,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -127,7 +127,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_0149_0
+      name: SHRIMP_0
       rect:
         serializedVersion: 2
         x: 235
@@ -142,14 +142,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7e283b689641bc470800000000000000
-      internalID: 8415842772135936743
+      spriteID: 3130a8c581d6e3f30800000000000000
+      internalID: 4557199824344711955
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_1
+      name: SHRIMP_1
       rect:
         serializedVersion: 2
         x: 1292
@@ -164,14 +164,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0be12f64a8d0b42a0800000000000000
-      internalID: -6752288328765006160
+      spriteID: 670fcfc78648d3b60800000000000000
+      internalID: 7727478119946055798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_2
+      name: SHRIMP_2
       rect:
         serializedVersion: 2
         x: 2351
@@ -186,14 +186,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d8e71318f401a3ad0800000000000000
-      internalID: -2721845091136078195
+      spriteID: f53d3729040f2a090800000000000000
+      internalID: -8024587425895165089
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_3
+      name: SHRIMP_3
       rect:
         serializedVersion: 2
         x: 3412
@@ -208,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6a1bd13b4ad3556a0800000000000000
-      internalID: -6461190312804109914
+      spriteID: 14113164f1d16f980800000000000000
+      internalID: -8505578826085756607
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_4
+      name: SHRIMP_4
       rect:
         serializedVersion: 2
         x: 4475
@@ -230,14 +230,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 74220996cc29d4b90800000000000000
-      internalID: -7255982017981963705
+      spriteID: 8045b9c05388e38c0800000000000000
+      internalID: -4017624056141753336
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_5
+      name: SHRIMP_5
       rect:
         serializedVersion: 2
         x: 240
@@ -252,14 +252,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 00d38325649b7b440800000000000000
-      internalID: 4951630026995416320
+      spriteID: 704fa5ddb85a1a9a0800000000000000
+      internalID: -6223511189916552185
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_6
+      name: SHRIMP_6
       rect:
         serializedVersion: 2
         x: 1298
@@ -274,14 +274,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c22dbad52af2016c0800000000000000
-      internalID: -4174784480169700820
+      spriteID: f9f7c9d8e41815ad0800000000000000
+      internalID: -2715246925944422497
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_7
+      name: SHRIMP_7
       rect:
         serializedVersion: 2
         x: 2353
@@ -296,14 +296,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: acaa1f5d54c0c9310800000000000000
-      internalID: 1413017877169154762
+      spriteID: be4c487d2b7a3d4d0800000000000000
+      internalID: -3110958531021060885
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_8
+      name: SHRIMP_8
       rect:
         serializedVersion: 2
         x: 3412
@@ -318,14 +318,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2d2dbb438ff4b0ea0800000000000000
-      internalID: -5905538558911065390
+      spriteID: a675f3dd1979385f0800000000000000
+      internalID: -755593659730143382
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0149_9
+      name: SHRIMP_9
       rect:
         serializedVersion: 2
         x: 4471
@@ -340,8 +340,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 95a49e63e13908c20800000000000000
-      internalID: 3206724692667353689
+      spriteID: f03ef5130b4c32c10800000000000000
+      internalID: 2027680518268510991
       vertices: []
       indices: 
       edges: []
@@ -360,16 +360,16 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_0149_0: 8415842772135936743
-      IMG_0149_1: -6752288328765006160
-      IMG_0149_2: -2721845091136078195
-      IMG_0149_3: -6461190312804109914
-      IMG_0149_4: -7255982017981963705
-      IMG_0149_5: 4951630026995416320
-      IMG_0149_6: -4174784480169700820
-      IMG_0149_7: 1413017877169154762
-      IMG_0149_8: -5905538558911065390
-      IMG_0149_9: 3206724692667353689
+      SHRIMP_0: 4557199824344711955
+      SHRIMP_1: 7727478119946055798
+      SHRIMP_2: -8024587425895165089
+      SHRIMP_3: -8505578826085756607
+      SHRIMP_4: -4017624056141753336
+      SHRIMP_5: -6223511189916552185
+      SHRIMP_6: -2715246925944422497
+      SHRIMP_7: -3110958531021060885
+      SHRIMP_8: -755593659730143382
+      SHRIMP_9: 2027680518268510991
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

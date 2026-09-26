@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: 56dc86dfe886de644a0f8211d618b765
+guid: 62e3b1987fe3f274db2e9e0511cee8e3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8546130791101926094
-    second: IMG_0154_0
+      213: -4994045265728382883
+    second: PLAYER EYE_0
   - first:
-      213: 9037018235883348467
-    second: IMG_0154_1
+      213: 2920404732150609381
+    second: PLAYER EYE_1
   - first:
-      213: -6542300990690614983
-    second: IMG_0154_2
+      213: -4831129847811874358
+    second: PLAYER EYE_2
   - first:
-      213: 3386100702134038111
-    second: IMG_0154_3
+      213: 349253028759466432
+    second: PLAYER EYE_3
+  - first:
+      213: 4291443502307570471
+    second: PLAYER EYE_4
+  - first:
+      213: 7995923767082209313
+    second: PLAYER EYE_5
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -84,7 +90,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -109,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IMG_0154_0
+      name: PLAYER EYE_0
       rect:
         serializedVersion: 2
-        x: 100
-        y: 105
-        width: 1008
-        height: 722
+        x: 563
+        y: 2114
+        width: 154
+        height: 100
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -124,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2357758235b066980800000000000000
-      internalID: -8546130791101926094
+      spriteID: d58d9085a4691bab0800000000000000
+      internalID: -4994045265728382883
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0154_1
+      name: PLAYER EYE_1
       rect:
         serializedVersion: 2
-        x: 1287
-        y: 195
-        width: 1007
-        height: 628
+        x: 1772
+        y: 2140
+        width: 154
+        height: 51
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,20 +152,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 3f1ed829430f96d70800000000000000
-      internalID: 9037018235883348467
+      spriteID: 5e5f43481ac578820800000000000000
+      internalID: 2920404732150609381
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0154_2
+      name: PLAYER EYE_2
       rect:
         serializedVersion: 2
-        x: 2502
-        y: 290
-        width: 1064
-        height: 527
+        x: 2985
+        y: 2167
+        width: 147
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -168,20 +174,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 931233c59e31535a0800000000000000
-      internalID: -6542300990690614983
+      spriteID: ac1e265fff064fcb0800000000000000
+      internalID: -4831129847811874358
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: IMG_0154_3
+      name: PLAYER EYE_3
       rect:
         serializedVersion: 2
-        x: 3698
-        y: 104
-        width: 1066
-        height: 721
+        x: 4191
+        y: 2143
+        width: 150
+        height: 48
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -190,8 +196,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: f5e6664f5a8ddfe20800000000000000
-      internalID: 3386100702134038111
+      spriteID: 0c1ffeb77cbc8d400800000000000000
+      internalID: 349253028759466432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLAYER EYE_4
+      rect:
+        serializedVersion: 2
+        x: 5397
+        y: 2111
+        width: 153
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72373b8d0254e8b30800000000000000
+      internalID: 4291443502307570471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLAYER EYE_5
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 831
+        width: 154
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 120d90c4d4a37fe60800000000000000
+      internalID: 7995923767082209313
       vertices: []
       indices: 
       edges: []
@@ -200,7 +250,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c5c12cad68fa5b847806dfd657c7e0e9
     internalID: 0
     vertices: []
     indices: 
@@ -210,10 +260,12 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IMG_0154_0: -8546130791101926094
-      IMG_0154_1: 9037018235883348467
-      IMG_0154_2: -6542300990690614983
-      IMG_0154_3: 3386100702134038111
+      PLAYER EYE_0: -4994045265728382883
+      PLAYER EYE_1: 2920404732150609381
+      PLAYER EYE_2: -4831129847811874358
+      PLAYER EYE_3: 349253028759466432
+      PLAYER EYE_4: 4291443502307570471
+      PLAYER EYE_5: 7995923767082209313
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
