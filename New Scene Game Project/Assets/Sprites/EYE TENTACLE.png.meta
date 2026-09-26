@@ -133,12 +133,12 @@ TextureImporter:
       name: EYE TENTACLE_0
       rect:
         serializedVersion: 2
-        x: 636
-        y: 3177
-        width: 805
-        height: 500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 639
+        y: 3368
+        width: 113
+        height: 109
+      alignment: 9
+      pivot: {x: 0.06538162, y: 0.6268568}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -155,12 +155,12 @@ TextureImporter:
       name: EYE TENTACLE_1
       rect:
         serializedVersion: 2
-        x: 2085
-        y: 3255
-        width: 805
-        height: 438
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 2088
+        y: 3414
+        width: 244
+        height: 198
+      alignment: 9
+      pivot: {x: 0.027094606, y: 0.21102011}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -178,11 +178,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3533
-        y: 3221
-        width: 805
-        height: 500
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 3371
+        width: 332
+        height: 223
+      alignment: 9
+      pivot: {x: 0.023186006, y: 0.36743164}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -199,12 +199,12 @@ TextureImporter:
       name: EYE TENTACLE_3
       rect:
         serializedVersion: 2
-        x: 4975
-        y: 3202
-        width: 805
-        height: 540
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 4971
+        y: 3393
+        width: 480
+        height: 332
+      alignment: 9
+      pivot: {x: 0.017225139, y: 0.15531462}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -221,12 +221,12 @@ TextureImporter:
       name: EYE TENTACLE_4
       rect:
         serializedVersion: 2
-        x: 6425
-        y: 3162
-        width: 805
-        height: 621
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 6422
+        y: 3389
+        width: 467
+        height: 361
+      alignment: 9
+      pivot: {x: 0.019271947, y: 0.1301939}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -243,12 +243,12 @@ TextureImporter:
       name: EYE TENTACLE_5
       rect:
         serializedVersion: 2
-        x: 597
-        y: 1841
-        width: 805
-        height: 565
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 593
+        y: 1862
+        width: 470
+        height: 350
+      alignment: 9
+      pivot: {x: 0.09361702, y: 0.8371428}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -266,11 +266,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 2053
-        y: 1853
-        width: 805
-        height: 629
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 1852
+        width: 452
+        height: 371
+      alignment: 9
+      pivot: {x: 0.10176991, y: 0.85983825}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -288,11 +288,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 3497
-        y: 1828
-        width: 827
-        height: 638
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        y: 1852
+        width: 453
+        height: 371
+      alignment: 9
+      pivot: {x: 0.11037528, y: 0.8625337}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -309,12 +309,12 @@ TextureImporter:
       name: EYE TENTACLE_8
       rect:
         serializedVersion: 2
-        x: 4981
-        y: 1964
-        width: 805
-        height: 441
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 4978
+        y: 2089
+        width: 335
+        height: 222
+      alignment: 9
+      pivot: {x: 0.026865672, y: 0.33783785}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -333,10 +333,10 @@ TextureImporter:
         serializedVersion: 2
         x: 6430
         y: 2131
-        width: 805
+        width: 243
         height: 194
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.024691358, y: 0.21649484}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -355,10 +355,10 @@ TextureImporter:
         serializedVersion: 2
         x: 639
         y: 799
-        width: 805
+        width: 110
         height: 113
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      alignment: 9
+      pivot: {x: 0.07272727, y: 0.7522124}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
