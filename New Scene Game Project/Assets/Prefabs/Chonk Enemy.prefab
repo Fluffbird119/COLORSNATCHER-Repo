@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 792241601117970521}
   - component: {fileID: 288809302001428004}
   - component: {fileID: 4739332431938524062}
-  - component: {fileID: -3348958892605144913}
-  - component: {fileID: 2689489989738015194}
+  - component: {fileID: -9208219351790336122}
   m_Layer: 0
   m_Name: Chonk Enemy
   m_TagString: Enemy
@@ -31,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -80,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 3327998091030722509, guid: 2f1ba09bb10b3214ab90eee768a9df7b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -4994045265728382883, guid: 62e3b1987fe3f274db2e9e0511cee8e3, type: 3}
+  m_Color: {r: 0, g: 1, b: 0.086761, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -104,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPowerUpScript: {fileID: 0}
+  healthScript: {fileID: 0}
   speed: 3
   stoppingDistance: 0
   maxHealth: 7
@@ -111,6 +111,7 @@ MonoBehaviour:
   knockbackDuration: 1
   damage: 1
   proceduralSpeed: 0
+  spriteAngleOffset: 0
 --- !u!50 &4739332431938524062
 Rigidbody2D:
   serializedVersion: 5
@@ -138,8 +139,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &-3348958892605144913
-CircleCollider2D:
+--- !u!60 &-9208219351790336122
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -173,26 +174,23 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.77
---- !u!95 &2689489989738015194
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2855841578704052247}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 271c7572d0e59bc45808da93e8cf2733, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5400001, y: 1.0002997}
+    newSize: {x: 1.5300001, y: 1.0903267}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.4748829, y: 0.5018028}
+      - {x: -0.74031264, y: 0.23637313}
+      - {x: -0.74031264, y: -0.26499408}
+      - {x: -0.5338673, y: -0.50093156}
+      - {x: 0.55734366, y: -0.50093156}
+      - {x: 0.8227734, y: -0.38296282}
+      - {x: 0.8227734, y: 0.118404366}
+      - {x: 0.55734366, y: 0.5018028}
+  m_UseDelaunayMesh: 0
