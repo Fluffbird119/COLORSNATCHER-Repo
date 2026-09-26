@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 792241601117970521}
   - component: {fileID: 288809302001428004}
   - component: {fileID: 4739332431938524062}
-  - component: {fileID: -3348958892605144913}
+  - component: {fileID: 4636669971963895850}
   m_Layer: 0
   m_Name: Smol Enemy
   m_TagString: Enemy
@@ -103,12 +103,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPowerUpScript: {fileID: 0}
+  healthScript: {fileID: 0}
   speed: 10
   stoppingDistance: 0
   maxHealth: 3
   knockbackForce: 15
   knockbackDuration: 1
   damage: 1
+  proceduralSpeed: 0
+  spriteAngleOffset: 0
 --- !u!50 &4739332431938524062
 Rigidbody2D:
   serializedVersion: 5
@@ -136,8 +139,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &-3348958892605144913
-CircleCollider2D:
+--- !u!60 &4636669971963895850
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -171,4 +174,23 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.77
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.5400001, y: 1.0002997}
+    newSize: {x: 1.5300001, y: 1.0903267}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.4748829, y: 0.5018028}
+      - {x: -0.74031264, y: 0.23637313}
+      - {x: -0.74031264, y: -0.26499408}
+      - {x: -0.5338673, y: -0.50093156}
+      - {x: 0.55734366, y: -0.50093156}
+      - {x: 0.8227734, y: -0.38296282}
+      - {x: 0.8227734, y: 0.118404366}
+      - {x: 0.55734366, y: 0.5018028}
+  m_UseDelaunayMesh: 0
