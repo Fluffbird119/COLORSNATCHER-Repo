@@ -904,8 +904,8 @@ Transform:
   m_GameObject: {fileID: 1714951690}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7, y: 8.5, z: 1}
+  m_LocalPosition: {x: -7.7809, y: 21.5302, z: 0}
+  m_LocalScale: {x: 5.071793, y: 4.8705173, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1467,6 +1467,10 @@ PrefabInstance:
       propertyPath: rageBarUIScript
       value: 
       objectReference: {fileID: 1920280087}
+    - target: {fileID: 2501471015635225836, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: m_SortingOrder
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
