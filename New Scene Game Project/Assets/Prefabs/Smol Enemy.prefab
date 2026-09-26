@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 792241601117970521}
   - component: {fileID: 288809302001428004}
   - component: {fileID: 4739332431938524062}
-  - component: {fileID: -3348958892605144913}
   - component: {fileID: 5362711996799352816}
+  - component: {fileID: -419930719568672656}
   m_Layer: 0
   m_Name: Smol Enemy
   m_TagString: Enemy
@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 10.5}
+  m_LocalScale: {x: 0.25, y: 0.25, z: 5.25}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,8 +77,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1516441201
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -830398599913431855, guid: e1107c9440429dc41b71818d236a8142, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104,6 +104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPowerUpScript: {fileID: 0}
+  healthScript: {fileID: 0}
   speed: 10
   stoppingDistance: 0
   maxHealth: 3
@@ -111,6 +112,7 @@ MonoBehaviour:
   knockbackDuration: 1
   damage: 1
   proceduralSpeed: 0
+  spriteAngleOffset: 0
 --- !u!50 &4739332431938524062
 Rigidbody2D:
   serializedVersion: 5
@@ -138,8 +140,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &-3348958892605144913
-CircleCollider2D:
+--- !u!95 &5362711996799352816
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2855841578704052247}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2cc4143d92e948e478e67f337be6f19b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &-419930719568672656
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -173,26 +197,45 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.77
---- !u!95 &5362711996799352816
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2855841578704052247}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2cc4143d92e948e478e67f337be6f19b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 8.82, y: 8.228027}
+    newSize: {x: 1.5300001, y: 1.0903267}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 4.4321876, y: -1.9538573}
+      - {x: 4.4321876, y: -0.5944823}
+      - {x: 3.5415626, y: 0.4836427}
+      - {x: 3.8696876, y: 0.9055177}
+      - {x: 3.8228126, y: 2.0773926}
+      - {x: 3.5415626, y: 2.8273926}
+      - {x: 2.2759376, y: 4.0930176}
+      - {x: 2.1353126, y: 4.1398926}
+      - {x: 0.9634377, y: 4.1398926}
+      - {x: 0.5884377, y: 4.0461426}
+      - {x: -0.16156232, y: 3.9523926}
+      - {x: -1.1459373, y: 3.4836426}
+      - {x: -2.8334374, y: 2.5930176}
+      - {x: -3.7240624, y: 1.8430177}
+      - {x: -3.9584374, y: 1.2805177}
+      - {x: -3.9584374, y: 0.5773927}
+      - {x: -4.3803124, y: -0.4069823}
+      - {x: -4.4271874, y: -0.5944823}
+      - {x: -4.4271874, y: -1.3444823}
+      - {x: -4.2396874, y: -1.7663573}
+      - {x: -3.5834374, y: -2.6101074}
+      - {x: -2.6928124, y: -3.0788574}
+      - {x: -1.5209373, y: -3.6413574}
+      - {x: -0.48968732, y: -3.8757324}
+      - {x: 0.40093768, y: -4.0163574}
+      - {x: 1.0571877, y: -4.1101074}
+      - {x: 1.8071877, y: -4.1101074}
+      - {x: 3.2134376, y: -3.7351074}
+      - {x: 3.9165626, y: -3.0319824}
+      - {x: 4.1978126, y: -2.5632324}
+  m_UseDelaunayMesh: 0

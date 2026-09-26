@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1516441201
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -4994045265728382883, guid: 62e3b1987fe3f274db2e9e0511cee8e3, type: 3}
   m_Color: {r: 1, g: 0.90100497, b: 0, a: 1}
@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPowerUpScript: {fileID: 0}
+  healthScript: {fileID: 0}
   speed: 1
   stoppingDistance: 0
   maxHealth: 5
@@ -110,6 +111,7 @@ MonoBehaviour:
   knockbackDuration: 1
   damage: 1
   proceduralSpeed: 1
+  spriteAngleOffset: 0
 --- !u!50 &1123261327007499238
 Rigidbody2D:
   serializedVersion: 5
