@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class HeadLookAtMouse : MonoBehaviour
 {
-    private Camera cam;
+    [SerializeField] private Camera cam;
+    [SerializeField] private GameObject head;
 
     void Start()
     {
@@ -12,9 +13,9 @@ public class HeadLookAtMouse : MonoBehaviour
     void Update()
     {
         Vector3 mousePos = (Vector2)cam.ScreenToWorldPoint(Input.mousePosition);
-        float angleRad = Mathf.Atan2(mousePos.y - transform.position.y, mousePos.x - transform.position.x);
-        float angleDed = (180 / Mathf.PI) * angleRad - 90; // offset by 90 degs
+        float angleRad = Mathf.Atan2(mousePos.y - head.transform.position.y, mousePos.x - head.transform.position.x);
+        float angleDeg = (180 / Mathf.PI) * angleRad - 180;
 
-        transform.rotation = Quaternion.Euler(0f, 0f, angleDed);
+        head.transform.rotation = Quaternion.Euler(0f, 0f, angleDeg);
     }
 }
