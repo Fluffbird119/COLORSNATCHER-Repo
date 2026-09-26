@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public int killsThisWave = 0;
     public int waveTwoCount = 20;
     public int waveThreeCount = 20;
+    public int waveNumber = 0;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -27,39 +28,51 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(StartGame());
+        StartCoroutine(WaveOne());
     }
 
-    private IEnumerator StartGame()
+    private IEnumerator WaveOne()
     {
+        waveNumber = 1;
         StartCoroutine(DialogueSystem.instance.StartCutscene(1));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
-        CreateWave(1);
+        CreateWave();
         while(killsThisWave < waveOneCount)
         {
             yield return null;
         }
+        StartCoroutine(WaveTwo());
+    }
+    public IEnumerator WaveTwo()
+    {
+        waveNumber = 2;
         StartCoroutine(DialogueSystem.instance.StartCutscene(2));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
         killsThisWave = 0;
-        CreateWave(2);
+        CreateWave();
         while (killsThisWave < waveTwoCount)
         {
             yield return null;
         }
+        StartCoroutine(WaveThree());
+    }
+
+    private IEnumerator WaveThree()
+    {
+        waveNumber = 3;
         StartCoroutine(DialogueSystem.instance.StartCutscene(3));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
         killsThisWave = 0;
-        CreateWave(3);
+        CreateWave();
         while (killsThisWave < waveThreeCount)
         {
             yield return null;
@@ -67,7 +80,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(DialogueSystem.instance.StartCutscene(4));
     }
 
-    public void CreateWave(int waveNumber)
+    public void CreateWave()
     {
         if (waveNumber == 1)
         {
