@@ -25,6 +25,7 @@ public class EnemyScript : MonoBehaviour
         if (player != null)
         {
             playerTransform = player.transform;
+            playerPowerUpScript = player.GetComponent<PlayerPowerUps>();
         }
     }
 
@@ -77,7 +78,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Die()
     {
-        //playerPowerUpScript.IncreaseRage(1f);
+        playerPowerUpScript.IncreaseRage(1f);
         GameManager.Instance.killsThisWave++;
         Destroy(gameObject);
     }
