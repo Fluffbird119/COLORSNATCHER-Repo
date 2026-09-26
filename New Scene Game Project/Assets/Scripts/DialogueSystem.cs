@@ -23,20 +23,16 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.UI.Image playerImage;
     public UnityEngine.UI.Image redImage;
 
+    public bool isCutscenePlaying = false;
+
     void Awake()
     {
         instance = this;
     }
 
-    void Start()
-    {
-        dialoguePanel.SetActive(false);
-        StartCoroutine(StartCutscene(1));
-    }
-
     void Update()
     {
-        if (isTalking && canAdvance && Input.GetKeyDown(KeyCode.E))
+        if (isTalking && canAdvance && Input.GetKeyDown(KeyCode.Space))
         {
             if (isTyping)
                 SkipTyping();
@@ -117,6 +113,8 @@ public class DialogueSystem : MonoBehaviour
         isTalking = false;
         canAdvance = false;
         dialoguePanel.SetActive(false);
+        playerImage.gameObject.SetActive(false);
+        redImage.gameObject.SetActive(false);
         StartCoroutine(DialogueCooldown());
     }
 
@@ -127,16 +125,17 @@ public class DialogueSystem : MonoBehaviour
         dialogueCooldown = false;
     }
 
-    private IEnumerator StartCutscene(int cutsceneNumer)
+    public IEnumerator StartCutscene(int cutsceneNumber)
     {
-        if (cutsceneNumer == 1)
+        if (cutsceneNumber == 1)
         {
+            isCutscenePlaying = true;
             StartDialogue(new string[] { "It has been so long. so so so so so long",
                 " but i have found it",
                 "the red land",
                 "the land of red",
                 "a land of redness"}, "player");
-            while(isTalking)
+            while (isTalking)
             {
                 yield return null;
             }
@@ -160,11 +159,43 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "DIEEEEEEEEEE",  "btw use left click button to attack and WASD/arrows to move around" }, "red");
+            StartDialogue(new string[] { "DIEEEEEEEEEE", "btw use left click button to attack and WASD/arrows to move around" }, "red");
             while (isTalking)
             {
                 yield return null;
             }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 2)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "GRR, you taking down all these enemies makes me SUPER ANGRY", "I'm boiling with rage... im steaming out of my ears", "you could even say",
+            "im SMOKIN HOTTTTTTTTTTTTTTTTT"}, "red");
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 3)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "Why do you do this? Why? I send more of my men out and you just kill them ALL!." }, "red");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+            StartDialogue(new string[] { "You have something I need, lord of red.",
+            "There are problems with me. Problems that must be solved.",
+            "I can not live with myself. I have no purpose, no meaning.",
+            "And your world is so beautiful. So crimson. So Vibrant.",
+            "I live with nothing. And here I was. No color. No soul. No beauty",
+            "I want your color. I wan't your red. I want the passion you feel and the anger you hold."}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "On my beautiful chiseled body and my mighty shrimp head",
+            "YOU WILL DIEEEEEEEEE!!!!!!!!!",
+            "and other dramatic war cries"}, "red");
+            isCutscenePlaying = false;
         }
     }
 }
