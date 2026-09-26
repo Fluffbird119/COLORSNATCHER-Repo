@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-<<<<<<< Updated upstream
     [SerializeField] private float speed;
-=======
->>>>>>> Stashed changes
+    [SerializeField] private Rigidbody2D rb;
+
     void Start()
     {
         
@@ -13,6 +12,9 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        
+        float moveHorizontal = Input.GetAxis("Horizontal");
+        float moveVertical = Input.GetAxis("Vertical");
+
+        rb.linearVelocity = new Vector2(moveHorizontal, moveVertical) * speed;
     }
 }
