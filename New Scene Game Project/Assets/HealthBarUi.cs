@@ -25,11 +25,4 @@ public class HealthBarUi : MonoBehaviour
 
         healthBar.sizeDelta = new Vector2(newWidth, Height);
     }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0)) {
-            ChangeHealth(-1);
-        }
-    }
 }
