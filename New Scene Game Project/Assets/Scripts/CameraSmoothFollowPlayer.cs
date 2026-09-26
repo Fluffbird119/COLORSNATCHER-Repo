@@ -3,8 +3,8 @@ using UnityEngine;
 public class CameraSmoothFollowPlayer : MonoBehaviour
 {
     [SerializeField] private Transform player;
-    [SerializeField] private float smoothTime = 0.3f;
-    [SerializeField] private Vector3 offset = new Vector3(0f, -100f, -10f);
+    [SerializeField] private float smoothTime;
+    [SerializeField] private Vector3 offset;
 
     private Vector3 velocity = Vector3.zero;
 

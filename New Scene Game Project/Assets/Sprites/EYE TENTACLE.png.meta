@@ -1,0 +1,403 @@
+fileFormatVersion: 2
+guid: f0f85672976978242930998fb15db52f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4190338958771332382
+    second: EYE TENTACLE_0
+  - first:
+      213: 2458261857194193382
+    second: EYE TENTACLE_1
+  - first:
+      213: 4546189512011983555
+    second: EYE TENTACLE_2
+  - first:
+      213: 2948010128550050068
+    second: EYE TENTACLE_3
+  - first:
+      213: 142487831180085594
+    second: EYE TENTACLE_4
+  - first:
+      213: -4628616706678666808
+    second: EYE TENTACLE_5
+  - first:
+      213: 1432565973003704576
+    second: EYE TENTACLE_6
+  - first:
+      213: 5489572727398752315
+    second: EYE TENTACLE_7
+  - first:
+      213: -3521571429662536096
+    second: EYE TENTACLE_8
+  - first:
+      213: 8722558366139652167
+    second: EYE TENTACLE_9
+  - first:
+      213: 7510637261435710326
+    second: EYE TENTACLE_10
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: EYE TENTACLE_0
+      rect:
+        serializedVersion: 2
+        x: 636
+        y: 3177
+        width: 805
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea54f91bece8d5c0800000000000000
+      internalID: -4190338958771332382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_1
+      rect:
+        serializedVersion: 2
+        x: 2085
+        y: 3255
+        width: 805
+        height: 438
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e1b3fa72208d1220800000000000000
+      internalID: 2458261857194193382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_2
+      rect:
+        serializedVersion: 2
+        x: 3533
+        y: 3221
+        width: 805
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3caa411464f471f30800000000000000
+      internalID: 4546189512011983555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_3
+      rect:
+        serializedVersion: 2
+        x: 4975
+        y: 3202
+        width: 805
+        height: 540
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419ba7ab79f69e820800000000000000
+      internalID: 2948010128550050068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_4
+      rect:
+        serializedVersion: 2
+        x: 6425
+        y: 3162
+        width: 805
+        height: 621
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a590e427de73af100800000000000000
+      internalID: 142487831180085594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_5
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 1841
+        width: 805
+        height: 565
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9caf4f0a9d3cfb0800000000000000
+      internalID: -4628616706678666808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_6
+      rect:
+        serializedVersion: 2
+        x: 2053
+        y: 1853
+        width: 805
+        height: 629
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0099232992f71e310800000000000000
+      internalID: 1432565973003704576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_7
+      rect:
+        serializedVersion: 2
+        x: 3497
+        y: 1828
+        width: 827
+        height: 638
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3066418f41ee2c40800000000000000
+      internalID: 5489572727398752315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_8
+      rect:
+        serializedVersion: 2
+        x: 4981
+        y: 1964
+        width: 805
+        height: 441
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06ecccb517dd02fc0800000000000000
+      internalID: -3521571429662536096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_9
+      rect:
+        serializedVersion: 2
+        x: 6430
+        y: 2131
+        width: 805
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7489d52be90cc0970800000000000000
+      internalID: 8722558366139652167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EYE TENTACLE_10
+      rect:
+        serializedVersion: 2
+        x: 639
+        y: 799
+        width: 805
+        height: 113
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67b20b4dbc42b3860800000000000000
+      internalID: 7510637261435710326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 970c9d8a8ab593140832715b694cb7a0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      EYE TENTACLE_0: -4190338958771332382
+      EYE TENTACLE_1: 2458261857194193382
+      EYE TENTACLE_10: 7510637261435710326
+      EYE TENTACLE_2: 4546189512011983555
+      EYE TENTACLE_3: 2948010128550050068
+      EYE TENTACLE_4: 142487831180085594
+      EYE TENTACLE_5: -4628616706678666808
+      EYE TENTACLE_6: 1432565973003704576
+      EYE TENTACLE_7: 5489572727398752315
+      EYE TENTACLE_8: -3521571429662536096
+      EYE TENTACLE_9: 8722558366139652167
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
