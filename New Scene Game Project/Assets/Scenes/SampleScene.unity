@@ -408,6 +408,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae003f109666a60488483ce15f06dd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beatenRed: 0
+  rage: 20
 --- !u!114 &1758357360 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8504196808888852489, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
@@ -820,7 +822,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6408839684650479102, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      insertIndex: -1
+      insertIndex: 4
       addedObject: {fileID: 1230194031}
   m_SourcePrefab: {fileID: 100100000, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
 --- !u!1660057539 &9223372036854775807
