@@ -13,9 +13,10 @@ public class EnemyScript : MonoBehaviour
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
     public int damage = 1;
-
+    public bool proceduralSpeed = false;
     private Transform playerTransform;
     private Rigidbody2D rb;
+    private float lastSpeedBoostTime = 0f;
 
     void Start()
     {
@@ -27,12 +28,20 @@ public class EnemyScript : MonoBehaviour
             playerTransform = player.transform;
             playerPowerUpScript = player.GetComponent<PlayerPowerUps>();
         }
+        lastSpeedBoostTime = Time.time;
     }
 
     void FixedUpdate()
     {
         if (isKnockedBack) return;
-
+        if (proceduralSpeed)
+        {
+            if (Time.time - lastSpeedBoostTime >= 5f)
+            {
+                speed *= 2f;
+                lastSpeedBoostTime = Time.time;
+            }
+        }
         if (playerTransform != null)
         {
             float distance = Vector2.Distance(rb.position, playerTransform.position);

@@ -6,12 +6,12 @@ public class GameManager : MonoBehaviour
     public GameObject enemyPrefab;
     public GameObject smallEnemyPrefab;
     public GameObject bigEnemyPrefab;
-    public int waveOneCount = 10;
+    public GameObject speedEnemyPrefab;
+    public GameObject shooterPrefab;
+    public int[] waveCount = new int[] { 10, 20, 20, 10, 10 };
     public float minBounds = -100f;
     public float maxBounds = 100f;
     public int killsThisWave = 0;
-    public int waveTwoCount = 20;
-    public int waveThreeCount = 20;
     public int waveNumber = 0;
 
     public static GameManager Instance { get; private set; }
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        while(killsThisWave < waveOneCount)
+        while(killsThisWave < waveCount[0])
         {
             yield return null;
         }
@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        while (killsThisWave < waveTwoCount)
+        while (killsThisWave < waveCount[1])
         {
             yield return null;
         }
@@ -74,29 +74,75 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        while (killsThisWave < waveThreeCount)
+        while (killsThisWave < waveCount[2])
         {
             yield return null;
         }
         StartCoroutine(DialogueSystem.instance.StartCutscene(4));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        StartCoroutine(WaveFour());
+    }
+
+    public IEnumerator WaveFour()
+    {
+        waveNumber = 4;
+        /*StartCoroutine(DialogueSystem.instance.StartCutscene(5));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }*/
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[3])
+        {
+            yield return null;
+        }
+        StartCoroutine(WaveFive());
+    }
+
+    public IEnumerator WaveFive()
+    {
+        waveNumber = 5;
+        /*StartCoroutine(DialogueSystem.instance.StartCutscene(5));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }*/
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[4])
+        {
+            yield return null;
+        }
     }
 
     public void CreateWave()
     {
         if (waveNumber == 1)
         {
-            SpawnEnemies(enemyPrefab, waveOneCount);
+            SpawnEnemies(enemyPrefab, waveCount[0]);
         }
         else if (waveNumber == 2)
         {
-            SpawnEnemies(smallEnemyPrefab, waveTwoCount / 2);
-            SpawnEnemies(enemyPrefab, waveTwoCount / 2);
+            SpawnEnemies(smallEnemyPrefab, waveCount[1] / 2);
+            SpawnEnemies(enemyPrefab, waveCount[1] / 2);
         }
         else if (waveNumber == 3)
         {
-            SpawnEnemies(smallEnemyPrefab, waveTwoCount / 4);
-            SpawnEnemies(enemyPrefab, waveTwoCount / 2);
-            SpawnEnemies(bigEnemyPrefab, waveTwoCount / 4);
+            SpawnEnemies(smallEnemyPrefab, waveCount[2] / 4);
+            SpawnEnemies(enemyPrefab, waveCount[2] / 2);
+            SpawnEnemies(bigEnemyPrefab, waveCount[2] / 4);
+        }
+        else if (waveNumber == 4)
+        {
+            SpawnEnemies(speedEnemyPrefab, waveCount[3]);
+        }
+        else if (waveNumber == 5)
+        {
+            SpawnEnemies(shooterPrefab, waveCount[4]);
         }
     }
 
