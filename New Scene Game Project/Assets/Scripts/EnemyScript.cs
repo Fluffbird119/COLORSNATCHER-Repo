@@ -28,8 +28,9 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField] private bool isStunned;
 
-    // change this to change how fix are roatated
     public float spriteAngleOffset = -90f;
+
+    public GameObject hitParticlePrefab;
 
     void Start()
     {
@@ -94,6 +95,7 @@ public class EnemyScript : MonoBehaviour
         {
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
+            CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Horizontal);
         }
         if (collision.CompareTag("VineAOE"))
         {
@@ -122,6 +124,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !isInDeathState && !isStunned)
         {
             PlayerHealth.Instance.ChangeHealth(-1);
+            CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);
         }
     }
 
@@ -129,10 +132,20 @@ public class EnemyScript : MonoBehaviour
     {
         currentHealth -= 1;
         StartCoroutine(ApplyKnockback(knockbackDirection));
+        SpawnHitParticles();
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    private void SpawnHitParticles()
+    {
+        if (hitParticlePrefab == null) return;
+        GameObject particles = Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
+        ParticleSystem ps = particles.GetComponent<ParticleSystem>();
+        float lifetime = ps != null ? ps.main.duration + ps.main.startLifetime.constantMax : 2f;
+        Destroy(particles, lifetime);
     }
 
     private IEnumerator ApplyKnockback(Vector2 direction)
@@ -164,7 +177,7 @@ public class EnemyScript : MonoBehaviour
         RigidbodyType2D originalBodyType = rb.bodyType;
         rb.bodyType = RigidbodyType2D.Kinematic;
         gameObject.layer = LayerMask.NameToLayer("NoCollide");
-        
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
