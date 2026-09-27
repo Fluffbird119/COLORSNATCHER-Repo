@@ -10,7 +10,9 @@ public class GameManager : MonoBehaviour
     public GameObject shooterPrefab;
     public GameObject sniperPrefab;
     public GameObject zombiePrefab;
-    private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20, 15, 15, 15, 30 };
+    public GameObject trooperPrefab;
+    public GameObject chunkyPrefab;
+    private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20, 15, 15, 30, 10, 20, 30 };
     public float minBounds = -100f;
     public float maxBounds = 100f;
     public int killsThisWave = 0;
@@ -31,7 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         BackgroundManager.Instance.ChangeBackground(0);
-        StartCoroutine(WaveOne());
+        StartCoroutine(WaveTen());
     }
 
     public IEnumerator WaveOne()
@@ -199,9 +201,70 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-
+        StartCoroutine(DialogueSystem.instance.StartCutscene(12));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
+        WaveTen();
+    }
+
+    public IEnumerator WaveTen()
+    {
+        waveNumber = 10;
+        /*
+        StartCoroutine(DialogueSystem.instance.StartCutscene(13));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        */
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[9])
+        {
+            yield return null;
+        }
+        StartCoroutine(WaveEleven());
+    }
+
+    public IEnumerator WaveEleven()
+    {
+        waveNumber = 11;
+        /*
+        StartCoroutine(DialogueSystem.instance.StartCutscene(14));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        */
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[10])
+        {
+            yield return null;
+        }
+        StartCoroutine(WaveTwelve());
+    }
+
+    public IEnumerator WaveTwelve()
+    {
+        waveNumber = 12;
+        /*
+        StartCoroutine(DialogueSystem.instance.StartCutscene(15));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        */
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[11])
+        {
+            yield return null;
+        }
     }
 
     public void CreateWave()
@@ -247,6 +310,20 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies(zombiePrefab, 20);
             SpawnEnemies(sniperPrefab, 10);
+        }
+        else if (waveNumber == 10)
+        {
+            SpawnEnemies(trooperPrefab, 10);
+        }
+        else if (waveNumber == 11)
+        {
+            SpawnEnemies(chunkyPrefab, 10);
+            SpawnEnemies(trooperPrefab, 10);
+        }
+        else if (waveNumber == 12)
+        {
+            SpawnEnemies(chunkyPrefab, 15);
+            SpawnEnemies(trooperPrefab, 15);
         }
     }
 

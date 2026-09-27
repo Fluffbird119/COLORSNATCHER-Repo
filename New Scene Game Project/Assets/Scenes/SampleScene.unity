@@ -663,6 +663,10 @@ PrefabInstance:
       value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: chunkyPrefab
+      value: 
+      objectReference: {fileID: 2855841578704052247, guid: c3faa7612fd7e3b4ba4d4f8cc7d5df6b, type: 3}
+    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: sniperPrefab
       value: 
       objectReference: {fileID: 8719147511489265977, guid: d8204b9c21029b24885d0ee713c960c0, type: 3}
@@ -670,6 +674,10 @@ PrefabInstance:
       propertyPath: zombiePrefab
       value: 
       objectReference: {fileID: 8719147511489265977, guid: 085a7b1fc3ad9a4418aaeb75a12a4fdd, type: 3}
+    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: trooperPrefab
+      value: 
+      objectReference: {fileID: 8719147511489265977, guid: e5b508ec8fe98d14693bfdc7426d9c78, type: 3}
     - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: redImage
       value: 
