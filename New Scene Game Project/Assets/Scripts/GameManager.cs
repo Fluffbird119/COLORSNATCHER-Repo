@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
     {
         AudioManager.Instance.ConvoMusic();
         BackgroundManager.Instance.ChangeBackground(0);
-        StartCoroutine(WaveFour());
+        StartCoroutine(WaveOne());
     }
 
     public IEnumerator WaveOne()
