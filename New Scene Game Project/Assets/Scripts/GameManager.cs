@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        BackgroundManager.Instance.ChangeBackground(0);
         StartCoroutine(WaveSeven());
     }
 
@@ -87,6 +88,7 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerPowerUps.Instance.beatenRed = true;
+        BackgroundManager.Instance.ChangeBackground(1);
 
         StartCoroutine(WaveFour());
     }
@@ -144,6 +146,10 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
+        PlayerPowerUps.Instance.beatenYellow = true;
+        BackgroundManager.Instance.ChangeBackground(2);
+
         StartCoroutine(WaveSeven());
     }
 
@@ -193,6 +199,9 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
+        PlayerPowerUps.Instance.beatenGreen = true;
+        BackgroundManager.Instance.ChangeBackground(3);
     }
 
     public void CreateWave()

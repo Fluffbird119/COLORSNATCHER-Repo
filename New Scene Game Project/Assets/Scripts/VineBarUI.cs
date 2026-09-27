@@ -2,15 +2,20 @@ using UnityEngine;
 
 public class VineBarUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private float curCooldown;
+    private float maxCooldown;
+    public float width;
+    public float height;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] private RectTransform vineBar;
+
+    public void UpdateVineVisual()
     {
-        
+        curCooldown = PlayerPowerUps.Instance.getVineCurCooldown();
+        maxCooldown = PlayerPowerUps.Instance.getVineMaxCooldown();
+
+        float newHeight = (curCooldown / maxCooldown) * height;
+
+        vineBar.sizeDelta = new Vector2(width, newHeight);
     }
 }

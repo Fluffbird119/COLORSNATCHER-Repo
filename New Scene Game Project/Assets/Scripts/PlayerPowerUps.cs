@@ -44,7 +44,17 @@ public class PlayerPowerUps : MonoBehaviour
 
     [Header("Vine Attack Variables")]
     [SerializeField] GameObject VineBarObject;
-    
+    [SerializeField] GameObject VineBallPrefab;
+    [SerializeField] Transform vineBallStartingPoint;
+    [SerializeField] private float fireForce= 20f;
+
+    public bool beatenGreen;
+
+    [SerializeField] private float curVineCooldown;
+    [SerializeField] private float maxVineCooldown;
+
+    private VineBarUI vineBarUI;
+
 
     private void Awake()
     {
@@ -61,10 +71,13 @@ public class PlayerPowerUps : MonoBehaviour
 
     void Start()
     {
+        vineBarUI = VineBarObject.GetComponent<VineBarUI>();
+
         rageBarUIScript.UpdateRageVisual();
 
         RageBarObject.SetActive(false);
         DashBarObject.SetActive(false);
+        VineBarObject.SetActive(false);
     }
 
     void Update()
@@ -87,6 +100,18 @@ public class PlayerPowerUps : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha2) && beatenYellow && curDashCooldown >= maxDashCooldown)
             {
                 Dash();
+            }
+        }
+
+        if (beatenGreen)
+        {
+            VineBarObject.SetActive(true);
+
+            RechargeVine();
+            
+            if (Input.GetKeyDown(KeyCode.Alpha3) && beatenGreen && curVineCooldown >= maxVineCooldown)
+            {
+                ShootVineBall();
             }
         }
     }
@@ -119,7 +144,7 @@ public class PlayerPowerUps : MonoBehaviour
         legTentacles.color = Color.red;
 
         // increase animation speed of tentacle and speed of eye to slow down start lag
-        tentacleAnim.speed = 1.5f;
+        tentacleAnim.speed = 3f;
         EyeAnim.speed = 2f;
 
         // wait for duration of buff then turn back to normal
@@ -135,8 +160,8 @@ public class PlayerPowerUps : MonoBehaviour
         attackTentacle.color = Color.white;
         legTentacles.color = Color.white;
 
-        tentacleAnim.speed = 0.5f;
-        EyeAnim.speed = 0.5f;
+        tentacleAnim.speed = 2f;
+        EyeAnim.speed = 2f;
     }
 
     public float getRage()
@@ -181,16 +206,45 @@ public class PlayerPowerUps : MonoBehaviour
         player.layer = 7;
     }
 
-    public float getCurCooldown()
+    public float getDashCurCooldown()
     {
         return curDashCooldown;
     }
     
-    public float getMaxCooldown()
+    public float getDashMaxCooldown()
     {
         return maxDashCooldown;
     }
     #endregion
 
+    #region Vine Ball Attack
+    private void RechargeVine()
+    {
+        if (curVineCooldown < maxVineCooldown)
+        {
+            curVineCooldown += 1f * Time.deltaTime;
+            curVineCooldown = Mathf.Clamp(curVineCooldown, 0f, maxVineCooldown);
 
+            vineBarUI.UpdateVineVisual();
+        }
+    }
+
+    private void ShootVineBall()
+    {
+        curVineCooldown = 0;
+
+        GameObject vineBall = Instantiate(VineBallPrefab, vineBallStartingPoint.position, vineBallStartingPoint.rotation);
+        vineBall.GetComponent<Rigidbody2D>().AddForce(vineBallStartingPoint.up * fireForce, ForceMode2D.Impulse);
+    }
+
+    public float getVineCurCooldown()
+    {
+        return curVineCooldown;
+    }
+
+    public float getVineMaxCooldown()
+    {
+        return maxVineCooldown;
+    }
+    #endregion
 }

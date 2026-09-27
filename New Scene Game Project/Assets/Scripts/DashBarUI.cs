@@ -13,8 +13,8 @@ public class DashBarUI : MonoBehaviour
 
     public void UpdateDashVisual()
     {
-        curCooldown = playerPowerUpsScript.getCurCooldown();
-        maxCooldown = playerPowerUpsScript.getMaxCooldown();
+        curCooldown = playerPowerUpsScript.getDashCurCooldown();
+        maxCooldown = playerPowerUpsScript.getDashMaxCooldown();
 
         float newHeight = (curCooldown / maxCooldown) * Height;
 

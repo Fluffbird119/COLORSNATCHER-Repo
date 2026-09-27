@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tentacle
   - Enemy
+  - VineAOE
   layers:
   - Default
   - TransparentFX

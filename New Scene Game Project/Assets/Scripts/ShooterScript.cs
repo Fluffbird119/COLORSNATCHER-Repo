@@ -109,6 +109,7 @@ public class ShooterScript : MonoBehaviour
         {
             GameManager.Instance.killsThisWave++;
         }
+        PlayerPowerUps.Instance.IncreaseRage(1f);
         Destroy(gameObject);
     }
 }
