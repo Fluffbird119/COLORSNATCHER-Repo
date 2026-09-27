@@ -3,6 +3,8 @@ using System.Collections;
 
 public class PlayerPowerUps : MonoBehaviour
 {
+    public static PlayerPowerUps Instance { get; private set; }
+
     [Header("NonPowerUp Variables")]
     [SerializeField] private Animator tentacleAnim;
     [SerializeField] private Animator EyeAnim;
@@ -16,6 +18,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     [Header("Rage Variables")]
     #region Rage Variables
+    [SerializeField] GameObject RageBarObject;
     [SerializeField] RageBarUI rageBarUIScript;
 
     public bool beatenRed = false; // bool for now cuz lazy can make it better latter
@@ -26,6 +29,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     [Header("Dash Variables")]
     #region Dash variables
+    [SerializeField] GameObject DashBarObject;
     [SerializeField] private PlayerMovement movementScript;
     [SerializeField] private DashBarUI dashBarUIScript;
 
@@ -38,25 +42,48 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] private float dashDuration;
     #endregion
 
+    private void Awake()
+    {
+        // Check if an instance already exists
+        if (Instance != null && Instance != this)
+        {
+            // If a duplicate exists, destroy this GameObject to enforce the single instance
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
     void Start()
     {
         rageBarUIScript.UpdateRageVisual();
+
+        RageBarObject.SetActive(false);
+        DashBarObject.SetActive(false);
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1) && beatenRed && rage >= maxRage)
+        if (beatenRed)
         {
-            RagePowerUpEffect();
-        } // i know this fucking else if is gonna fuck me over
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && beatenYellow && curDashCooldown >= maxDashCooldown)
-        {
-            Dash();
-        }
+            RageBarObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.Alpha1) && beatenRed && rage >= maxRage)
+            {
+                RagePowerUpEffect();
+            }
+        } 
 
         if (beatenYellow)
         {
+            DashBarObject.SetActive(true);
+
             RechargeDash();
+
+            if (Input.GetKeyDown(KeyCode.Alpha2) && beatenYellow && curDashCooldown >= maxDashCooldown)
+            {
+                Dash();
+            }
         }
     }
 
@@ -125,17 +152,29 @@ public class PlayerPowerUps : MonoBehaviour
         // set cooldown back to zero
         curDashCooldown = 0;
         // set movespeed really high for dashDuration
+        StartCoroutine(StartDash());
+
     }
     private void RechargeDash()
     {
         if (curDashCooldown < maxDashCooldown)
         {
-            Debug.Log("dash recharging");
             curDashCooldown += 1f * Time.deltaTime;
             curDashCooldown = Mathf.Clamp(curDashCooldown, 0f, maxDashCooldown); // Keep within bound
 
             dashBarUIScript.UpdateDashVisual();
         }
+    }
+
+    private IEnumerator StartDash()
+    {
+        PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
+        player.layer = 6;
+
+        yield return new WaitForSeconds(dashDuration);
+
+        PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
+        player.layer = 7;
     }
 
     public float getCurCooldown()

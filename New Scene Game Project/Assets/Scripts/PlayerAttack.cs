@@ -39,7 +39,6 @@ public class PlayerAttack : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Debug.Log("attack start");
             eyeAnim.SetTrigger("Blink Eye");
         }
     }

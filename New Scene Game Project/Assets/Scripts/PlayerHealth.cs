@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -53,6 +54,11 @@ public class PlayerHealth : MonoBehaviour
     // adds passed in amount to health
     public void ChangeHealth(float amount)
     {
+        if (amount < 0)
+        {
+            StartCoroutine(iFrames());
+        }
+
         health += amount;
 
         if (health > maxHealth)
@@ -61,6 +67,16 @@ public class PlayerHealth : MonoBehaviour
         }
 
         healthBarUIScript.ChangeHealthVisual();
+    }
+
+    // i frames for 0.1 seconds after player takes damage
+    private IEnumerator iFrames()
+    {
+        player.layer = 6;
+
+        yield return new WaitForSeconds(0.1f);
+
+        player.layer = 7;
     }
 
     public void ResetPlayerStuff()

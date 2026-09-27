@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public static PlayerMovement Instance { get; private set; }
+
     [Header("Player Stuff")]
     [SerializeField] private float speed;
     [SerializeField] private Rigidbody2D rb;
@@ -10,6 +12,19 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Animator playerAnimation;
 
     Vector2 input;
+
+    private void Awake()
+    {
+        // Check if an instance already exists
+        if (Instance != null && Instance != this)
+        {
+            // If a duplicate exists, destroy this GameObject to enforce the single instance
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     void Update()
     {
@@ -30,7 +45,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void setSpeed(float newSpeed)
+    public void SetSpeed(float newSpeed)
     {
         speed = newSpeed;
     }

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 963861514724031767}
   - component: {fileID: 2762492558423917729}
   - component: {fileID: 7944602113072084358}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: EYE TENTACLE
   m_TagString: Tentacle
   m_Icon: {fileID: 0}
@@ -271,7 +271,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6757516956971056260}
   - component: {fileID: 5865066669066843291}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PLAYER HEAD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 432235010504193905}
   - component: {fileID: 2683895138686641779}
   - component: {fileID: 6525035785704692774}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PLAYER EYE
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 6200498255624669922}
   - component: {fileID: 665813947060500010}
   - component: {fileID: 2520696230468659117}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -581,18 +581,20 @@ MonoBehaviour:
   attackTentacle: {fileID: 5007791665903138126}
   legTentacles: {fileID: 2501471015635225836}
   player: {fileID: 0}
+  RageBarObject: {fileID: 0}
   rageBarUIScript: {fileID: 0}
   beatenRed: 0
   rage: 0
   maxRage: 15
   rageDuration: 10
+  DashBarObject: {fileID: 0}
   movementScript: {fileID: 989395696206953658}
   dashBarUIScript: {fileID: 0}
   beatenYellow: 0
   curDashCooldown: 0
-  maxDashCooldown: 0
-  dashMoveSpeed: 0
-  dashDuration: 0
+  maxDashCooldown: 5
+  dashMoveSpeed: 80
+  dashDuration: 0.2
 --- !u!114 &6200498255624669922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -696,7 +698,7 @@ GameObject:
   - component: {fileID: 7845153681584272643}
   - component: {fileID: 2501471015635225836}
   - component: {fileID: 3908517268659304918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PLAYER TENTACLES
   m_TagString: Untagged
   m_Icon: {fileID: 0}

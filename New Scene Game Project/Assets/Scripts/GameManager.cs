@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaveFour());
+        StartCoroutine(WaveOne());
     }
 
     public IEnumerator WaveOne()
@@ -83,6 +83,10 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
+        // now that player has killed red set 
+        PlayerPowerUps.Instance.beatenRed = true;
+
         StartCoroutine(WaveFour());
     }
 
