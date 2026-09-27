@@ -1,0 +1,559 @@
+fileFormatVersion: 2
+guid: 32fa05355348383489a38f8a50d6b67f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5651961379713351801
+    second: HATEMACHINE IDLE_0
+  - first:
+      213: -9044661429524332948
+    second: HATEMACHINE IDLE_1
+  - first:
+      213: -2224751735011187712
+    second: HATEMACHINE IDLE_2
+  - first:
+      213: 2088610985467179902
+    second: HATEMACHINE IDLE_3
+  - first:
+      213: -6199255752902943374
+    second: HATEMACHINE IDLE_4
+  - first:
+      213: -5781025460085763061
+    second: HATEMACHINE IDLE_5
+  - first:
+      213: 6071396596370274522
+    second: HATEMACHINE IDLE_6
+  - first:
+      213: 8346993187029938605
+    second: HATEMACHINE IDLE_7
+  - first:
+      213: 4809978317772519209
+    second: HATEMACHINE IDLE_8
+  - first:
+      213: -738246479465307237
+    second: HATEMACHINE IDLE_9
+  - first:
+      213: 3147575366404408285
+    second: HATEMACHINE IDLE_10
+  - first:
+      213: -2552912273653454182
+    second: HATEMACHINE IDLE_11
+  - first:
+      213: -1169339308128181118
+    second: HATEMACHINE IDLE_12
+  - first:
+      213: 2369688743761450608
+    second: HATEMACHINE IDLE_13
+  - first:
+      213: -7233672050687603535
+    second: HATEMACHINE IDLE_14
+  - first:
+      213: 3831902494723459520
+    second: HATEMACHINE IDLE_15
+  - first:
+      213: 2703839093258505977
+    second: HATEMACHINE IDLE_16
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_0
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 3957
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9708a02fdeccf6e40800000000000000
+      internalID: 5651961379713351801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_1
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 3957
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6e768bb958ea7280800000000000000
+      internalID: -9044661429524332948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_2
+      rect:
+        serializedVersion: 2
+        x: 2516
+        y: 3957
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 004693195181021e0800000000000000
+      internalID: -2224751735011187712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_3
+      rect:
+        serializedVersion: 2
+        x: 3724
+        y: 3957
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e73ffb610ac3cfc10800000000000000
+      internalID: 2088610985467179902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_4
+      rect:
+        serializedVersion: 2
+        x: 4932
+        y: 3957
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27d5c60ecb1d7f9a0800000000000000
+      internalID: -6199255752902943374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_5
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 2667
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b04591629fba5cfa0800000000000000
+      internalID: -5781025460085763061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_6
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 2673
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad87a29690fe14450800000000000000
+      internalID: 6071396596370274522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_7
+      rect:
+        serializedVersion: 2
+        x: 2516
+        y: 2673
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da1768f441a76d370800000000000000
+      internalID: 8346993187029938605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_8
+      rect:
+        serializedVersion: 2
+        x: 3727
+        y: 2660
+        width: 1005
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9277920bbc970c240800000000000000
+      internalID: 4809978317772519209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_9
+      rect:
+        serializedVersion: 2
+        x: 4942
+        y: 2650
+        width: 998
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b93a9c20db831c5f0800000000000000
+      internalID: -738246479465307237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_10
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 1380
+        width: 994
+        height: 959
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd30e428e1f6eab20800000000000000
+      internalID: 3147575366404408285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_11
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 1393
+        width: 998
+        height: 936
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9aa62220db329cd0800000000000000
+      internalID: -2552912273653454182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_12
+      rect:
+        serializedVersion: 2
+        x: 2514
+        y: 1355
+        width: 1006
+        height: 966
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2846e1d381ca5cfe0800000000000000
+      internalID: -1169339308128181118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_13
+      rect:
+        serializedVersion: 2
+        x: 3722
+        y: 1354
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07694287b53d2e020800000000000000
+      internalID: 2369688743761450608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_14
+      rect:
+        serializedVersion: 2
+        x: 4932
+        y: 1410
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bc08157895dc9b90800000000000000
+      internalID: -7233672050687603535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_15
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 121
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c9cce34407ad2530800000000000000
+      internalID: 3831902494723459520
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HATEMACHINE IDLE_16
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 111
+        width: 1008
+        height: 992
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fecc7b6457f58520800000000000000
+      internalID: 2703839093258505977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      HATEMACHINE IDLE_0: 5651961379713351801
+      HATEMACHINE IDLE_1: -9044661429524332948
+      HATEMACHINE IDLE_10: 3147575366404408285
+      HATEMACHINE IDLE_11: -2552912273653454182
+      HATEMACHINE IDLE_12: -1169339308128181118
+      HATEMACHINE IDLE_13: 2369688743761450608
+      HATEMACHINE IDLE_14: -7233672050687603535
+      HATEMACHINE IDLE_15: 3831902494723459520
+      HATEMACHINE IDLE_16: 2703839093258505977
+      HATEMACHINE IDLE_2: -2224751735011187712
+      HATEMACHINE IDLE_3: 2088610985467179902
+      HATEMACHINE IDLE_4: -6199255752902943374
+      HATEMACHINE IDLE_5: -5781025460085763061
+      HATEMACHINE IDLE_6: 6071396596370274522
+      HATEMACHINE IDLE_7: 8346993187029938605
+      HATEMACHINE IDLE_8: 4809978317772519209
+      HATEMACHINE IDLE_9: -738246479465307237
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
