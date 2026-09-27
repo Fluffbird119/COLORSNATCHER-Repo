@@ -24,6 +24,7 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.UI.Image redImage;
     public UnityEngine.UI.Image yellowImage;
     public UnityEngine.UI.Image greenImage;
+    public UnityEngine.UI.Image blueImage;
 
     public bool isCutscenePlaying = false;
 
