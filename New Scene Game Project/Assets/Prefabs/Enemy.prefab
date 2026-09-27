@@ -111,6 +111,8 @@ MonoBehaviour:
   knockbackDuration: 1
   damage: 1
   proceduralSpeed: 0
+  healthScript: {fileID: 0}
+  spriteAngleOffset: 180
 --- !u!50 &1123261327007499238
 Rigidbody2D:
   serializedVersion: 5

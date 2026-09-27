@@ -28,18 +28,13 @@ public class DialogueSystem : MonoBehaviour
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
     }
-
-    /*
-    void Start()
-    {
-        dialoguePanel.SetActive(false);
-        playerImage.gameObject.SetActive(false);
-        redImage.gameObject.SetActive(false);
-    }
-    */
-    
 
     void Update()
     {
@@ -140,6 +135,7 @@ public class DialogueSystem : MonoBehaviour
         dialoguePanel.SetActive(false);
         playerImage.gameObject.SetActive(false);
         redImage.gameObject.SetActive(false);
+        yellowImage.gameObject.SetActive(false);
         StartCoroutine(DialogueCooldown());
     }
 
@@ -152,6 +148,11 @@ public class DialogueSystem : MonoBehaviour
 
     public IEnumerator StartCutscene(int cutsceneNumber)
     {
+        if (isCutscenePlaying)
+        {
+            yield break;
+        }
+
         if (cutsceneNumber == 1)
         {
             isCutscenePlaying = true;
@@ -232,13 +233,13 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 4)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] { "I...I lost... I actually LOST???", "ITS IMPOSSIBLE!!!", 
+            StartDialogue(new string[] { "I...I lost... I actually LOST???", "ITS IMPOSSIBLE!!!",
                 "I CANT LOSE TO SOMEONE LIKE YOU. SOMEBODY WITH NO PURPOSE, NO COLOR, NO FEELINGS, NO THOUGHTS, YOU'RE COMPLETELY FLAVORLESS!" }, "red");
             while (isTalking)
             {
                 yield return null;
             }
-            StartDialogue(new string[] {"It's okay.", "I will be killing you now."}, "player");
+            StartDialogue(new string[] { "It's okay.", "I will be killing you now." }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -264,7 +265,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "...","You killed him." }, "none");
+            StartDialogue(new string[] { "...", "You killed him." }, "none");
             while (isTalking)
             {
                 yield return null;
@@ -327,7 +328,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "I HATE YOU!!!!!!!!!!!!!!!1!!!!1!!!1!!!!!"}, "player");
+            StartDialogue(new string[] { "I HATE YOU!!!!!!!!!!!!!!!1!!!!1!!!1!!!!!" }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -342,7 +343,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] {"Are you TWELVE."}, "player");
+            StartDialogue(new string[] { "Are you TWELVE." }, "player");
             while (isTalking)
             {
                 yield return null;

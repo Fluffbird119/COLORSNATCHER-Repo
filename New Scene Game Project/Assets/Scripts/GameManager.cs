@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject bigEnemyPrefab;
     public GameObject speedEnemyPrefab;
     public GameObject shooterPrefab;
-    public int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20 };
+    private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20 };
     public float minBounds = -100f;
     public float maxBounds = 100f;
     public int killsThisWave = 0;
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaveOne());
+        StartCoroutine(WaveSix());
     }
 
     public IEnumerator WaveOne()
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        while(killsThisWave < waveCount[0])
+        while (killsThisWave < waveCount[0])
         {
             yield return null;
         }
@@ -84,7 +84,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
-        // now that player has killed red set 
         PlayerPowerUps.Instance.beatenRed = true;
 
         StartCoroutine(WaveFour());
@@ -121,6 +120,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        StartCoroutine(WaveSix());
     }
 
     public IEnumerator WaveSix()
@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         killsThisWave = 0;
+        Debug.Log("Wave 6 started");
         CreateWave();
         while (killsThisWave < waveCount[5])
         {
@@ -164,10 +165,11 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies(shooterPrefab, waveCount[4]);
         }
-        else if (waveNumber ==6)
+        else if (waveNumber == 6)
         {
-            SpawnEnemies(shooterPrefab, waveCount[5]/2);
-            SpawnEnemies(speedEnemyPrefab, waveCount[5]/2);
+            SpawnEnemies(shooterPrefab, waveCount[5] / 2);
+            SpawnEnemies(speedEnemyPrefab, waveCount[5] / 2);
+            Debug.Log("Wave 6 enemies spawned");
         }
     }
 
