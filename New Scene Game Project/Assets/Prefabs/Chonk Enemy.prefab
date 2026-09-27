@@ -104,7 +104,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPowerUpScript: {fileID: 0}
-  healthScript: {fileID: 0}
   speed: 3
   stoppingDistance: 0
   maxHealth: 5
@@ -112,6 +111,9 @@ MonoBehaviour:
   knockbackDuration: 1
   damage: 1
   proceduralSpeed: 0
+  reincarnates: 0
+  healthScript: {fileID: 0}
+  isStunned: 0
   spriteAngleOffset: 90
 --- !u!50 &4739332431938524062
 Rigidbody2D:
@@ -135,7 +137,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -178,7 +180,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

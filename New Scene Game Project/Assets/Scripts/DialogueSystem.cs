@@ -61,6 +61,7 @@ public class DialogueSystem : MonoBehaviour
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
+            blueImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("red"))
         {
@@ -68,6 +69,7 @@ public class DialogueSystem : MonoBehaviour
             redImage.gameObject.SetActive(true);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
+            blueImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("none"))
         {
@@ -75,6 +77,7 @@ public class DialogueSystem : MonoBehaviour
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
+            blueImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("yellow"))
         {
@@ -82,6 +85,7 @@ public class DialogueSystem : MonoBehaviour
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(true);
             greenImage.gameObject.SetActive(false);
+            blueImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("green"))
         {
@@ -89,8 +93,17 @@ public class DialogueSystem : MonoBehaviour
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(true);
+            blueImage.gameObject.SetActive(false);
         }
-        dialoguePanel.SetActive(true);
+        else if (characterName.Equals("blue"))
+        {
+            playerImage.gameObject.SetActive(false);
+            redImage.gameObject.SetActive(false);
+            yellowImage.gameObject.SetActive(false);
+            greenImage.gameObject.SetActive(false);
+            blueImage.gameObject.SetActive(true);
+        }
+            dialoguePanel.SetActive(true);
         ShowLine(currentLines[currentLine]);
         StartCoroutine(EnableAdvance());
     }
@@ -467,6 +480,56 @@ public class DialogueSystem : MonoBehaviour
             StartDialogue(new string[] { "What is this? I feel... fine. I feel satiated. I feel... good?", "I should stop here." ,
             "but this feels so good...", "But I have to keep going. What if theres more? More good feelings. Like all of these ones!",
             "I want good feelings! I love good feelings!"}, "player");
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 13)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "And now, dear player, you have reached the end." }, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Murderer", "MURDERER", "MURDERERRRRRR" }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "I can feel everything.", "I can sense everything.", "I want what you have." }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "FRIEND KILLER.", "BEGONE"}, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 13)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "And now, dear player, you have reached the end." }, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Murderer", "MURDERER", "MURDERERRRRRR" }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "I can feel everything.", "I can sense everything.", "I want what you have." }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "FRIEND KILLER.", "BEGONE" }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
     }
