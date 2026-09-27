@@ -83,9 +83,8 @@ public class EnemyScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !isInDeathState)
         {
-            Debug.Log("hit player");
             PlayerHealth.Instance.ChangeHealth(-1);
         }
     }
