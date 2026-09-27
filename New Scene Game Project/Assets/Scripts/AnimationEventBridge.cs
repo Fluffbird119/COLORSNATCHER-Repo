@@ -17,4 +17,14 @@ public class AnimationEventBridge : MonoBehaviour
     {
         playerAttackScript.ResumeEye();
     }
+
+    public void CallTurnOnSwipeHitbox()
+    {
+        playerAttackScript.TurnOnSwipeHitbox();
+    }
+
+    public void CallTurnOffSwipeHitbox()
+    {
+        playerAttackScript.TurnOffSwipeHitbox();
+    }
 }

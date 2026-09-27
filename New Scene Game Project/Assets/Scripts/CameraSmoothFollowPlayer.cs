@@ -10,8 +10,28 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (player.position.x <= -53 || player.position.x >= 53 || player.position.y >= 29 || player.position.y <= -45)
+        if ((player.position.x <= -53 || player.position.x >= 53) && (player.position.y >= 29 || player.position.y <= -45))
         {
+            return;
+        }
+        else if (player.position.y >= 29 || player.position.y <= -45)
+        {
+            // Calculate where the camera wants to go
+            Vector3 targetPosition = player.position + offset;
+            targetPosition.y = transform.position.y;
+
+            // Smoothly move the camera to that target position
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
+            return;
+        }
+        else if (player.position.x <= -53 || player.position.x >= 53)
+        {
+            // Calculate where the camera wants to go
+            Vector3 targetPosition = player.position + offset;
+            targetPosition.x = transform.position.x;
+
+            // Smoothly move the camera to that target position
+            transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
             return;
         }
 

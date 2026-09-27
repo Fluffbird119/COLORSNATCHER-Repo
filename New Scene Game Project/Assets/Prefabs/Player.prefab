@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8115883375737965560}
   - component: {fileID: 963861514724031767}
   - component: {fileID: 2762492558423917729}
+  - component: {fileID: 7944602113072084358}
   m_Layer: 0
   m_Name: EYE TENTACLE
   m_TagString: Tentacle
@@ -180,6 +181,85 @@ PolygonCollider2D:
       - {x: 0.7874599, y: -0.68452924}
       - {x: 1.105515, y: -0.57851094}
       - {x: 1.105515, y: 0.41099364}
+  m_UseDelaunayMesh: 0
+--- !u!60 &7944602113072084358
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 297878756627286767}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.06538162, y: 0.6268568}
+    oldSize: {x: 1.1303934, y: 1.0899999}
+    newSize: {x: 1.1303934, y: 1.0899999}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.7416515, y: 3.078555}
+      - {x: 2.6608803, y: 2.9920483}
+      - {x: 2.253952, y: 1.6224654}
+      - {x: 0.6107627, y: 0.41099364}
+      - {x: 0.08067096, y: 0.3756542}
+      - {x: -0.06068683, y: 0.3049753}
+      - {x: -0.06068683, y: 0.12827806}
+      - {x: -0.025347384, y: -0.15443753}
+      - {x: -0.28047055, y: -1.1443355}
+      - {x: 0.041650593, y: -1.8582666}
+      - {x: 0.3034144, y: -2.30043}
+      - {x: 0.643018, y: -2.6863391}
+      - {x: 1.1539351, y: -2.9765425}
+      - {x: 1.5649163, y: -3.1206307}
+      - {x: 1.7085389, y: -3.1533751}
+      - {x: 2.0047276, y: -3.2578392}
+      - {x: 2.005661, y: -3.2565327}
+      - {x: 2.5100625, y: -3.2615058}
+      - {x: 2.647204, y: -3.2730806}
+      - {x: 2.770139, y: -3.2844737}
+      - {x: 2.7832463, y: -3.2851741}
+      - {x: 3.1480184, y: -3.241732}
+      - {x: 3.536157, y: -3.036617}
+      - {x: 3.8506641, y: -2.7417088}
+      - {x: 4.182221, y: -2.1689382}
+      - {x: 4.703811, y: 1.1561593}
+      - {x: 4.686823, y: 1.3094214}
+      - {x: 4.546792, y: 1.8404567}
+      - {x: 4.3297677, y: 2.0016308}
+      - {x: 3.9168587, y: 2.6353223}
+      - {x: 3.4864283, y: 3.027382}
+      - {x: 3.2596743, y: 3.1843653}
   m_UseDelaunayMesh: 0
 --- !u!1 &2958279938311627523
 GameObject:
@@ -479,7 +559,9 @@ MonoBehaviour:
   eyeAnim: {fileID: 2683895138686641779}
   tentacleObject: {fileID: 297878756627286767}
   spriteRenderer: {fileID: 5007791665903138126}
+  eyeTentacle: {fileID: 297878756627286767}
   polygonCollider: {fileID: 2762492558423917729}
+  tentacleSwipeHitbox: {fileID: 2762492558423917729}
 --- !u!114 &526807625256543745
 MonoBehaviour:
   m_ObjectHideFlags: 0
