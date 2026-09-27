@@ -553,11 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &939620620 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2312094620568690683, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-  m_PrefabInstance: {fileID: 8358882279293644888}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1207200887 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5644327633257636472, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
@@ -933,33 +928,13 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 111938134}
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: VineBallPrefab
-      value: 
-      objectReference: {fileID: 8120118057655045135, guid: ce00c7c62bf7e0b4fb5970815d84d9a4, type: 3}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: curVineCooldown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: dashBarUIScript
       value: 
       objectReference: {fileID: 1686573496}
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: maxVineCooldown
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: rageBarUIScript
       value: 
       objectReference: {fileID: 590160078}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: vineBallStartingPoint
-      value: 
-      objectReference: {fileID: 939620620}
-    - target: {fileID: 665813947060500010, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_ExcludeLayers.m_Bits
-      value: 256
-      objectReference: {fileID: 0}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
@@ -1012,10 +987,6 @@ PrefabInstance:
       propertyPath: healthBarUIScript
       value: 
       objectReference: {fileID: 7589550}
-    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: timeInBetweenHeals
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: youDiedMessageAndButton
       value: 
