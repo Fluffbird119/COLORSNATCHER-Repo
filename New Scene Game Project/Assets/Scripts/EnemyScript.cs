@@ -124,7 +124,7 @@ public class EnemyScript : MonoBehaviour
         rb.angularVelocity = 0f;
         RigidbodyType2D originalBodyType = rb.bodyType;
         rb.bodyType = RigidbodyType2D.Kinematic;
-
+        
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
