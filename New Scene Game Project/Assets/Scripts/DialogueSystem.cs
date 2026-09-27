@@ -163,6 +163,7 @@ public class DialogueSystem : MonoBehaviour
         redImage.gameObject.SetActive(false);
         yellowImage.gameObject.SetActive(false);
         greenImage.gameObject.SetActive(false);
+        blueImage.gameObject.SetActive(false);
         StartCoroutine(DialogueCooldown());
     }
 
@@ -472,7 +473,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "boooooooom"}, "none");
+            StartDialogue(new string[] { "boooooooom" }, "none");
             while (isTalking)
             {
                 yield return null;
@@ -500,7 +501,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "FRIEND KILLER.", "BEGONE"}, "blue");
+            StartDialogue(new string[] { "FRIEND KILLER.", "BEGONE" }, "blue");
             while (isTalking)
             {
                 yield return null;
@@ -530,6 +531,94 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 14)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "You. I just need you! I NEED YOU" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Empty void. You won't discover what is not already there." }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "But I'm doing it. I'm living. All these years I was a mindless corpse, but now I feel so REAL." }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "One often kills himself in the attempt to be alive" }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "I'm tired of all this lecturing. I WANT TO KILL YOU!" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 15)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "No more." }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "You can feel the beast cry." }, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 16)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "And now, it is done.", "you killed them all" }, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "YES, I HAVE IT ALL. RAGE. EXCITEMENT. TRANQUILITY. SORROW",
+                "What... what is this last one? Why do I feel bad. WHY DO I FEEL REGRET?"}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "With their dying breath, the being of blue spoke." }, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Sadness. Empathy. You will feel what you have done.", "You will finally live in the context of the world and the brutality of the experiences you have carried out." }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "The passion of red. The fun of yellow. The peace of green. I... I ended it all.", "WHY DO I CARE.", "WHY DO I FEEL THIS WAY?",
+            "I DONT WANT TO FEEL. I DON't WANT TO CARE."}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "If you had cared from the start, this never would have happened" }, "blue");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "What does that mean? What do I do? WHAT DO I DO?", "COME BACKKKKKK" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "It was too late. The colors were long gone.", "The feelings and love had forever faded away." }, "none");
             isCutscenePlaying = false;
         }
     }

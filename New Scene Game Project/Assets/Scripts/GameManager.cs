@@ -214,13 +214,12 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveTen()
     {
         waveNumber = 10;
-        /*
         StartCoroutine(DialogueSystem.instance.StartCutscene(13));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
-        */
+        
         killsThisWave = 0;
         CreateWave();
         while (killsThisWave < waveCount[9])
@@ -233,13 +232,11 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveEleven()
     {
         waveNumber = 11;
-        /*
         StartCoroutine(DialogueSystem.instance.StartCutscene(14));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
-        */
         killsThisWave = 0;
         CreateWave();
         while (killsThisWave < waveCount[10])
@@ -252,19 +249,23 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveTwelve()
     {
         waveNumber = 12;
-        /*
         StartCoroutine(DialogueSystem.instance.StartCutscene(15));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
-        */
         killsThisWave = 0;
         CreateWave();
         while (killsThisWave < waveCount[11])
         {
             yield return null;
         }
+        StartCoroutine(DialogueSystem.instance.StartCutscene(16));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        //send to main menu here
     }
 
     public void CreateWave()

@@ -211,6 +211,10 @@ public class PlayerPowerUps : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
 
         PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
+        player.layer = 9;
+
+        yield return new WaitForSeconds(0.2f);
+
         player.layer = 7;
     }
 
