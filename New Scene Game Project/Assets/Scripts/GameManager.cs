@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        AudioManager.Instance.ConvoMusic();
         BackgroundManager.Instance.ChangeBackground(0);
         StartCoroutine(WaveOne());
     }
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         killsThisWave = 0;
+        AudioManager.Instance.RedMusic();
         CreateWave();
         while (killsThisWave < waveCount[0])
         {
@@ -54,6 +56,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator WaveTwo()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 2;
         StartCoroutine(DialogueSystem.instance.StartCutscene(2));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.RedMusic();
         while (killsThisWave < waveCount[1])
         {
             yield return null;
@@ -71,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveThree()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 3;
         StartCoroutine(DialogueSystem.instance.StartCutscene(3));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -79,6 +84,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.RedMusic();
         while (killsThisWave < waveCount[2])
         {
             yield return null;
@@ -97,6 +103,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveFour()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 4;
         StartCoroutine(DialogueSystem.instance.StartCutscene(5));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -105,6 +112,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.YellowMuisc();
         while (killsThisWave < waveCount[3])
         {
             yield return null;
@@ -114,6 +122,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveFive()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 5;
         StartCoroutine(DialogueSystem.instance.StartCutscene(6));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -122,6 +131,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.YellowMuisc();
         while (killsThisWave < waveCount[4])
         {
             yield return null;
@@ -131,6 +141,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveSix()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 6;
         StartCoroutine(DialogueSystem.instance.StartCutscene(7));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -139,6 +150,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.YellowMuisc();
         while (killsThisWave < waveCount[5])
         {
             yield return null;
@@ -157,6 +169,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveSeven()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 7;
         StartCoroutine(DialogueSystem.instance.StartCutscene(9));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -165,6 +178,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.GreenMusic();
         while (killsThisWave < waveCount[6])
         {
             yield return null;
@@ -174,6 +188,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveEight()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 8;
         StartCoroutine(DialogueSystem.instance.StartCutscene(10));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -182,6 +197,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.GreenMusic();
         while (killsThisWave < waveCount[7])
         {
             yield return null;
@@ -189,6 +205,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator WaveNine()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 9;
         StartCoroutine(DialogueSystem.instance.StartCutscene(11));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -197,6 +214,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.GreenMusic();
         while (killsThisWave < waveCount[8])
         {
             yield return null;
@@ -213,6 +231,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveTen()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 10;
         StartCoroutine(DialogueSystem.instance.StartCutscene(13));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -222,6 +241,7 @@ public class GameManager : MonoBehaviour
         
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.BlueMuisc();
         while (killsThisWave < waveCount[9])
         {
             yield return null;
@@ -231,6 +251,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveEleven()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 11;
         StartCoroutine(DialogueSystem.instance.StartCutscene(14));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -239,6 +260,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.BlueMuisc();
         while (killsThisWave < waveCount[10])
         {
             yield return null;
@@ -248,6 +270,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveTwelve()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 12;
         StartCoroutine(DialogueSystem.instance.StartCutscene(15));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -256,6 +279,7 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
+        AudioManager.Instance.BlueMuisc();
         while (killsThisWave < waveCount[11])
         {
             yield return null;

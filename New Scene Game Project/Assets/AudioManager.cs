@@ -3,16 +3,30 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
+    public static AudioManager Instance { get; private set; }
+
     [SerializeField] AudioSource convoMusic;
     [SerializeField] AudioSource yellowMusic;
     [SerializeField] AudioSource blueMusic;
     [SerializeField] AudioSource redMusic;
     [SerializeField] AudioSource greenMusic;
 
+    private void Awake()
+    {
+        // Check if an instance already exists
+        if (Instance != null && Instance != this)
+        {
+            // If a duplicate exists, destroy this GameObject to enforce the single instance
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
     private void Start()
     {
         convoMusic.Play();
-        Debug.Log(convoMusic.isPlaying);
     }
 
     public void ConvoMusic()
@@ -58,14 +72,5 @@ public class AudioManager : MonoBehaviour
         blueMusic.Play();
         redMusic.Stop();
         greenMusic.Stop();
-    }
-
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("blue music");
-            BlueMuisc();
-        }
     }
 }
