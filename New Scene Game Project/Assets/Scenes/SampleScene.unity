@@ -727,16 +727,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: maxBounds
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: minBounds
-      value: -50
+      value: -40
       objectReference: {fileID: 0}
+    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: sniperPrefab
+      value: 
+      objectReference: {fileID: 8719147511489265977, guid: d8204b9c21029b24885d0ee713c960c0, type: 3}
+    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: zombiePrefab
+      value: 
+      objectReference: {fileID: 8719147511489265977, guid: 085a7b1fc3ad9a4418aaeb75a12a4fdd, type: 3}
     - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: redImage
       value: 
       objectReference: {fileID: 408133668}
+    - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: greenImage
+      value: 
+      objectReference: {fileID: 1532037494}
     - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: playerImage
       value: 

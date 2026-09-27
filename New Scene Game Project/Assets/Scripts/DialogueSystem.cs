@@ -88,10 +88,10 @@ public class DialogueSystem : MonoBehaviour
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(true);
-            dialoguePanel.SetActive(true);
-            ShowLine(currentLines[currentLine]);
-            StartCoroutine(EnableAdvance());
         }
+        dialoguePanel.SetActive(true);
+        ShowLine(currentLines[currentLine]);
+        StartCoroutine(EnableAdvance());
     }
 
     private IEnumerator EnableAdvance()
