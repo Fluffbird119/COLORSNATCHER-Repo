@@ -124,6 +124,7 @@ public class EnemyScript : MonoBehaviour
         rb.angularVelocity = 0f;
         RigidbodyType2D originalBodyType = rb.bodyType;
         rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.isTrigger = true;
         
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
@@ -131,6 +132,7 @@ public class EnemyScript : MonoBehaviour
             Color originalColor = spriteRenderer.color;
             spriteRenderer.color = Color.gray;
             yield return new WaitForSeconds(5f);
+            rb.isTrigger = false;
             reincarnated = true;
             currentHealth = maxHealth;
             isInDeathState = false;
@@ -140,6 +142,8 @@ public class EnemyScript : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(5f);
+            rb.isTrigger = false;
+            rb.
             reincarnated = true;
             currentHealth = maxHealth;
             isInDeathState = false;
