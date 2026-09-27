@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaveSix());
+        StartCoroutine(WaveOne());
     }
 
     public IEnumerator WaveOne()
@@ -132,44 +132,43 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         killsThisWave = 0;
-        Debug.Log("Wave 6 started");
         CreateWave();
         while (killsThisWave < waveCount[5])
         {
             yield return null;
         }
+        StartCoroutine(DialogueSystem.instance.StartCutscene(8));
     }
 
     public void CreateWave()
     {
         if (waveNumber == 1)
         {
-            SpawnEnemies(enemyPrefab, waveCount[0]);
+            SpawnEnemies(enemyPrefab, 10);
         }
         else if (waveNumber == 2)
         {
-            SpawnEnemies(smallEnemyPrefab, waveCount[1] / 2);
-            SpawnEnemies(enemyPrefab, waveCount[1] / 2);
+            SpawnEnemies(smallEnemyPrefab, 10);
+            SpawnEnemies(enemyPrefab, 10);
         }
         else if (waveNumber == 3)
         {
-            SpawnEnemies(smallEnemyPrefab, waveCount[2] / 4);
-            SpawnEnemies(enemyPrefab, waveCount[2] / 2);
-            SpawnEnemies(bigEnemyPrefab, waveCount[2] / 4);
+            SpawnEnemies(smallEnemyPrefab, 5);
+            SpawnEnemies(enemyPrefab, 10);
+            SpawnEnemies(bigEnemyPrefab, 5);
         }
         else if (waveNumber == 4)
         {
-            SpawnEnemies(speedEnemyPrefab, waveCount[3]);
+            SpawnEnemies(speedEnemyPrefab, 10);
         }
         else if (waveNumber == 5)
         {
-            SpawnEnemies(shooterPrefab, waveCount[4]);
+            SpawnEnemies(shooterPrefab, 10);
         }
         else if (waveNumber == 6)
         {
-            SpawnEnemies(shooterPrefab, waveCount[5] / 2);
-            SpawnEnemies(speedEnemyPrefab, waveCount[5] / 2);
-            Debug.Log("Wave 6 enemies spawned");
+            SpawnEnemies(shooterPrefab, 10);
+            SpawnEnemies(speedEnemyPrefab, 10);
         }
     }
 
