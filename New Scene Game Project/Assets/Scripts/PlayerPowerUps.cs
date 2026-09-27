@@ -88,7 +88,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (beatenRed)
         {
             RageBarObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Alpha1) && beatenRed && rage >= maxRage)
+            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && rage >= maxRage)
             {
                 RagePowerUpEffect();
             }
@@ -100,7 +100,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeDash();
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && beatenYellow && curDashCooldown >= maxDashCooldown)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDashCooldown >= maxDashCooldown)
             {
                 Dash();
             }
@@ -112,7 +112,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeVine();
             
-            if (Input.GetKeyDown(KeyCode.Alpha3) && beatenGreen && curVineCooldown >= maxVineCooldown)
+            if (Input.GetKeyDown(KeyCode.E) && beatenGreen && curVineCooldown >= maxVineCooldown)
             {
                 ShootVineBall();
             }
