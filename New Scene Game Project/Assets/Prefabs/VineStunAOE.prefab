@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 38205733750372412}
   m_Layer: 0
   m_Name: VineStunAOE
-  m_TagString: Untagged
+  m_TagString: VineAOE
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
