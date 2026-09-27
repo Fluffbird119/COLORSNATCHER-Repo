@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        ConvoMusic();
+        convoMusic.Play();
+        Debug.Log(convoMusic.isPlaying);
     }
 
     public void ConvoMusic()
