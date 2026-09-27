@@ -19,6 +19,9 @@ public class ShooterScript : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D rb;
     private float nextFireTime = 0f;
+    public bool isWalker = false;
+    public float moveSpeed = 2f;
+    public bool isStunned = false;
 
     void Start()
     {
@@ -36,10 +39,17 @@ public class ShooterScript : MonoBehaviour
     {
         if (playerTransform == null || isKnockedBack) return;
 
+        if (isStunned)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         float distance = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distance <= shootingRange)
         {
+            rb.linearVelocity = Vector2.zero;
             RotateTowardsPlayer();
 
             if (Time.time >= nextFireTime)
@@ -48,6 +58,22 @@ public class ShooterScript : MonoBehaviour
                 nextFireTime = Time.time + (1f / fireRate);
             }
         }
+        else if (isWalker)
+        {
+            MoveTowardsPlayer();
+        }
+        else
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+    }
+
+    private void MoveTowardsPlayer()
+    {
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
+        rb.linearVelocity = direction * moveSpeed;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
     private void RotateTowardsPlayer()
