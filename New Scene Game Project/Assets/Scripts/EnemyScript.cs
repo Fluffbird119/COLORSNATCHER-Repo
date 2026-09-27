@@ -133,11 +133,9 @@ public class EnemyScript : MonoBehaviour
     private void SpawnHitParticles()
     {
         if (hitParticlePrefab == null) return;
-        Debug.Log("particle");
         GameObject particles = Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
         ParticleSystem ps = particles.GetComponent<ParticleSystem>();
         float lifetime = ps != null ? ps.main.duration + ps.main.startLifetime.constantMax : 2f;
-        Debug.Log("done");
         Destroy(particles, lifetime);
     }
 

@@ -175,6 +175,7 @@ MonoBehaviour:
   isWalker: 0
   moveSpeed: 2
   isStunned: 0
+  hitParticlePrefab: {fileID: 7359391080089007259, guid: e812884516822064d9a3a49c8b6248da, type: 3}
 --- !u!60 &-5097661702451804976
 PolygonCollider2D:
   m_ObjectHideFlags: 0

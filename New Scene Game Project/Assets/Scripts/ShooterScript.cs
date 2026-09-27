@@ -22,6 +22,7 @@ public class ShooterScript : MonoBehaviour
     public bool isWalker = false;
     public float moveSpeed = 2f;
     public bool isStunned = false;
+    public GameObject hitParticlePrefab;
 
     void Start()
     {
@@ -136,11 +137,26 @@ public class ShooterScript : MonoBehaviour
     {
         currentHealth -= damageAmount;
         StartCoroutine(ApplyKnockback(knockbackDirection));
+        SpawnHitParticles();
 
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    private void SpawnHitParticles()
+    {
+        if (hitParticlePrefab == null) return;
+        GameObject particles = Instantiate(hitParticlePrefab, transform.position, Quaternion.identity);
+        ParticleSystem ps = particles.GetComponentInChildren<ParticleSystem>();
+        float lifetime = 2f;
+        if (ps != null)
+        {
+            ps.Play();
+            lifetime = ps.main.duration + ps.main.startLifetime.constantMax;
+        }
+        Destroy(particles, lifetime);
     }
 
     private IEnumerator ApplyKnockback(Vector2 direction)
