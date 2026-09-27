@@ -580,7 +580,7 @@ MonoBehaviour:
   eye: {fileID: 432235010504193905}
   attackTentacle: {fileID: 5007791665903138126}
   legTentacles: {fileID: 2501471015635225836}
-  player: {fileID: 0}
+  player: {fileID: 4667962735266773042}
   RageBarObject: {fileID: 0}
   rageBarUIScript: {fileID: 0}
   beatenRed: 0
@@ -595,6 +595,7 @@ MonoBehaviour:
   maxDashCooldown: 5
   dashMoveSpeed: 80
   dashDuration: 0.2
+  VineBarObject: {fileID: 0}
 --- !u!114 &6200498255624669922
 MonoBehaviour:
   m_ObjectHideFlags: 0

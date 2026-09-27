@@ -42,6 +42,10 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] private float dashDuration;
     #endregion
 
+    [Header("Vine Attack Variables")]
+    [SerializeField] GameObject VineBarObject;
+    
+
     private void Awake()
     {
         // Check if an instance already exists
