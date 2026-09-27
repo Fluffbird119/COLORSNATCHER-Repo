@@ -910,6 +910,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7589550}
     - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: timeInBetweenHeals
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: youDiedMessageAndButton
       value: 
       objectReference: {fileID: 1207200887}

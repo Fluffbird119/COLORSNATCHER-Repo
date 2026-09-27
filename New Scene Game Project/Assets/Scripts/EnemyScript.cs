@@ -80,9 +80,13 @@ public class EnemyScript : MonoBehaviour
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
         }
-        if (collision.CompareTag("Player"))
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
         {
-            healthScript.ChangeHealth(-1);
+            Debug.Log("hit player");
+            PlayerHealth.Instance.ChangeHealth(-1);
         }
     }
 
@@ -112,7 +116,7 @@ public class EnemyScript : MonoBehaviour
             StartCoroutine(Reincarnate());
             return;
         }
-        playerPowerUpScript.IncreaseRage(1f);
+        PlayerPowerUps.Instance.IncreaseRage(1f);
         GameManager.Instance.killsThisWave++;
         Destroy(gameObject);
     }
@@ -131,5 +135,10 @@ public class EnemyScript : MonoBehaviour
             isInDeathState = false;
             spriteRenderer.color = originalColor;
         }
+    }
+
+    private IEnumerator VineStun()
+    {
+        yield return null;
     }
 }

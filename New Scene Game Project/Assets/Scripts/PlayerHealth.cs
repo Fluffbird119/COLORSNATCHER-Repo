@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] Transform playerTransform;
 
+    [SerializeField] private float timeInBetweenHeals;
+
     public float health;
     public float maxHealth;
 
@@ -31,6 +33,8 @@ public class PlayerHealth : MonoBehaviour
     {
         youDiedMessageAndButton.SetActive(false);
         ChangeHealth(maxHealth);
+
+        StartCoroutine(HealOverTime());
     }
 
     private void Update()
@@ -101,6 +105,16 @@ public class PlayerHealth : MonoBehaviour
         else if (GameManager.Instance.waveNumber == 3)
         {
             StartCoroutine(GameManager.Instance.WaveThree());
+        }
+    }
+
+    private IEnumerator HealOverTime()
+    {
+        // yay we love while true loops
+        while (true)
+        {
+            yield return new WaitForSeconds(timeInBetweenHeals);
+            ChangeHealth(1);
         }
     }
 

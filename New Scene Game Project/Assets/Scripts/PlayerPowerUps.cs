@@ -144,7 +144,7 @@ public class PlayerPowerUps : MonoBehaviour
         legTentacles.color = Color.red;
 
         // increase animation speed of tentacle and speed of eye to slow down start lag
-        tentacleAnim.speed = 1.5f;
+        tentacleAnim.speed = 3f;
         EyeAnim.speed = 2f;
 
         // wait for duration of buff then turn back to normal
@@ -160,8 +160,8 @@ public class PlayerPowerUps : MonoBehaviour
         attackTentacle.color = Color.white;
         legTentacles.color = Color.white;
 
-        tentacleAnim.speed = 0.5f;
-        EyeAnim.speed = 0.5f;
+        tentacleAnim.speed = 2f;
+        EyeAnim.speed = 2f;
     }
 
     public float getRage()
