@@ -85,6 +85,7 @@ public class EnemyScript : MonoBehaviour
         {
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
+            CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Horizontal);
         }
         if (collision.CompareTag("VineAOE"))
         {
@@ -113,6 +114,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !isInDeathState && !isStunned)
         {
             PlayerHealth.Instance.ChangeHealth(-1);
+            CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);
         }
     }
 
