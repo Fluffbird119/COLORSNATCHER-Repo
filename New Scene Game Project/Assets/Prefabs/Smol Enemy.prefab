@@ -107,7 +107,7 @@ MonoBehaviour:
   healthScript: {fileID: 0}
   speed: 10
   stoppingDistance: 0
-  maxHealth: 3
+  maxHealth: 2
   knockbackForce: 15
   knockbackDuration: 1
   damage: 1
