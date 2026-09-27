@@ -6,6 +6,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private PlayerPowerUps playerPowerUpScript;
 
     public float speed = 3f;
+    private float oldSpeed;
     public float stoppingDistance = 0f;
     public int maxHealth = 5;
     private int currentHealth;
@@ -23,11 +24,16 @@ public class EnemyScript : MonoBehaviour
 
     [SerializeField] private PlayerHealth healthScript;
 
+    [SerializeField] private bool isStunned;
+
     // change this to change how fix are roatated
     public float spriteAngleOffset = -90f;
 
     void Start()
     {
+        oldSpeed = speed;
+        isStunned = false;
+
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         GameObject player = GameObject.FindWithTag("Player");
@@ -81,9 +87,24 @@ public class EnemyScript : MonoBehaviour
             TakeDamage(1, knockbackDir);
         }
     }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("VineAOE"))
+        {
+            StunEnemy();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("VineAOE"))
+        {
+            UnStunEnemy();
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !isInDeathState)
+        if (collision.gameObject.CompareTag("Player") && !isInDeathState && !isStunned)
         {
             PlayerHealth.Instance.ChangeHealth(-1);
         }
@@ -127,6 +148,7 @@ public class EnemyScript : MonoBehaviour
         rb.angularVelocity = 0f;
         RigidbodyType2D originalBodyType = rb.bodyType;
         rb.bodyType = RigidbodyType2D.Kinematic;
+        gameObject.layer = LayerMask.NameToLayer("NoCollide");
         
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
@@ -134,6 +156,7 @@ public class EnemyScript : MonoBehaviour
             Color originalColor = spriteRenderer.color;
             spriteRenderer.color = Color.gray;
             yield return new WaitForSeconds(5f);
+            gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
             currentHealth = maxHealth;
             isInDeathState = false;
@@ -143,6 +166,7 @@ public class EnemyScript : MonoBehaviour
         else
         {
             yield return new WaitForSeconds(5f);
+            gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
             currentHealth = maxHealth;
             isInDeathState = false;
@@ -150,8 +174,18 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    private IEnumerator VineStun()
+    private void StunEnemy()
     {
-        yield return null;
+        isStunned = true;
+        speed = 0;
+
+        Debug.Log("stunned enemy old speed is:" + oldSpeed);
+    }
+    private void UnStunEnemy()
+    {
+        isStunned = false;
+        speed = oldSpeed;
+
+        Debug.Log("unstunned enemy speed is: " + speed);
     }
 }

@@ -145,7 +145,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -172,6 +172,9 @@ MonoBehaviour:
   maxHealth: 3
   knockbackForce: 3
   knockbackDuration: 0.15
+  isWalker: 0
+  moveSpeed: 2
+  isStunned: 0
 --- !u!60 &-5097661702451804976
 PolygonCollider2D:
   m_ObjectHideFlags: 0
