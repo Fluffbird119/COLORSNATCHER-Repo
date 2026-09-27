@@ -387,22 +387,63 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 9)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] {"After a short trip, the colorless finds themself in a field of green"}, "none");
+            StartDialogue(new string[] { "After a short trip, the colorless finds themself in a field of green" }, "none");
             while (isTalking)
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "Heyyyyyy bro" }, "green");
+            StartDialogue(new string[] { "ommmmmmmmmmmmmmmmmmmmmmmmmmmmm ommmmmmmmmmmmmmmmmmmmm", "ommmmmmmmmmm", "*meditating*", "Heyyyyyy bro" }, "green");
             while (isTalking)
             {
                 yield return null;
             }
-            StartDialogue(new string[] {"IM GONNA RIP YOUR HEART OUT AND EAT YOUR ORGANS AAAAAAAAAAA"}, "player");
+            StartDialogue(new string[] { "IM GONNA RIP YOUR HEART OUT AND EAT YOUR ORGANS AAAAAAAAAAA" }, "player");
             while (isTalking)
             {
                 yield return null;
             }
             StartDialogue(new string[] { "what the freaky" }, "green");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 10)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "Okay bro, stop sliming out my buddies before I have to put you down." }, "green");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "I CANT STOP! IM LIVING! IM FINALLY LIVING!", "DONT TRY TO STOP ME OR ILL KILL YOU HARDER" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Well thats not living. Living is being content in the moment, experiencing things because you can.", "when you're alive, you have love" }, "green");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "STOP WITH YOUR PHILISOPHICAL BULLS--- IM GONNA MAUL YOU RAHHHH LELELELELELELE" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 11)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "Why are you doing this?" }, "green");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "I was born without color. My life was a void. But one day, I realized. You are all so full of color. Of emotion.",
+            "And I want it. I WANT IT!!!"}, "player");
             while (isTalking)
             {
                 yield return null;
