@@ -568,7 +568,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
   m_PrefabInstance: {fileID: 8358882279293644888}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1275088932}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5eb1996538c02743a57eb13c1b7ddba, type: 3}
@@ -579,12 +579,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
   m_PrefabInstance: {fileID: 8358882279293644888}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1275088932}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae003f109666a60488483ce15f06dd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1275088932 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4667962735266773042, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+  m_PrefabInstance: {fileID: 8358882279293644888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1532037494 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3086568576249794662, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
@@ -737,29 +742,9 @@ PrefabInstance:
       value: GameManager
       objectReference: {fileID: 0}
     - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
-      propertyPath: maxBounds
-      value: 40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
-      propertyPath: minBounds
-      value: -40
-      objectReference: {fileID: 0}
-    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
-      propertyPath: chunkyPrefab
+      propertyPath: player
       value: 
-      objectReference: {fileID: 2855841578704052247, guid: c3faa7612fd7e3b4ba4d4f8cc7d5df6b, type: 3}
-    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
-      propertyPath: sniperPrefab
-      value: 
-      objectReference: {fileID: 8719147511489265977, guid: d8204b9c21029b24885d0ee713c960c0, type: 3}
-    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
-      propertyPath: zombiePrefab
-      value: 
-      objectReference: {fileID: 8719147511489265977, guid: 085a7b1fc3ad9a4418aaeb75a12a4fdd, type: 3}
-    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
-      propertyPath: trooperPrefab
-      value: 
-      objectReference: {fileID: 8719147511489265977, guid: e5b508ec8fe98d14693bfdc7426d9c78, type: 3}
+      objectReference: {fileID: 1275088932}
     - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: redImage
       value: 
