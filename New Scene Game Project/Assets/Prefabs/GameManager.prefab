@@ -51,6 +51,9 @@ MonoBehaviour:
   dialogueCooldown: 0
   playerImage: {fileID: 0}
   redImage: {fileID: 0}
+  yellowImage: {fileID: 0}
+  greenImage: {fileID: 0}
+  blueImage: {fileID: 0}
   isCutscenePlaying: 0
 --- !u!114 &3977465018342270255
 MonoBehaviour:
@@ -64,13 +67,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54bc85ef50261b4388e794b1aa80bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   enemyPrefab: {fileID: 8719147511489265977, guid: 3bd1c4bb03260a349b755884bc8c92ad, type: 3}
   smallEnemyPrefab: {fileID: 2855841578704052247, guid: d2f299c45c9349448b6ae9a076aae85a, type: 3}
   bigEnemyPrefab: {fileID: 2855841578704052247, guid: b02dba09b1876d346b1186a78e610689, type: 3}
   speedEnemyPrefab: {fileID: 8719147511489265977, guid: 8b7ef972b8097d84bac7b5d53bb62bd6, type: 3}
   shooterPrefab: {fileID: 8719147511489265977, guid: 825b1b4b74ab1ca4fa0ca50e2a09d36f, type: 3}
-  waveCount: 0a00000014000000140000000a0000000a000000
-  minBounds: -100
-  maxBounds: 100
+  sniperPrefab: {fileID: 8719147511489265977, guid: d8204b9c21029b24885d0ee713c960c0, type: 3}
+  zombiePrefab: {fileID: 8719147511489265977, guid: 085a7b1fc3ad9a4418aaeb75a12a4fdd, type: 3}
+  trooperPrefab: {fileID: 8719147511489265977, guid: e5b508ec8fe98d14693bfdc7426d9c78, type: 3}
+  chunkyPrefab: {fileID: 2855841578704052247, guid: c3faa7612fd7e3b4ba4d4f8cc7d5df6b, type: 3}
+  minSpawnBounds: 40
+  maxSpawnBounds: 60
+  arenaMinBounds: -70
+  arenaMaxBounds: 70
   killsThisWave: 0
   waveNumber: 0
