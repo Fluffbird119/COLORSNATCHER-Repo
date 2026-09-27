@@ -216,7 +216,7 @@ public class GameManager : MonoBehaviour
         }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
-        WaveTen();
+        StartCoroutine(WaveTen());
     }
 
     public IEnumerator WaveTen()
