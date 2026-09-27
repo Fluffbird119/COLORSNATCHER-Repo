@@ -115,6 +115,7 @@ MonoBehaviour:
   healthScript: {fileID: 0}
   isStunned: 0
   spriteAngleOffset: 0
+  hitParticlePrefab: {fileID: 7359391080089007259, guid: 5eb95f9b3cf85b347a7e129849f10eb0, type: 3}
 --- !u!50 &4739332431938524062
 Rigidbody2D:
   serializedVersion: 5
