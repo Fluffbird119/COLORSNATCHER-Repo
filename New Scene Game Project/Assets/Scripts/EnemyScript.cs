@@ -95,11 +95,17 @@ public class EnemyScript : MonoBehaviour
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
         }
+        if (collision.CompareTag("VineAOE"))
+        {
+            Debug.Log("stun enemy");
+            StunEnemy();
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("VineAOE"))
         {
+            Debug.Log("stun enemy");
             StunEnemy();
         }
     }
@@ -187,14 +193,10 @@ public class EnemyScript : MonoBehaviour
     {
         isStunned = true;
         speed = 0;
-
-        Debug.Log("stunned enemy old speed is:" + oldSpeed);
     }
     private void UnStunEnemy()
     {
         isStunned = false;
         speed = oldSpeed;
-
-        Debug.Log("unstunned enemy speed is: " + speed);
     }
 }

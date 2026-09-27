@@ -85,6 +85,11 @@ public class ShooterScript : MonoBehaviour
 
     private void Shoot()
     {
+        if (isStunned)
+        {
+            return;
+        }
+
         if (bulletPrefab == null || firePoint == null) return;
         Vector2 fireDirection = (playerTransform.position - firePoint.position).normalized;
         float maxSpreadAngle = (1f - accuracy) * 45f;
@@ -105,6 +110,25 @@ public class ShooterScript : MonoBehaviour
         {
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
+        }
+        if (collision.CompareTag("VineAOE"))
+        {
+            StunEnemy();
+        }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("VineAOE"))
+        {
+            StunEnemy();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("VineAOE"))
+        {
+            UnStunEnemy();
         }
     }
 
@@ -137,5 +161,13 @@ public class ShooterScript : MonoBehaviour
         }
         PlayerPowerUps.Instance.IncreaseRage(1f);
         Destroy(gameObject);
+    }
+    private void StunEnemy()
+    {
+        isStunned = true;
+    }
+    private void UnStunEnemy()
+    {
+        isStunned = false;
     }
 }
