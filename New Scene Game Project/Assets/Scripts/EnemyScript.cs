@@ -86,11 +86,17 @@ public class EnemyScript : MonoBehaviour
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
         }
+        if (collision.CompareTag("VineAOE"))
+        {
+            Debug.Log("stun enemy");
+            StunEnemy();
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.CompareTag("VineAOE"))
         {
+            Debug.Log("stun enemy");
             StunEnemy();
         }
     }

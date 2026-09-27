@@ -106,6 +106,42 @@ public class PlayerHealth : MonoBehaviour
         {
             StartCoroutine(GameManager.Instance.WaveThree());
         }
+        else if (GameManager.Instance.waveNumber == 4)
+        {
+            StartCoroutine(GameManager.Instance.WaveFour());
+        }
+        else if (GameManager.Instance.waveNumber == 5)
+        {
+            StartCoroutine(GameManager.Instance.WaveFive());
+        }
+        else if (GameManager.Instance.waveNumber == 6)
+        {
+            StartCoroutine(GameManager.Instance.WaveSix());
+        }
+        else if (GameManager.Instance.waveNumber == 7)
+        {
+            StartCoroutine(GameManager.Instance.WaveSeven());
+        }
+        else if (GameManager.Instance.waveNumber == 8)
+        {
+            StartCoroutine(GameManager.Instance.WaveEight());
+        }
+        else if (GameManager.Instance.waveNumber == 9)
+        {
+            StartCoroutine(GameManager.Instance.WaveNine());
+        }
+        else if (GameManager.Instance.waveNumber == 10)
+        {
+            StartCoroutine(GameManager.Instance.WaveTen());
+        }
+        else if (GameManager.Instance.waveNumber == 11)
+        {
+            StartCoroutine(GameManager.Instance.WaveEleven());
+        }
+        else if (GameManager.Instance.waveNumber == 12)
+        {
+            StartCoroutine(GameManager.Instance.WaveTwelve());
+        }
     }
 
     private IEnumerator HealOverTime()
