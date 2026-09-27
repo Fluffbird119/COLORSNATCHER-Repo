@@ -94,3 +94,4 @@ fmod_editor.log
 
 # ignores vscode settings cause it pmo
 .vscode/*
+/New Scene Game Project.slnx
