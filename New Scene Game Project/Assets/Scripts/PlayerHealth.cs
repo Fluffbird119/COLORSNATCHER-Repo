@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+    public static PlayerHealth Instance { get; private set; }
+
     [SerializeField] PlayerAttack attackScript;
     [SerializeField] HealthBarUI healthBarUIScript;
     [SerializeField] GameObject youDiedMessageAndButton;
@@ -10,6 +12,19 @@ public class PlayerHealth : MonoBehaviour
 
     public float health;
     public float maxHealth;
+
+    private void Awake()
+    {
+        // Check if an instance already exists
+        if (Instance != null && Instance != this)
+        {
+            // If a duplicate exists, destroy this GameObject to enforce the single instance
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
 
     private void Start()
     {

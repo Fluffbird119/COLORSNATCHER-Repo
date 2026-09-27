@@ -10,6 +10,11 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
 
     private void LateUpdate()
     {
+        if (player.position.x <= -53 || player.position.x >= 53 || player.position.y >= 29 || player.position.y <= -45)
+        {
+            return;
+        }
+
         if (player != null)
         {
             // Calculate where the camera wants to go
