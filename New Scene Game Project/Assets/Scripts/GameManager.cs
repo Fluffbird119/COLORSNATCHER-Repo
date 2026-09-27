@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public GameObject bigEnemyPrefab;
     public GameObject speedEnemyPrefab;
     public GameObject shooterPrefab;
-    public int[] waveCount = new int[] { 10, 20, 20, 10, 10 };
+    public int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20 };
     public float minBounds = -100f;
     public float maxBounds = 100f;
     public int killsThisWave = 0;
@@ -89,11 +89,11 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveFour()
     {
         waveNumber = 4;
-        /*StartCoroutine(DialogueSystem.instance.StartCutscene(5));
+        StartCoroutine(DialogueSystem.instance.StartCutscene(5));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
-        }*/
+        }
         killsThisWave = 0;
         CreateWave();
         while (killsThisWave < waveCount[3])
@@ -106,14 +106,30 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveFive()
     {
         waveNumber = 5;
-        /*StartCoroutine(DialogueSystem.instance.StartCutscene(5));
+        StartCoroutine(DialogueSystem.instance.StartCutscene(6));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
-        }*/
+        }
         killsThisWave = 0;
         CreateWave();
         while (killsThisWave < waveCount[4])
+        {
+            yield return null;
+        }
+    }
+
+    public IEnumerator WaveSix()
+    {
+        waveNumber = 5;
+        StartCoroutine(DialogueSystem.instance.StartCutscene(7));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[5])
         {
             yield return null;
         }
@@ -143,6 +159,11 @@ public class GameManager : MonoBehaviour
         else if (waveNumber == 5)
         {
             SpawnEnemies(shooterPrefab, waveCount[4]);
+        }
+        else if (waveNumber ==6)
+        {
+            SpawnEnemies(shooterPrefab, waveCount[5]/2);
+            SpawnEnemies(speedEnemyPrefab, waveCount[5]/2);
         }
     }
 

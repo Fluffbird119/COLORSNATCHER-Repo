@@ -19,7 +19,6 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
 
-    // change this to change how fix are roatated
     public float spriteAngleOffset = 0;
 
     void Start()
@@ -44,6 +43,7 @@ public class EnemyScript : MonoBehaviour
             if (Time.time - lastSpeedBoostTime >= 5f)
             {
                 speed *= 2f;
+                transform.localScale *= 1.5f;
                 lastSpeedBoostTime = Time.time;
             }
         }
@@ -51,10 +51,8 @@ public class EnemyScript : MonoBehaviour
         {
             Vector2 direction = (Vector2)playerTransform.position - rb.position;
 
-            // 2. Turn that vector into an angle in degrees
             float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-            // 3. Apply the angle offset and set the Rigidbody's rotation
             rb.rotation = targetAngle + spriteAngleOffset;
 
             float distance = Vector2.Distance(rb.position, playerTransform.position);

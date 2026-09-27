@@ -22,6 +22,7 @@ public class DialogueSystem : MonoBehaviour
 
     public UnityEngine.UI.Image playerImage;
     public UnityEngine.UI.Image redImage;
+    public UnityEngine.UI.Image yellowImage;
 
     public bool isCutscenePlaying = false;
 
@@ -61,16 +62,25 @@ public class DialogueSystem : MonoBehaviour
         {
             playerImage.gameObject.SetActive(true);
             redImage.gameObject.SetActive(false);
+            yellowImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("red"))
         {
             playerImage.gameObject.SetActive(false);
             redImage.gameObject.SetActive(true);
+            yellowImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("none"))
         {
             playerImage.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
+            yellowImage.gameObject.SetActive(false);
+        }
+        else if (characterName.Equals("yellow"))
+        {
+            playerImage.gameObject.SetActive(false);
+            redImage.gameObject.SetActive(false);
+            yellowImage.gameObject.SetActive(true);
         }
         dialoguePanel.SetActive(true);
         ShowLine(currentLines[currentLine]);
@@ -262,6 +272,81 @@ public class DialogueSystem : MonoBehaviour
             StartDialogue(new string[] {"What... is this feeling? Is this it? The red anger of rage?",
                 "I can feel it now! The anger! The will! The motivation! The pure malice to kill everything! The adrenaline to achieve my goals!",
                 "I'm going to take every color. One kill at a time" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 5)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "some time passes" }, "yellow");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "HIIII IM YELLOW AND I LIKE TO PARTAYYYYY" }, "yellow");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "YELLLOWWWWWW", "I'M GONNA KILL YOU", "I WILL CHASE YOU TO THE ENDS OF THE EARTHHHHH" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Yoooo whats goody gang that sounds fun!" }, "yellow");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Shut UP.", "You may not know me, but I just killed the entity of red, and I'll kill you too!!!" }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Killing! Woah, thats crazy! You're getting me riled up!!!" }, "yellow");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] {"This is NOT a GAME.", "For all my life, I was TRAPPED in an emotionless body.", "But now, I can THINK. And I can FEEL.",
+                "And I have been filled with hate. HATE.", "Hate for every disgusting colored being that holds their emotions", "And I want them ALL!!!"}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 6)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "Wow! You are really good at this!" }, "yellow");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "I HATE YOU!!!!!!!!!!!!!!!1!!!!1!!!1!!!!!"}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 7)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "Today I ate some cookies!" }, "yellow");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] {"Are you TWELVE."}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
     }
