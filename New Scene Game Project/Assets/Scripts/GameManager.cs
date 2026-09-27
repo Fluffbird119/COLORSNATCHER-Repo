@@ -8,7 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject bigEnemyPrefab;
     public GameObject speedEnemyPrefab;
     public GameObject shooterPrefab;
-    private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20 };
+    public GameObject sniperPrefab;
+    public GameObject zombiePrefab;
+    private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20, 15, 15, 15, 30 };
     public float minBounds = -100f;
     public float maxBounds = 100f;
     public int killsThisWave = 0;
@@ -28,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaveOne());
+        StartCoroutine(WaveSix());
     }
 
     public IEnumerator WaveOne()
@@ -138,6 +140,27 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         StartCoroutine(DialogueSystem.instance.StartCutscene(8));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        StartCoroutine(WaveSeven());
+    }
+
+    public IEnumerator WaveSeven()
+    {
+        waveNumber = 7;
+        StartCoroutine(DialogueSystem.instance.StartCutscene(9));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[6])
+        {
+            yield return null;
+        }
     }
 
     public void CreateWave()
@@ -169,6 +192,20 @@ public class GameManager : MonoBehaviour
         {
             SpawnEnemies(shooterPrefab, 10);
             SpawnEnemies(speedEnemyPrefab, 10);
+        }
+        else if (waveNumber == 7)
+        {
+            SpawnEnemies(zombiePrefab, 15);
+        }
+        else if (waveNumber == 8)
+        {
+            SpawnEnemies(sniperPrefab, 7);
+            SpawnEnemies(zombiePrefab, 8);
+        }
+        else if (waveNumber == 9)
+        {
+            SpawnEnemies(zombiePrefab, 20);
+            SpawnEnemies(sniperPrefab, 10);
         }
     }
 
