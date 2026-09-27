@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player;
     public GameObject enemyPrefab;
     public GameObject smallEnemyPrefab;
     public GameObject bigEnemyPrefab;
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         BackgroundManager.Instance.ChangeBackground(0);
         StartCoroutine(WaveOne());
     }
@@ -215,7 +216,7 @@ public class GameManager : MonoBehaviour
         }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
-        WaveTen();
+        StartCoroutine(WaveTen());
     }
 
     public IEnumerator WaveTen()
