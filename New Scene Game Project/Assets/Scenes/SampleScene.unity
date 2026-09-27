@@ -880,6 +880,10 @@ PrefabInstance:
       propertyPath: vineBallStartingPoint
       value: 
       objectReference: {fileID: 939620620}
+    - target: {fileID: 665813947060500010, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
