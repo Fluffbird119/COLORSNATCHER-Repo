@@ -427,7 +427,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "STOP WITH YOUR PHILISOPHICAL BULLS--- IM GONNA MAUL YOU RAHHHH LELELELELELELE" }, "player");
+            StartDialogue(new string[] { "STOP WITH YOUR PHILISOPHICAL[sic] BULLS--- IM GONNA MAUL YOU RAHHHH LELELELELELELE" }, "player");
             while (isTalking)
             {
                 yield return null;
