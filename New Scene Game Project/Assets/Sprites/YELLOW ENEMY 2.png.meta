@@ -1,0 +1,325 @@
+fileFormatVersion: 2
+guid: ee5304acb1e08534a8f13131f288fbf3
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1721913998604347230
+    second: YELLOW ENEMY 2_0
+  - first:
+      213: 4413034351237222439
+    second: YELLOW ENEMY 2_1
+  - first:
+      213: 4612524657504920080
+    second: YELLOW ENEMY 2_2
+  - first:
+      213: 7085016997452832151
+    second: YELLOW ENEMY 2_3
+  - first:
+      213: -7709502057223613937
+    second: YELLOW ENEMY 2_4
+  - first:
+      213: 1032944103546502309
+    second: YELLOW ENEMY 2_5
+  - first:
+      213: -6805974047909880362
+    second: YELLOW ENEMY 2_6
+  - first:
+      213: 1301868658279529909
+    second: YELLOW ENEMY 2_7
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_0
+      rect:
+        serializedVersion: 2
+        x: 225
+        y: 1821
+        width: 1566
+        height: 1260
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a85a6367588a18e0800000000000000
+      internalID: -1721913998604347230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_1
+      rect:
+        serializedVersion: 2
+        x: 2159
+        y: 1825
+        width: 1535
+        height: 1249
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72057177c5f3e3d30800000000000000
+      internalID: 4413034351237222439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_2
+      rect:
+        serializedVersion: 2
+        x: 4079
+        y: 1831
+        width: 1535
+        height: 1230
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 012af40ecbaf20040800000000000000
+      internalID: 4612524657504920080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_3
+      rect:
+        serializedVersion: 2
+        x: 5821
+        y: 1777
+        width: 1789
+        height: 1304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79dd7c0db69035260800000000000000
+      internalID: 7085016997452832151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_4
+      rect:
+        serializedVersion: 2
+        x: 7724
+        y: 1762
+        width: 1826
+        height: 1322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f021b04c9b8520590800000000000000
+      internalID: -7709502057223613937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 162
+        width: 1826
+        height: 1322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ac39bc7031c55e00800000000000000
+      internalID: 1032944103546502309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_6
+      rect:
+        serializedVersion: 2
+        x: 1964
+        y: 162
+        width: 1826
+        height: 1322
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ddddcbb9a25c81a0800000000000000
+      internalID: -6805974047909880362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: YELLOW ENEMY 2_7
+      rect:
+        serializedVersion: 2
+        x: 3901
+        y: 177
+        width: 1789
+        height: 1304
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bd37f8a5aa211210800000000000000
+      internalID: 1301868658279529909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      YELLOW ENEMY 2_0: -1721913998604347230
+      YELLOW ENEMY 2_1: 4413034351237222439
+      YELLOW ENEMY 2_2: 4612524657504920080
+      YELLOW ENEMY 2_3: 7085016997452832151
+      YELLOW ENEMY 2_4: -7709502057223613937
+      YELLOW ENEMY 2_5: 1032944103546502309
+      YELLOW ENEMY 2_6: -6805974047909880362
+      YELLOW ENEMY 2_7: 1301868658279529909
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
