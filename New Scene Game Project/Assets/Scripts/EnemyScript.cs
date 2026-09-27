@@ -120,16 +120,30 @@ public class EnemyScript : MonoBehaviour
     private IEnumerator Reincarnate()
     {
         isInDeathState = true;
+        rb.linearVelocity = Vector2.zero;
+        rb.angularVelocity = 0f;
+        RigidbodyType2D originalBodyType = rb.bodyType;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
         {
             Color originalColor = spriteRenderer.color;
             spriteRenderer.color = Color.gray;
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
             reincarnated = true;
             currentHealth = maxHealth;
             isInDeathState = false;
+            rb.bodyType = originalBodyType;
             spriteRenderer.color = originalColor;
+        }
+        else
+        {
+            yield return new WaitForSeconds(5f);
+            reincarnated = true;
+            currentHealth = maxHealth;
+            isInDeathState = false;
+            rb.bodyType = originalBodyType;
         }
     }
 }

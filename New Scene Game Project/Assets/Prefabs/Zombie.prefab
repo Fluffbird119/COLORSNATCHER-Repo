@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5984809680287405731}
   - component: {fileID: 835887257477770892}
   - component: {fileID: 1123261327007499238}
-  - component: {fileID: 301865711061546951}
   - component: {fileID: -4923119542820788551}
+  - component: {fileID: -3973690650181288414}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Enemy
@@ -112,8 +112,6 @@ MonoBehaviour:
   damage: 1
   proceduralSpeed: 0
   reincarnates: 1
-  reincarnated: 0
-  isInDeathState: 0
   healthScript: {fileID: 0}
   spriteAngleOffset: 180
 --- !u!50 &1123261327007499238
@@ -143,8 +141,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &301865711061546951
-CircleCollider2D:
+--- !u!95 &-4923119542820788551
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719147511489265977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a60d3417c498d3444a015d0dfc2f143a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &-3973690650181288414
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,26 +198,60 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.77
---- !u!95 &-4923119542820788551
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8719147511489265977}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a60d3417c498d3444a015d0dfc2f143a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 16.554043, y: 7.0699997}
+    newSize: {x: 1.5300001, y: 1.0903267}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 2.4262178, y: -1.9730054}
+      - {x: 3.082628, y: -1.5979139}
+      - {x: 4.8174267, y: -0.5195255}
+      - {x: 6.036474, y: 0.08999828}
+      - {x: 6.974203, y: 0.37131697}
+      - {x: 8.146364, y: 0.93395436}
+      - {x: 8.33391, y: 1.1683866}
+      - {x: 8.33391, y: 1.4497052}
+      - {x: 8.099478, y: 1.5903646}
+      - {x: 6.974203, y: 1.8247968}
+      - {x: 6.88043, y: 2.2936614}
+      - {x: 6.88043, y: 2.9031851}
+      - {x: 6.411566, y: 3.6064818}
+      - {x: 6.0833607, y: 3.6064818}
+      - {x: 5.614496, y: 3.1376173}
+      - {x: 5.192518, y: 2.996958}
+      - {x: 4.958086, y: 2.8562987}
+      - {x: 4.5829945, y: 2.246775}
+      - {x: 3.8796976, y: 1.1683866}
+      - {x: 3.598379, y: 1.0277272}
+      - {x: 2.66065, y: 1.0746137}
+      - {x: 2.1448991, y: 1.2621595}
+      - {x: 1.8166939, y: 1.3559324}
+      - {x: 1.4416023, y: 1.4028188}
+      - {x: -0.24630982, y: 2.246775}
+      - {x: -0.5276285, y: 2.2936614}
+      - {x: -2.1217678, y: 2.4812071}
+      - {x: -2.5437458, y: 2.4812071}
+      - {x: -4.0909986, y: 2.4343207}
+      - {x: -4.888068, y: 2.153002}
+      - {x: -5.91957, y: 1.4497052}
+      - {x: -6.5290937, y: 0.793295}
+      - {x: -7.419936, y: -0.09754751}
+      - {x: -7.7481413, y: -0.47263908}
+      - {x: -8.076346, y: -1.0352764}
+      - {x: -8.263892, y: -1.4103681}
+      - {x: -8.263892, y: -1.6448003}
+      - {x: -8.170119, y: -1.926119}
+      - {x: -7.7481413, y: -2.348097}
+      - {x: -6.1071157, y: -3.0045073}
+      - {x: -4.137885, y: -3.5202582}
+      - {x: -2.4030864, y: -3.5202582}
+      - {x: -1.3715845, y: -3.3327124}
+      - {x: -0.62140137, y: -3.192053}
+      - {x: 1.6291481, y: -2.348097}
+  m_UseDelaunayMesh: 0

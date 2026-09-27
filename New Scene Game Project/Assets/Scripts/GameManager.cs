@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaveSix());
+        StartCoroutine(WaveSeven());
     }
 
     public IEnumerator WaveOne()
@@ -158,6 +158,38 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         while (killsThisWave < waveCount[6])
+        {
+            yield return null;
+        }
+        StartCoroutine(WaveEight());
+    }
+
+    public IEnumerator WaveEight()
+    {
+        waveNumber = 8;
+        StartCoroutine(DialogueSystem.instance.StartCutscene(10));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[7])
+        {
+            yield return null;
+        }
+    }
+    public IEnumerator WaveNine()
+    {
+        waveNumber = 9;
+        StartCoroutine(DialogueSystem.instance.StartCutscene(11));
+        while (DialogueSystem.instance.isCutscenePlaying)
+        {
+            yield return null;
+        }
+        killsThisWave = 0;
+        CreateWave();
+        while (killsThisWave < waveCount[8])
         {
             yield return null;
         }
