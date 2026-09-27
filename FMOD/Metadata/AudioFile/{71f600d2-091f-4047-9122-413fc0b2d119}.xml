@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{71f600d2-091f-4047-9122-413fc0b2d119}">
+		<property name="assetPath">
+			<value>Gamejam-Blue.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>60.995918367346938</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fd9e90ae-9250-47b6-9a4d-8b5ec09cf071}</destination>
+		</relationship>
+	</object>
+</objects>
