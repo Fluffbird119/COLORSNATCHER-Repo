@@ -23,23 +23,19 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.UI.Image playerImage;
     public UnityEngine.UI.Image redImage;
     public UnityEngine.UI.Image yellowImage;
+    public UnityEngine.UI.Image greenImage;
 
     public bool isCutscenePlaying = false;
 
     void Awake()
     {
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         instance = this;
     }
-
-    /*
-    void Start()
-    {
-        dialoguePanel.SetActive(false);
-        playerImage.gameObject.SetActive(false);
-        redImage.gameObject.SetActive(false);
-    }
-    */
-    
 
     void Update()
     {
@@ -63,24 +59,35 @@ public class DialogueSystem : MonoBehaviour
             playerImage.gameObject.SetActive(true);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
+            greenImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("red"))
         {
             playerImage.gameObject.SetActive(false);
             redImage.gameObject.SetActive(true);
             yellowImage.gameObject.SetActive(false);
+            greenImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("none"))
         {
             playerImage.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
+            greenImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("yellow"))
         {
             playerImage.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(true);
+            greenImage.gameObject.SetActive(false);
+        }
+        else if (characterName.Equals("green"))
+        {
+            playerImage.gameObject.SetActive(false);
+            redImage.gameObject.SetActive(false);
+            yellowImage.gameObject.SetActive(false);
+            greenImage.gameObject.SetActive(true);
         }
         dialoguePanel.SetActive(true);
         ShowLine(currentLines[currentLine]);
@@ -140,6 +147,8 @@ public class DialogueSystem : MonoBehaviour
         dialoguePanel.SetActive(false);
         playerImage.gameObject.SetActive(false);
         redImage.gameObject.SetActive(false);
+        yellowImage.gameObject.SetActive(false);
+        greenImage.gameObject.SetActive(false);
         StartCoroutine(DialogueCooldown());
     }
 
@@ -152,6 +161,11 @@ public class DialogueSystem : MonoBehaviour
 
     public IEnumerator StartCutscene(int cutsceneNumber)
     {
+        if (isCutscenePlaying)
+        {
+            yield break;
+        }
+
         if (cutsceneNumber == 1)
         {
             isCutscenePlaying = true;
@@ -232,13 +246,13 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 4)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] { "I...I lost... I actually LOST???", "ITS IMPOSSIBLE!!!", 
+            StartDialogue(new string[] { "I...I lost... I actually LOST???", "ITS IMPOSSIBLE!!!",
                 "I CANT LOSE TO SOMEONE LIKE YOU. SOMEBODY WITH NO PURPOSE, NO COLOR, NO FEELINGS, NO THOUGHTS, YOU'RE COMPLETELY FLAVORLESS!" }, "red");
             while (isTalking)
             {
                 yield return null;
             }
-            StartDialogue(new string[] {"It's okay.", "I will be killing you now."}, "player");
+            StartDialogue(new string[] { "It's okay.", "I will be killing you now." }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -264,7 +278,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "...","You killed him." }, "none");
+            StartDialogue(new string[] { "...", "You killed him." }, "none");
             while (isTalking)
             {
                 yield return null;
@@ -327,7 +341,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "I HATE YOU!!!!!!!!!!!!!!!1!!!!1!!!1!!!!!"}, "player");
+            StartDialogue(new string[] { "I HATE YOU!!!!!!!!!!!!!!!1!!!!1!!!1!!!!!" }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -342,7 +356,53 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] {"Are you TWELVE."}, "player");
+            StartDialogue(new string[] { "Are you TWELVE." }, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 8)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "Wow, that was so much fun! Thanks fren!!!", "Wait, what are you doing?", "Nononono stopstopstopstop",
+            "AAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAA",
+            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH"}, "yellow");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "And now, you're color is mine!!! YES!", "Is this happiness? I feel so good! So joyous! So excited!",
+            "Have they been keeping this all away from me? This color and emotion?",
+            "I want their feelings. They're holding it from me. I will show them. I can kill them",
+            "IM GONNA TAKE EVERY COLOR IN THE WORLD!!!!!!!!"}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 9)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] {"After a short trip, the colorless finds themself in a field of green"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "Heyyyyyy bro" }, "green");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] {"IM GONNA RIP YOUR HEART OUT AND EAT YOUR ORGANS AAAAAAAAAAA"}, "player");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "what the freaky" }, "green");
             while (isTalking)
             {
                 yield return null;

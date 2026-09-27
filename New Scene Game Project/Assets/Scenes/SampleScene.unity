@@ -270,7 +270,10 @@ PrefabInstance:
       objectReference: {fileID: 1230194029}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 969681746042540163, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1532037493}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
 --- !u!114 &408133668 stripped
@@ -532,6 +535,81 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae003f109666a60488483ce15f06dd02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1532037492
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1532037493}
+  - component: {fileID: 1532037495}
+  - component: {fileID: 1532037494}
+  m_Layer: 5
+  m_Name: Green
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1532037493
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532037492}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.6535, y: 0.6535, z: 0.6535}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2082220899}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 269.11, y: 2}
+  m_SizeDelta: {x: 319, y: 652}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1532037494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532037492}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -4541501957983096045, guid: 6752aba3a5b510e4ba1707e237b1f2ac, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1532037495
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1532037492}
+  m_CullTransparentMesh: 1
 --- !u!114 &1598668377 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4586349288469997016, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
@@ -559,6 +637,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9000ba14c425d42aba604ca394dade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &2082220899 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 969681746042540163, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+  m_PrefabInstance: {fileID: 408133666}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1149748262224835492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -674,16 +757,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: maxBounds
-      value: 50
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: minBounds
-      value: -50
+      value: -40
       objectReference: {fileID: 0}
+    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: sniperPrefab
+      value: 
+      objectReference: {fileID: 8719147511489265977, guid: d8204b9c21029b24885d0ee713c960c0, type: 3}
+    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: zombiePrefab
+      value: 
+      objectReference: {fileID: 8719147511489265977, guid: 085a7b1fc3ad9a4418aaeb75a12a4fdd, type: 3}
     - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: redImage
       value: 
       objectReference: {fileID: 408133668}
+    - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: greenImage
+      value: 
+      objectReference: {fileID: 1532037494}
     - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: playerImage
       value: 

@@ -17,6 +17,9 @@ public class EnemyScript : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
+    public bool reincarnates = false;
+    private bool reincarnated = false;
+    private bool isInDeathState = false;
 
     [SerializeField] private PlayerHealth healthScript;
 
@@ -38,7 +41,7 @@ public class EnemyScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isKnockedBack) return;
+        if (isKnockedBack || isInDeathState) return;
         if (proceduralSpeed)
         {
             if (Time.time - lastSpeedBoostTime >= 5f)
@@ -71,6 +74,7 @@ public class EnemyScript : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (isInDeathState) return;
         if (collision.CompareTag("Tentacle"))
         {
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
@@ -103,8 +107,29 @@ public class EnemyScript : MonoBehaviour
 
     private void Die()
     {
+        if (reincarnates && !reincarnated)
+        {
+            StartCoroutine(Reincarnate());
+            return;
+        }
         playerPowerUpScript.IncreaseRage(1f);
         GameManager.Instance.killsThisWave++;
         Destroy(gameObject);
+    }
+
+    private IEnumerator Reincarnate()
+    {
+        isInDeathState = true;
+        SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            Color originalColor = spriteRenderer.color;
+            spriteRenderer.color = Color.gray;
+            yield return new WaitForSeconds(1f);
+            reincarnated = true;
+            currentHealth = maxHealth;
+            isInDeathState = false;
+            spriteRenderer.color = originalColor;
+        }
     }
 }
