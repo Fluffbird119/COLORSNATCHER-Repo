@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(WaveOne());
+        StartCoroutine(WaveFour());
     }
 
     public IEnumerator WaveOne()
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveSix()
     {
-        waveNumber = 5;
+        waveNumber = 6;
         StartCoroutine(DialogueSystem.instance.StartCutscene(7));
         while (DialogueSystem.instance.isCutscenePlaying)
         {

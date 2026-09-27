@@ -12,11 +12,11 @@ GameObject:
   - component: {fileID: 5984809680287405731}
   - component: {fileID: 835887257477770892}
   - component: {fileID: 1123261327007499238}
-  - component: {fileID: 301865711061546951}
   - component: {fileID: -4740312554225553737}
+  - component: {fileID: -8034592887901626622}
   m_Layer: 0
   m_Name: Speeder Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -112,7 +112,7 @@ MonoBehaviour:
   knockbackDuration: 1
   damage: 1
   proceduralSpeed: 1
-  spriteAngleOffset: 0
+  spriteAngleOffset: 180
 --- !u!50 &1123261327007499238
 Rigidbody2D:
   serializedVersion: 5
@@ -140,8 +140,30 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &301865711061546951
-CircleCollider2D:
+--- !u!95 &-4740312554225553737
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719147511489265977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 12468703c02108946b9c5edba1445afa, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &-8034592887901626622
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -175,26 +197,70 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.77
---- !u!95 &-4740312554225553737
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8719147511489265977}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 12468703c02108946b9c5edba1445afa, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 16.75, y: 4.583595}
+    newSize: {x: 1.5300001, y: 1.0903267}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 8.408751, y: 0.22859824}
+      - {x: 8.408751, y: 0.50984824}
+      - {x: 8.315001, y: 0.65047324}
+      - {x: 7.7993755, y: 0.74422324}
+      - {x: 6.4400005, y: 1.4004732}
+      - {x: 4.3775005, y: 1.8692232}
+      - {x: 3.6743753, y: 1.9629732}
+      - {x: 3.1118753, y: 1.7285982}
+      - {x: 2.4556253, y: 1.9160982}
+      - {x: 1.5650003, y: 2.056723}
+      - {x: 1.1431253, y: 2.056723}
+      - {x: 0.9087503, y: 1.9160982}
+      - {x: 0.2993753, y: 1.9629732}
+      - {x: -1.0131247, y: 2.244223}
+      - {x: -1.3412497, y: 2.244223}
+      - {x: -2.3256247, y: 2.009848}
+      - {x: -3.4037497, y: 2.244223}
+      - {x: -3.9193747, y: 2.337973}
+      - {x: -4.3412495, y: 2.337973}
+      - {x: -4.7162495, y: 2.009848}
+      - {x: -5.1381245, y: 2.009848}
+      - {x: -5.9818745, y: 1.9629732}
+      - {x: -6.4506245, y: 2.103598}
+      - {x: -6.8724995, y: 2.103598}
+      - {x: -7.2006245, y: 1.8223482}
+      - {x: -7.5756245, y: 0.74422324}
+      - {x: -7.6224995, y: 0.83797324}
+      - {x: -8.278749, y: 0.83797324}
+      - {x: -8.372499, y: 0.60359824}
+      - {x: -8.372499, y: 0.18172324}
+      - {x: -8.278749, y: 0.13484824}
+      - {x: -7.6224995, y: -0.005776763}
+      - {x: -7.2474995, y: -1.1776518}
+      - {x: -6.8724995, y: -1.4589018}
+      - {x: -5.7474995, y: -1.2714018}
+      - {x: -5.3724995, y: -1.1776518}
+      - {x: -4.0131245, y: -2.068277}
+      - {x: -3.1224997, y: -1.8339018}
+      - {x: -2.5131247, y: -1.4120268}
+      - {x: -1.9974997, y: -1.4589018}
+      - {x: -1.4818747, y: -1.7870268}
+      - {x: -1.0599997, y: -1.9745268}
+      - {x: -0.4974997, y: -1.9745268}
+      - {x: -0.122499704, y: -1.8339018}
+      - {x: 0.3931253, y: -1.5057768}
+      - {x: 0.9556253, y: -1.9276518}
+      - {x: 1.3306253, y: -2.162027}
+      - {x: 1.9868753, y: -2.208902}
+      - {x: 3.0181253, y: -1.6932768}
+      - {x: 3.2993753, y: -1.9745268}
+      - {x: 3.9087503, y: -2.302652}
+      - {x: 4.7525005, y: -2.302652}
+      - {x: 5.6431255, y: -1.8807768}
+      - {x: 6.5806255, y: -1.4589018}
+      - {x: 7.3775005, y: -0.84952676}
+  m_UseDelaunayMesh: 0

@@ -1396,6 +1396,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1758357360}
     - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: yellowImage
+      value: 
+      objectReference: {fileID: 1976025199}
+    - target: {fileID: 5644904546230578292, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: dialogueText
       value: 
       objectReference: {fileID: 1879389643}

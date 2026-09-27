@@ -43,7 +43,7 @@ public class EnemyScript : MonoBehaviour
             if (Time.time - lastSpeedBoostTime >= 5f)
             {
                 speed *= 2f;
-                transform.localScale *= 1.5f;
+                transform.localScale *= 1.25f;
                 lastSpeedBoostTime = Time.time;
             }
         }
