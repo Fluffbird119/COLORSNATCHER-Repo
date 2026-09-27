@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         BackgroundManager.Instance.ChangeBackground(0);
-        StartCoroutine(WaveTen());
+        StartCoroutine(WaveOne());
     }
 
     public IEnumerator WaveOne()

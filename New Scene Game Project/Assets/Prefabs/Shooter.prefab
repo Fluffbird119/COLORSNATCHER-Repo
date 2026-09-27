@@ -145,7 +145,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -166,7 +166,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -208,6 +208,9 @@ MonoBehaviour:
   maxHealth: 3
   knockbackForce: 3
   knockbackDuration: 0.15
+  isWalker: 0
+  moveSpeed: 2
+  isStunned: 0
 --- !u!95 &-3890336698069211559
 Animator:
   serializedVersion: 7
