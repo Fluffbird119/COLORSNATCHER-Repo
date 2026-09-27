@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    private GameObject player;
     public GameObject enemyPrefab;
     public GameObject smallEnemyPrefab;
     public GameObject bigEnemyPrefab;
@@ -13,8 +14,12 @@ public class GameManager : MonoBehaviour
     public GameObject trooperPrefab;
     public GameObject chunkyPrefab;
     private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20, 15, 15, 30, 10, 20, 30 };
-    public float minBounds = -100f;
-    public float maxBounds = 100f;
+    public float minSpawnBounds = 40f;
+    public float maxSpawnBounds = 60f;
+    public float arenaMinBoundsX = -70f;
+    public float arenaMaxBoundsX = 70f;
+    public float arenaMinBoundsY = -55f;
+    public float arenaMaxBoundsY = 35f;
     public int killsThisWave = 0;
     public int waveNumber = 0;
 
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        player = GameObject.FindWithTag("Player");
         AudioManager.Instance.ConvoMusic();
         BackgroundManager.Instance.ChangeBackground(0);
         StartCoroutine(WaveOne());
@@ -195,6 +201,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
@@ -202,6 +209,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        StartCoroutine(WaveNine());
     }
     public IEnumerator WaveNine()
     {
@@ -212,6 +220,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
@@ -226,7 +235,7 @@ public class GameManager : MonoBehaviour
         }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
-        WaveTen();
+        StartCoroutine(WaveTen());
     }
 
     public IEnumerator WaveTen()
@@ -363,18 +372,32 @@ public class GameManager : MonoBehaviour
             int attempts = 0;
             while (!validPositionFound && attempts < maxAttempts)
             {
-                float randomX = Random.Range(minBounds, maxBounds);
-                float randomY = Random.Range(minBounds, maxBounds);
-                spawnPosition = new Vector2(randomX, randomY);
+                float randomTheta = Random.Range(0f, 2f * Mathf.PI);
+                float randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds);
+                spawnPosition = new Vector2(randomDistance * Mathf.Cos(randomTheta) + player.transform.position.x, randomDistance * Mathf.Sin(randomTheta) + player.transform.position.y);
                 Collider2D hitCollider = Physics2D.OverlapCircle(spawnPosition, checkRadius);
-                if (hitCollider == null)
+                if (hitCollider == null && spawnPosition.x > arenaMinBoundsX && spawnPosition.y > arenaMinBoundsY && spawnPosition.x < arenaMaxBoundsX && spawnPosition.y < arenaMaxBoundsY)
                 {
                     validPositionFound = true;
                 }
 
                 attempts++;
             }
-            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+            if (attempts == maxAttempts)
+            {
+                if (Vector2.Distance(player.transform.position, new Vector2(0, 0)) < minSpawnBounds)
+                {
+                    Instantiate(prefabToSpawn, new Vector2(30 * (int)Random.Range(-1, 2), 30 * (int)Random.Range(-1, 2)), Quaternion.identity);
+                }
+                else
+                {
+                    Instantiate(prefabToSpawn, new Vector2(0f, 0f), Quaternion.identity);
+                }
+            }
+            else
+            {
+                Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+            }
         }
     }
 }
