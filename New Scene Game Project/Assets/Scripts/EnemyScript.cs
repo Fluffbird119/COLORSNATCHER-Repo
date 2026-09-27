@@ -178,14 +178,10 @@ public class EnemyScript : MonoBehaviour
     {
         isStunned = true;
         speed = 0;
-
-        Debug.Log("stunned enemy old speed is:" + oldSpeed);
     }
     private void UnStunEnemy()
     {
         isStunned = false;
         speed = oldSpeed;
-
-        Debug.Log("unstunned enemy speed is: " + speed);
     }
 }

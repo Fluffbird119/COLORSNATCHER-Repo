@@ -590,7 +590,7 @@ MonoBehaviour:
   DashBarObject: {fileID: 0}
   movementScript: {fileID: 989395696206953658}
   dashBarUIScript: {fileID: 0}
-  beatenYellow: 1
+  beatenYellow: 0
   curDashCooldown: 0
   maxDashCooldown: 5
   dashMoveSpeed: 80
@@ -601,7 +601,7 @@ MonoBehaviour:
   fireForce: 20
   beatenGreen: 0
   curVineCooldown: 0
-  maxVineCooldown: 30
+  maxVineCooldown: 5
 --- !u!114 &6200498255624669922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -644,7 +644,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
