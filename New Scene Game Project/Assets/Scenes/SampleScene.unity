@@ -135,6 +135,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1790427902795987779, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
   m_PrefabInstance: {fileID: 408133666}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &321341265 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1926698061695128521, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+  m_PrefabInstance: {fileID: 408133666}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &408133666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -143,6 +148,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 392478891977375710, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+      propertyPath: m_Name
+      value: VineBar
+      objectReference: {fileID: 0}
+    - target: {fileID: 589852683741798211, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+      propertyPath: width
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 589852683741798211, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+      propertyPath: height
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 589852683741798211, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+      propertyPath: vineBar
+      value: 
+      objectReference: {fileID: 321341265}
     - target: {fileID: 969681746042540163, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -238,6 +259,10 @@ PrefabInstance:
     - target: {fileID: 5644327633257636472, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5748199065776742387, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+      propertyPath: m_Name
+      value: VineBackground
       objectReference: {fileID: 0}
     - target: {fileID: 6538716724527989935, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
       propertyPath: playerPowerUpsScript
@@ -470,6 +495,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &939620620 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2312094620568690683, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+  m_PrefabInstance: {fileID: 8358882279293644888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1207200887 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5644327633257636472, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
@@ -810,13 +840,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 111938134}
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: VineBallPrefab
+      value: 
+      objectReference: {fileID: 8120118057655045135, guid: ce00c7c62bf7e0b4fb5970815d84d9a4, type: 3}
+    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: curVineCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: dashBarUIScript
       value: 
       objectReference: {fileID: 1686573496}
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: maxVineCooldown
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: rageBarUIScript
       value: 
       objectReference: {fileID: 590160078}
+    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: vineBallStartingPoint
+      value: 
+      objectReference: {fileID: 939620620}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
