@@ -521,7 +521,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
   m_PrefabInstance: {fileID: 8358882279293644888}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1653616373}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a5eb1996538c02743a57eb13c1b7ddba, type: 3}
@@ -532,7 +532,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
   m_PrefabInstance: {fileID: 8358882279293644888}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1653616373}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae003f109666a60488483ce15f06dd02, type: 3}
@@ -609,6 +609,11 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1 &1653616373 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4667962735266773042, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+  m_PrefabInstance: {fileID: 8358882279293644888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1686573494 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7931326851186187500, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
@@ -838,6 +843,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1653616373}
     - target: {fileID: 3977465018342270255, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: maxBounds
       value: 40
