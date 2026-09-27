@@ -24,6 +24,7 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.UI.Image redImage;
     public UnityEngine.UI.Image yellowImage;
     public UnityEngine.UI.Image greenImage;
+    public UnityEngine.UI.Image blueImage;
 
     public bool isCutscenePlaying = false;
 
@@ -448,6 +449,24 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
+            isCutscenePlaying = false;
+        }
+        else if (cutsceneNumber == 12)
+        {
+            isCutscenePlaying = true;
+            StartDialogue(new string[] { "oh no im dying" }, "green");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "boooooooom"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
+            StartDialogue(new string[] { "What is this? I feel... fine. I feel satiated. I feel... good?", "I should stop here." ,
+            "but this feels so good...", "But I have to keep going. What if theres more? More good feelings. Like all of these ones!",
+            "I want good feelings! I love good feelings!"}, "player");
             isCutscenePlaying = false;
         }
     }

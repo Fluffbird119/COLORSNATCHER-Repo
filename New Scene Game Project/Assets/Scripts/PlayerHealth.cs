@@ -76,7 +76,7 @@ public class PlayerHealth : MonoBehaviour
     // i frames for 0.1 seconds after player takes damage
     private IEnumerator iFrames()
     {
-        player.layer = 6;
+        player.layer = 9;
 
         yield return new WaitForSeconds(0.1f);
 

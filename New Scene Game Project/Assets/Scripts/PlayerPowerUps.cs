@@ -22,6 +22,9 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] RageBarUI rageBarUIScript;
 
     public bool beatenRed = false; // bool for now cuz lazy can make it better latter
+
+    private float oldSpeed;
+
     [SerializeField] float rage = 0f; 
     [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup
     [SerializeField] float rageDuration;
@@ -85,7 +88,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (beatenRed)
         {
             RageBarObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Alpha1) && beatenRed && rage >= maxRage)
+            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && rage >= maxRage)
             {
                 RagePowerUpEffect();
             }
@@ -97,7 +100,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeDash();
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && beatenYellow && curDashCooldown >= maxDashCooldown)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDashCooldown >= maxDashCooldown)
             {
                 Dash();
             }
@@ -109,7 +112,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeVine();
             
-            if (Input.GetKeyDown(KeyCode.Alpha3) && beatenGreen && curVineCooldown >= maxVineCooldown)
+            if (Input.GetKeyDown(KeyCode.E) && beatenGreen && curVineCooldown >= maxVineCooldown)
             {
                 ShootVineBall();
             }
@@ -137,6 +140,9 @@ public class PlayerPowerUps : MonoBehaviour
         rage = 0;
         rageBarUIScript.UpdateRageVisual();
 
+        oldSpeed = PlayerMovement.Instance.GetSpeed();
+        PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
+
         // turn head and eye and tentacle red
         head.color = Color.red;
         eye.color = Color.red;
@@ -162,6 +168,8 @@ public class PlayerPowerUps : MonoBehaviour
 
         tentacleAnim.speed = 2f;
         EyeAnim.speed = 2f;
+
+        PlayerMovement.Instance.SetSpeed(oldSpeed);
     }
 
     public float getRage()
