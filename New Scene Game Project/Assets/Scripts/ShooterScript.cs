@@ -10,11 +10,11 @@ public class ShooterScript : MonoBehaviour
     private float distanceRateIncrease = 3f;
     private float distanceAccuracyIncrease = 2f;
     public float bulletSpeed = 30f;
-    public int damage = 1;
+    public float rageDamageBuff = 1.5f;
     [Range(0f, 1f)]
     public float accuracy = 0.8f;
     public int maxHealth = 3;
-    private int currentHealth;
+    private float currentHealth;
     public float knockbackForce = 3f;
     public float knockbackDuration = 0.15f;
     private bool isKnockedBack = false;
@@ -168,7 +168,14 @@ public class ShooterScript : MonoBehaviour
 
     public void TakeDamage(int damageAmount, Vector2 knockbackDirection)
     {
-        currentHealth -= damageAmount;
+        if (PlayerPowerUps.Instance.getIsRaged())
+        {
+            currentHealth -= damageAmount * rageDamageBuff;
+        }
+        else {
+            currentHealth -= damageAmount;
+        }
+        
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
 

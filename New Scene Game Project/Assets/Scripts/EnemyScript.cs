@@ -10,11 +10,11 @@ public class EnemyScript : MonoBehaviour
     private float oldSpeed;
     public float stoppingDistance = 0f;
     public int maxHealth = 5;
-    private int currentHealth;
+    private float currentHealth;
     public float knockbackForce = 5f;
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
-    public int damage = 1;
+    public float rageDamageBuff = 1.5f;
     public bool proceduralSpeed = false;
     private Transform playerTransform;
     private Rigidbody2D rb;
@@ -133,7 +133,13 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockbackDirection)
     {
-        currentHealth -= damage;
+        if (PlayerPowerUps.Instance.getIsRaged())
+        {
+            currentHealth -= damage * rageDamageBuff;
+        }
+        else {
+            currentHealth -= damage;
+        }
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
         if (currentHealth <= 0)
