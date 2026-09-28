@@ -320,6 +320,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        AudioManager.Instance.StopAll();
         //send to main menu here
     }
 

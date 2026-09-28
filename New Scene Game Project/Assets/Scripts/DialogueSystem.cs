@@ -305,6 +305,11 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
+            StartDialogue(new string[] { "RAGE acquired, press 'Q' to RAGE out"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
         else if (cutsceneNumber == 5)
@@ -397,6 +402,11 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
+            StartDialogue(new string[] { "DASH acquired, press 'Shift' to do that"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
         else if (cutsceneNumber == 9)
@@ -481,6 +491,11 @@ public class DialogueSystem : MonoBehaviour
             StartDialogue(new string[] { "What is this? I feel... fine. I feel satiated. I feel... good?", "I should stop here." ,
             "but this feels so good...", "But I have to keep going. What if theres more? More good feelings. Like all of these ones!",
             "I want good feelings! I love good feelings!"}, "player");
+            StartDialogue(new string[] { "SLUDGE acquired, press 'E' to splooge"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
         else if (cutsceneNumber == 13)
