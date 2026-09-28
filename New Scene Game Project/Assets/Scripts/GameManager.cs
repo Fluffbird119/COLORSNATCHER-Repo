@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         AudioManager.Instance.RedMusic();
-        AudioManager.Instance.RedMusic();
         CreateWave();
         while (killsThisWave < waveCount[0])
         {
