@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{2e45da21-5e8e-4f14-ae95-1a9708f3fe8d}">
+		<property name="assetPath">
+			<value>Gamejam-red.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>43.154285714285713</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fd9e90ae-9250-47b6-9a4d-8b5ec09cf071}</destination>
+		</relationship>
+	</object>
+</objects>

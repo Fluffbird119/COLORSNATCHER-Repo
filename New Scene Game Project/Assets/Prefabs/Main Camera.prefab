@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 6616418375045034041}
   - component: {fileID: 7495998974250219549}
   - component: {fileID: 5337852873745584491}
-  - component: {fileID: 264504693349680486}
   - component: {fileID: 6064216758916219620}
-  - component: {fileID: 6362243397971244915}
+  - component: {fileID: 3401946813943132251}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -131,20 +130,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &264504693349680486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 757306365164333470}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86c6556701af9e04380698b89f691b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nonRigidbodyVelocity: 0
-  attenuationObject: {fileID: 0}
 --- !u!114 &6064216758916219620
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,19 +145,11 @@ MonoBehaviour:
   player: {fileID: 0}
   smoothTime: 0.3
   offset: {x: 0, y: -3.5, z: -10}
---- !u!114 &6362243397971244915
-MonoBehaviour:
+--- !u!81 &3401946813943132251
+AudioListener:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757306365164333470}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd362c4e587cd654986e0cb70423706b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shakeAxis: 0
-  shakeDuration: 0.2
-  shakeMagnitude: 0.3
-  dampingSpeed: 1

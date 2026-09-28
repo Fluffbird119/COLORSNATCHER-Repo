@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{d1cf48cc-c141-479e-b1fd-9d0b289498d7}">
+		<property name="assetPath">
+			<value>Convo gamejam.mp3</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>92.186122448979589</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{fd9e90ae-9250-47b6-9a4d-8b5ec09cf071}</destination>
+		</relationship>
+	</object>
+</objects>
