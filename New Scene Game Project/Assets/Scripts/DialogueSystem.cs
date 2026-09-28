@@ -198,12 +198,12 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "im gonna kill u" }, "player");
+            StartDialogue(new string[] { "la dee dah im just a critter who is NOT evil I would never do that" }, "player");
             while (isTalking)
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "WHAAAAT. I DONT EVEN KNOW WHO YOU ARE", "BUT THIS MAKES ME VERY ANGRY" }, "red");
+            StartDialogue(new string[] { "WHAAAAT. I DONT EVEN KNOW HOW TO READ", "BUT THIS MAKES ME VERY ANGRY" }, "red");
             while (isTalking)
             {
                 yield return null;
