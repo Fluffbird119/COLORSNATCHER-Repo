@@ -204,7 +204,7 @@ MonoBehaviour:
   fireRate: 0.3
   bulletSpeed: 20
   damage: 1
-  accuracy: 0
+  accuracy: 0.1
   maxHealth: 3
   knockbackForce: 3
   knockbackDuration: 0.15

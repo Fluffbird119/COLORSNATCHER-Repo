@@ -107,8 +107,8 @@ MonoBehaviour:
   speed: 0.5
   stoppingDistance: 0
   maxHealth: 2
-  knockbackForce: 15
-  knockbackDuration: 1
+  knockbackForce: 80
+  knockbackDuration: 0.15
   damage: 1
   proceduralSpeed: 1
   reincarnates: 0

@@ -7,6 +7,8 @@ public class ShooterScript : MonoBehaviour
     public Transform firePoint;
     public float shootingRange = 8f;
     public float fireRate = 1.5f;
+    private float distanceRateIncrease = 3f;
+    private float distanceAccuracyIncrease = 2f;
     public float bulletSpeed = 30f;
     public int damage = 1;
     [Range(0f, 1f)]
@@ -19,6 +21,7 @@ public class ShooterScript : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D rb;
     private float nextFireTime = 0f;
+    private float reducedNextFireTime = 0f;
     public bool isWalker = false;
     public float moveSpeed = 2f;
     public bool isStunned = false;
@@ -28,6 +31,9 @@ public class ShooterScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+
+        nextFireTime = Time.time + Random.Range(0.3f, 0.5f);
+        reducedNextFireTime = Time.time + 0.6f;
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
@@ -50,13 +56,23 @@ public class ShooterScript : MonoBehaviour
 
         if (distance <= shootingRange)
         {
-            rb.linearVelocity = Vector2.zero;
+            if (!isWalker)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                moveSpeed /= 2;
+                MoveTowardsPlayer();
+                moveSpeed *= 2;
+            }
             RotateTowardsPlayer();
 
-            if (Time.time >= nextFireTime)
+            if ((Time.time >= nextFireTime) || (Vector2.Distance(playerTransform.position, transform.position) > 50f && Time.time >= reducedNextFireTime))
             {
                 Shoot();
                 nextFireTime = Time.time + (1f / fireRate);
+                reducedNextFireTime = Time.time + (1f / (fireRate * distanceRateIncrease));
             }
         }
         else if (isWalker)
@@ -93,7 +109,15 @@ public class ShooterScript : MonoBehaviour
 
         if (bulletPrefab == null || firePoint == null) return;
         Vector2 fireDirection = (playerTransform.position - firePoint.position).normalized;
-        float maxSpreadAngle = (1f - accuracy) * 45f;
+        float maxSpreadAngle;
+        if (Vector2.Distance(transform.position, playerTransform.position) > 50f)
+        {
+            maxSpreadAngle = (1f - (accuracy * distanceAccuracyIncrease)) * 45f;
+        }
+        else
+        {
+            maxSpreadAngle = (1f - accuracy) * 45f;
+        }
         float randomAngle = Random.Range(-maxSpreadAngle, maxSpreadAngle);
         Quaternion spreadRotation = Quaternion.Euler(0, 0, randomAngle);
         Vector2 finalDirection = spreadRotation * fireDirection;
@@ -122,6 +146,15 @@ public class ShooterScript : MonoBehaviour
         if (collision.CompareTag("VineAOE"))
         {
             StunEnemy();
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && !isStunned && isWalker)
+        {
+            PlayerHealth.Instance.ChangeHealth(-1);
+            CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);
         }
     }
 

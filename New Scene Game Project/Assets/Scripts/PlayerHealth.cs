@@ -51,6 +51,7 @@ public class PlayerHealth : MonoBehaviour
             attackScript.ResumeEye();
 
             youDiedMessageAndButton.SetActive(true);
+            PlayerPowerUps.Instance.setIsRaged(false);
             player.SetActive(false);
         }
     }
@@ -61,6 +62,7 @@ public class PlayerHealth : MonoBehaviour
         if (amount < 0)
         {
             StartCoroutine(iFrames());
+            PlayerPowerUps.Instance.IncreaseRage(1f);
         }
 
         health += amount;

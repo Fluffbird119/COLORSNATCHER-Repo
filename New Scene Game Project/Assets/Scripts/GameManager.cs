@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveTwo()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 2;
         StartCoroutine(DialogueSystem.instance.StartCutscene(2));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -72,7 +71,6 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.RedMusic();
         AudioManager.Instance.RedMusic();
         while (killsThisWave < waveCount[1])
         {
@@ -84,7 +82,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveThree()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 3;
         StartCoroutine(DialogueSystem.instance.StartCutscene(3));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -93,7 +90,6 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.RedMusic();
         AudioManager.Instance.RedMusic();
         while (killsThisWave < waveCount[2])
         {
@@ -114,7 +110,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveFour()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 4;
         StartCoroutine(DialogueSystem.instance.StartCutscene(5));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -123,7 +118,6 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.YellowMuisc();
         AudioManager.Instance.YellowMuisc();
         while (killsThisWave < waveCount[3])
         {
@@ -135,7 +129,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveFive()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 5;
         StartCoroutine(DialogueSystem.instance.StartCutscene(6));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -144,7 +137,6 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.YellowMuisc();
         AudioManager.Instance.YellowMuisc();
         while (killsThisWave < waveCount[4])
         {
@@ -156,16 +148,15 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveSix()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 6;
         StartCoroutine(DialogueSystem.instance.StartCutscene(7));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
+
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.YellowMuisc();
         AudioManager.Instance.YellowMuisc();
         while (killsThisWave < waveCount[5])
         {
@@ -186,16 +177,15 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveSeven()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 7;
         StartCoroutine(DialogueSystem.instance.StartCutscene(9));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
             yield return null;
         }
+
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.GreenMusic();
         AudioManager.Instance.GreenMusic();
         while (killsThisWave < waveCount[6])
         {
@@ -207,7 +197,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveEight()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 8;
         StartCoroutine(DialogueSystem.instance.StartCutscene(10));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -218,7 +207,6 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
-        AudioManager.Instance.GreenMusic();
         while (killsThisWave < waveCount[7])
         {
             yield return null;
@@ -227,7 +215,6 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator WaveNine()
     {
-        AudioManager.Instance.ConvoMusic();
         AudioManager.Instance.ConvoMusic();
         waveNumber = 9;
         StartCoroutine(DialogueSystem.instance.StartCutscene(11));
@@ -238,7 +225,6 @@ public class GameManager : MonoBehaviour
 
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.GreenMusic();
         AudioManager.Instance.GreenMusic();
         while (killsThisWave < waveCount[8])
         {
@@ -257,7 +243,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveTen()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 10;
         StartCoroutine(DialogueSystem.instance.StartCutscene(13));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -267,7 +252,6 @@ public class GameManager : MonoBehaviour
 
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.BlueMuisc();
         AudioManager.Instance.BlueMuisc();
         while (killsThisWave < waveCount[9])
         {
@@ -279,7 +263,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveEleven()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 11;
         StartCoroutine(DialogueSystem.instance.StartCutscene(14));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -288,7 +271,6 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.BlueMuisc();
         AudioManager.Instance.BlueMuisc();
         while (killsThisWave < waveCount[10])
         {
@@ -300,7 +282,6 @@ public class GameManager : MonoBehaviour
     public IEnumerator WaveTwelve()
     {
         AudioManager.Instance.ConvoMusic();
-        AudioManager.Instance.ConvoMusic();
         waveNumber = 12;
         StartCoroutine(DialogueSystem.instance.StartCutscene(15));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -309,7 +290,6 @@ public class GameManager : MonoBehaviour
         }
         killsThisWave = 0;
         CreateWave();
-        AudioManager.Instance.BlueMuisc();
         AudioManager.Instance.BlueMuisc();
         while (killsThisWave < waveCount[11])
         {
@@ -326,6 +306,7 @@ public class GameManager : MonoBehaviour
 
     public void CreateWave()
     {
+        PlayerHealth.Instance.ChangeHealth(1, 0.3f);
         if (waveNumber == 1)
         {
             SpawnEnemies(enemyPrefab, 10);
@@ -396,10 +377,24 @@ public class GameManager : MonoBehaviour
             while (!validPositionFound && attempts < maxAttempts)
             {
                 float randomTheta = Random.Range(0f, 2f * Mathf.PI);
-                float randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds);
+                float randomDistance;
+
+                if (prefabToSpawn == speedEnemyPrefab)
+                {
+                    randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds * 0.5f);
+                }
+                else if (prefabToSpawn == sniperPrefab)
+                {
+                    randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds * 0.8f);
+                }
+                else
+                {
+                    randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds);
+                }
+
                 spawnPosition = new Vector2(randomDistance * Mathf.Cos(randomTheta) + player.transform.position.x, randomDistance * Mathf.Sin(randomTheta) + player.transform.position.y);
                 Collider2D hitCollider = Physics2D.OverlapCircle(spawnPosition, checkRadius);
-                if (hitCollider == null && spawnPosition.x > arenaMinBoundsX && spawnPosition.y > arenaMinBoundsY && spawnPosition.x < arenaMaxBoundsX && spawnPosition.y < arenaMaxBoundsY)
+                if (/*hitCollider == null && */spawnPosition.x > arenaMinBoundsX && spawnPosition.y > arenaMinBoundsY && spawnPosition.x < arenaMaxBoundsX && spawnPosition.y < arenaMaxBoundsY)
                 {
                     validPositionFound = true;
                 }

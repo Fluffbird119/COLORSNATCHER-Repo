@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
+    private int numSpeedBoosts = 0;
     private float distanceSpeedMod = 1f;
     public bool reincarnates = false;
     private bool reincarnated = false;
@@ -53,11 +54,13 @@ public class EnemyScript : MonoBehaviour
         if (isKnockedBack || isInDeathState) return;
         if (proceduralSpeed)
         {
-            if (Time.time - lastSpeedBoostTime >= 5f)
+            if (Time.time - lastSpeedBoostTime >= 1f + (0.5f * numSpeedBoosts))
             {
+                currentHealth += 1;
                 speed *= 2f;
                 transform.localScale *= 1.25f;
-                lastSpeedBoostTime = Time.time;
+                lastSpeedBoostTime = Time.time + Random.Range(0.1f, 0.2f);
+                numSpeedBoosts++;
             }
         }
         if (Vector2.Distance(playerTransform.position, gameObject.transform.position) > 50) {
@@ -121,7 +124,7 @@ public class EnemyScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !isInDeathState && !isStunned)
+        if (collision.gameObject.CompareTag("Player") && !isInDeathState && !isStunned && !(collision.gameObject.layer == LayerMask.NameToLayer("Dashing")))
         {
             PlayerHealth.Instance.ChangeHealth(-1);
             CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);
@@ -130,7 +133,7 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockbackDirection)
     {
-        currentHealth -= 1;
+        currentHealth -= damage;
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
         if (currentHealth <= 0)
@@ -186,19 +189,23 @@ public class EnemyScript : MonoBehaviour
             yield return new WaitForSeconds(5f);
             gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
-            currentHealth = maxHealth;
+            currentHealth = (int)(maxHealth * 1.5f);
             isInDeathState = false;
             rb.bodyType = originalBodyType;
             spriteRenderer.color = originalColor;
+            speed *= 2.5f;
+            knockbackDuration /= 3f;
         }
         else
         {
             yield return new WaitForSeconds(5f);
             gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
-            currentHealth = maxHealth;
+            currentHealth = (int)(maxHealth * 1.5f);
             isInDeathState = false;
             rb.bodyType = originalBodyType;
+            speed *= 2.5f;
+            knockbackDuration /= 3f;
         }
     }
 

@@ -23,11 +23,12 @@ public class PlayerPowerUps : MonoBehaviour
 
     public bool beatenRed = false; // bool for now cuz lazy can make it better latter
 
-    private float oldSpeed;
+    private float oldSpeed = 15f;
 
     [SerializeField] float rage = 0f; 
     [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup
     [SerializeField] float rageDuration;
+    private bool isRaged = false;
     #endregion
 
     [Header("Dash Variables")]
@@ -85,6 +86,18 @@ public class PlayerPowerUps : MonoBehaviour
 
     void Update()
     {
+        if (!isRaged && head.color == Color.red)
+        {
+            head.color = Color.white;
+            eye.color = Color.white;
+            attackTentacle.color = Color.white;
+            legTentacles.color = Color.white;
+
+            tentacleAnim.speed = 2f;
+            EyeAnim.speed = 2f;
+
+            PlayerMovement.Instance.SetSpeed(oldSpeed);
+        }
         if (beatenRed)
         {
             RageBarObject.SetActive(true);
@@ -139,6 +152,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         rage = 0;
         rageBarUIScript.UpdateRageVisual();
+        isRaged = true;
 
         oldSpeed = PlayerMovement.Instance.GetSpeed();
         PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
@@ -165,11 +179,22 @@ public class PlayerPowerUps : MonoBehaviour
         eye.color = Color.white;
         attackTentacle.color = Color.white;
         legTentacles.color = Color.white;
+        isRaged = false;
 
         tentacleAnim.speed = 2f;
         EyeAnim.speed = 2f;
 
         PlayerMovement.Instance.SetSpeed(oldSpeed);
+    }
+
+    public bool getIsRaged()
+    {
+        return isRaged;
+    }
+
+    public void setIsRaged(bool value)
+    {
+        isRaged = value;
     }
 
     public float getRage()
