@@ -112,7 +112,7 @@ public class ShooterScript : MonoBehaviour
         float maxSpreadAngle;
         if (Vector2.Distance(transform.position, playerTransform.position) > 50f)
         {
-            maxSpreadAngle = (1f - (accuracy * distanceAccuracyIncrease)) * 45f;
+            maxSpreadAngle = Mathf.Max(1f - (accuracy * distanceAccuracyIncrease), 0) * 45f;
         }
         else
         {
