@@ -393,7 +393,7 @@ public class GameManager : MonoBehaviour
                 }
 
                 spawnPosition = new Vector2(randomDistance * Mathf.Cos(randomTheta) + player.transform.position.x, randomDistance * Mathf.Sin(randomTheta) + player.transform.position.y);
-                Collider2D hitCollider = Physics2D.OverlapCircle(spawnPosition, checkRadius);
+                // Collider2D hitCollider = Physics2D.OverlapCircle(spawnPosition, checkRadius);
                 if (/*hitCollider == null && */spawnPosition.x > arenaMinBoundsX && spawnPosition.y > arenaMinBoundsY && spawnPosition.x < arenaMaxBoundsX && spawnPosition.y < arenaMaxBoundsY)
                 {
                     validPositionFound = true;

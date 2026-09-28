@@ -32,8 +32,8 @@ public class ShooterScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
 
-        nextFireTime = Time.time + Random.Range(0.3f, 0.5f);
-        reducedNextFireTime = Time.time + 0.6f;
+        nextFireTime = Time.time + Random.Range(0.3f, 1f);
+        reducedNextFireTime = Time.time + 3f;
 
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
