@@ -305,7 +305,8 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "RAGE acquired, press 'Q' to RAGE out"}, "none");
+            StartDialogue(new string[] { "RAGE acquired, press 'Q' to feel the RAGE come inside of you, making you feel so powerful",
+                "so powerful", "powerful RAGE", "yeah", "also it lets you parry btw"}, "none");
             while (isTalking)
             {
                 yield return null;
@@ -491,7 +492,8 @@ public class DialogueSystem : MonoBehaviour
             StartDialogue(new string[] { "What is this? I feel... fine. I feel satiated. I feel... good?", "I should stop here." ,
             "but this feels so good...", "But I have to keep going. What if theres more? More good feelings. Like all of these ones!",
             "I want good feelings! I love good feelings!"}, "player");
-            StartDialogue(new string[] { "SLUDGE acquired, press 'E' to splooge"}, "none");
+            StartDialogue(new string[] { "SLUDGE acquired, press 'E' to splooge",
+                "the gunk is supposed to stun enemies but it's lowkey bugged so use your imagination"}, "none");
             while (isTalking)
             {
                 yield return null;
