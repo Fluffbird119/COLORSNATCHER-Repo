@@ -367,7 +367,7 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemies(GameObject prefabToSpawn, int count)
     {
-        float checkRadius = 1.5f;
+        // float checkRadius = 1.5f;
         int maxAttempts = 30;
         for (int i = 0; i < count; i++)
         {
