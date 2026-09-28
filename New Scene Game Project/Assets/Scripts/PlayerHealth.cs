@@ -73,6 +73,24 @@ public class PlayerHealth : MonoBehaviour
         healthBarUIScript.ChangeHealthVisual();
     }
 
+    // overload for percentage based healing
+    public void ChangeHealth(int sign, float percentage)
+    {
+        if (sign < 0)
+        {
+            StartCoroutine(iFrames());
+        }
+
+        health += maxHealth * sign * percentage;
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        healthBarUIScript.ChangeHealthVisual();
+    }
+
     // i frames for 0.1 seconds after player takes damage
     private IEnumerator iFrames()
     {
