@@ -44,6 +44,12 @@ public class PlayerPowerUps : MonoBehaviour
 
     [SerializeField] private float dashMoveSpeed;
     [SerializeField] private float dashDuration;
+    // private int numDashes = 0;
+    [SerializeField] private int maxDashes;
+    private bool canDash = true;
+    private bool canQueueDash = true;
+    private bool dashQueued = false;
+    private Coroutine currDashRoutine;
     #endregion
 
     [Header("Vine Attack Variables")]
@@ -114,7 +120,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeDash();
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDashCooldown >= maxDashCooldown)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDashCooldown >= maxDashCooldown / maxDashes)
             {
                 Dash();
             }
@@ -215,9 +221,26 @@ public class PlayerPowerUps : MonoBehaviour
     private void Dash()
     {
         // set cooldown back to zero
-        curDashCooldown = 0;
+        curDashCooldown -= maxDashCooldown / maxDashes;
         // set movespeed really high for dashDuration
-        StartCoroutine(StartDash());
+        if (canDash)
+        {
+            if (currDashRoutine != null)
+            {
+                StopCoroutine(currDashRoutine);
+            }
+            
+            canDash = false;
+            canQueueDash = false;
+            dashQueued = true;
+            currDashRoutine = StartCoroutine(StartDash());
+        }
+        else if (canQueueDash)
+        {
+            Debug.Log("Queued Dash");
+            dashQueued = true;
+        }
+
 
     }
     private void RechargeDash()
@@ -233,16 +256,26 @@ public class PlayerPowerUps : MonoBehaviour
 
     private IEnumerator StartDash()
     {
-        PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
-        player.layer = 6;
+        while (dashQueued) {
+            dashQueued = false;
+            PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
+            player.layer = 6;
 
-        yield return new WaitForSeconds(dashDuration);
+            yield return new WaitForSeconds((dashDuration / maxDashes) - 0.05f);
 
-        PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
+            canQueueDash = true;
+
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        PlayerMovement.Instance.SetSpeed(dashMoveSpeed / 2f);
         player.layer = 9;
 
-        yield return new WaitForSeconds(0.2f);
+        canDash = true;
 
+        yield return new WaitForSeconds(dashDuration / 4f); // hard coded value cuz thats just what the player move speed is as of rn
+
+        PlayerMovement.Instance.SetSpeed(15f);
         player.layer = 7;
     }
 
