@@ -95,6 +95,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             tentacleAnim.speed = 2f;
             EyeAnim.speed = 2f;
+            PlayerAttack.Instance.addIdleToBlinkET();
 
             PlayerMovement.Instance.SetSpeed(oldSpeed);
         }
@@ -166,6 +167,7 @@ public class PlayerPowerUps : MonoBehaviour
         // increase animation speed of tentacle and speed of eye to slow down start lag
         tentacleAnim.speed = 3f;
         EyeAnim.speed = 2f;
+        PlayerAttack.Instance.removeIdleToBlinkET();
 
         // wait for duration of buff then turn back to normal
         StartCoroutine(rageTimer());
@@ -183,6 +185,7 @@ public class PlayerPowerUps : MonoBehaviour
 
         tentacleAnim.speed = 2f;
         EyeAnim.speed = 2f;
+        PlayerAttack.Instance.addIdleToBlinkET();
 
         PlayerMovement.Instance.SetSpeed(oldSpeed);
     }

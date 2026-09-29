@@ -54,12 +54,12 @@ public class EnemyScript : MonoBehaviour
         if (isKnockedBack || isInDeathState) return;
         if (proceduralSpeed)
         {
-            if (Time.time - lastSpeedBoostTime >= 1f + (0.5f * numSpeedBoosts))
+            if (Time.time - lastSpeedBoostTime >= 2f + (0.25f * numSpeedBoosts))
             {
                 currentHealth += 1;
                 speed *= 2f;
                 transform.localScale *= 1.25f;
-                lastSpeedBoostTime = Time.time + Random.Range(0.1f, 0.2f);
+                lastSpeedBoostTime = Time.time + Random.Range(-0.2f, 0.2f);
                 numSpeedBoosts++;
             }
         }
