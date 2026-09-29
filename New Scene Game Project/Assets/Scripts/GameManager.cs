@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public float arenaMaxBoundsY = 35f;
     public int killsThisWave = 0;
     public int waveNumber = 0;
+    private Coroutine currWaveRoutine;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -40,7 +41,13 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         AudioManager.Instance.ConvoMusic();
         BackgroundManager.Instance.ChangeBackground(0);
-        StartCoroutine(WaveOne());
+        currWaveRoutine = StartCoroutine(WaveOne());
+    }
+
+    public void StopCurrWaveRoutine()
+    {
+        StopCoroutine(currWaveRoutine);
+        return;
     }
 
     public IEnumerator WaveOne()
@@ -58,7 +65,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveTwo());
+        currWaveRoutine = StartCoroutine(WaveTwo());
     }
     public IEnumerator WaveTwo()
     {
@@ -76,7 +83,8 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveThree());
+        Debug.Log("Wave Two Check");
+        currWaveRoutine = StartCoroutine(WaveThree());
     }
 
     public IEnumerator WaveThree()
@@ -89,6 +97,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         killsThisWave = 0;
+        Debug.Log("Wave Three Check");
         CreateWave();
         AudioManager.Instance.RedMusic();
         while (killsThisWave < waveCount[2])
@@ -104,7 +113,7 @@ public class GameManager : MonoBehaviour
         PlayerPowerUps.Instance.beatenRed = true;
         BackgroundManager.Instance.ChangeBackground(1);
 
-        StartCoroutine(WaveFour());
+        currWaveRoutine = StartCoroutine(WaveFour());
     }
 
     public IEnumerator WaveFour()
@@ -123,7 +132,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveFive());
+        currWaveRoutine = StartCoroutine(WaveFive());
     }
 
     public IEnumerator WaveFive()
@@ -135,6 +144,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
@@ -142,7 +152,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveSix());
+        currWaveRoutine = StartCoroutine(WaveSix());
     }
 
     public IEnumerator WaveSix()
@@ -171,7 +181,7 @@ public class GameManager : MonoBehaviour
         PlayerPowerUps.Instance.beatenYellow = true;
         BackgroundManager.Instance.ChangeBackground(2);
 
-        StartCoroutine(WaveSeven());
+        currWaveRoutine = StartCoroutine(WaveSeven());
     }
 
     public IEnumerator WaveSeven()
@@ -191,7 +201,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveEight());
+        currWaveRoutine = StartCoroutine(WaveEight());
     }
 
     public IEnumerator WaveEight()
@@ -211,7 +221,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveNine());
+        currWaveRoutine = StartCoroutine(WaveNine());
     }
     public IEnumerator WaveNine()
     {
@@ -237,7 +247,7 @@ public class GameManager : MonoBehaviour
         }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
-        StartCoroutine(WaveTen());
+        currWaveRoutine = StartCoroutine(WaveTen());
     }
 
     public IEnumerator WaveTen()
@@ -257,7 +267,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveEleven());
+        currWaveRoutine = StartCoroutine(WaveEleven());
     }
 
     public IEnumerator WaveEleven()
@@ -269,6 +279,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
@@ -276,7 +287,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        StartCoroutine(WaveTwelve());
+        currWaveRoutine = StartCoroutine(WaveTwelve());
     }
 
     public IEnumerator WaveTwelve()
@@ -288,6 +299,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
@@ -301,12 +313,15 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         AudioManager.Instance.StopAll();
-        //send to main menu here
+        
+        yield return new WaitForSeconds(20f);
+        Application.Quit();
     }
 
     public void CreateWave()
     {
         PlayerHealth.Instance.ChangeHealth(1, 0.3f);
+        Debug.Log("starting wave");
         if (waveNumber == 1)
         {
             SpawnEnemies(enemyPrefab, 10);
