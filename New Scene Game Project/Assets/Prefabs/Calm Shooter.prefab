@@ -166,7 +166,7 @@ MonoBehaviour:
   firePoint: {fileID: 3049531179453528255}
   shootingRange: 100
   fireRate: 0.125
-  bulletSpeed: 30
+  bulletSpeed: 40
   bulletDamage: 1
   bulletSizeMod: 1.5
   rageDamageBuff: 1.5
