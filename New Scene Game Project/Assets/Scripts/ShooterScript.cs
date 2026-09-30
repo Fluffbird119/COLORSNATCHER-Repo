@@ -8,7 +8,7 @@ public class ShooterScript : MonoBehaviour
     public float shootingRange = 8f;
     public float fireRate = 1.5f;
     private float distanceRateIncrease = 3f;
-    private float distanceAccuracyIncrease = 2f;
+    private float distanceAccuracyIncrease = 5f;
     public float bulletSpeed = 30f;
     [SerializeField] private float bulletDamage;
     [SerializeField] private float bulletSizeMod;

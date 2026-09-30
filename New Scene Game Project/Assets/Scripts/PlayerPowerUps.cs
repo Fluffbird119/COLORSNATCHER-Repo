@@ -275,7 +275,13 @@ public class PlayerPowerUps : MonoBehaviour
 
         yield return new WaitForSeconds(dashDuration / 4f);
 
-        PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
+        if (isRaged)
+        {
+            PlayerMovement.Instance.SetSpeed(15f * 1.5f);
+        }
+        else {
+            PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
+        }
         player.layer = 7;
     }
 

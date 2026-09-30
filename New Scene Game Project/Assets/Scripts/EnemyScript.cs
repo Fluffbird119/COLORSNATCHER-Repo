@@ -202,7 +202,7 @@ public class EnemyScript : MonoBehaviour
             isInDeathState = false;
             rb.bodyType = originalBodyType;
             spriteRenderer.color = originalColor;
-            speed *= 2.5f;
+            speed *= 3f;
             knockbackDuration /= 3f;
         }
         else
