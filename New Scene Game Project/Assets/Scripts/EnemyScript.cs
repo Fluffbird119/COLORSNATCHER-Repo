@@ -56,7 +56,10 @@ public class EnemyScript : MonoBehaviour
         {
             if (Time.time - lastSpeedBoostTime >= 2f + (0.25f * numSpeedBoosts))
             {
-                currentHealth += 1;
+                if (numSpeedBoosts < 3)
+                {
+                    currentHealth += 1;
+                }
                 speed *= 2f;
                 transform.localScale *= 1.25f;
                 lastSpeedBoostTime = Time.time + Random.Range(-0.2f, 0.2f);

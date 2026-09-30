@@ -167,6 +167,8 @@ MonoBehaviour:
   shootingRange: 30
   fireRate: 0.5
   bulletSpeed: 30
+  bulletDamage: 1
+  bulletSizeMod: 1
   rageDamageBuff: 1.5
   accuracy: 0.75
   maxHealth: 5

@@ -273,9 +273,9 @@ public class PlayerPowerUps : MonoBehaviour
 
         canDash = true;
 
-        yield return new WaitForSeconds(dashDuration / 4f); // hard coded value cuz thats just what the player move speed is as of rn
+        yield return new WaitForSeconds(dashDuration / 4f);
 
-        PlayerMovement.Instance.SetSpeed(15f);
+        PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
         player.layer = 7;
     }
 

@@ -10,6 +10,8 @@ public class ShooterScript : MonoBehaviour
     private float distanceRateIncrease = 3f;
     private float distanceAccuracyIncrease = 2f;
     public float bulletSpeed = 30f;
+    [SerializeField] private float bulletDamage;
+    [SerializeField] private float bulletSizeMod;
     public float rageDamageBuff = 1.5f;
     [Range(0f, 1f)]
     public float accuracy = 0.8f;
@@ -122,11 +124,14 @@ public class ShooterScript : MonoBehaviour
         Quaternion spreadRotation = Quaternion.Euler(0, 0, randomAngle);
         Vector2 finalDirection = spreadRotation * fireDirection;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
         {
             bulletRb.linearVelocity = finalDirection * bulletSpeed;
         }
+        bulletScript.SetSize(bulletSizeMod);
+        bulletScript.SetDamage(bulletDamage);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -8,10 +8,22 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D rb;
     private bool parried = false;
 
+    private float damage = 1;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         Destroy(gameObject, lifetime);
+    }
+
+    public void SetSize(float sizeMod)
+    {
+        transform.localScale *= sizeMod;
+    }
+
+    public void SetDamage(float damageValue)
+    {
+        damage = damageValue;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,7 +52,7 @@ public class Bullet : MonoBehaviour
         else if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
-            PlayerHealth.Instance.ChangeHealth(-1);
+            PlayerHealth.Instance.ChangeHealth(-damage);
         }
     }
 }
