@@ -20,7 +20,7 @@ public class EnemyScript : MonoBehaviour
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
     private int numSpeedBoosts = 0;
-    private float distanceSpeedMod = 1f;
+    [SerializeField] private float distanceSpeedMod = 1f;
     public bool reincarnates = false;
     private bool reincarnated = false;
     private bool isInDeathState = false;
@@ -66,13 +66,6 @@ public class EnemyScript : MonoBehaviour
                 numSpeedBoosts++;
             }
         }
-        if (Vector2.Distance(playerTransform.position, gameObject.transform.position) > 50) {
-            distanceSpeedMod = 5f;
-        }
-        else
-        {
-            distanceSpeedMod = 1f;
-        }
         if (playerTransform != null)
         {
             Vector2 direction = (Vector2)playerTransform.position - rb.position;
@@ -87,7 +80,7 @@ public class EnemyScript : MonoBehaviour
                 Vector2 newPosition = Vector2.MoveTowards(
                     rb.position,
                     playerTransform.position,
-                    speed * distanceSpeedMod * Time.fixedDeltaTime
+                    speed * ((distance > 50f) ? distanceSpeedMod : 1f) * Time.fixedDeltaTime
                 );
                 rb.MovePosition(newPosition);
             }

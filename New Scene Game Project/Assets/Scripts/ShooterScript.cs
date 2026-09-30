@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShooterScript : MonoBehaviour
@@ -7,8 +8,9 @@ public class ShooterScript : MonoBehaviour
     public Transform firePoint;
     public float shootingRange = 8f;
     public float fireRate = 1.5f;
-    private float distanceRateIncrease = 3f;
-    private float distanceAccuracyIncrease = 5f;
+    [SerializeField] private float distanceRateIncrease = 3f;
+    [SerializeField] private float distanceAccuracyIncrease = 5f;
+    [SerializeField] private float distanceMovePredict = 0f;
     public float bulletSpeed = 30f;
     [SerializeField] private float bulletDamage;
     [SerializeField] private float bulletSizeMod;
@@ -21,10 +23,12 @@ public class ShooterScript : MonoBehaviour
     public float knockbackDuration = 0.15f;
     private bool isKnockedBack = false;
     private Transform playerTransform;
+    private Rigidbody2D playerRB;
     private Rigidbody2D rb;
     private float nextFireTime = 0f;
     private float reducedNextFireTime = 0f;
     public bool isWalker = false;
+    public bool aimIncreaser = false;
     public float moveSpeed = 2f;
     public bool isStunned = false;
     public GameObject hitParticlePrefab;
@@ -41,6 +45,7 @@ public class ShooterScript : MonoBehaviour
         if (player != null)
         {
             playerTransform = player.transform;
+            playerRB = player.GetComponent<Rigidbody2D>();
         }
     }
 
@@ -52,6 +57,15 @@ public class ShooterScript : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
             return;
+        }
+
+        if (aimIncreaser && accuracy < 1f)
+        {
+            accuracy += Time.deltaTime / 200f;
+            if (accuracy > 1f)
+            {
+                accuracy = 1f;
+            }
         }
 
         float distance = Vector2.Distance(transform.position, playerTransform.position);
@@ -70,7 +84,7 @@ public class ShooterScript : MonoBehaviour
             }
             RotateTowardsPlayer();
 
-            if ((Time.time >= nextFireTime) || (Vector2.Distance(playerTransform.position, transform.position) > 50f && Time.time >= reducedNextFireTime))
+            if ((Time.time >= nextFireTime) || (Vector2.Distance(playerTransform.position, transform.position) > 60f && Time.time >= reducedNextFireTime))
             {
                 Shoot();
                 nextFireTime = Time.time + (1f / fireRate);
@@ -110,7 +124,10 @@ public class ShooterScript : MonoBehaviour
         }
 
         if (bulletPrefab == null || firePoint == null) return;
-        Vector2 fireDirection = (playerTransform.position - firePoint.position).normalized;
+        Vector2 playerPosition = playerTransform.position;
+        Vector2 firePointPosition = firePoint.position;
+        float distance = Vector2.Distance(playerPosition, firePointPosition);
+        Vector2 fireDirection = (playerPosition + (distance > 60f ? (distanceMovePredict * playerRB.linearVelocity) : new Vector2(0, 0)) - firePointPosition).normalized;
         float maxSpreadAngle;
         if (Vector2.Distance(transform.position, playerTransform.position) > 50f)
         {

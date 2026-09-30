@@ -109,8 +109,9 @@ MonoBehaviour:
   maxHealth: 2
   knockbackForce: 80
   knockbackDuration: 0.15
-  damage: 1
+  rageDamageBuff: 1.5
   proceduralSpeed: 1
+  distanceSpeedMod: 0.25
   reincarnates: 0
   healthScript: {fileID: 0}
   isStunned: 0

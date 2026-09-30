@@ -164,8 +164,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2855841578704052247, guid: 22aff7b80a0f2674e9512dcaf73e0a4e, type: 3}
   firePoint: {fileID: 3049531179453528255}
-  shootingRange: 100
-  fireRate: 0.125
+  shootingRange: 200
+  fireRate: 0.2
+  distanceRateIncrease: 3
+  distanceAccuracyIncrease: 1
+  distanceMovePredict: 1.5
   bulletSpeed: 40
   bulletDamage: 2
   bulletSizeMod: 1.5
@@ -175,6 +178,7 @@ MonoBehaviour:
   knockbackForce: 3
   knockbackDuration: 0.15
   isWalker: 0
+  aimIncreaser: 0
   moveSpeed: 2
   isStunned: 0
   hitParticlePrefab: {fileID: 7359391080089007259, guid: ed937c33d9ffa4440a4c141695f3c918, type: 3}
