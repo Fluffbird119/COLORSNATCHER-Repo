@@ -124,7 +124,7 @@ public class EnemyScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !isInDeathState && !isStunned && !(collision.gameObject.layer == LayerMask.NameToLayer("Dashing")))
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer != LayerMask.NameToLayer("iframes") && !isInDeathState && !isStunned && !(collision.gameObject.layer == LayerMask.NameToLayer("Dashing")))
         {
             PlayerHealth.Instance.ChangeHealth(-1);
             CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);

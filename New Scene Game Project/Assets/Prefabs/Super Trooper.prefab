@@ -167,7 +167,7 @@ MonoBehaviour:
   shootingRange: 30
   fireRate: 0.5
   bulletSpeed: 30
-  damage: 1
+  rageDamageBuff: 1.5
   accuracy: 0.75
   maxHealth: 5
   knockbackForce: 2
@@ -214,7 +214,7 @@ PolygonCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 320
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
