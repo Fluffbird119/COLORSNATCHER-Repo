@@ -50,6 +50,7 @@ public class PlayerPowerUps : MonoBehaviour
     private bool canQueueDash = true;
     private bool dashQueued = false;
     private Coroutine currDashRoutine;
+    [SerializeField] private bool isDashing = false;
     #endregion
 
     [Header("Vine Attack Variables")]
@@ -64,6 +65,8 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] private float maxVineCooldown;
 
     private VineBarUI vineBarUI;
+    [SerializeField] private GameObject dashParticlePrefab;
+    private ParticleSystem particleSys;
 
 
     private void Awake()
@@ -88,6 +91,8 @@ public class PlayerPowerUps : MonoBehaviour
         RageBarObject.SetActive(false);
         DashBarObject.SetActive(false);
         VineBarObject.SetActive(false);
+
+        particleSys = dashParticlePrefab.GetComponent<ParticleSystem>();
     }
 
     void Update()
@@ -104,6 +109,16 @@ public class PlayerPowerUps : MonoBehaviour
             PlayerAttack.Instance.addIdleToBlinkET();
 
             PlayerMovement.Instance.SetSpeed(oldSpeed);
+        }
+        else if (!isDashing && head.color == Color.yellow)
+        {
+            head.color = Color.white;
+            eye.color = Color.white;
+            attackTentacle.color = Color.white;
+            legTentacles.color = Color.white;
+
+            PlayerMovement.Instance.SetSpeed(oldSpeed);
+            player.layer = 7;
         }
         if (beatenRed)
         {
@@ -170,7 +185,7 @@ public class PlayerPowerUps : MonoBehaviour
         attackTentacle.color = Color.red;
         legTentacles.color = Color.red;
 
-        // increase animation speed of tentacle and speed of eye to slow down start lag
+        // increase animation speed of tentacle and speed of eye to slow down start lag. also just removes start lag now
         tentacleAnim.speed = 3f;
         EyeAnim.speed = 2f;
         PlayerAttack.Instance.removeIdleToBlinkET();
@@ -222,17 +237,26 @@ public class PlayerPowerUps : MonoBehaviour
     {
         // set cooldown back to zero
         curDashCooldown -= maxDashCooldown / maxDashes;
+
+        // turn head and eye and tentacle red
+        head.color = Color.yellow;
+        eye.color = Color.yellow;
+        attackTentacle.color = Color.yellow;
+        legTentacles.color = Color.yellow;
+
         // set movespeed really high for dashDuration
         if (canDash)
         {
             if (currDashRoutine != null)
             {
                 StopCoroutine(currDashRoutine);
+                particleSys.Stop();
             }
             
             canDash = false;
             canQueueDash = false;
             dashQueued = true;
+            isDashing = true;
             currDashRoutine = StartCoroutine(StartDash());
         }
         else if (canQueueDash)
@@ -257,6 +281,10 @@ public class PlayerPowerUps : MonoBehaviour
     private IEnumerator StartDash()
     {
         while (dashQueued) {
+            if (dashParticlePrefab != null && particleSys != null) {
+                particleSys.Play();
+            }
+
             dashQueued = false;
             PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
             player.layer = 6;
@@ -282,7 +310,24 @@ public class PlayerPowerUps : MonoBehaviour
         else {
             PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
         }
+
+        head.color = Color.white;
+        eye.color = Color.white;
+        attackTentacle.color = Color.white;
+        legTentacles.color = Color.white;
+        isDashing = false;
         player.layer = 7;
+        particleSys.Stop();
+    }
+
+    public bool getIsDashing()
+    {
+        return isDashing;
+    }
+
+    public void setIsDashing(bool value)
+    {
+        isDashing = value;
     }
 
     public float getDashCurCooldown()

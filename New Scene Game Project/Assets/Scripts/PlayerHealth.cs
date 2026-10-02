@@ -52,6 +52,7 @@ public class PlayerHealth : MonoBehaviour
 
             youDiedMessageAndButton.SetActive(true);
             PlayerPowerUps.Instance.setIsRaged(false);
+            PlayerPowerUps.Instance.setIsDashing(false);
             GameManager.Instance.killsThisWave = 0;
             player.SetActive(false);
         }
