@@ -166,6 +166,9 @@ MonoBehaviour:
   firePoint: {fileID: 3049531179453528255}
   shootingRange: 30
   fireRate: 0.5
+  distanceRateIncrease: 3
+  distanceAccuracyIncrease: 5
+  distanceMovePredict: 0
   bulletSpeed: 30
   bulletDamage: 1
   bulletSizeMod: 1
@@ -175,9 +178,13 @@ MonoBehaviour:
   knockbackForce: 2
   knockbackDuration: 0.15
   isWalker: 1
+  aimIncreaser: 0
   moveSpeed: 4
   isStunned: 0
   hitParticlePrefab: {fileID: 7359391080089007259, guid: e812884516822064d9a3a49c8b6248da, type: 3}
+  bodyParts:
+  - {fileID: 5984809680287405731}
+  animator: {fileID: 412852580384354709}
 --- !u!95 &412852580384354709
 Animator:
   serializedVersion: 7

@@ -34,6 +34,8 @@ public class ShooterScript : MonoBehaviour
     public bool isStunned = false;
     public GameObject hitParticlePrefab;
     [SerializeField] private SpriteRenderer[] bodyParts;
+    [SerializeField] private Animator animator;
+    private float animSpeed;
 
     void Start()
     {
@@ -51,6 +53,7 @@ public class ShooterScript : MonoBehaviour
         }
 
         oldSpeed = moveSpeed;
+        animSpeed = animator.speed;
     }
 
     void Update()
@@ -249,6 +252,7 @@ public class ShooterScript : MonoBehaviour
         isStunned = true;
         moveSpeed = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        animator.speed = 0;
         foreach (SpriteRenderer renderer in bodyParts)
         {
             renderer.color = Color.green;
@@ -259,6 +263,7 @@ public class ShooterScript : MonoBehaviour
         isStunned = false;
         moveSpeed = oldSpeed;
         rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        animator.speed = animSpeed;
         foreach (SpriteRenderer renderer in bodyParts)
         {
             renderer.color = Color.white;

@@ -218,6 +218,9 @@ MonoBehaviour:
   moveSpeed: 2
   isStunned: 0
   hitParticlePrefab: {fileID: 7359391080089007259, guid: df16f1a3a1d9c8c4a95bf06941da5f5d, type: 3}
+  bodyParts:
+  - {fileID: 5984809680287405731}
+  animator: {fileID: -3890336698069211559}
 --- !u!95 &-3890336698069211559
 Animator:
   serializedVersion: 7

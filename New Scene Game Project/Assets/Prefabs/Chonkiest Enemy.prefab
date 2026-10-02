@@ -119,6 +119,7 @@ MonoBehaviour:
   hitParticlePrefab: {fileID: 7359391080089007259, guid: e812884516822064d9a3a49c8b6248da, type: 3}
   bodyParts:
   - {fileID: 792241601117970521}
+  animator: {fileID: 2689489989738015194}
 --- !u!50 &4739332431938524062
 Rigidbody2D:
   serializedVersion: 5

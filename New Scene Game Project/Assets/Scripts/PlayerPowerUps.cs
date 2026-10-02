@@ -50,7 +50,7 @@ public class PlayerPowerUps : MonoBehaviour
     private bool canQueueDash = true;
     private bool dashQueued = false;
     private Coroutine currDashRoutine;
-    [SerializeField] private bool isDashing = false;
+    private bool isDashing = false;
     #endregion
 
     [Header("Vine Attack Variables")]

@@ -33,11 +33,14 @@ public class EnemyScript : MonoBehaviour
 
     public GameObject hitParticlePrefab;
     [SerializeField] private SpriteRenderer[] bodyParts;
+    [SerializeField] private Animator animator;
+    private float animSpeed;
 
     void Start()
     {
         oldSpeed = speed;
         isStunned = false;
+        animSpeed = animator.speed;
 
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
@@ -52,7 +55,7 @@ public class EnemyScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isKnockedBack || isInDeathState) return;
+        if (isKnockedBack || isInDeathState || isStunned) return;
         if (proceduralSpeed)
         {
             if (Time.time - lastSpeedBoostTime >= 2f + (0.25f * numSpeedBoosts))
@@ -189,13 +192,17 @@ public class EnemyScript : MonoBehaviour
         {
             Color originalColor = spriteRenderer.color;
             spriteRenderer.color = Color.gray;
+            spriteRenderer.sortingLayerName = "DeadEnemy";
+            animator.speed = 0;
             yield return new WaitForSeconds(5f);
+            animator.speed = animSpeed;
             gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
             currentHealth = (int)(maxHealth * 1.5f);
             isInDeathState = false;
             rb.bodyType = originalBodyType;
             spriteRenderer.color = originalColor;
+            spriteRenderer.sortingLayerName = "Enemy";
             speed *= 3f;
             knockbackDuration /= 3f;
         }
@@ -217,6 +224,7 @@ public class EnemyScript : MonoBehaviour
         isStunned = true;
         speed = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        animator.speed = 0;
         foreach (SpriteRenderer renderer in bodyParts)
         {
             renderer.color = Color.green;
@@ -227,6 +235,7 @@ public class EnemyScript : MonoBehaviour
         isStunned = false;
         speed = oldSpeed;
         rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        animator.speed = animSpeed;
         foreach (SpriteRenderer renderer in bodyParts)
         {
             renderer.color = Color.white;

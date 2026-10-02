@@ -182,6 +182,9 @@ MonoBehaviour:
   moveSpeed: 2
   isStunned: 0
   hitParticlePrefab: {fileID: 7359391080089007259, guid: ed937c33d9ffa4440a4c141695f3c918, type: 3}
+  bodyParts:
+  - {fileID: 5984809680287405731}
+  animator: {fileID: 412852580384354709}
 --- !u!60 &-5097661702451804976
 PolygonCollider2D:
   m_ObjectHideFlags: 0
