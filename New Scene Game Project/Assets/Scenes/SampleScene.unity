@@ -1801,6 +1801,14 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].repeatInterval
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3984010671431804888, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: m_SortingLayer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3984010671431804888, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -52976901
+      objectReference: {fileID: 0}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
