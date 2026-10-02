@@ -357,7 +357,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         curVineCooldown = 0;
 
-        GameObject vineBall = Instantiate(VineBallPrefab, vineBallStartingPoint.position, vineBallStartingPoint.rotation);
+        GameObject vineBall = Instantiate(VineBallPrefab, vineBallStartingPoint.position, HeadLookAtMouse.aimAngle);
         vineBall.GetComponent<Rigidbody2D>().AddForce(vineBallStartingPoint.up * fireForce, ForceMode2D.Impulse);
     }
 
