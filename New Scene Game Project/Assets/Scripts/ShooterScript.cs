@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ShooterScript : MonoBehaviour
@@ -7,33 +8,52 @@ public class ShooterScript : MonoBehaviour
     public Transform firePoint;
     public float shootingRange = 8f;
     public float fireRate = 1.5f;
+    [SerializeField] private float distanceRateIncrease = 3f;
+    [SerializeField] private float distanceAccuracyIncrease = 5f;
+    [SerializeField] private float distanceMovePredict = 0f;
     public float bulletSpeed = 30f;
-    public int damage = 1;
+    [SerializeField] private float bulletDamage;
+    [SerializeField] private float bulletSizeMod;
+    public float rageDamageBuff = 1.5f;
     [Range(0f, 1f)]
     public float accuracy = 0.8f;
     public int maxHealth = 3;
-    private int currentHealth;
+    private float currentHealth;
     public float knockbackForce = 3f;
     public float knockbackDuration = 0.15f;
     private bool isKnockedBack = false;
     private Transform playerTransform;
+    private Rigidbody2D playerRB;
     private Rigidbody2D rb;
     private float nextFireTime = 0f;
+    private float reducedNextFireTime = 0f;
     public bool isWalker = false;
+    public bool aimIncreaser = false;
     public float moveSpeed = 2f;
+    private float oldSpeed;
     public bool isStunned = false;
     public GameObject hitParticlePrefab;
+    [SerializeField] private SpriteRenderer[] bodyParts;
+    [SerializeField] private Animator animator;
+    private float animSpeed;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
 
+        nextFireTime = Time.time + Random.Range(0.3f, 1f);
+        reducedNextFireTime = Time.time + 3f;
+
         GameObject player = GameObject.FindWithTag("Player");
         if (player != null)
         {
             playerTransform = player.transform;
+            playerRB = player.GetComponent<Rigidbody2D>();
         }
+
+        oldSpeed = moveSpeed;
+        animSpeed = animator.speed;
     }
 
     void Update()
@@ -46,17 +66,36 @@ public class ShooterScript : MonoBehaviour
             return;
         }
 
+        if (aimIncreaser && accuracy < 1f)
+        {
+            accuracy += Time.deltaTime / 200f;
+            if (accuracy > 1f)
+            {
+                accuracy = 1f;
+            }
+        }
+
         float distance = Vector2.Distance(transform.position, playerTransform.position);
 
         if (distance <= shootingRange)
         {
-            rb.linearVelocity = Vector2.zero;
+            if (!isWalker)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            else
+            {
+                moveSpeed /= 2;
+                MoveTowardsPlayer();
+                moveSpeed *= 2;
+            }
             RotateTowardsPlayer();
 
-            if (Time.time >= nextFireTime)
+            if ((Time.time >= nextFireTime) || (Vector2.Distance(playerTransform.position, transform.position) > 60f && Time.time >= reducedNextFireTime))
             {
                 Shoot();
                 nextFireTime = Time.time + (1f / fireRate);
+                reducedNextFireTime = Time.time + (1f / (fireRate * distanceRateIncrease));
             }
         }
         else if (isWalker)
@@ -92,17 +131,31 @@ public class ShooterScript : MonoBehaviour
         }
 
         if (bulletPrefab == null || firePoint == null) return;
-        Vector2 fireDirection = (playerTransform.position - firePoint.position).normalized;
-        float maxSpreadAngle = (1f - accuracy) * 45f;
+        Vector2 playerPosition = playerTransform.position;
+        Vector2 firePointPosition = firePoint.position;
+        float distance = Vector2.Distance(playerPosition, firePointPosition);
+        Vector2 fireDirection = (playerPosition + (distance > 60f ? (distanceMovePredict * playerRB.linearVelocity) : new Vector2(0, 0)) - firePointPosition).normalized;
+        float maxSpreadAngle;
+        if (Vector2.Distance(transform.position, playerTransform.position) > 50f)
+        {
+            maxSpreadAngle = Mathf.Max(1f - (accuracy * distanceAccuracyIncrease), 0) * 45f;
+        }
+        else
+        {
+            maxSpreadAngle = (1f - accuracy) * 45f;
+        }
         float randomAngle = Random.Range(-maxSpreadAngle, maxSpreadAngle);
         Quaternion spreadRotation = Quaternion.Euler(0, 0, randomAngle);
         Vector2 finalDirection = spreadRotation * fireDirection;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
         Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
         if (bulletRb != null)
         {
             bulletRb.linearVelocity = finalDirection * bulletSpeed;
         }
+        bulletScript.SetSize(bulletSizeMod);
+        bulletScript.SetDamage(bulletDamage);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -125,6 +178,15 @@ public class ShooterScript : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && !isStunned && isWalker)
+        {
+            PlayerHealth.Instance.ChangeHealth(-1);
+            CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);
+        }
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("VineAOE"))
@@ -135,7 +197,14 @@ public class ShooterScript : MonoBehaviour
 
     public void TakeDamage(int damageAmount, Vector2 knockbackDirection)
     {
-        currentHealth -= damageAmount;
+        if (PlayerPowerUps.Instance.getIsRaged())
+        {
+            currentHealth -= damageAmount * rageDamageBuff;
+        }
+        else {
+            currentHealth -= damageAmount;
+        }
+        
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
 
@@ -181,9 +250,23 @@ public class ShooterScript : MonoBehaviour
     private void StunEnemy()
     {
         isStunned = true;
+        moveSpeed = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        animator.speed = 0;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.green;
+        }
     }
     private void UnStunEnemy()
     {
         isStunned = false;
+        moveSpeed = oldSpeed;
+        rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        animator.speed = animSpeed;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.white;
+        }
     }
 }

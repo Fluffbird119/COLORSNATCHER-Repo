@@ -10,16 +10,17 @@ public class EnemyScript : MonoBehaviour
     private float oldSpeed;
     public float stoppingDistance = 0f;
     public int maxHealth = 5;
-    private int currentHealth;
+    private float currentHealth;
     public float knockbackForce = 5f;
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
-    public int damage = 1;
+    public float rageDamageBuff = 1.5f;
     public bool proceduralSpeed = false;
     private Transform playerTransform;
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
-    private float distanceSpeedMod = 1f;
+    private int numSpeedBoosts = 0;
+    [SerializeField] private float distanceSpeedMod = 1f;
     public bool reincarnates = false;
     private bool reincarnated = false;
     private bool isInDeathState = false;
@@ -31,11 +32,15 @@ public class EnemyScript : MonoBehaviour
     public float spriteAngleOffset = -90f;
 
     public GameObject hitParticlePrefab;
+    [SerializeField] private SpriteRenderer[] bodyParts;
+    [SerializeField] private Animator animator;
+    private float animSpeed;
 
     void Start()
     {
         oldSpeed = speed;
         isStunned = false;
+        animSpeed = animator.speed;
 
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
@@ -50,22 +55,20 @@ public class EnemyScript : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (isKnockedBack || isInDeathState) return;
+        if (isKnockedBack || isInDeathState || isStunned) return;
         if (proceduralSpeed)
         {
-            if (Time.time - lastSpeedBoostTime >= 5f)
+            if (Time.time - lastSpeedBoostTime >= 2f + (0.25f * numSpeedBoosts))
             {
+                if (numSpeedBoosts < 3)
+                {
+                    currentHealth += 1;
+                }
                 speed *= 2f;
                 transform.localScale *= 1.25f;
-                lastSpeedBoostTime = Time.time;
+                lastSpeedBoostTime = Time.time + Random.Range(-0.2f, 0.2f);
+                numSpeedBoosts++;
             }
-        }
-        if (Vector2.Distance(playerTransform.position, gameObject.transform.position) > 50) {
-            distanceSpeedMod = 5f;
-        }
-        else
-        {
-            distanceSpeedMod = 1f;
         }
         if (playerTransform != null)
         {
@@ -81,7 +84,7 @@ public class EnemyScript : MonoBehaviour
                 Vector2 newPosition = Vector2.MoveTowards(
                     rb.position,
                     playerTransform.position,
-                    speed * distanceSpeedMod * Time.fixedDeltaTime
+                    speed * ((distance > 50f) ? distanceSpeedMod : 1f) * Time.fixedDeltaTime
                 );
                 rb.MovePosition(newPosition);
             }
@@ -121,7 +124,7 @@ public class EnemyScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !isInDeathState && !isStunned)
+        if (collision.gameObject.CompareTag("Player") && collision.gameObject.layer != LayerMask.NameToLayer("iframes") && !isInDeathState && !isStunned && !(collision.gameObject.layer == LayerMask.NameToLayer("Dashing")))
         {
             PlayerHealth.Instance.ChangeHealth(-1);
             CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);
@@ -130,7 +133,13 @@ public class EnemyScript : MonoBehaviour
 
     public void TakeDamage(int damage, Vector2 knockbackDirection)
     {
-        currentHealth -= 1;
+        if (PlayerPowerUps.Instance.getIsRaged())
+        {
+            currentHealth -= damage * rageDamageBuff;
+        }
+        else {
+            currentHealth -= damage;
+        }
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
         if (currentHealth <= 0)
@@ -183,22 +192,30 @@ public class EnemyScript : MonoBehaviour
         {
             Color originalColor = spriteRenderer.color;
             spriteRenderer.color = Color.gray;
+            spriteRenderer.sortingLayerName = "DeadEnemy";
+            animator.speed = 0;
             yield return new WaitForSeconds(5f);
+            animator.speed = animSpeed;
             gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
-            currentHealth = maxHealth;
+            currentHealth = (int)(maxHealth * 1.5f);
             isInDeathState = false;
             rb.bodyType = originalBodyType;
             spriteRenderer.color = originalColor;
+            spriteRenderer.sortingLayerName = "Enemy";
+            speed *= 3f;
+            knockbackDuration /= 3f;
         }
         else
         {
             yield return new WaitForSeconds(5f);
             gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
-            currentHealth = maxHealth;
+            currentHealth = (int)(maxHealth * 1.5f);
             isInDeathState = false;
             rb.bodyType = originalBodyType;
+            speed *= 2.5f;
+            knockbackDuration /= 3f;
         }
     }
 
@@ -206,10 +223,22 @@ public class EnemyScript : MonoBehaviour
     {
         isStunned = true;
         speed = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        animator.speed = 0;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.green;
+        }
     }
     private void UnStunEnemy()
     {
         isStunned = false;
         speed = oldSpeed;
+        rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        animator.speed = animSpeed;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.white;
+        }
     }
 }

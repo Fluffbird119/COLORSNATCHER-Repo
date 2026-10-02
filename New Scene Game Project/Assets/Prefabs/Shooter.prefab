@@ -200,18 +200,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2855841578704052247, guid: 22aff7b80a0f2674e9512dcaf73e0a4e, type: 3}
   firePoint: {fileID: 3049531179453528255}
-  shootingRange: 50
-  fireRate: 0.3
-  bulletSpeed: 20
-  damage: 1
-  accuracy: 0
+  shootingRange: 200
+  fireRate: 0.4
+  distanceRateIncrease: 2
+  distanceAccuracyIncrease: 3
+  distanceMovePredict: 0.3
+  bulletSpeed: 25
+  bulletDamage: 1
+  bulletSizeMod: 1.2
+  rageDamageBuff: 1.5
+  accuracy: 0.1
   maxHealth: 3
   knockbackForce: 3
   knockbackDuration: 0.15
   isWalker: 0
+  aimIncreaser: 1
   moveSpeed: 2
   isStunned: 0
   hitParticlePrefab: {fileID: 7359391080089007259, guid: df16f1a3a1d9c8c4a95bf06941da5f5d, type: 3}
+  bodyParts:
+  - {fileID: 5984809680287405731}
+  animator: {fileID: -3890336698069211559}
 --- !u!95 &-3890336698069211559
 Animator:
   serializedVersion: 7

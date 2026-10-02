@@ -51,6 +51,9 @@ public class PlayerHealth : MonoBehaviour
             attackScript.ResumeEye();
 
             youDiedMessageAndButton.SetActive(true);
+            PlayerPowerUps.Instance.setIsRaged(false);
+            PlayerPowerUps.Instance.setIsDashing(false);
+            GameManager.Instance.killsThisWave = 0;
             player.SetActive(false);
         }
     }
@@ -61,9 +64,28 @@ public class PlayerHealth : MonoBehaviour
         if (amount < 0)
         {
             StartCoroutine(iFrames());
+            PlayerPowerUps.Instance.IncreaseRage(1f);
         }
 
         health += amount;
+
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
+
+        healthBarUIScript.ChangeHealthVisual();
+    }
+
+    // overload for percentage based healing
+    public void ChangeHealth(int sign, float percentage)
+    {
+        if (sign < 0)
+        {
+            StartCoroutine(iFrames());
+        }
+
+        health += maxHealth * sign * percentage;
 
         if (health > maxHealth)
         {
@@ -93,6 +115,7 @@ public class PlayerHealth : MonoBehaviour
     public void ResetWaveStuff()
     {
         youDiedMessageAndButton.SetActive(false);
+        GameManager.Instance.StopCurrWaveRoutine();
 
         if (GameManager.Instance.waveNumber == 1)
         {

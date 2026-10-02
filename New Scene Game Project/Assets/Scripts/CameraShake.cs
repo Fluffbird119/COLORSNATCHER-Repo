@@ -66,8 +66,15 @@ public class CameraShake : MonoBehaviour
     public void Shake(float duration, float magnitude, ShakeAxis axis)
     {
         shakeAxis = axis;
-        shakeMagnitude = magnitude;
-        currentShakeDuration = duration;
+        if (!isShaking) {
+            shakeMagnitude = magnitude;
+            currentShakeDuration = duration;
+        }
+        else
+        {
+            shakeMagnitude += magnitude * 0.3f;
+            currentShakeDuration = duration * 0.8f;
+        }
         isShaking = true;
     }
 }

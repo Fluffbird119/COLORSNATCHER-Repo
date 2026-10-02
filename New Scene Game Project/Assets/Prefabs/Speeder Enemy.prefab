@@ -107,15 +107,19 @@ MonoBehaviour:
   speed: 0.5
   stoppingDistance: 0
   maxHealth: 2
-  knockbackForce: 15
-  knockbackDuration: 1
-  damage: 1
+  knockbackForce: 80
+  knockbackDuration: 0.15
+  rageDamageBuff: 1.5
   proceduralSpeed: 1
+  distanceSpeedMod: 0.25
   reincarnates: 0
   healthScript: {fileID: 0}
   isStunned: 0
   spriteAngleOffset: 180
   hitParticlePrefab: {fileID: 7359391080089007259, guid: df16f1a3a1d9c8c4a95bf06941da5f5d, type: 3}
+  bodyParts:
+  - {fileID: 5984809680287405731}
+  animator: {fileID: -4740312554225553737}
 --- !u!50 &1123261327007499238
 Rigidbody2D:
   serializedVersion: 5

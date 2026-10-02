@@ -103,6 +103,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vineStunAOEPrefab: {fileID: 7733814492955380199, guid: 31ac3bef4fa07504986c29f83cde2bf4, type: 3}
+  arenaMinBoundsX: -70
+  arenaMaxBoundsX: 70
+  arenaMinBoundsY: -55
+  arenaMaxBoundsY: 35
 --- !u!50 &3298688722783006151
 Rigidbody2D:
   serializedVersion: 5
@@ -165,4 +169,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 6.5

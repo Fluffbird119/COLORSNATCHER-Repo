@@ -198,12 +198,12 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "im gonna kill u" }, "player");
+            StartDialogue(new string[] { "la dee dah im just a critter who is NOT evil I would never do that" }, "player");
             while (isTalking)
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "WHAAAAT. I DONT EVEN KNOW WHO YOU ARE", "BUT THIS MAKES ME VERY ANGRY" }, "red");
+            StartDialogue(new string[] { "WHAAAAT. I DONT EVEN KNOW HOW TO READ", "BUT THIS MAKES ME VERY ANGRY" }, "red");
             while (isTalking)
             {
                 yield return null;
@@ -305,6 +305,12 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
+            StartDialogue(new string[] { "RAGE acquired, press 'Q' to feel the RAGE come inside of you, making you feel so powerful",
+                "so powerful", "powerful RAGE", "yeah", "also it lets you parry btw"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
         else if (cutsceneNumber == 5)
@@ -397,6 +403,11 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
+            StartDialogue(new string[] { "DASH acquired, press 'Shift' to do that"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
         else if (cutsceneNumber == 9)
@@ -481,6 +492,12 @@ public class DialogueSystem : MonoBehaviour
             StartDialogue(new string[] { "What is this? I feel... fine. I feel satiated. I feel... good?", "I should stop here." ,
             "but this feels so good...", "But I have to keep going. What if theres more? More good feelings. Like all of these ones!",
             "I want good feelings! I love good feelings!"}, "player");
+            StartDialogue(new string[] { "SLUDGE acquired, press 'E' to splooge",
+                "the gunk is supposed to stun enemies but it's lowkey bugged so use your imagination"}, "none");
+            while (isTalking)
+            {
+                yield return null;
+            }
             isCutscenePlaying = false;
         }
         else if (cutsceneNumber == 13)

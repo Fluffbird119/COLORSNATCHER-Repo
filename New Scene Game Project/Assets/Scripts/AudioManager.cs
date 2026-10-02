@@ -29,6 +29,15 @@ public class AudioManager : MonoBehaviour
         convoMusic.Play();
     }
 
+    public void StopAll()
+    {
+        convoMusic.Stop();
+        yellowMusic.Stop();
+        blueMusic.Stop();
+        redMusic.Stop();
+        greenMusic.Stop();
+    }
+
     public void ConvoMusic()
     {
         convoMusic.Play();
