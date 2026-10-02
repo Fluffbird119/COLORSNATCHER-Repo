@@ -25,6 +25,7 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.UI.Image yellowImage;
     public UnityEngine.UI.Image greenImage;
     public UnityEngine.UI.Image blueImage;
+    public GameObject playerBox;
 
     public bool isCutscenePlaying = false;
 
@@ -58,6 +59,7 @@ public class DialogueSystem : MonoBehaviour
         if (characterName.Equals("player"))
         {
             playerImage.gameObject.SetActive(true);
+            playerBox.gameObject.SetActive(true);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
@@ -66,6 +68,7 @@ public class DialogueSystem : MonoBehaviour
         else if (characterName.Equals("red"))
         {
             playerImage.gameObject.SetActive(false);
+            playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(true);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
@@ -74,6 +77,7 @@ public class DialogueSystem : MonoBehaviour
         else if (characterName.Equals("none"))
         {
             playerImage.gameObject.SetActive(false);
+            playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
@@ -82,6 +86,7 @@ public class DialogueSystem : MonoBehaviour
         else if (characterName.Equals("yellow"))
         {
             playerImage.gameObject.SetActive(false);
+            playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(true);
             greenImage.gameObject.SetActive(false);
@@ -90,6 +95,7 @@ public class DialogueSystem : MonoBehaviour
         else if (characterName.Equals("green"))
         {
             playerImage.gameObject.SetActive(false);
+            playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(true);
@@ -98,6 +104,7 @@ public class DialogueSystem : MonoBehaviour
         else if (characterName.Equals("blue"))
         {
             playerImage.gameObject.SetActive(false);
+            playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
