@@ -32,6 +32,7 @@ public class EnemyScript : MonoBehaviour
     public float spriteAngleOffset = -90f;
 
     public GameObject hitParticlePrefab;
+    [SerializeField] private SpriteRenderer[] bodyParts;
 
     void Start()
     {
@@ -215,10 +216,20 @@ public class EnemyScript : MonoBehaviour
     {
         isStunned = true;
         speed = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.green;
+        }
     }
     private void UnStunEnemy()
     {
         isStunned = false;
         speed = oldSpeed;
+        rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.white;
+        }
     }
 }

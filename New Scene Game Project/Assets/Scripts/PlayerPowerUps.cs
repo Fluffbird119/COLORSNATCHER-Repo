@@ -57,7 +57,7 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] GameObject VineBarObject;
     [SerializeField] GameObject VineBallPrefab;
     [SerializeField] Transform vineBallStartingPoint;
-    [SerializeField] private float fireForce= 20f;
+    [SerializeField] private float fireForce = 20f;
 
     public bool beatenGreen;
 

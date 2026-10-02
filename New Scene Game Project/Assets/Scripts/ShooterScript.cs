@@ -30,8 +30,10 @@ public class ShooterScript : MonoBehaviour
     public bool isWalker = false;
     public bool aimIncreaser = false;
     public float moveSpeed = 2f;
+    private float oldSpeed;
     public bool isStunned = false;
     public GameObject hitParticlePrefab;
+    [SerializeField] private SpriteRenderer[] bodyParts;
 
     void Start()
     {
@@ -47,6 +49,8 @@ public class ShooterScript : MonoBehaviour
             playerTransform = player.transform;
             playerRB = player.GetComponent<Rigidbody2D>();
         }
+
+        oldSpeed = moveSpeed;
     }
 
     void Update()
@@ -243,9 +247,21 @@ public class ShooterScript : MonoBehaviour
     private void StunEnemy()
     {
         isStunned = true;
+        moveSpeed = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.green;
+        }
     }
     private void UnStunEnemy()
     {
         isStunned = false;
+        moveSpeed = oldSpeed;
+        rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.white;
+        }
     }
 }
