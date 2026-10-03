@@ -6,13 +6,13 @@ public class PlayerPowerUps : MonoBehaviour
     public static PlayerPowerUps Instance { get; private set; }
 
     [Header("NonPowerUp Variables")]
-    [SerializeField] private Animator tentacleAnim;
+    public Animator tentacleAnim;
     [SerializeField] private Animator EyeAnim;
 
-    [SerializeField] SpriteRenderer head;
-    [SerializeField] SpriteRenderer eye;
-    [SerializeField] SpriteRenderer attackTentacle;
-    [SerializeField] SpriteRenderer legTentacles;
+    public SpriteRenderer head;
+    public SpriteRenderer eye;
+    public SpriteRenderer attackTentacle;
+    public SpriteRenderer legTentacles;
 
     [SerializeField] private GameObject player;
 

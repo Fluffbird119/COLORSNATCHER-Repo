@@ -16,6 +16,8 @@ public class PlayerHealth : MonoBehaviour
     public float health;
     public float maxHealth;
 
+    private float originalSpeed; // for resetting player values on player death
+
     private void Awake()
     {
         // Check if an instance already exists
@@ -31,6 +33,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
+        originalSpeed = PlayerMovement.Instance.GetSpeed();
+
         youDiedMessageAndButton.SetActive(false);
         ChangeHealth(maxHealth);
 
@@ -110,6 +114,15 @@ public class PlayerHealth : MonoBehaviour
         ChangeHealth(maxHealth);
         playerTransform.position = new Vector2(0, 0);
         player.SetActive(true);
+
+        PlayerPowerUps.Instance.head.color = Color.white;
+        PlayerPowerUps.Instance.eye.color = Color.white;
+        PlayerPowerUps.Instance.attackTentacle.color = Color.white;
+        PlayerPowerUps.Instance.legTentacles.color = Color.white;
+
+        PlayerMovement.Instance.SetSpeed(originalSpeed);
+
+        PlayerPowerUps.Instance.tentacleAnim.speed = 2f;
     }
 
     public void ResetWaveStuff()

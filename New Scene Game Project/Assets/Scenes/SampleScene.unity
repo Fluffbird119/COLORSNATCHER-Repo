@@ -281,6 +281,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 3965118895180923035, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1701,6 +1705,10 @@ PrefabInstance:
       propertyPath: healthBarUIScript
       value: 
       objectReference: {fileID: 7589550}
+    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: timeInBetweenHeals
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: youDiedMessageAndButton
       value: 
