@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class DashBarUI : MonoBehaviour
 {
-    private float curCooldown;
+    private float curCooldown1;
+    private float curCooldown2;
     private float maxCooldown;
 
     [SerializeField] private Image dashBarLeft;
@@ -11,16 +12,11 @@ public class DashBarUI : MonoBehaviour
 
     public void UpdateDashVisual()
     {
-        curCooldown = PlayerPowerUps.Instance.getDashCurCooldown();
+        curCooldown1 = PlayerPowerUps.Instance.getDash1CurCooldown();
+        curCooldown2 = PlayerPowerUps.Instance.getDash2CurCooldown();
         maxCooldown = PlayerPowerUps.Instance.getDashMaxCooldown();
 
-        if (curCooldown <= (maxCooldown / 2))
-        {
-            dashBarLeft.fillAmount = (curCooldown / (maxCooldown / 2)); // the / 2 is so it scales correctly for the left bar
-        }
-        else
-        {
-            dashBarRight.fillAmount = (curCooldown - maxCooldown / 2) / (maxCooldown - (maxCooldown / 2));
-        }
+        dashBarLeft.fillAmount = curCooldown1 / maxCooldown;
+        dashBarRight.fillAmount = curCooldown2 / maxCooldown;
     }
 }

@@ -426,7 +426,7 @@ GameObject:
   - component: {fileID: 1925703557553002362}
   - component: {fileID: 784068634409676896}
   m_Layer: 5
-  m_Name: DashBarFill
+  m_Name: DashBarFillLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -675,7 +675,7 @@ GameObject:
   - component: {fileID: 1289285901721161062}
   - component: {fileID: 7134281366882193436}
   m_Layer: 5
-  m_Name: DashBarFill
+  m_Name: DashBarFillRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1832,8 +1832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa9000ba14c425d42aba604ca394dade, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashBarLeft: {fileID: 2492940051070826706}
-  dashBarRight: {fileID: 6896241514794884666}
+  dashBarLeft: {fileID: 784068634409676896}
+  dashBarRight: {fileID: 7134281366882193436}
 --- !u!1 &8892701000905101077
 GameObject:
   m_ObjectHideFlags: 0
