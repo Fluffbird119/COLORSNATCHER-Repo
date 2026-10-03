@@ -135,7 +135,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeDash();
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && (curDash1Cooldown >= maxIndividualDashCooldown || curDash2Cooldown >= maxIndividualDashCooldown))
+            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDash1Cooldown >= maxIndividualDashCooldown)
             {
                 Dash();
             }
@@ -236,14 +236,8 @@ public class PlayerPowerUps : MonoBehaviour
     private void Dash()
     {
         // set cooldown back to zero
-        if (curDash2Cooldown >= maxIndividualDashCooldown)
-        {
-            curDash2Cooldown -= maxIndividualDashCooldown;
-        }
-        else
-        {
-            curDash1Cooldown -= maxIndividualDashCooldown;
-        } 
+        curDash1Cooldown = curDash2Cooldown;
+        curDash2Cooldown = 0;
 
         // turn head and eye and tentacle yellow
         head.color = Color.yellow;
