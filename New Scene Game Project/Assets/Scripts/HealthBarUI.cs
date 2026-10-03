@@ -3,23 +3,16 @@ using UnityEngine.UI;
 
 public class HealthBarUI : MonoBehaviour
 {
-    [SerializeField] PlayerHealth healthScript;
-
     private float health;
     private float maxHealth;
-    public float width;
-    public float height;
 
-    [SerializeField] private RectTransform healthBar;
-
+    [SerializeField] private Image healthBar;
 
     public void ChangeHealthVisual()
     {
-        health = healthScript.GetHealth();
-        maxHealth = healthScript.GetMaxHealth();
+        health = PlayerHealth.Instance.GetHealth();
+        maxHealth = PlayerHealth.Instance.GetMaxHealth();
 
-        float newWidth = (health / maxHealth) * width;
-
-        healthBar.sizeDelta = new Vector2(newWidth, height);
+        healthBar.fillAmount = health / maxHealth;
     }
 }

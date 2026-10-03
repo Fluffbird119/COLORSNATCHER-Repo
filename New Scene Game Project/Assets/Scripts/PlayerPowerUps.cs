@@ -51,9 +51,13 @@ public class PlayerPowerUps : MonoBehaviour
     private bool dashQueued = false;
     private Coroutine currDashRoutine;
     private bool isDashing = false;
+
+    [SerializeField] private GameObject dashParticlePrefab;
+    private ParticleSystem particleSys;
     #endregion
 
     [Header("Vine Attack Variables")]
+    #region Vine Variables
     [SerializeField] GameObject VineBarObject;
     [SerializeField] GameObject VineBallPrefab;
     [SerializeField] Transform vineBallStartingPoint;
@@ -65,8 +69,7 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] private float maxVineCooldown;
 
     private VineBarUI vineBarUI;
-    [SerializeField] private GameObject dashParticlePrefab;
-    private ParticleSystem particleSys;
+    #endregion
 
 
     private void Awake()
@@ -238,7 +241,7 @@ public class PlayerPowerUps : MonoBehaviour
         // set cooldown back to zero
         curDashCooldown -= maxDashCooldown / maxDashes;
 
-        // turn head and eye and tentacle red
+        // turn head and eye and tentacle yellow
         head.color = Color.yellow;
         eye.color = Color.yellow;
         attackTentacle.color = Color.yellow;
