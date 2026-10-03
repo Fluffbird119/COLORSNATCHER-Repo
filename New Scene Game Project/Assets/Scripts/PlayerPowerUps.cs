@@ -324,7 +324,7 @@ public class PlayerPowerUps : MonoBehaviour
             attackTentacle.color = Color.red;
             legTentacles.color = Color.red;
         }
-        
+
         isDashing = false;
         player.layer = 7;
         particleSys.Stop();
@@ -369,6 +369,13 @@ public class PlayerPowerUps : MonoBehaviour
 
         GameObject vineBall = Instantiate(VineBallPrefab, vineBallStartingPoint.position, HeadLookAtMouse.aimAngle);
         vineBall.GetComponent<Rigidbody2D>().AddForce(vineBallStartingPoint.up * fireForce, ForceMode2D.Impulse);
+        ParticleSystem vineParticles = vineBall.transform.GetChild(0).GetComponent<ParticleSystem>();
+        if (vineParticles != null)
+        {
+            float radiansZ = HeadLookAtMouse.aimAngle.eulerAngles.z * Mathf.Deg2Rad;
+            ParticleSystem.MainModule vinePartMain = vineParticles.main;
+            vinePartMain.startRotation = new ParticleSystem.MinMaxCurve(-radiansZ);
+        }
     }
 
     public float getVineCurCooldown()

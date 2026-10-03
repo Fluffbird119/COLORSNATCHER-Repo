@@ -1750,6 +1750,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: beatenGreen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: DashBarObject
       value: 
       objectReference: {fileID: 1686573494}
