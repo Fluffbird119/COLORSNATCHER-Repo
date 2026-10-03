@@ -311,10 +311,20 @@ public class PlayerPowerUps : MonoBehaviour
             PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
         }
 
-        head.color = Color.white;
-        eye.color = Color.white;
-        attackTentacle.color = Color.white;
-        legTentacles.color = Color.white;
+        if (!isRaged) {
+            head.color = Color.white;
+            eye.color = Color.white;
+            attackTentacle.color = Color.white;
+            legTentacles.color = Color.white;
+        }
+        else
+        {
+            head.color = Color.red;
+            eye.color = Color.red;
+            attackTentacle.color = Color.red;
+            legTentacles.color = Color.red;
+        }
+        
         isDashing = false;
         player.layer = 7;
         particleSys.Stop();
