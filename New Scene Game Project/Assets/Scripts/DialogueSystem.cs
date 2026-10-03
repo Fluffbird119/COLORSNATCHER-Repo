@@ -26,6 +26,10 @@ public class DialogueSystem : MonoBehaviour
     public UnityEngine.UI.Image greenImage;
     public UnityEngine.UI.Image blueImage;
     public GameObject playerBox;
+    public GameObject redBox;
+    public GameObject yellowBox;
+    public GameObject greenBox;
+    public GameObject blueBox;
 
     public bool isCutscenePlaying = false;
 
@@ -61,17 +65,24 @@ public class DialogueSystem : MonoBehaviour
             playerImage.gameObject.SetActive(true);
             playerBox.gameObject.SetActive(true);
             redImage.gameObject.SetActive(false);
+            redBox.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
+            yellowBox.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
+            greenBox.gameObject.SetActive(false);
             blueImage.gameObject.SetActive(false);
+            blueBox.gameObject.SetActive(false);
         }
         else if (characterName.Equals("red"))
         {
             playerImage.gameObject.SetActive(false);
             playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(true);
+            redBox.gameObject.SetActive(true);
             yellowImage.gameObject.SetActive(false);
+            yellowBox.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
+            greenBox.gameObject.SetActive(false);
             blueImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("none"))
@@ -79,8 +90,12 @@ public class DialogueSystem : MonoBehaviour
             playerImage.gameObject.SetActive(false);
             playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
+            redBox.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
+            yellowBox.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
+            greenBox.gameObject.SetActive(false);
+            blueImage.gameObject.SetActive(false);
             blueImage.gameObject.SetActive(false);
         }
         else if (characterName.Equals("yellow"))
@@ -88,27 +103,39 @@ public class DialogueSystem : MonoBehaviour
             playerImage.gameObject.SetActive(false);
             playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
+            redBox.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(true);
+            yellowBox.gameObject.SetActive(true);
             greenImage.gameObject.SetActive(false);
+            greenBox.gameObject.SetActive(false);
             blueImage.gameObject.SetActive(false);
+            blueBox.gameObject.SetActive(false);
         }
         else if (characterName.Equals("green"))
         {
             playerImage.gameObject.SetActive(false);
             playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
+            redBox.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
+            yellowBox.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(true);
+            greenBox.gameObject.SetActive(true);
             blueImage.gameObject.SetActive(false);
+            blueBox.gameObject.SetActive(false);
         }
         else if (characterName.Equals("blue"))
         {
             playerImage.gameObject.SetActive(false);
             playerBox.gameObject.SetActive(false);
             redImage.gameObject.SetActive(false);
+            redBox.gameObject.SetActive(false);
             yellowImage.gameObject.SetActive(false);
+            yellowBox.gameObject.SetActive(false);
             greenImage.gameObject.SetActive(false);
+            greenBox.gameObject.SetActive(false);
             blueImage.gameObject.SetActive(true);
+            blueBox.gameObject.SetActive(true);
         }
             dialoguePanel.SetActive(true);
         ShowLine(currentLines[currentLine]);
