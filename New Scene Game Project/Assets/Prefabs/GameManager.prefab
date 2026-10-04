@@ -67,7 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54bc85ef50261b4388e794b1aa80bd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   enemyPrefab: {fileID: 8719147511489265977, guid: 3bd1c4bb03260a349b755884bc8c92ad, type: 3}
   smallEnemyPrefab: {fileID: 2855841578704052247, guid: d2f299c45c9349448b6ae9a076aae85a, type: 3}
   bigEnemyPrefab: {fileID: 2855841578704052247, guid: b02dba09b1876d346b1186a78e610689, type: 3}
@@ -79,7 +78,9 @@ MonoBehaviour:
   chunkyPrefab: {fileID: 2855841578704052247, guid: c3faa7612fd7e3b4ba4d4f8cc7d5df6b, type: 3}
   minSpawnBounds: 40
   maxSpawnBounds: 60
-  arenaMinBounds: -70
-  arenaMaxBounds: 70
+  arenaMinBoundsX: -70
+  arenaMaxBoundsX: 70
+  arenaMinBoundsY: -55
+  arenaMaxBoundsY: 35
   killsThisWave: 0
   waveNumber: 0
