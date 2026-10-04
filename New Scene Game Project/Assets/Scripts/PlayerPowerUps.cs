@@ -327,10 +327,10 @@ public class PlayerPowerUps : MonoBehaviour
 
         if (isRaged)
         {
-            PlayerMovement.Instance.SetSpeed(15f * 1.5f);
+            PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
         }
         else {
-            PlayerMovement.Instance.SetSpeed(15f); // hard coded value cuz thats just what the player move speed is as of rn
+            PlayerMovement.Instance.SetSpeed(oldSpeed); // hard coded value cuz thats just what the player move speed is as of rn
         }
 
         if (!isRaged) {
