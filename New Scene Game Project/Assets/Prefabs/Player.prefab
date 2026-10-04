@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -110792873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 2
   m_Sprite: {fileID: -4190338958771332382, guid: f0f85672976978242930998fb15db52f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -337,7 +337,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -110792873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 2817057228151112505, guid: 64d0ea6beab2d284ea99b5164cc0be23, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -426,7 +426,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -110792873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -4994045265728382883, guid: 62e3b1987fe3f274db2e9e0511cee8e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -582,30 +582,29 @@ MonoBehaviour:
   attackTentacle: {fileID: 5007791665903138126}
   legTentacles: {fileID: 2501471015635225836}
   player: {fileID: 4667962735266773042}
+  beatenRed: 0
   RageBarObject: {fileID: 0}
   rageBarUIScript: {fileID: 0}
-  beatenRed: 0
   rage: 0
   maxRage: 15
   rageDuration: 5
+  beatenYellow: 0
   DashBarObject: {fileID: 0}
   movementScript: {fileID: 989395696206953658}
   dashBarUIScript: {fileID: 0}
-  beatenYellow: 0
-  curDashCooldown: 0
-  maxDashCooldown: 5
+  curDash1Cooldown: 0
+  curDash2Cooldown: 0
+  maxIndividualDashCooldown: 2
   dashMoveSpeed: 80
-  dashDuration: 0.4
-  maxDashes: 3
-  isDashing: 0
+  dashDuration: 0.2
+  dashParticlePrefab: {fileID: 5577874096463633537}
+  beatenGreen: 0
   VineBarObject: {fileID: 0}
   VineBallPrefab: {fileID: 8120118057655045135, guid: ce00c7c62bf7e0b4fb5970815d84d9a4, type: 3}
   vineBallStartingPoint: {fileID: 2312094620568690683}
   fireForce: 20
-  beatenGreen: 0
   curVineCooldown: 0
-  maxVineCooldown: 5
-  dashParticlePrefab: {fileID: 3603855121255805436, guid: bc273b749ca93374daac843edf8687e2, type: 3}
+  maxVineCooldown: 8
 --- !u!114 &6200498255624669922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -623,7 +622,7 @@ MonoBehaviour:
   youDiedMessageAndButton: {fileID: 0}
   player: {fileID: 4667962735266773042}
   playerTransform: {fileID: 5016473435061172441}
-  timeInBetweenHeals: 15
+  timeInBetweenHeals: 10
   health: 0
   maxHealth: 20
 --- !u!50 &665813947060500010
@@ -764,7 +763,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -110792873
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: -1
   m_Sprite: {fileID: -2228694499172533255, guid: a208cbae58cccc54bbd7c25c64dec19a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -809,19 +808,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3603855121255805436, guid: bc273b749ca93374daac843edf8687e2, type: 3}
       propertyPath: m_Name
-      value: PlayerParticleSystem
+      value: DashParticleSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 7912657559323793204, guid: bc273b749ca93374daac843edf8687e2, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9040743042819859959, guid: bc273b749ca93374daac843edf8687e2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.719316
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9040743042819859959, guid: bc273b749ca93374daac843edf8687e2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5970137
+      value: -4.1
       objectReference: {fileID: 0}
     - target: {fileID: 9040743042819859959, guid: bc273b749ca93374daac843edf8687e2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.37839347
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9040743042819859959, guid: bc273b749ca93374daac843edf8687e2, type: 3}
       propertyPath: m_LocalRotation.w
@@ -859,5 +862,10 @@ PrefabInstance:
 --- !u!4 &152218822196152458 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9040743042819859959, guid: bc273b749ca93374daac843edf8687e2, type: 3}
+  m_PrefabInstance: {fileID: 9181680564329901437}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5577874096463633537 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3603855121255805436, guid: bc273b749ca93374daac843edf8687e2, type: 3}
   m_PrefabInstance: {fileID: 9181680564329901437}
   m_PrefabAsset: {fileID: 0}

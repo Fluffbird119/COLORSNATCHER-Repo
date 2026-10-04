@@ -184,11 +184,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &400628180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5577874096463633537, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-  m_PrefabInstance: {fileID: 8358882279293644888}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &408133666
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1553,30 +1548,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 152218822196152458, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 152218822196152458, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -4.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 152218822196152458, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: maxDashes
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: beatenYellow
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: dashDuration
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: DashBarObject
       value: 
@@ -1594,61 +1565,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1686573496}
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: maxDashCooldown
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: maxVineCooldown
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: rageBarUIScript
       value: 
       objectReference: {fileID: 590160078}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: dashParticlePrefab
-      value: 
-      objectReference: {fileID: 400628180}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: maxIndividualDashCooldown
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343350265921681993, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: playOnAwake
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343350265921681993, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343350265921681993, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: InitialModule.maxNumParticles
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343350265921681993, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: InitialModule.startSize.scalar
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343350265921681993, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: InitialModule.startLifetime.scalar
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343350265921681993, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].cycleCount
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1343350265921681993, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: EmissionModule.m_Bursts.Array.data[0].repeatInterval
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3984010671431804888, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3984010671431804888, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -52976901
-      objectReference: {fileID: 0}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
@@ -1697,18 +1616,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5577874096463633537, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_Name
-      value: DashParticleSystem
-      objectReference: {fileID: 0}
     - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: healthBarUIScript
       value: 
       objectReference: {fileID: 7589550}
-    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: timeInBetweenHeals
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: youDiedMessageAndButton
       value: 
