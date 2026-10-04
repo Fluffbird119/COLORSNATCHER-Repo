@@ -191,7 +191,9 @@ public class PlayerPowerUps : MonoBehaviour
         rageBarUIScript.UpdateRageVisual();
         isRaged = true;
 
-        PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
+        if (!isDashing) {
+            PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
+        }
 
         // turn head and eye and tentacle red
         head.color = Color.red;
@@ -212,10 +214,12 @@ public class PlayerPowerUps : MonoBehaviour
     {
         yield return new WaitForSeconds(rageDuration);
 
-        head.color = Color.white;
-        eye.color = Color.white;
-        attackTentacle.color = Color.white;
-        legTentacles.color = Color.white;
+        if (!isDashing) {
+            head.color = Color.white;
+            eye.color = Color.white;
+            attackTentacle.color = Color.white;
+            legTentacles.color = Color.white;
+        }
         isRaged = false;
 
         tentacleAnim.speed = 2f;

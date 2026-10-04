@@ -45,7 +45,7 @@ public class DialogueSystem : MonoBehaviour
 
     void Update()
     {
-        if (isTalking && canAdvance && Input.GetKeyDown(KeyCode.Space))
+        if (isTalking && ((canAdvance && Input.GetKeyDown(KeyCode.Space)) || Input.GetKey(KeyCode.V)))
         {
             if (isTyping)
                 SkipTyping();
