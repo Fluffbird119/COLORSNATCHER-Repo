@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement Instance { get; private set; }
 
     [Header("Player Stuff")]
-    [SerializeField] private float speed;
+    public float speed;
     [SerializeField] private Rigidbody2D rb;
 
     [Header("Animation Stuff")]

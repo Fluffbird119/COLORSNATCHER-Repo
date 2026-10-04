@@ -1,23 +1,22 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DashBarUI : MonoBehaviour
 {
-    [SerializeField] PlayerPowerUps playerPowerUpsScript;
-
-    private float curCooldown;
+    private float curCooldown1;
+    private float curCooldown2;
     private float maxCooldown;
-    public float Width;
-    public float Height;
 
-    [SerializeField] private RectTransform dashBar;
+    [SerializeField] private Image dashBarLeft;
+    [SerializeField] private Image dashBarRight;
 
     public void UpdateDashVisual()
     {
-        curCooldown = playerPowerUpsScript.getDashCurCooldown();
-        maxCooldown = playerPowerUpsScript.getDashMaxCooldown();
+        curCooldown1 = PlayerPowerUps.Instance.getDash1CurCooldown();
+        curCooldown2 = PlayerPowerUps.Instance.getDash2CurCooldown();
+        maxCooldown = PlayerPowerUps.Instance.getDashMaxCooldown();
 
-        float newHeight = (curCooldown / maxCooldown) * Height;
-
-        dashBar.sizeDelta = new Vector2(Width, newHeight);
+        dashBarLeft.fillAmount = curCooldown1 / maxCooldown;
+        dashBarRight.fillAmount = curCooldown2 / maxCooldown;
     }
 }

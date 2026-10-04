@@ -6,22 +6,21 @@ public class PlayerPowerUps : MonoBehaviour
     public static PlayerPowerUps Instance { get; private set; }
 
     [Header("NonPowerUp Variables")]
-    [SerializeField] private Animator tentacleAnim;
+    public Animator tentacleAnim;
     [SerializeField] private Animator EyeAnim;
 
-    [SerializeField] SpriteRenderer head;
-    [SerializeField] SpriteRenderer eye;
-    [SerializeField] SpriteRenderer attackTentacle;
-    [SerializeField] SpriteRenderer legTentacles;
+    public SpriteRenderer head;
+    public SpriteRenderer eye;
+    public SpriteRenderer attackTentacle;
+    public SpriteRenderer legTentacles;
 
     [SerializeField] private GameObject player;
 
     [Header("Rage Variables")]
     #region Rage Variables
+    public bool beatenRed = false; // bool for now cuz lazy can make it better latter
     [SerializeField] GameObject RageBarObject;
     [SerializeField] RageBarUI rageBarUIScript;
-
-    public bool beatenRed = false; // bool for now cuz lazy can make it better latter
 
     private float oldSpeed = 15f;
 
@@ -32,41 +31,42 @@ public class PlayerPowerUps : MonoBehaviour
     #endregion
 
     [Header("Dash Variables")]
-    #region Dash variables
+    #region Dash variables 
+    public bool beatenYellow = false;
     [SerializeField] GameObject DashBarObject;
     [SerializeField] private PlayerMovement movementScript;
     [SerializeField] private DashBarUI dashBarUIScript;
 
-    public bool beatenYellow = false;
-
-    [SerializeField] private float curDashCooldown;
-    [SerializeField] private float maxDashCooldown;
+    [SerializeField] private float curDash1Cooldown;
+    [SerializeField] private float curDash2Cooldown; // right lung dash should be used first before dash1
+    [SerializeField] private float maxIndividualDashCooldown; // max dash cooldown for ONE!!!! DASH
 
     [SerializeField] private float dashMoveSpeed;
     [SerializeField] private float dashDuration;
     // private int numDashes = 0;
-    [SerializeField] private int maxDashes;
     private bool canDash = true;
     private bool canQueueDash = true;
     private bool dashQueued = false;
     private Coroutine currDashRoutine;
     private bool isDashing = false;
+
+    [SerializeField] private GameObject dashParticlePrefab;
+    private ParticleSystem particleSys;
     #endregion
 
     [Header("Vine Attack Variables")]
+    #region Vine Variables
+    public bool beatenGreen;
     [SerializeField] GameObject VineBarObject;
     [SerializeField] GameObject VineBallPrefab;
     [SerializeField] Transform vineBallStartingPoint;
     [SerializeField] private float fireForce = 20f;
 
-    public bool beatenGreen;
-
     [SerializeField] private float curVineCooldown;
     [SerializeField] private float maxVineCooldown;
 
     private VineBarUI vineBarUI;
-    [SerializeField] private GameObject dashParticlePrefab;
-    private ParticleSystem particleSys;
+    #endregion
 
 
     private void Awake()
@@ -135,7 +135,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeDash();
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDashCooldown >= maxDashCooldown / maxDashes)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDash1Cooldown >= maxIndividualDashCooldown)
             {
                 Dash();
             }
@@ -236,9 +236,10 @@ public class PlayerPowerUps : MonoBehaviour
     private void Dash()
     {
         // set cooldown back to zero
-        curDashCooldown -= maxDashCooldown / maxDashes;
+        curDash1Cooldown = curDash2Cooldown;
+        curDash2Cooldown = 0;
 
-        // turn head and eye and tentacle red
+        // turn head and eye and tentacle yellow
         head.color = Color.yellow;
         eye.color = Color.yellow;
         attackTentacle.color = Color.yellow;
@@ -264,18 +265,22 @@ public class PlayerPowerUps : MonoBehaviour
             Debug.Log("Queued Dash");
             dashQueued = true;
         }
-
-
     }
+
     private void RechargeDash()
     {
-        if (curDashCooldown < maxDashCooldown)
+        if (curDash1Cooldown < maxIndividualDashCooldown)
         {
-            curDashCooldown += 1f * Time.deltaTime;
-            curDashCooldown = Mathf.Clamp(curDashCooldown, 0f, maxDashCooldown); // Keep within bound
-
-            dashBarUIScript.UpdateDashVisual();
+            curDash1Cooldown += Time.deltaTime;
+            curDash1Cooldown = Mathf.Clamp(curDash1Cooldown, 0f, maxIndividualDashCooldown);
         }
+        else if (curDash2Cooldown < maxIndividualDashCooldown)
+        {
+            curDash2Cooldown += Time.deltaTime;
+            curDash2Cooldown = Mathf.Clamp(curDash2Cooldown, 0f, maxIndividualDashCooldown);
+        }
+
+        dashBarUIScript.UpdateDashVisual();
     }
 
     private IEnumerator StartDash()
@@ -289,7 +294,7 @@ public class PlayerPowerUps : MonoBehaviour
             PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
             player.layer = 6;
 
-            yield return new WaitForSeconds((dashDuration / maxDashes) - 0.05f);
+            yield return new WaitForSeconds(dashDuration - 0.05f);
 
             canQueueDash = true;
 
@@ -340,14 +345,18 @@ public class PlayerPowerUps : MonoBehaviour
         isDashing = value;
     }
 
-    public float getDashCurCooldown()
+    public float getDash1CurCooldown()
     {
-        return curDashCooldown;
+        return curDash1Cooldown;
     }
-    
+    public float getDash2CurCooldown()
+    {
+        return curDash2Cooldown;
+    }
+
     public float getDashMaxCooldown()
     {
-        return maxDashCooldown;
+        return maxIndividualDashCooldown;
     }
     #endregion
 
@@ -356,7 +365,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (curVineCooldown < maxVineCooldown)
         {
-            curVineCooldown += 1f * Time.deltaTime;
+            curVineCooldown += Time.deltaTime;
             curVineCooldown = Mathf.Clamp(curVineCooldown, 0f, maxVineCooldown);
 
             vineBarUI.UpdateVineVisual();
