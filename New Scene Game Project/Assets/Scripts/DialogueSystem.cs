@@ -84,6 +84,7 @@ public class DialogueSystem : MonoBehaviour
             greenImage.gameObject.SetActive(false);
             greenBox.gameObject.SetActive(false);
             blueImage.gameObject.SetActive(false);
+            blueBox.gameObject.SetActive(false);
         }
         else if (characterName.Equals("none"))
         {
@@ -96,7 +97,7 @@ public class DialogueSystem : MonoBehaviour
             greenImage.gameObject.SetActive(false);
             greenBox.gameObject.SetActive(false);
             blueImage.gameObject.SetActive(false);
-            blueImage.gameObject.SetActive(false);
+            blueBox.gameObject.SetActive(false);
         }
         else if (characterName.Equals("yellow"))
         {
@@ -137,7 +138,7 @@ public class DialogueSystem : MonoBehaviour
             blueImage.gameObject.SetActive(true);
             blueBox.gameObject.SetActive(true);
         }
-            dialoguePanel.SetActive(true);
+        dialoguePanel.SetActive(true);
         ShowLine(currentLines[currentLine]);
         StartCoroutine(EnableAdvance());
     }

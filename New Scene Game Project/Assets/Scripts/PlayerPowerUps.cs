@@ -97,7 +97,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     void Update()
     {
-        if (!isRaged && head.color == Color.red)
+        /*if (!isRaged && head.color == Color.red)
         {
             head.color = Color.white;
             eye.color = Color.white;
@@ -119,6 +119,11 @@ public class PlayerPowerUps : MonoBehaviour
 
             PlayerMovement.Instance.SetSpeed(oldSpeed);
             player.layer = 7;
+        }*/
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            EnemyManager.Instance.DeleteEnemies();
+            GameManager.Instance.killsThisWave = 100;
         }
         if (beatenRed)
         {
