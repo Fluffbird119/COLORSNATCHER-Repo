@@ -25,7 +25,7 @@ public class PlayerPowerUps : MonoBehaviour
     private float oldSpeed = 15f;
 
     [SerializeField] float rage = 0f; 
-    [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup
+    [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup (not true its 15)
     [SerializeField] float rageDuration;
     private bool isRaged = false;
     #endregion
@@ -93,6 +93,8 @@ public class PlayerPowerUps : MonoBehaviour
         VineBarObject.SetActive(false);
 
         particleSys = dashParticlePrefab.GetComponent<ParticleSystem>();
+
+        oldSpeed = PlayerMovement.Instance.GetSpeed();
     }
 
     void Update()
@@ -189,7 +191,6 @@ public class PlayerPowerUps : MonoBehaviour
         rageBarUIScript.UpdateRageVisual();
         isRaged = true;
 
-        oldSpeed = PlayerMovement.Instance.GetSpeed();
         PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
 
         // turn head and eye and tentacle red
@@ -221,7 +222,10 @@ public class PlayerPowerUps : MonoBehaviour
         EyeAnim.speed = 2f;
         PlayerAttack.Instance.addIdleToBlinkET();
 
-        PlayerMovement.Instance.SetSpeed(oldSpeed);
+        if (!isDashing)
+        {
+            PlayerMovement.Instance.SetSpeed(oldSpeed);
+        }
     }
 
     public bool getIsRaged()
