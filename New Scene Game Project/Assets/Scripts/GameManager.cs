@@ -383,6 +383,7 @@ public class GameManager : MonoBehaviour
     private void SpawnEnemies(GameObject prefabToSpawn, int count)
     {
         // float checkRadius = 1.5f;
+        GameObject enemy;
         int maxAttempts = 30;
         for (int i = 0; i < count; i++)
         {
@@ -420,17 +421,18 @@ public class GameManager : MonoBehaviour
             {
                 if (Vector2.Distance(player.transform.position, new Vector2(0, 0)) < minSpawnBounds)
                 {
-                    Instantiate(prefabToSpawn, new Vector2(30 * (int)Random.Range(-1, 2), 30 * (int)Random.Range(-1, 2)), Quaternion.identity);
+                    enemy = Instantiate(prefabToSpawn, new Vector2(30 * (int)Random.Range(-1, 2), 30 * (int)Random.Range(-1, 2)), Quaternion.identity);
                 }
                 else
                 {
-                    Instantiate(prefabToSpawn, new Vector2(0f, 0f), Quaternion.identity);
+                    enemy = Instantiate(prefabToSpawn, new Vector2(0f, 0f), Quaternion.identity);
                 }
             }
             else
             {
-                Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+                enemy = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
             }
+            EnemyManager.Instance.AddEnemy(enemy);
         }
     }
 }

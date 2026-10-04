@@ -45,12 +45,14 @@ public class PlayerHealth : MonoBehaviour
     {
         if (health <= 0)
         {
-            GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+            /*GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
 
             foreach (GameObject enemy in enemyObjects)
             {
                 Destroy(enemy);
-            }
+            }*/
+
+            EnemyManager.Instance.DeleteEnemies();
 
             attackScript.ResumeEye();
 
