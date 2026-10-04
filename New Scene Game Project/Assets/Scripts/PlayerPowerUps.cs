@@ -125,6 +125,14 @@ public class PlayerPowerUps : MonoBehaviour
             EnemyManager.Instance.DeleteEnemies();
             GameManager.Instance.killsThisWave = 100;
         }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            rage = maxRage;
+            rageBarUIScript.UpdateRageVisual();
+            curDash1Cooldown = maxIndividualDashCooldown;
+            curDash2Cooldown = maxIndividualDashCooldown;
+            curVineCooldown = maxVineCooldown;
+        }
         if (beatenRed)
         {
             RageBarObject.SetActive(true);
