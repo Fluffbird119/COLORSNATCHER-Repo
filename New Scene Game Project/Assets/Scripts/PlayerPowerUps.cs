@@ -235,16 +235,6 @@ public class PlayerPowerUps : MonoBehaviour
     #region Lightning Dash PowerUp Methods
     private void Dash()
     {
-        // set cooldown back to zero
-        curDash1Cooldown = curDash2Cooldown;
-        curDash2Cooldown = 0;
-
-        // turn head and eye and tentacle yellow
-        head.color = Color.yellow;
-        eye.color = Color.yellow;
-        attackTentacle.color = Color.yellow;
-        legTentacles.color = Color.yellow;
-
         // set movespeed really high for dashDuration
         if (canDash)
         {
@@ -289,6 +279,16 @@ public class PlayerPowerUps : MonoBehaviour
             if (dashParticlePrefab != null && particleSys != null) {
                 particleSys.Play();
             }
+
+            // set cooldown back to zero
+            curDash1Cooldown = curDash2Cooldown;
+            curDash2Cooldown = 0;
+
+            // turn head and eye and tentacle yellow
+            head.color = Color.yellow;
+            eye.color = Color.yellow;
+            attackTentacle.color = Color.yellow;
+            legTentacles.color = Color.yellow;
 
             dashQueued = false;
             PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
