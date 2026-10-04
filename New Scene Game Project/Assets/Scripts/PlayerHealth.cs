@@ -53,6 +53,7 @@ public class PlayerHealth : MonoBehaviour
             }*/
 
             EnemyManager.Instance.DeleteEnemies();
+            AudioManager.Instance.StopAll();
 
             attackScript.ResumeEye();
 
@@ -106,7 +107,7 @@ public class PlayerHealth : MonoBehaviour
     {
         player.layer = 9;
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.3f);
 
         player.layer = 7;
     }

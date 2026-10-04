@@ -39,7 +39,6 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
-        AudioManager.Instance.ConvoMusic();
         BackgroundManager.Instance.ChangeBackground(0);
         currWaveRoutine = StartCoroutine(WaveOne());
     }
@@ -52,6 +51,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator WaveOne()
     {
+        AudioManager.Instance.ConvoMusic();
         waveNumber = 1;
         StartCoroutine(DialogueSystem.instance.StartCutscene(1));
         while (DialogueSystem.instance.isCutscenePlaying)
@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        Debug.Log("Wave Two Check");
         currWaveRoutine = StartCoroutine(WaveThree());
     }
 
@@ -97,7 +96,6 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         killsThisWave = 0;
-        Debug.Log("Wave Three Check");
         CreateWave();
         AudioManager.Instance.RedMusic();
         while (killsThisWave < waveCount[2])
@@ -321,7 +319,6 @@ public class GameManager : MonoBehaviour
     public void CreateWave()
     {
         PlayerHealth.Instance.ChangeHealth(1, 0.3f);
-        Debug.Log("starting wave");
         if (waveNumber == 1)
         {
             SpawnEnemies(enemyPrefab, 10);
@@ -432,7 +429,9 @@ public class GameManager : MonoBehaviour
             {
                 enemy = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
             }
-            EnemyManager.Instance.AddEnemy(enemy);
+            if (enemy != null) {
+                EnemyManager.Instance.AddEnemy(enemy);
+            }
         }
     }
 }

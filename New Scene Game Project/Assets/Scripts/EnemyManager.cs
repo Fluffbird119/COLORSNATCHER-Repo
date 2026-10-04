@@ -1,10 +1,12 @@
+using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
-    private GameObject[] enemies;
+    private List<GameObject> enemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -18,7 +20,7 @@ public class EnemyManager : MonoBehaviour
 
     public void AddEnemy(GameObject enemy)
     {
-        enemies.Append(enemy);
+        enemies.Add(enemy);
     }
 
     public void DeleteEnemies()
@@ -31,6 +33,6 @@ public class EnemyManager : MonoBehaviour
 
     public int NumEnemies()
     {
-        return enemies.Length;
+        return enemies.Count;
     }
 }
