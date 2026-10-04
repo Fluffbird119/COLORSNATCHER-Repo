@@ -52,7 +52,9 @@ public class Bullet : MonoBehaviour
         else if (collision.CompareTag("Player"))
         {
             Destroy(gameObject);
-            PlayerHealth.Instance.ChangeHealth(-damage);
+            if (collision.gameObject.layer != LayerMask.NameToLayer("iframes")) {
+                PlayerHealth.Instance.ChangeHealth(-damage);
+            }
         }
     }
 }

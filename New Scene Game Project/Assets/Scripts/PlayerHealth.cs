@@ -117,6 +117,7 @@ public class PlayerHealth : MonoBehaviour
         ChangeHealth(maxHealth);
         playerTransform.position = new Vector2(0, 0);
         player.SetActive(true);
+        player.layer = 7;
 
         PlayerPowerUps.Instance.head.color = Color.white;
         PlayerPowerUps.Instance.eye.color = Color.white;
