@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager Instance { get; private set; }
-    private List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
 
     private void Awake()
     {
@@ -28,11 +28,24 @@ public class EnemyManager : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             Destroy(enemy);
+            enemies = new List<GameObject>();
         }
     }
 
     public int NumEnemies()
     {
         return enemies.Count;
+    }
+
+    public void RemoveNulls()
+    {
+        enemies.RemoveAll(enemy => !enemy);
+        /*for (int i = enemies.Count - 1; i >= 0; --i)
+        {
+            if (enemies.ElementAt(i) == null)
+            {
+                enemies.RemoveAt(i);
+            }
+        }*/
     }
 }

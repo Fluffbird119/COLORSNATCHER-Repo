@@ -125,7 +125,6 @@ public class PlayerPowerUps : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F))
         {
             EnemyManager.Instance.DeleteEnemies();
-            GameManager.Instance.killsThisWave = 100;
         }
         if (Input.GetKeyDown(KeyCode.R))
         {

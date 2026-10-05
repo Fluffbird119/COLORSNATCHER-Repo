@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject zombiePrefab;
     public GameObject trooperPrefab;
     public GameObject chunkyPrefab;
-    private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20, 15, 15, 30, 10, 20, 30 };
+    //private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20, 15, 15, 30, 10, 20, 30 };
     public float minSpawnBounds = 40f;
     public float maxSpawnBounds = 60f;
     public float arenaMinBoundsX = -70f;
@@ -43,6 +43,11 @@ public class GameManager : MonoBehaviour
         currWaveRoutine = StartCoroutine(WaveOne());
     }
 
+    void Update()
+    {
+        EnemyManager.Instance.RemoveNulls();
+    }
+
     public void StopCurrWaveRoutine()
     {
         StopCoroutine(currWaveRoutine);
@@ -61,7 +66,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         AudioManager.Instance.RedMusic();
         CreateWave();
-        while (killsThisWave < waveCount[0])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -79,7 +84,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.RedMusic();
-        while (killsThisWave < waveCount[1])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -98,7 +103,12 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.RedMusic();
-        while (killsThisWave < waveCount[2])
+        while (EnemyManager.Instance.NumEnemies() > 8)
+        {
+            yield return null;
+        }
+        SpawnEnemies(smallEnemyPrefab, 10);
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -126,7 +136,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
-        while (killsThisWave < waveCount[3])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -146,7 +156,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
-        while (killsThisWave < waveCount[4])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -166,7 +176,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
-        while (killsThisWave < waveCount[5])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -195,7 +205,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
-        while (killsThisWave < waveCount[6])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -215,7 +225,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
-        while (killsThisWave < waveCount[7])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -234,7 +244,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
-        while (killsThisWave < waveCount[8])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -261,7 +271,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
-        while (killsThisWave < waveCount[9])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -281,7 +291,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
-        while (killsThisWave < waveCount[10])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
@@ -301,7 +311,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
-        while (killsThisWave < waveCount[11])
+        while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
         }
