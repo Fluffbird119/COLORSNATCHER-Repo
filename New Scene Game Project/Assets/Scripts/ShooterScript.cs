@@ -254,6 +254,7 @@ public class ShooterScript : MonoBehaviour
             GameManager.Instance.killsThisWave++;
         }
         PlayerPowerUps.Instance.IncreaseRage(1f);
+        EnemyManager.Instance.RemoveEnemy(gameObject);
         Destroy(gameObject);
     }
     private void StunEnemy()

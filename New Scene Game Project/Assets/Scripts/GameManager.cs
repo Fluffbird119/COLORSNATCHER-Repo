@@ -43,11 +43,6 @@ public class GameManager : MonoBehaviour
         currWaveRoutine = StartCoroutine(WaveOne());
     }
 
-    void Update()
-    {
-        EnemyManager.Instance.RemoveNulls();
-    }
-
     public void StopCurrWaveRoutine()
     {
         StopCoroutine(currWaveRoutine);

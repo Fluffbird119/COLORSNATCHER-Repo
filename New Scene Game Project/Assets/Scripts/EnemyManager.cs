@@ -37,15 +37,20 @@ public class EnemyManager : MonoBehaviour
         return enemies.Count;
     }
 
+    public void RemoveEnemy(GameObject enemy)
+    {
+        for (int i = enemies.Count - 1; i >= 0; --i)
+        {
+            if (enemies[i] == enemy)
+            {
+                enemies.RemoveAt(i);
+                return;
+            }
+        }
+    }
+
     public void RemoveNulls()
     {
         enemies.RemoveAll(enemy => !enemy);
-        /*for (int i = enemies.Count - 1; i >= 0; --i)
-        {
-            if (enemies.ElementAt(i) == null)
-            {
-                enemies.RemoveAt(i);
-            }
-        }*/
     }
 }

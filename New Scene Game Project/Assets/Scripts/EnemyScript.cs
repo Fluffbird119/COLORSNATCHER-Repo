@@ -181,6 +181,7 @@ public class EnemyScript : MonoBehaviour
         }
         PlayerPowerUps.Instance.IncreaseRage(1f);
         GameManager.Instance.killsThisWave++;
+        EnemyManager.Instance.RemoveEnemy(gameObject);
         Destroy(gameObject);
     }
 
