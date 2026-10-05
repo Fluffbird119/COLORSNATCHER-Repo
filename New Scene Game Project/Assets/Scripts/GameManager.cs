@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public int waveNumber = 0;
     private Coroutine currWaveRoutine;
     [SerializeField] private Light2D globalLight;
+    private Coroutine lightOscillator;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -313,6 +314,7 @@ public class GameManager : MonoBehaviour
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
         globalLight.intensity = 0.8f;
+        lightOscillator = StartCoroutine(OscillateLight());
         currWaveRoutine = StartCoroutine(WaveTen());
     }
 
@@ -536,6 +538,20 @@ public class GameManager : MonoBehaviour
             if (enemy != null) {
                 EnemyManager.Instance.AddEnemy(enemy);
             }
+        }
+    }
+
+    public IEnumerator OscillateLight()
+    {
+        float startTime = Time.time;
+        while (true)
+        {
+            globalLight.intensity += 0.2f * Mathf.Sin((Time.time - startTime) / 3f);
+            if (globalLight.intensity > 1)
+            {
+                globalLight.intensity = 1;
+            }
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
