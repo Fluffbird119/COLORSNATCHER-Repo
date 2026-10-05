@@ -28,8 +28,8 @@ public class EnemyManager : MonoBehaviour
         foreach (GameObject enemy in enemies)
         {
             Destroy(enemy);
-            enemies = new List<GameObject>();
         }
+        RemoveNulls();
     }
 
     public int NumEnemies()
