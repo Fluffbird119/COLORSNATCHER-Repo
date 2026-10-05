@@ -226,6 +226,11 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
+        while (EnemyManager.Instance.NumEnemies() >  6)
+        {
+            yield return null;
+        }
+        SpawnEnemies(sniperPrefab, 4);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
@@ -246,6 +251,16 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
+        while (EnemyManager.Instance.NumEnemies() >  5)
+        {
+            yield return null;
+        }
+        SpawnEnemies(zombiePrefab, 8);
+        while (EnemyManager.Instance.NumEnemies() >  9)
+        {
+            yield return null;
+        }
+        SpawnEnemies(sniperPrefab, 2);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
@@ -265,6 +280,23 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
+        while (EnemyManager.Instance.NumEnemies() >  20)
+        {
+            yield return null;
+        }
+        SpawnEnemies(sniperPrefab, 10);
+        while (EnemyManager.Instance.NumEnemies() >  20)
+        {
+            yield return null;
+        }
+        SpawnEnemies(zombiePrefab, 10);
+        SpawnEnemies(sniperPrefab, 5);
+        while (EnemyManager.Instance.NumEnemies() >  5)
+        {
+            yield return null;
+        }
+        SpawnEnemies(zombiePrefab, 10);
+        SpawnEnemies(sniperPrefab, 2);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
@@ -292,6 +324,16 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
+        while (EnemyManager.Instance.NumEnemies() >  5)
+        {
+            yield return null;
+        }
+        SpawnEnemies(chunkyPrefab, 4);
+        while (EnemyManager.Instance.NumEnemies() >  6)
+        {
+            yield return null;
+        }
+        SpawnEnemies(trooperPrefab, 5);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
@@ -312,6 +354,16 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
+        while (EnemyManager.Instance.NumEnemies() >  10)
+        {
+            yield return null;
+        }
+        SpawnEnemies(chunkyPrefab, 5);
+        while (EnemyManager.Instance.NumEnemies() > 10)
+        {
+            yield return null;
+        }
+        SpawnEnemies(trooperPrefab, 15);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
@@ -332,6 +384,22 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
+        while (EnemyManager.Instance.NumEnemies() > 8)
+        {
+            yield return null;
+        }
+        SpawnEnemies(trooperPrefab, 5);
+        while (EnemyManager.Instance.NumEnemies() > 10)
+        {
+            yield return null;
+        }
+        SpawnEnemies(trooperPrefab, 8);
+        while (EnemyManager.Instance.NumEnemies() > 15)
+        {
+            yield return null;
+        }
+        SpawnEnemies(chunkyPrefab, 5);
+        SpawnEnemies(trooperPrefab, 10);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
