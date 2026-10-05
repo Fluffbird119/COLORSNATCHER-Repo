@@ -25,11 +25,11 @@ public class EnemyManager : MonoBehaviour
 
     public void DeleteEnemies()
     {
-        foreach (GameObject enemy in enemies)
+        for (int i = enemies.Count - 1; i >= 0; --i)
         {
-            Destroy(enemy);
+            Destroy(enemies[i]);
+            enemies.RemoveAt(i);
         }
-        RemoveNulls();
     }
 
     public int NumEnemies()
