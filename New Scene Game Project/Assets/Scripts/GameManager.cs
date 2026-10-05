@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class GameManager : MonoBehaviour
     public int killsThisWave = 0;
     public int waveNumber = 0;
     private Coroutine currWaveRoutine;
-    [SerializeField] private Light globalLight;
+    [SerializeField] private Light2D globalLight;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         BackgroundManager.Instance.ChangeBackground(0);
+        globalLight.intensity = 0.5f;
         currWaveRoutine = StartCoroutine(WaveOne());
     }
 
@@ -116,7 +118,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPowerUps.Instance.beatenRed = true;
         BackgroundManager.Instance.ChangeBackground(1);
-        
+        globalLight.intensity = 0.9f;
 
         currWaveRoutine = StartCoroutine(WaveFour());
     }
@@ -211,7 +213,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPowerUps.Instance.beatenYellow = true;
         BackgroundManager.Instance.ChangeBackground(2);
-
+        globalLight.intensity = 0.6f;
         currWaveRoutine = StartCoroutine(WaveSeven());
     }
 
@@ -310,6 +312,7 @@ public class GameManager : MonoBehaviour
         }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
+        globalLight.intensity = 0.8f;
         currWaveRoutine = StartCoroutine(WaveTen());
     }
 
