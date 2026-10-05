@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public int killsThisWave = 0;
     public int waveNumber = 0;
     private Coroutine currWaveRoutine;
+    [SerializeField] private Light globalLight;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -115,6 +116,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPowerUps.Instance.beatenRed = true;
         BackgroundManager.Instance.ChangeBackground(1);
+        
 
         currWaveRoutine = StartCoroutine(WaveFour());
     }

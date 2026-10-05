@@ -9,6 +9,8 @@ public class BackgroundManager : MonoBehaviour
     [SerializeField] private Sprite yellowBackground;
     [SerializeField] private Sprite greenBackground;
     [SerializeField] private Sprite blueBackground;
+    [SerializeField] private Material defaultMaterial;
+    [SerializeField] private Material blueBackgroundShader;
 
     private void Awake()
     {
@@ -25,6 +27,7 @@ public class BackgroundManager : MonoBehaviour
 
     public void ChangeBackground(float backgroundNum)
     {
+        spriteRenderer.material = defaultMaterial;
         if (backgroundNum == 0)
         {
             spriteRenderer.sprite = redBackgrond;
@@ -40,6 +43,7 @@ public class BackgroundManager : MonoBehaviour
         else if (backgroundNum == 3)
         {
             spriteRenderer.sprite = blueBackground;
+            spriteRenderer.material = blueBackgroundShader;
         }
     }
 }
