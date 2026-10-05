@@ -131,6 +131,11 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
+        while (EnemyManager.Instance.NumEnemies() >  3)
+        {
+            yield return null;
+        }
+        SpawnEnemies(speedEnemyPrefab, 3);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
@@ -151,6 +156,16 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
+        while (EnemyManager.Instance.NumEnemies() >  8)
+        {
+            yield return null;
+        }
+        SpawnEnemies(speedEnemyPrefab, 3);
+        while (EnemyManager.Instance.NumEnemies() >  2)
+        {
+            yield return null;
+        }
+        SpawnEnemies(speedEnemyPrefab, 3);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
@@ -171,6 +186,17 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
+        while (EnemyManager.Instance.NumEnemies() >  4)
+        {
+            yield return null;
+        }
+        SpawnEnemies(speedEnemyPrefab, 5);
+        SpawnEnemies(shooterPrefab, 5);
+        while (EnemyManager.Instance.NumEnemies() >  2)
+        {
+            yield return null;
+        }
+        SpawnEnemies(speedEnemyPrefab, 3);
         while (EnemyManager.Instance.NumEnemies() > 0)
         {
             yield return null;
