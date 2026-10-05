@@ -126,7 +126,8 @@ public class PlayerHealth : MonoBehaviour
 
         PlayerMovement.Instance.SetSpeed(originalSpeed);
 
-        PlayerPowerUps.Instance.tentacleAnim.speed = 2f;
+        PlayerPowerUps.Instance.tentacleAnim.speed = 1f;
+        PlayerPowerUps.Instance.EyeAnim.speed = 1f;
     }
 
     public void ResetWaveStuff()

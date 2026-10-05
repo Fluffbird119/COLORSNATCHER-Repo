@@ -7,7 +7,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     [Header("NonPowerUp Variables")]
     public Animator tentacleAnim;
-    [SerializeField] private Animator EyeAnim;
+    public Animator EyeAnim;
 
     public SpriteRenderer head;
     public SpriteRenderer eye;
@@ -221,8 +221,8 @@ public class PlayerPowerUps : MonoBehaviour
         }
         isRaged = false;
 
-        tentacleAnim.speed = 2f;
-        EyeAnim.speed = 2f;
+        tentacleAnim.speed = 1f;
+        EyeAnim.speed = 1f;
         PlayerAttack.Instance.addIdleToBlinkET();
 
         if (!isDashing)
