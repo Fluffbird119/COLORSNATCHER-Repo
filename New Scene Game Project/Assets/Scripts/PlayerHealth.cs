@@ -52,6 +52,7 @@ public class PlayerHealth : MonoBehaviour
                 Destroy(enemy);
             }*/
 
+            GameManager.Instance.StopCurrWaveRoutine();
             EnemyManager.Instance.DeleteEnemies();
             AudioManager.Instance.StopAll();
 
@@ -133,7 +134,6 @@ public class PlayerHealth : MonoBehaviour
     public void ResetWaveStuff()
     {
         youDiedMessageAndButton.SetActive(false);
-        GameManager.Instance.StopCurrWaveRoutine();
 
         if (GameManager.Instance.waveNumber == 1)
         {

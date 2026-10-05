@@ -280,12 +280,12 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.GreenMusic();
-        while (EnemyManager.Instance.NumEnemies() >  20)
+        while (EnemyManager.Instance.NumEnemies() >  15)
         {
             yield return null;
         }
         SpawnEnemies(sniperPrefab, 10);
-        while (EnemyManager.Instance.NumEnemies() >  20)
+        while (EnemyManager.Instance.NumEnemies() >  15)
         {
             yield return null;
         }
@@ -384,7 +384,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.BlueMuisc();
-        while (EnemyManager.Instance.NumEnemies() > 8)
+        while (EnemyManager.Instance.NumEnemies() > 10)
         {
             yield return null;
         }
@@ -394,7 +394,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         SpawnEnemies(trooperPrefab, 8);
-        while (EnemyManager.Instance.NumEnemies() > 15)
+        while (EnemyManager.Instance.NumEnemies() > 10)
         {
             yield return null;
         }
@@ -472,7 +472,7 @@ public class GameManager : MonoBehaviour
         else if (waveNumber == 12)
         {
             SpawnEnemies(chunkyPrefab, 15);
-            SpawnEnemies(trooperPrefab, 15);
+            SpawnEnemies(trooperPrefab, 10);
         }
     }
 
