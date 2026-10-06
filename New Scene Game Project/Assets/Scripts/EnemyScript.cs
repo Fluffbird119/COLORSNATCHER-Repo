@@ -154,6 +154,7 @@ public class EnemyScript : MonoBehaviour
         }
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
+        StartCoroutine(HitFlash());
         if (currentHealth <= 0)
         {
             Die();
@@ -163,7 +164,7 @@ public class EnemyScript : MonoBehaviour
     private IEnumerator HitFlash()
     {
         spotLight.pointLightOuterRadius *= 2;
-        spotLight.falloffIntensity += 0.15f;
+        spotLight.falloffIntensity -= 0.15f;
         yield return new WaitForSeconds(0.2f);
         spotLight.pointLightOuterRadius = lightRadius;
         spotLight.falloffIntensity = lightFallOff;

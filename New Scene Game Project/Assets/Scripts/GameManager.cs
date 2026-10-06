@@ -314,7 +314,7 @@ public class GameManager : MonoBehaviour
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
         globalLight.intensity = 1.0f;
-        lightOscillator = StartCoroutine(OscillateLight(0.4f, 1f));
+        lightOscillator = StartCoroutine(OscillateLight(0.4f, 5f));
         currWaveRoutine = StartCoroutine(WaveTen());
     }
 
