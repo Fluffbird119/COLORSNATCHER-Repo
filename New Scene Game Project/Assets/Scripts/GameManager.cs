@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
-        while (EnemyManager.Instance.NumEnemies() >  3)
+        while (EnemyManager.Instance.NumEnemies() >  5)
         {
             yield return null;
         }

@@ -211,11 +211,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1790427902795987779, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
   m_PrefabInstance: {fileID: 408133666}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &150676819 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1474899843245820371, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-  m_PrefabInstance: {fileID: 8358882279293644888}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &166057054
 GameObject:
   m_ObjectHideFlags: 0
@@ -953,17 +948,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &637322291 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8730383698089591140, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-  m_PrefabInstance: {fileID: 8358882279293644888}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &816008451
 GameObject:
   m_ObjectHideFlags: 0
@@ -2771,10 +2755,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: playerLight
-      value: 
-      objectReference: {fileID: 637322291}
-    - target: {fileID: 526807625256543745, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: DashBarObject
       value: 
       objectReference: {fileID: 1686573494}
@@ -2794,18 +2774,6 @@ PrefabInstance:
       propertyPath: rageBarUIScript
       value: 
       objectReference: {fileID: 590160078}
-    - target: {fileID: 963861514724031767, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: tentacleLight
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 963861514724031767, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: tentacleTransform
-      value: 
-      objectReference: {fileID: 150676819}
-    - target: {fileID: 2977864893326969168, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_PointLightOuterRadius
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
@@ -2854,26 +2822,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5027278485358184708, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5232913976402692052, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5232913976402692052, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5232913976402692052, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5232913976402692052, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: healthBarUIScript
       value: 
@@ -2882,17 +2830,8 @@ PrefabInstance:
       propertyPath: youDiedMessageAndButton
       value: 
       objectReference: {fileID: 1207200887}
-    - target: {fileID: 6525035785704692774, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: tentacleLight
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6525035785704692774, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: tentacleTransform
-      value: 
-      objectReference: {fileID: 150676819}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 5027278485358184708, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}

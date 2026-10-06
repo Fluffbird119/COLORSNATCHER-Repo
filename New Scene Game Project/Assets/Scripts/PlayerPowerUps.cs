@@ -16,6 +16,7 @@ public class PlayerPowerUps : MonoBehaviour
     public SpriteRenderer legTentacles;
 
     [SerializeField] private GameObject player;
+    private Rigidbody2D playerRB;
     [SerializeField] private Light2D playerLight;
     private float playerLightRadius;
     private float playerLightFallOff;
@@ -97,6 +98,7 @@ public class PlayerPowerUps : MonoBehaviour
         VineBarObject.SetActive(false);
 
         particleSys = dashParticlePrefab.GetComponent<ParticleSystem>();
+        playerRB = player.GetComponent<Rigidbody2D>();
 
         oldSpeed = PlayerMovement.Instance.GetSpeed();
         playerLightRadius = playerLight.pointLightOuterRadius;
@@ -158,6 +160,14 @@ public class PlayerPowerUps : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDash1Cooldown >= maxIndividualDashCooldown)
             {
                 Dash();
+            }
+            if (isDashing && particleSys.isEmitting && playerRB.linearVelocity.magnitude <= 0.1f)
+            {
+                particleSys.Stop();
+            }
+            else if (isDashing && !particleSys.isEmitting && playerRB.linearVelocity.magnitude >= 0.5f)
+            {
+                particleSys.Play();
             }
         }
 
@@ -230,6 +240,12 @@ public class PlayerPowerUps : MonoBehaviour
             playerLight.color = Color.white;
             playerLight.pointLightOuterRadius = playerLightRadius;
             playerLight.falloffIntensity = playerLightFallOff;
+        }
+        else
+        {
+            // rage ends in the middle of a dash
+            playerLight.pointLightOuterRadius /= 1.2f;
+            playerLight.falloffIntensity += 0.25f;
         }
         isRaged = false;
 
@@ -308,6 +324,11 @@ public class PlayerPowerUps : MonoBehaviour
     private IEnumerator StartDash()
     {
         while (dashQueued) {
+            // set the collider to be a trigger
+            if (isRaged)
+            {
+                // activate dash burst
+            }
             if (dashParticlePrefab != null && particleSys != null) {
                 particleSys.Play();
             }
@@ -367,8 +388,8 @@ public class PlayerPowerUps : MonoBehaviour
             attackTentacle.color = Color.red;
             legTentacles.color = Color.red;
             playerLight.color = Color.red;
-            playerLight.pointLightOuterRadius *= 1.2f;
-            playerLight.falloffIntensity -= 0.25f;
+            playerLight.pointLightOuterRadius /= 1.2f;
+            playerLight.falloffIntensity += 0.25f;
         }
 
         isDashing = false;
