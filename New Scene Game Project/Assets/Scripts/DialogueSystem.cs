@@ -528,7 +528,8 @@ public class DialogueSystem : MonoBehaviour
             "but this feels so good...", "But I have to keep going. What if theres more? More good feelings. Like all of these ones!",
             "I want good feelings! I love good feelings!"}, "player");
             StartDialogue(new string[] { "SLUDGE acquired, press 'E' to splooge",
-                "the gunk is supposed to stun enemies but it's lowkey bugged so use your imagination"}, "none");
+                "the gunk is supposed to stun enemies but it's lowkey bugged so use your imagination",
+                "nvm it's been fixed lol"}, "none");
             while (isTalking)
             {
                 yield return null;
