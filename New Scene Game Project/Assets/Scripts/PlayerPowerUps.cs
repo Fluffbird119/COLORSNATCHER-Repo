@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerPowerUps : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class PlayerPowerUps : MonoBehaviour
     public SpriteRenderer legTentacles;
 
     [SerializeField] private GameObject player;
+    [SerializeField] private Light2D playerLight;
+    private float playerLightRadius;
+    private float playerLightFallOff;
 
     [Header("Rage Variables")]
     #region Rage Variables
@@ -95,6 +99,8 @@ public class PlayerPowerUps : MonoBehaviour
         particleSys = dashParticlePrefab.GetComponent<ParticleSystem>();
 
         oldSpeed = PlayerMovement.Instance.GetSpeed();
+        playerLightRadius = playerLight.pointLightOuterRadius;
+        playerLightFallOff = playerLight.falloffIntensity;
     }
 
     void Update()
@@ -199,6 +205,9 @@ public class PlayerPowerUps : MonoBehaviour
         eye.color = Color.red;
         attackTentacle.color = Color.red;
         legTentacles.color = Color.red;
+        playerLight.color = Color.red;
+        playerLight.pointLightOuterRadius *= 1.2f;
+        playerLight.falloffIntensity -= 0.25f;
 
         // increase animation speed of tentacle and speed of eye to slow down start lag. also just removes start lag now
         tentacleAnim.speed = 3f;
@@ -218,6 +227,9 @@ public class PlayerPowerUps : MonoBehaviour
             eye.color = Color.white;
             attackTentacle.color = Color.white;
             legTentacles.color = Color.white;
+            playerLight.color = Color.white;
+            playerLight.pointLightOuterRadius = playerLightRadius;
+            playerLight.falloffIntensity = playerLightFallOff;
         }
         isRaged = false;
 
@@ -309,6 +321,9 @@ public class PlayerPowerUps : MonoBehaviour
             eye.color = Color.yellow;
             attackTentacle.color = Color.yellow;
             legTentacles.color = Color.yellow;
+            playerLight.color = Color.yellow;
+            playerLight.pointLightOuterRadius *= 1.2f;
+            playerLight.falloffIntensity -= 0.25f;
 
             dashQueued = false;
             PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
@@ -341,6 +356,9 @@ public class PlayerPowerUps : MonoBehaviour
             eye.color = Color.white;
             attackTentacle.color = Color.white;
             legTentacles.color = Color.white;
+            playerLight.color = Color.white;
+            playerLight.pointLightOuterRadius = playerLightRadius;
+            playerLight.falloffIntensity = playerLightFallOff;
         }
         else
         {
@@ -348,6 +366,9 @@ public class PlayerPowerUps : MonoBehaviour
             eye.color = Color.red;
             attackTentacle.color = Color.red;
             legTentacles.color = Color.red;
+            playerLight.color = Color.red;
+            playerLight.pointLightOuterRadius *= 1.2f;
+            playerLight.falloffIntensity -= 0.25f;
         }
 
         isDashing = false;
