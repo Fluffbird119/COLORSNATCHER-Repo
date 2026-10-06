@@ -120,6 +120,7 @@ public class GameManager : MonoBehaviour
         PlayerPowerUps.Instance.beatenRed = true;
         BackgroundManager.Instance.ChangeBackground(1);
         globalLight.intensity = 0.9f;
+        PlayerHealth.Instance.ChangeHealth(1, 1f);
 
         currWaveRoutine = StartCoroutine(WaveFour());
     }
@@ -215,6 +216,8 @@ public class GameManager : MonoBehaviour
         PlayerPowerUps.Instance.beatenYellow = true;
         BackgroundManager.Instance.ChangeBackground(2);
         globalLight.intensity = 0.4f;
+        PlayerHealth.Instance.ChangeHealth(1, 1f);
+
         currWaveRoutine = StartCoroutine(WaveSeven());
     }
 
@@ -315,6 +318,8 @@ public class GameManager : MonoBehaviour
         BackgroundManager.Instance.ChangeBackground(3);
         globalLight.intensity = 1.0f;
         lightOscillator = StartCoroutine(OscillateLight(0.4f, 5f));
+        PlayerHealth.Instance.ChangeHealth(1, 1f);
+        
         currWaveRoutine = StartCoroutine(WaveTen());
     }
 
