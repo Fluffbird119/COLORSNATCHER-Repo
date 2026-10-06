@@ -214,7 +214,7 @@ public class GameManager : MonoBehaviour
 
         PlayerPowerUps.Instance.beatenYellow = true;
         BackgroundManager.Instance.ChangeBackground(2);
-        globalLight.intensity = 0.6f;
+        globalLight.intensity = 0.4f;
         currWaveRoutine = StartCoroutine(WaveSeven());
     }
 
@@ -313,8 +313,8 @@ public class GameManager : MonoBehaviour
         }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
-        globalLight.intensity = 0.8f;
-        lightOscillator = StartCoroutine(OscillateLight());
+        globalLight.intensity = 1.0f;
+        lightOscillator = StartCoroutine(OscillateLight(0.4f, 1f));
         currWaveRoutine = StartCoroutine(WaveTen());
     }
 
@@ -541,12 +541,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator OscillateLight()
+    public IEnumerator OscillateLight(float amplitude, float speed)
     {
         float startTime = Time.time;
+        float startIntensity = globalLight.intensity;
         while (true)
         {
-            globalLight.intensity += 0.2f * Mathf.Sin((Time.time - startTime) / 3f);
+            globalLight.intensity = startIntensity + amplitude * ((Mathf.Sin(speed * (Time.time - startTime) / 10f) - 1) / 2);
             if (globalLight.intensity > 1)
             {
                 globalLight.intensity = 1;

@@ -45,11 +45,11 @@ public class CameraShake : MonoBehaviour
             currentShakeDuration -= Time.deltaTime * dampingSpeed;
             shakeMagnitude -= Time.deltaTime;
         }
-        else
+        else if (isShaking)
         {
             currentOffset = Vector3.zero;
-            isShaking = false;
             ShakeFalloff(shakeMagnitude / 2f);
+            isShaking = false;
         }
 
         transform.localPosition = basePosition + currentOffset;

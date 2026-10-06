@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 public class EnemyScript : MonoBehaviour
@@ -35,6 +36,9 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private SpriteRenderer[] bodyParts;
     [SerializeField] private Animator animator;
     private float animSpeed;
+    [SerializeField] private Light2D spotLight;
+    private float lightRadius;
+    private float lightFallOff;
 
     void Start()
     {
@@ -45,6 +49,8 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         GameObject player = GameObject.FindWithTag("Player");
+        lightRadius = spotLight.pointLightOuterRadius;
+        lightFallOff = spotLight.falloffIntensity;
         if (player != null)
         {
             playerTransform = player.transform;
@@ -152,6 +158,15 @@ public class EnemyScript : MonoBehaviour
         {
             Die();
         }
+    }
+
+    private IEnumerator HitFlash()
+    {
+        spotLight.pointLightOuterRadius *= 2;
+        spotLight.falloffIntensity += 0.15f;
+        yield return new WaitForSeconds(0.2f);
+        spotLight.pointLightOuterRadius = lightRadius;
+        spotLight.falloffIntensity = lightFallOff;
     }
 
     private void SpawnHitParticles()

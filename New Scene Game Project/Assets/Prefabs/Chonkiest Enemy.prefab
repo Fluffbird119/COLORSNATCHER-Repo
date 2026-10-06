@@ -121,6 +121,7 @@ MonoBehaviour:
   bodyParts:
   - {fileID: 792241601117970521}
   animator: {fileID: 2689489989738015194}
+  spotLight: {fileID: 1408754835419252317}
 --- !u!50 &4739332431938524062
 Rigidbody2D:
   serializedVersion: 5

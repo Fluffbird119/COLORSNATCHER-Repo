@@ -270,6 +270,7 @@ MonoBehaviour:
   bodyParts:
   - {fileID: 5984809680287405731}
   animator: {fileID: 412852580384354709}
+  spotLight: {fileID: 4803635965539162015}
 --- !u!60 &-5097661702451804976
 PolygonCollider2D:
   m_ObjectHideFlags: 0
