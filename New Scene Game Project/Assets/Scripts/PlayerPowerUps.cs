@@ -369,9 +369,10 @@ public class PlayerPowerUps : MonoBehaviour
             PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
         }
         else {
-            PlayerMovement.Instance.SetSpeed(oldSpeed); // hard coded value cuz thats just what the player move speed is as of rn
+            PlayerMovement.Instance.SetSpeed(oldSpeed);
         }
 
+        // setting player back to red if raged or back to white if not raged when the dash ends
         if (!isRaged) {
             head.color = Color.white;
             eye.color = Color.white;
@@ -422,7 +423,7 @@ public class PlayerPowerUps : MonoBehaviour
     }
     #endregion
 
-    #region Vine Ball Attack
+    #region Goop Ball Attack
     private void RechargeVine()
     {
         if (curVineCooldown < maxVineCooldown)
