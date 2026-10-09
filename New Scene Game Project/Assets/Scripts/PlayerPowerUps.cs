@@ -15,6 +15,8 @@ public class PlayerPowerUps : MonoBehaviour
     public SpriteRenderer attackTentacle;
     public SpriteRenderer legTentacles;
 
+    private bool isStunned; // grabs the isStunned value from PlayerMovement this variable is only changed in PlayerMovement
+
     [SerializeField] private GameObject player;
     private Rigidbody2D playerRB;
     [SerializeField] private Light2D playerLight;
@@ -107,7 +109,8 @@ public class PlayerPowerUps : MonoBehaviour
 
     void Update()
     {
-        /*if (!isRaged && head.color == Color.red)
+        /*
+        if (!isRaged && head.color == Color.red)
         {
             head.color = Color.white;
             eye.color = Color.white;
@@ -129,7 +132,10 @@ public class PlayerPowerUps : MonoBehaviour
 
             PlayerMovement.Instance.SetSpeed(oldSpeed);
             player.layer = 7;
-        }*/
+        }
+        */
+        // wow look how hard it is to make debug keybinds only in editor derek
+        #if UNITY_EDITOR 
         if (Input.GetKeyDown(KeyCode.F))
         {
             EnemyManager.Instance.DeleteEnemies();
@@ -142,10 +148,14 @@ public class PlayerPowerUps : MonoBehaviour
             curDash2Cooldown = maxIndividualDashCooldown;
             curVineCooldown = maxVineCooldown;
         }
+        #endif
+
+        isStunned = PlayerMovement.Instance.GetIsStunned();
+
         if (beatenRed)
         {
             RageBarObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && rage >= maxRage)
+            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && rage >= maxRage && !isStunned)
             {
                 RagePowerUpEffect();
             }
@@ -157,7 +167,7 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeDash();
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDash1Cooldown >= maxIndividualDashCooldown)
+            if (Input.GetKeyDown(KeyCode.LeftShift) && beatenYellow && curDash1Cooldown >= maxIndividualDashCooldown && !isStunned)
             {
                 Dash();
             }
@@ -177,14 +187,14 @@ public class PlayerPowerUps : MonoBehaviour
 
             RechargeVine();
             
-            if (Input.GetKeyDown(KeyCode.E) && beatenGreen && curVineCooldown >= maxVineCooldown)
+            if (Input.GetKeyDown(KeyCode.E) && beatenGreen && curVineCooldown >= maxVineCooldown && !isStunned)
             {
                 ShootVineBall();
             }
         }
     }
 
-    #region Rage PowerUp Methods
+#region Rage PowerUp Methods
     public void IncreaseRage(float amount)
     {
         if (beatenRed)
@@ -278,9 +288,9 @@ public class PlayerPowerUps : MonoBehaviour
     {
         return maxRage;
     }
-    #endregion
+#endregion
 
-    #region Lightning Dash PowerUp Methods
+#region Lightning Dash PowerUp Methods
     private void Dash()
     {
         // set movespeed really high for dashDuration
@@ -421,9 +431,9 @@ public class PlayerPowerUps : MonoBehaviour
     {
         return maxIndividualDashCooldown;
     }
-    #endregion
+#endregion
 
-    #region Goop Ball Attack
+#region Goop Ball Attack
     private void RechargeVine()
     {
         if (curVineCooldown < maxVineCooldown)
@@ -459,5 +469,5 @@ public class PlayerPowerUps : MonoBehaviour
     {
         return maxVineCooldown;
     }
-    #endregion
+#endregion
 }

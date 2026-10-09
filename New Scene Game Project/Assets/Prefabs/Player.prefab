@@ -490,6 +490,7 @@ GameObject:
   - component: {fileID: 6200498255624669922}
   - component: {fileID: 665813947060500010}
   - component: {fileID: 3981123394845010402}
+  - component: {fileID: 4009340677796879962}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -626,7 +627,7 @@ MonoBehaviour:
   playerTransform: {fileID: 5016473435061172441}
   timeInBetweenHeals: 10
   playerLight: {fileID: 8730383698089591140}
-  health: 0
+  health: 20
   maxHealth: 20
 --- !u!50 &665813947060500010
 Rigidbody2D:
@@ -691,6 +692,22 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.06916094, y: -1.707474}
   m_Radius: 1.75
+--- !u!114 &4009340677796879962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4667962735266773042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62afd7d99a72f01469bab566eb7870f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 5865066669066843291}
+  legs: {fileID: 2501471015635225836}
+  tentecle: {fileID: 5007791665903138126}
+  eye: {fileID: 432235010504193905}
 --- !u!1 &8718035889158067838
 GameObject:
   m_ObjectHideFlags: 0
