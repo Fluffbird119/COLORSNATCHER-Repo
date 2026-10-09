@@ -53,4 +53,9 @@ public class PlayerMovement : MonoBehaviour
     {
         return speed;
     }
+
+    public Vector3 GetPosition()
+    {
+        return rb.position;
+    }
 }

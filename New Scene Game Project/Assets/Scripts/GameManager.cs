@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class GameManager : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class GameManager : MonoBehaviour
     public int killsThisWave = 0;
     public int waveNumber = 0;
     private Coroutine currWaveRoutine;
+    [SerializeField] private Light2D globalLight;
+    private Coroutine lightOscillator;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -40,6 +43,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player");
         BackgroundManager.Instance.ChangeBackground(0);
+        globalLight.intensity = 0.5f;
         currWaveRoutine = StartCoroutine(WaveOne());
     }
 
@@ -115,6 +119,8 @@ public class GameManager : MonoBehaviour
 
         PlayerPowerUps.Instance.beatenRed = true;
         BackgroundManager.Instance.ChangeBackground(1);
+        globalLight.intensity = 0.9f;
+        PlayerHealth.Instance.ChangeHealth(1, 1f);
 
         currWaveRoutine = StartCoroutine(WaveFour());
     }
@@ -131,7 +137,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
-        while (EnemyManager.Instance.NumEnemies() >  3)
+        while (EnemyManager.Instance.NumEnemies() >  5)
         {
             yield return null;
         }
@@ -209,6 +215,8 @@ public class GameManager : MonoBehaviour
 
         PlayerPowerUps.Instance.beatenYellow = true;
         BackgroundManager.Instance.ChangeBackground(2);
+        globalLight.intensity = 0.4f;
+        PlayerHealth.Instance.ChangeHealth(1, 1f);
 
         currWaveRoutine = StartCoroutine(WaveSeven());
     }
@@ -308,6 +316,10 @@ public class GameManager : MonoBehaviour
         }
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
+        globalLight.intensity = 1.0f;
+        lightOscillator = StartCoroutine(OscillateLight(0.4f, 5f));
+        PlayerHealth.Instance.ChangeHealth(1, 1f);
+        
         currWaveRoutine = StartCoroutine(WaveTen());
     }
 
@@ -531,6 +543,21 @@ public class GameManager : MonoBehaviour
             if (enemy != null) {
                 EnemyManager.Instance.AddEnemy(enemy);
             }
+        }
+    }
+
+    public IEnumerator OscillateLight(float amplitude, float speed)
+    {
+        float startTime = Time.time;
+        float startIntensity = globalLight.intensity;
+        while (true)
+        {
+            globalLight.intensity = startIntensity + amplitude * ((Mathf.Sin(speed * (Time.time - startTime) / 10f) - 1) / 2);
+            if (globalLight.intensity > 1)
+            {
+                globalLight.intensity = 1;
+            }
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

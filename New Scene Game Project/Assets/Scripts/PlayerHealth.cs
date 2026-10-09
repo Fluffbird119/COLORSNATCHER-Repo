@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] Transform playerTransform;
 
     [SerializeField] private float timeInBetweenHeals;
+    [SerializeField] private Light2D playerLight;
+    private float playerLightRadius;
+    private float playerLightFallOff;
 
     public float health;
     public float maxHealth;
@@ -34,6 +38,8 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         originalSpeed = PlayerMovement.Instance.GetSpeed();
+        playerLightRadius = playerLight.pointLightOuterRadius;
+        playerLightFallOff = playerLight.falloffIntensity;
 
         youDiedMessageAndButton.SetActive(false);
         ChangeHealth(maxHealth);
@@ -124,6 +130,9 @@ public class PlayerHealth : MonoBehaviour
         PlayerPowerUps.Instance.eye.color = Color.white;
         PlayerPowerUps.Instance.attackTentacle.color = Color.white;
         PlayerPowerUps.Instance.legTentacles.color = Color.white;
+        playerLight.color = Color.white;
+        playerLight.pointLightOuterRadius = playerLightRadius;
+        playerLight.falloffIntensity = playerLightFallOff;
 
         PlayerMovement.Instance.SetSpeed(originalSpeed);
 

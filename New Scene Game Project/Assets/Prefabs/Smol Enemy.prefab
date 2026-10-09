@@ -121,6 +121,8 @@ MonoBehaviour:
   bodyParts:
   - {fileID: 792241601117970521}
   animator: {fileID: 5362711996799352816}
+  spotLight: {fileID: 2231138657826456974}
+  vineColor: {r: 0.047058824, g: 0.7137255, b: 0, a: 1}
 --- !u!50 &4739332431938524062
 Rigidbody2D:
   serializedVersion: 5

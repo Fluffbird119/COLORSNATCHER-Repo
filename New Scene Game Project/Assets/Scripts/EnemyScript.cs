@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.UIElements;
 
 public class EnemyScript : MonoBehaviour
@@ -35,6 +36,11 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private SpriteRenderer[] bodyParts;
     [SerializeField] private Animator animator;
     private float animSpeed;
+    [SerializeField] private Light2D spotLight;
+    private float lightRadius;
+    private float lightFallOff;
+    private Color lightColor;
+    [SerializeField] private Color vineColor;
 
     void Start()
     {
@@ -45,6 +51,9 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         GameObject player = GameObject.FindWithTag("Player");
+        lightRadius = spotLight.pointLightOuterRadius;
+        lightFallOff = spotLight.falloffIntensity;
+        lightColor = spotLight.color;
         if (player != null)
         {
             playerTransform = player.transform;
@@ -148,10 +157,20 @@ public class EnemyScript : MonoBehaviour
         }
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
+        StartCoroutine(HitFlash());
         if (currentHealth <= 0)
         {
             Die();
         }
+    }
+
+    private IEnumerator HitFlash()
+    {
+        spotLight.pointLightOuterRadius *= 1.2f;
+        spotLight.falloffIntensity -= 0.15f;
+        yield return new WaitForSeconds(0.2f);
+        spotLight.pointLightOuterRadius = lightRadius;
+        spotLight.falloffIntensity = lightFallOff;
     }
 
     private void SpawnHitParticles()
@@ -230,6 +249,7 @@ public class EnemyScript : MonoBehaviour
     {
         isStunned = true;
         speed = 0;
+        spotLight.color = vineColor;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.speed = 0;
         foreach (SpriteRenderer renderer in bodyParts)
@@ -243,6 +263,7 @@ public class EnemyScript : MonoBehaviour
         speed = oldSpeed;
         rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         animator.speed = animSpeed;
+        spotLight.color = lightColor;
         foreach (SpriteRenderer renderer in bodyParts)
         {
             renderer.color = Color.white;

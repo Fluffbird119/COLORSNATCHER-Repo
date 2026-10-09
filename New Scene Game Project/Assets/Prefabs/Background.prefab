@@ -105,3 +105,4 @@ MonoBehaviour:
   yellowBackground: {fileID: -73980212845141083, guid: f9e47e2559da4524c874be23088e5213, type: 3}
   greenBackground: {fileID: -4356429235205919767, guid: 9a9cc3fd7b62e324e8220d1e71704e52, type: 3}
   blueBackground: {fileID: -3232298826241634003, guid: c77ffb57fd5efdb438fefbc3c725baa9, type: 3}
+  blueBackgroundShader: {fileID: -876546973899608171, guid: 97cf7adad0f782e4b9e157ed9bf200a9, type: 3}

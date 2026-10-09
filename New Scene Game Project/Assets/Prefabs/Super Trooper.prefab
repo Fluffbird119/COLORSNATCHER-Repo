@@ -270,6 +270,8 @@ MonoBehaviour:
   bodyParts:
   - {fileID: 5984809680287405731}
   animator: {fileID: 412852580384354709}
+  spotLight: {fileID: 4202928430206541905}
+  vineColor: {r: 0.047058824, g: 0.7137255, b: 0, a: 1}
 --- !u!95 &412852580384354709
 Animator:
   serializedVersion: 7
