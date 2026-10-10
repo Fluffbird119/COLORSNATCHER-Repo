@@ -59,7 +59,6 @@ public class PlayerHealth : MonoBehaviour
                 Destroy(enemy);
             }*/
 
-            Debug.Log("this is happening??");
             GameManager.Instance.StopCurrWaveRoutine();
             EnemyManager.Instance.DeleteEnemies();
             AudioManager.Instance.StopAll();

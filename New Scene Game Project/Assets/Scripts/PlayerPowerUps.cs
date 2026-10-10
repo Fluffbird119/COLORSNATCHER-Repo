@@ -35,6 +35,8 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup (not true its 15)
     [SerializeField] float rageDuration;
     private bool isRaged = false;
+
+    private float rageDrainRate;
     #endregion
 
     [Header("Dash Variables")]
@@ -91,6 +93,8 @@ public class PlayerPowerUps : MonoBehaviour
 
     void Start()
     {
+        rageDrainRate = maxRage / rageDuration;
+
         vineBarUI = VineBarObject.GetComponent<VineBarUI>();
 
         rageBarUIScript.UpdateRageVisual();
@@ -192,6 +196,12 @@ public class PlayerPowerUps : MonoBehaviour
                 ShootVineBall();
             }
         }
+
+        if (isRaged)
+        {
+            rage -= rageDrainRate * Time.deltaTime;
+            rageBarUIScript.UpdateRageVisual();
+        }
     }
 
 #region Rage PowerUp Methods
@@ -212,8 +222,6 @@ public class PlayerPowerUps : MonoBehaviour
 
     void RagePowerUpEffect()
     {
-        rage = 0;
-        rageBarUIScript.UpdateRageVisual();
         isRaged = true;
 
         if (!isDashing) {
@@ -235,12 +243,16 @@ public class PlayerPowerUps : MonoBehaviour
         PlayerAttack.Instance.removeIdleToBlinkET();
 
         // wait for duration of buff then turn back to normal
-        StartCoroutine(rageTimer());
+        StartCoroutine(RageTimer());
     }
 
-    private IEnumerator rageTimer()
+    private IEnumerator RageTimer()
     {
-        yield return new WaitForSeconds(rageDuration);
+        yield return new WaitUntil(() => rage <= 0);
+
+        isRaged = false;
+        rage = 0;
+        rageBarUIScript.UpdateRageVisual();
 
         if (!isDashing) {
             head.color = Color.white;
@@ -257,7 +269,6 @@ public class PlayerPowerUps : MonoBehaviour
             playerLight.pointLightOuterRadius /= 1.2f;
             playerLight.falloffIntensity += 0.25f;
         }
-        isRaged = false;
 
         tentacleAnim.speed = 1f;
         EyeAnim.speed = 1f;
