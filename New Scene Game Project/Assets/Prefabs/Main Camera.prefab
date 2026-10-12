@@ -110,7 +110,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -146,6 +146,10 @@ MonoBehaviour:
   player: {fileID: 0}
   smoothTime: 0.3
   offset: {x: 0, y: -3.5, z: -10}
+  leftWall: {fileID: 0}
+  rightWall: {fileID: 0}
+  topWall: {fileID: 0}
+  bottomWall: {fileID: 0}
 --- !u!114 &1094816976451832105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -160,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shakeAxis: 0
   shakeDuration: 0.2
-  shakeMagnitude: 0.3
+  shakeMagnitude: 0
   dampingSpeed: 1
 --- !u!81 &1871028728732835165
 AudioListener:

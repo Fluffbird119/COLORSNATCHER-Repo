@@ -173,6 +173,8 @@ public class ShooterScript : MonoBehaviour
         {
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
+
+            AudioManager.Instance.HitNoise();
         }
         if (collision.CompareTag("VineAOE"))
         {

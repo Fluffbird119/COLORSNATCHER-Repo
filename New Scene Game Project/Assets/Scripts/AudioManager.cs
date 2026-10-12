@@ -5,11 +5,15 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance { get; private set; }
 
-    [SerializeField] AudioSource convoMusic;
-    [SerializeField] AudioSource yellowMusic;
-    [SerializeField] AudioSource blueMusic;
-    [SerializeField] AudioSource redMusic;
-    [SerializeField] AudioSource greenMusic;
+    [Header("Music")]
+    [SerializeField] private AudioSource convoMusic;
+    [SerializeField] private AudioSource yellowMusic;
+    [SerializeField] private AudioSource blueMusic;
+    [SerializeField] private AudioSource redMusic;
+    [SerializeField] private AudioSource greenMusic;
+
+    [Header("SFX")]
+    [SerializeField] private AudioSource tentacleSmack;
 
     private void Awake()
     {
@@ -81,5 +85,10 @@ public class AudioManager : MonoBehaviour
         blueMusic.Play();
         redMusic.Stop();
         greenMusic.Stop();
+    }
+
+    public void HitNoise()
+    {
+        tentacleSmack.PlayOneShot(tentacleSmack.clip);
     }
 }
