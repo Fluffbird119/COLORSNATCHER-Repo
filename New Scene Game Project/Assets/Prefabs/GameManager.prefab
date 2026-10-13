@@ -135,7 +135,7 @@ MonoBehaviour:
   arenaMaxBoundsY: 35
   killsThisWave: 0
   waveNumber: 0
-  globalLightObject: {fileID: 0}
+  globalLight: {fileID: 0}
 --- !u!1 &5542598596054855690
 GameObject:
   m_ObjectHideFlags: 0

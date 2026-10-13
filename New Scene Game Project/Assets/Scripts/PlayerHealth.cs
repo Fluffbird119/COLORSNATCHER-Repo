@@ -24,6 +24,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Awake()
     {
+        health = maxHealth;
+
         // Check if an instance already exists
         if (Instance != null && Instance != this)
         {
@@ -42,8 +44,7 @@ public class PlayerHealth : MonoBehaviour
         playerLightFallOff = playerLight.falloffIntensity;
 
         youDiedMessageAndButton.SetActive(false);
-        ChangeHealth(maxHealth);
-
+        
         StartCoroutine(HealOverTime());
     }
 

@@ -108,6 +108,8 @@ public class EnemyScript : MonoBehaviour
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
             CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Horizontal);
+
+            AudioManager.Instance.HitNoise();
         }
         if (collision.CompareTag("VineAOE"))
         {

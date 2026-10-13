@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 input;
 
+    private bool isStunned = false;
+
     private void Awake()
     {
         // Check if an instance already exists
@@ -28,20 +30,28 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        float moveHorizontal = Input.GetAxisRaw("Horizontal");
-        float moveVertical = Input.GetAxisRaw("Vertical");
-
-        input = new Vector2(moveHorizontal, moveVertical);
-
-        rb.linearVelocity = input.normalized * speed;
-
-        if (rb.linearVelocity.magnitude > 0)
+        if (!isStunned)
         {
-            playerAnimation.SetBool("Player Walking", true);
+            float moveHorizontal = Input.GetAxisRaw("Horizontal");
+            float moveVertical = Input.GetAxisRaw("Vertical");
+
+            input = new Vector2(moveHorizontal, moveVertical);
+
+            rb.linearVelocity = input.normalized * speed;
+
+            if (rb.linearVelocity.magnitude > 0)
+            {
+                playerAnimation.SetBool("Player Walking", true);
+            }
+            else
+            {
+                playerAnimation.SetBool("Player Walking", false);
+            }
         }
         else
         {
-            playerAnimation.SetBool("Player Walking", false);
+            rb.linearVelocity = Vector2.zero;
+            rb.angularVelocity = 0f;
         }
     }
 
@@ -57,5 +67,15 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetPosition()
     {
         return rb.position;
+    }
+
+    public bool GetIsStunned()
+    {
+        return isStunned;
+    }
+
+    public void SetIsStunned(bool state)
+    {
+        isStunned = state;
     }
 }

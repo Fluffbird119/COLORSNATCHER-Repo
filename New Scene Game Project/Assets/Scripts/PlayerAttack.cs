@@ -43,7 +43,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (stateChild.state.name == "Idle")
                 {
-                    Debug.Log("Idle anim found");
+                    //Debug.Log("Idle anim found");
                     idleToBlink = stateChild.state.transitions[0];
                 }
             }

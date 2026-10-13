@@ -45,12 +45,25 @@ public class DialogueSystem : MonoBehaviour
 
     void Update()
     {
-        if (isTalking && ((canAdvance && Input.GetKeyDown(KeyCode.Space)) || Input.GetKey(KeyCode.V)))
+        if (isTalking)
         {
-            if (isTyping)
-                SkipTyping();
-            else
-                NextLine();
+            if (canAdvance && Input.GetKeyDown(KeyCode.Space)) 
+            {
+                if (isTyping)
+                    SkipTyping();
+                else
+                    NextLine();
+            }
+
+            #if UNITY_EDITOR
+            if (canAdvance && Input.GetKey(KeyCode.V))
+            {
+                if (isTyping)
+                    SkipTyping();
+                else
+                    NextLine();
+            }
+            #endif
         }
     }
 
@@ -60,6 +73,9 @@ public class DialogueSystem : MonoBehaviour
         currentLine = 0;
         isTalking = true;
         canAdvance = false;
+
+        PlayerManager.Instance.SetPlayerActive(!isTalking);
+        
         if (characterName.Equals("player"))
         {
             playerImage.gameObject.SetActive(true);
@@ -199,6 +215,9 @@ public class DialogueSystem : MonoBehaviour
         yellowImage.gameObject.SetActive(false);
         greenImage.gameObject.SetActive(false);
         blueImage.gameObject.SetActive(false);
+
+        PlayerManager.Instance.SetPlayerActive(!isTalking);
+
         StartCoroutine(DialogueCooldown());
     }
 
@@ -366,7 +385,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "Yoooo whats goody gang that sounds fun!" }, "yellow");
+            StartDialogue(new string[] { "Yoooo whats goody gang that sounds fun! :D" }, "yellow");
             while (isTalking)
             {
                 yield return null;
@@ -392,7 +411,7 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 6)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] { "Wow! You are really good at this!" }, "yellow");
+            StartDialogue(new string[] { "Wow! You are really good at this! :D" }, "yellow");
             while (isTalking)
             {
                 yield return null;
@@ -407,7 +426,7 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 7)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] { "Today I ate some cookies!" }, "yellow");
+            StartDialogue(new string[] { "Today I ate some cookies! :D" }, "yellow");
             while (isTalking)
             {
                 yield return null;
@@ -422,7 +441,7 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 8)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] { "Wow, that was so much fun! Thanks fren!!!", "Wait, what are you doing?", "Nononono stopstopstopstop",
+            StartDialogue(new string[] { "Wow, that was so much fun! Thanks fren!!! :D", "Wait, what are you doing? D:", "Nononono stopstopstopstop",
             "AAAAAAAAAAAAAAAAAAAA",
             "AAAAAAAAAAAAAAAAAAAAAAAAA",
             "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGH"}, "yellow");
