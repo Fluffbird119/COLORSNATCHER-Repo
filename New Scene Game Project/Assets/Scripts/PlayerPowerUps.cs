@@ -35,8 +35,8 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup (not true its 15)
     [SerializeField] float rageDuration;
     private bool isRaged = false;
-
     private float rageDrainRate;
+    private float rageStache;
     #endregion
 
     [Header("Dash Variables")]
@@ -209,6 +209,10 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (beatenRed)
         {
+            if (isRaged)
+            {
+                rageStache += amount;
+            }
             rage += amount;
 
             if (rage > maxRage)
@@ -251,7 +255,12 @@ public class PlayerPowerUps : MonoBehaviour
         yield return new WaitUntil(() => rage <= 0);
 
         isRaged = false;
-        rage = 0;
+        rage = Mathf.Log(2 * rageStache + 1, 2);
+        if (rage >= maxRage)
+        {
+            rage = maxRage;
+        }
+        rageStache = 0f;
         rageBarUIScript.UpdateRageVisual();
 
         if (!isDashing) {
