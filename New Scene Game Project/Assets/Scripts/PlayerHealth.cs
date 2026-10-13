@@ -166,10 +166,10 @@ public class PlayerHealth : MonoBehaviour
             yield break;
         }
 
-        float duration = 0.5f;
+        float duration = 1f;
         float elapsedTime = 0f;
 
-        bloomOverride.intensity.Override(baseBloomIntensity * 2f);
+        bloomOverride.intensity.Override(baseBloomIntensity * 10f);
         vignetteOverride.intensity.Override(baseVignetteIntensity);
 
         while (elapsedTime < duration)
@@ -177,7 +177,7 @@ public class PlayerHealth : MonoBehaviour
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / duration);
 
-            bloomOverride.intensity.Override(Mathf.Lerp(baseBloomIntensity * 2f, baseBloomIntensity, t));
+            bloomOverride.intensity.Override(Mathf.Lerp(baseBloomIntensity * 10f, baseBloomIntensity, t));
             vignetteOverride.intensity.Override(Mathf.Lerp(baseVignetteIntensity, 0f, t));
             
             yield return null;
