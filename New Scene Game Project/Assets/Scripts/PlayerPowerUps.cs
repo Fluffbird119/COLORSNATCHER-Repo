@@ -209,13 +209,13 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (beatenRed)
         {
+            rage += amount;
+
             if (isRaged)
             {
                 rageStache += amount;
             }
-            rage += amount;
-
-            if (rage > maxRage)
+            else if (rage > maxRage)
             {
                 rage = maxRage;
             }
