@@ -11,7 +11,12 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
     [SerializeField] private GameObject topWall;
     [SerializeField] private GameObject bottomWall;
 
-    private float minX;
+    private float leftWallOffset;
+    private float rightWallOffset;
+    private float topWallOffset;
+    private float bottomWallOffset;
+
+    private float minX; 
     private float maxX;
     private float minY;
     private float maxY;
@@ -22,19 +27,25 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
     {
         mainCam = GetComponent<Camera>();
 
-        float mainCamHeight = mainCam.orthographicSize;
-        float mainCamWidth = mainCamHeight * mainCam.aspect;
-
-        minX = (float)(leftWall.transform.position.x + 0.5) + mainCamWidth; // the .5 offset is cuz objects x and y transform are based on the center so offset by half the length in this case .5
-        maxX = (float)(rightWall.transform.position.x - 0.5) - mainCamWidth;
-        maxY = (float)(topWall.transform.position.y - 0.5) - mainCamHeight;
-        minY = (float)(bottomWall.transform.position.y + 0.5) + mainCamHeight;
+        leftWallOffset = (float)(leftWall.transform.position.x + 0.5);
+        rightWallOffset = (float)(rightWall.transform.position.x - 0.5);
+        topWallOffset = (float)(topWall.transform.position.y - 0.5);
+        bottomWallOffset = (float)(bottomWall.transform.position.y + 0.5);
     }
 
     private Vector3 velocity = Vector3.zero;
 
     private void LateUpdate()
     {
+        float mainCamHeight = mainCam.orthographicSize;
+        float mainCamWidth = mainCamHeight * mainCam.aspect;
+
+        minX = leftWallOffset + mainCamWidth; // the .5 offset is cuz objects x and y transform are based on the center so offset by half the length in this case .5
+        maxX = rightWallOffset - mainCamWidth;
+        maxY = topWallOffset - mainCamHeight;
+        minY = bottomWallOffset + mainCamHeight;
+
+
         // Calculate where the camera wants to go
         Vector3 targetPosition = player.position + offset;
 
