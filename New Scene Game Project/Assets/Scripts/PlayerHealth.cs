@@ -89,7 +89,7 @@ public class PlayerHealth : MonoBehaviour
             PlayerPowerUps.Instance.setIsRaged(false);
             PlayerPowerUps.Instance.setIsDashing(false);
             GameManager.Instance.killsThisWave = 0;
-            player.SetActive(false);
+            PlayerManager.Instance.SetPlayerActive(false);
         }
     }
 
@@ -195,7 +195,7 @@ public class PlayerHealth : MonoBehaviour
     {
         ChangeHealth(maxHealth);
         playerTransform.position = new Vector2(0, 0);
-        player.SetActive(true);
+        PlayerManager.Instance.SetPlayerActive(true);
         player.layer = 7;
         vignetteOverride.intensity.Override(0f);
         bloomOverride.intensity.Override(baseBloomIntensity);
