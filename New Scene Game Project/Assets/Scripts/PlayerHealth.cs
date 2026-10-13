@@ -108,6 +108,7 @@ public class PlayerHealth : MonoBehaviour
                 StopCoroutine(currVigRoutine);
             }
             currVigRoutine = StartCoroutine(HitVignette());
+            AudioManager.Instance.PlayerHitNoise();
             PlayerPowerUps.Instance.IncreaseRage(1f);
         }
 
@@ -136,6 +137,8 @@ public class PlayerHealth : MonoBehaviour
                 StopCoroutine(currVigRoutine);
             }
             currVigRoutine = StartCoroutine(HitVignette());
+            AudioManager.Instance.PlayerHitNoise();
+            PlayerPowerUps.Instance.IncreaseRage(1f);
         }
 
         health += maxHealth * sign * percentage;

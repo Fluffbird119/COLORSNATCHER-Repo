@@ -365,7 +365,6 @@ public class PlayerPowerUps : MonoBehaviour
             legTentacles.color = Color.yellow;
             playerLight.color = Color.yellow;
             playerLight.pointLightOuterRadius *= 1.2f;
-            playerLight.falloffIntensity -= 0.25f;
 
             dashQueued = false;
             PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
@@ -411,7 +410,6 @@ public class PlayerPowerUps : MonoBehaviour
             legTentacles.color = Color.red;
             playerLight.color = Color.red;
             playerLight.pointLightOuterRadius /= 1.2f;
-            playerLight.falloffIntensity += 0.25f;
         }
 
         isDashing = false;
