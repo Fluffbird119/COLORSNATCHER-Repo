@@ -417,6 +417,7 @@ public class PlayerPowerUps : MonoBehaviour
         isDashing = false;
         player.layer = 7;
         particleSys.Stop();
+        currDashRoutine = null;
     }
 
     public bool getIsDashing()

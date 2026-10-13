@@ -629,6 +629,10 @@ MonoBehaviour:
   playerLight: {fileID: 8730383698089591140}
   health: 20
   maxHealth: 20
+  postProccessing: {fileID: 11400000, guid: fdc3cfbfa4522b1429ebb687ac958e78, type: 2}
+  baseBloomIntensity:
+    m_OverrideState: 0
+    m_Value: 0
 --- !u!50 &665813947060500010
 Rigidbody2D:
   serializedVersion: 5
