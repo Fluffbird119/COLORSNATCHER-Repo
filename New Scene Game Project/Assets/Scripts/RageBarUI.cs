@@ -25,7 +25,7 @@ public class RageBarUI : MonoBehaviour
 
         if (rageBar.fillAmount == 1)
         {
-            rageBarHolder.color = new Color(255, 0, 0, 255);
+            rageBarHolder.color = new Color32(255, 0, 0, 255);
         }
         else
         {

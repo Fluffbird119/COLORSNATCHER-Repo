@@ -31,7 +31,7 @@ public class DashBarUI : MonoBehaviour
         // make holder yellow to show that they can dash but theyll also be able to wait and stack up two dashes
         if (dashBarLeft.fillAmount == 1)
         {
-            dashBarHolder.color = new Color(255, 236, 0, 255);
+            dashBarHolder.color = new Color32(255, 236, 0, 255);
         }
         else
         {

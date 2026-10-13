@@ -1824,6 +1824,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1878996469084367724, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1878996469084367724, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_TagString
+      value: BoundaryWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466502080283946856, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2466502080283946856, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_TagString
+      value: BoundaryWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867178082789494535, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2867178082789494535, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_TagString
+      value: BoundaryWall
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134629752029391900, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4134629752029391900, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
+      propertyPath: m_TagString
+      value: BoundaryWall
+      objectReference: {fileID: 0}
     - target: {fileID: 8101401537850049192, guid: 0c625182bd8d2fc46821e3bf77c429b3, type: 3}
       propertyPath: m_Name
       value: Boundary

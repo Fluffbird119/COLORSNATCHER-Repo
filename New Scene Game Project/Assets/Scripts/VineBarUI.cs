@@ -25,7 +25,7 @@ public class VineBarUI : MonoBehaviour
 
         if (vineBar.fillAmount == 1)
         {
-            vineBarHolder.color = new Color(65, 255, 25, 255);
+            vineBarHolder.color = new Color32(65, 255, 25, 255);
         }
         else
         {
