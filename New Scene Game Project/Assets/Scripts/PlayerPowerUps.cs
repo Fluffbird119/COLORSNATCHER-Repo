@@ -159,7 +159,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (beatenRed)
         {
             RageBarObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && rage >= maxRage && !isStunned)
+            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && !isRaged && rage >= maxRage && !isStunned)
             {
                 RagePowerUpEffect();
             }
