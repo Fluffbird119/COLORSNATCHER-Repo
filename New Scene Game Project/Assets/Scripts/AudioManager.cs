@@ -14,6 +14,7 @@ public class AudioManager : MonoBehaviour
 
     [Header("SFX")]
     [SerializeField] private AudioSource tentacleSmack;
+    [SerializeField] private AudioSource playerHit;
 
     private void Awake()
     {
@@ -90,5 +91,10 @@ public class AudioManager : MonoBehaviour
     public void HitNoise()
     {
         tentacleSmack.PlayOneShot(tentacleSmack.clip);
+    }
+
+    public void PlayerHitNoise()
+    {
+        playerHit.PlayOneShot(playerHit.clip);
     }
 }

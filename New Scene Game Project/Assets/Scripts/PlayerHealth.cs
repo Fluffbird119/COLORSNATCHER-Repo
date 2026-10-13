@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -21,6 +22,14 @@ public class PlayerHealth : MonoBehaviour
     public float maxHealth;
 
     private float originalSpeed; // for resetting player values on player death
+    [SerializeField] Volume proccessingVolume;
+    private VolumeProfile postProccessing;
+    private Bloom bloomOverride;
+    [SerializeField] private float baseBloomIntensity;
+    private Vignette vignetteOverride;
+    [SerializeField] private float baseVignetteIntensity;
+    private Coroutine currVigRoutine;
+    private Coroutine curriFrameRoutine;
 
     private void Awake()
     {
@@ -42,9 +51,19 @@ public class PlayerHealth : MonoBehaviour
         originalSpeed = PlayerMovement.Instance.GetSpeed();
         playerLightRadius = playerLight.pointLightOuterRadius;
         playerLightFallOff = playerLight.falloffIntensity;
+        postProccessing = proccessingVolume.profile;
+        if (postProccessing.TryGet(out bloomOverride))
+        {
+           bloomOverride.intensity.overrideState = true;
+        }
+
+        if (postProccessing.TryGet(out vignetteOverride))
+        {
+            vignetteOverride.intensity.overrideState = true;
+            vignetteOverride.intensity.Override(0f); 
+        }
 
         youDiedMessageAndButton.SetActive(false);
-        
         StartCoroutine(HealOverTime());
     }
 
@@ -62,6 +81,7 @@ public class PlayerHealth : MonoBehaviour
             GameManager.Instance.StopCurrWaveRoutine();
             EnemyManager.Instance.DeleteEnemies();
             AudioManager.Instance.StopAll();
+            StopAllCoroutines();
 
             attackScript.ResumeEye();
 
@@ -78,7 +98,17 @@ public class PlayerHealth : MonoBehaviour
     {
         if (amount < 0)
         {
-            StartCoroutine(iFrames());
+            if (curriFrameRoutine != null)
+            {
+                StopCoroutine(curriFrameRoutine);
+            }
+            curriFrameRoutine = StartCoroutine(iFrames());
+            if (currVigRoutine != null)
+            {
+                StopCoroutine(currVigRoutine);
+            }
+            currVigRoutine = StartCoroutine(HitVignette());
+            AudioManager.Instance.PlayerHitNoise();
             PlayerPowerUps.Instance.IncreaseRage(1f);
         }
 
@@ -97,7 +127,18 @@ public class PlayerHealth : MonoBehaviour
     {
         if (sign < 0)
         {
-            StartCoroutine(iFrames());
+            if (curriFrameRoutine != null)
+            {
+                StopCoroutine(curriFrameRoutine);
+            }
+            curriFrameRoutine = StartCoroutine(iFrames());
+            if (currVigRoutine != null)
+            {
+                StopCoroutine(currVigRoutine);
+            }
+            currVigRoutine = StartCoroutine(HitVignette());
+            AudioManager.Instance.PlayerHitNoise();
+            PlayerPowerUps.Instance.IncreaseRage(1f);
         }
 
         health += maxHealth * sign * percentage;
@@ -118,6 +159,36 @@ public class PlayerHealth : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         player.layer = 7;
+        curriFrameRoutine = null;
+    }
+
+    private IEnumerator HitVignette()
+    {
+        if (bloomOverride == null || vignetteOverride == null)
+        {
+            yield break;
+        }
+
+        float duration = 1f;
+        float elapsedTime = 0f;
+
+        bloomOverride.intensity.Override(baseBloomIntensity * 10f);
+        vignetteOverride.intensity.Override(baseVignetteIntensity);
+
+        while (elapsedTime < duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / duration);
+
+            bloomOverride.intensity.Override(Mathf.Lerp(baseBloomIntensity * 10f, baseBloomIntensity, t));
+            vignetteOverride.intensity.Override(Mathf.Lerp(baseVignetteIntensity, 0f, t));
+            
+            yield return null;
+        }
+
+        vignetteOverride.intensity.Override(0f);
+        bloomOverride.intensity.Override(baseBloomIntensity);
+        currVigRoutine = null;
     }
 
     public void ResetPlayerStuff()
@@ -126,6 +197,8 @@ public class PlayerHealth : MonoBehaviour
         playerTransform.position = new Vector2(0, 0);
         player.SetActive(true);
         player.layer = 7;
+        vignetteOverride.intensity.Override(0f);
+        bloomOverride.intensity.Override(baseBloomIntensity);
 
         PlayerPowerUps.Instance.head.color = Color.white;
         PlayerPowerUps.Instance.eye.color = Color.white;

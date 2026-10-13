@@ -35,8 +35,8 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] float maxRage; // kill 20 eneimes to get 20 rage and able to use powerup (not true its 15)
     [SerializeField] float rageDuration;
     private bool isRaged = false;
-
     private float rageDrainRate;
+    private float rageStache;
     #endregion
 
     [Header("Dash Variables")]
@@ -159,7 +159,7 @@ public class PlayerPowerUps : MonoBehaviour
         if (beatenRed)
         {
             RageBarObject.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && rage >= maxRage && !isStunned)
+            if (Input.GetKeyDown(KeyCode.Q) && beatenRed && !isRaged && rage >= maxRage && !isStunned)
             {
                 RagePowerUpEffect();
             }
@@ -211,7 +211,11 @@ public class PlayerPowerUps : MonoBehaviour
         {
             rage += amount;
 
-            if (rage > maxRage)
+            if (isRaged)
+            {
+                rageStache += amount;
+            }
+            else if (rage > maxRage)
             {
                 rage = maxRage;
             }
@@ -251,7 +255,12 @@ public class PlayerPowerUps : MonoBehaviour
         yield return new WaitUntil(() => rage <= 0);
 
         isRaged = false;
-        rage = 0;
+        rage = Mathf.Floor(Mathf.Log(2 * rageStache + 1, 2));
+        if (rage >= maxRage)
+        {
+            rage = maxRage;
+        }
+        rageStache = 0f;
         rageBarUIScript.UpdateRageVisual();
 
         if (!isDashing) {
@@ -365,7 +374,6 @@ public class PlayerPowerUps : MonoBehaviour
             legTentacles.color = Color.yellow;
             playerLight.color = Color.yellow;
             playerLight.pointLightOuterRadius *= 1.2f;
-            playerLight.falloffIntensity -= 0.25f;
 
             dashQueued = false;
             PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
@@ -411,12 +419,12 @@ public class PlayerPowerUps : MonoBehaviour
             legTentacles.color = Color.red;
             playerLight.color = Color.red;
             playerLight.pointLightOuterRadius /= 1.2f;
-            playerLight.falloffIntensity += 0.25f;
         }
 
         isDashing = false;
         player.layer = 7;
         particleSys.Stop();
+        currDashRoutine = null;
     }
 
     public bool getIsDashing()

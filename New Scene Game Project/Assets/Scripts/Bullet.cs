@@ -9,10 +9,13 @@ public class Bullet : MonoBehaviour
     private bool parried = false;
 
     private float damage = 1;
+    private float baseSpeed;
+    [SerializeField] private SpriteRenderer spriteRenderer;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        baseSpeed = rb.linearVelocity.magnitude;
         Destroy(gameObject, lifetime);
     }
 
@@ -31,9 +34,10 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Tentacle") && !parried && PlayerPowerUps.Instance.getIsRaged())
         {
             Transform playerTransform = collision.gameObject.transform.parent;
-            rb.linearVelocity =  playerTransform.rotation * new Vector2(0, 1) * rb.linearVelocity.magnitude;
+            rb.linearVelocity =  playerTransform.rotation * new Vector2(0, 1) * baseSpeed * 1.5f;
             gameObject.transform.position = playerTransform.position + playerTransform.rotation * new Vector2(0, 1) * Vector2.Distance(gameObject.transform.position, playerTransform.position);
             parried = true;
+            spriteRenderer.color = Color.red;
         }
         else if (collision.CompareTag("Enemy") && parried)
         {
@@ -53,8 +57,46 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
             if (collision.gameObject.layer != LayerMask.NameToLayer("iframes")) {
-                PlayerHealth.Instance.ChangeHealth(-damage);
+                if (!parried) {
+                    PlayerHealth.Instance.ChangeHealth(-damage);
+                }
+                else
+                {
+                    PlayerHealth.Instance.ChangeHealth(-1, 100);
+                }
             }
         }
+        else if (collision.CompareTag("VineAOE") && !parried)
+        {
+            SlowBullet();
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("VineAOE") && !parried)
+        {
+            SlowBullet();
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("VineAOE") && !parried)
+        {
+            UnSlowBullet();
+        }
+    }
+
+    private void SlowBullet()
+    {
+        rb.linearVelocity = baseSpeed / 2f * rb.linearVelocity.normalized;
+        spriteRenderer.color = Color.green;
+    }
+
+    private void UnSlowBullet()
+    {
+        rb.linearVelocity = baseSpeed* rb.linearVelocity.normalized;
+        spriteRenderer.color = Color.white;
     }
 }

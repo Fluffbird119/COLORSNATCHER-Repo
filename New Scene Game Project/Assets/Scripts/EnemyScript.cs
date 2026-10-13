@@ -108,8 +108,6 @@ public class EnemyScript : MonoBehaviour
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
             CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Horizontal);
-
-            AudioManager.Instance.HitNoise();
         }
         if (collision.CompareTag("VineAOE"))
         {
@@ -160,6 +158,7 @@ public class EnemyScript : MonoBehaviour
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
         StartCoroutine(HitFlash());
+        AudioManager.Instance.HitNoise();
         if (currentHealth <= 0)
         {
             Die();
@@ -197,6 +196,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (reincarnates && !reincarnated)
         {
+            PlayerPowerUps.Instance.IncreaseRage(0.5f);
             StartCoroutine(Reincarnate());
             return;
         }

@@ -137,7 +137,7 @@ public class GameManager : MonoBehaviour
         killsThisWave = 0;
         CreateWave();
         AudioManager.Instance.YellowMuisc();
-        while (EnemyManager.Instance.NumEnemies() >  5)
+        while (EnemyManager.Instance.NumEnemies() >  7)
         {
             yield return null;
         }
@@ -557,7 +557,7 @@ public class GameManager : MonoBehaviour
             {
                 globalLight.intensity = 1;
             }
-            yield return new WaitForSeconds(0.1f);
+            yield return null;
         }
     }
 }

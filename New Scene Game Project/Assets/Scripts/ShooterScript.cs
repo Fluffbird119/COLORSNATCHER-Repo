@@ -228,6 +228,7 @@ public class ShooterScript : MonoBehaviour
         StartCoroutine(ApplyKnockback(knockbackDirection));
         SpawnHitParticles();
         StartCoroutine(HitFlash());
+        AudioManager.Instance.HitNoise();
         if (currentHealth <= 0)
         {
             Die();
@@ -296,6 +297,8 @@ public class ShooterScript : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.None | RigidbodyConstraints2D.FreezeRotation;
         animator.speed = animSpeed;
         spotLight.color = lightColor;
+        nextFireTime = Time.time + (1f / fireRate);
+        reducedNextFireTime = Time.time + (1f / (fireRate * distanceRateIncrease));
         foreach (SpriteRenderer renderer in bodyParts)
         {
             renderer.color = Color.white;
