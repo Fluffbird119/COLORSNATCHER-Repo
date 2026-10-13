@@ -31,7 +31,7 @@ public class Bullet : MonoBehaviour
         if (collision.CompareTag("Tentacle") && !parried && PlayerPowerUps.Instance.getIsRaged())
         {
             Transform playerTransform = collision.gameObject.transform.parent;
-            rb.linearVelocity =  playerTransform.rotation * new Vector2(0, 1) * rb.linearVelocity.magnitude;
+            rb.linearVelocity =  playerTransform.rotation * new Vector2(0, 1) * rb.linearVelocity.magnitude * 1.5f;
             gameObject.transform.position = playerTransform.position + playerTransform.rotation * new Vector2(0, 1) * Vector2.Distance(gameObject.transform.position, playerTransform.position);
             parried = true;
         }
