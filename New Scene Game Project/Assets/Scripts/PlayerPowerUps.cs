@@ -255,7 +255,7 @@ public class PlayerPowerUps : MonoBehaviour
         yield return new WaitUntil(() => rage <= 0);
 
         isRaged = false;
-        rage = Mathf.Log(2 * rageStache + 1, 2);
+        rage = Mathf.Floor(Mathf.Log(2 * rageStache + 1, 2));
         if (rage >= maxRage)
         {
             rage = maxRage;

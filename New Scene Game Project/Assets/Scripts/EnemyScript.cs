@@ -197,6 +197,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (reincarnates && !reincarnated)
         {
+            PlayerPowerUps.Instance.IncreaseRage(0.5f);
             StartCoroutine(Reincarnate());
             return;
         }
