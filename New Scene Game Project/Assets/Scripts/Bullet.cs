@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour
                 }
                 else
                 {
-                    PlayerHealth.Instance.ChangeHealth(-1, 100);
+                    PlayerHealth.Instance.ChangeHealth(-1, 1);
                 }
             }
         }
