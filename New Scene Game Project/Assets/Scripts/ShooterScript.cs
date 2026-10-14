@@ -29,6 +29,7 @@ public class ShooterScript : MonoBehaviour
     private float nextFireTime = 0f;
     private float reducedNextFireTime = 0f;
     public bool isWalker = false;
+    [SerializeField] private float distanceSpeedMod;
     public bool aimIncreaser = false;
     public float moveSpeed = 2f;
     private float oldSpeed;
@@ -119,8 +120,9 @@ public class ShooterScript : MonoBehaviour
 
     private void MoveTowardsPlayer()
     {
+        float distance = Vector2.Distance(playerTransform.position, transform.position);
         Vector2 direction = (playerTransform.position - transform.position).normalized;
-        rb.linearVelocity = direction * moveSpeed;
+        rb.linearVelocity = direction * moveSpeed * ((distance > 50f) ? distanceSpeedMod : 1f);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }

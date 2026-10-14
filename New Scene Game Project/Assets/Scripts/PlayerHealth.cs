@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float baseVignetteIntensity;
     private Coroutine currVigRoutine;
     private Coroutine curriFrameRoutine;
+    private float timeSinceDamage;
 
     private void Awake()
     {
@@ -110,6 +111,7 @@ public class PlayerHealth : MonoBehaviour
             currVigRoutine = StartCoroutine(HitVignette());
             AudioManager.Instance.PlayerHitNoise();
             PlayerPowerUps.Instance.IncreaseRage(1f);
+            timeSinceDamage = 0f;
         }
 
         health += amount;
@@ -139,6 +141,7 @@ public class PlayerHealth : MonoBehaviour
             currVigRoutine = StartCoroutine(HitVignette());
             AudioManager.Instance.PlayerHitNoise();
             PlayerPowerUps.Instance.IncreaseRage(1f);
+            timeSinceDamage = 0f;
         }
 
         health += maxHealth * sign * percentage;
@@ -273,8 +276,18 @@ public class PlayerHealth : MonoBehaviour
         // yay we love while true loops
         while (true)
         {
-            yield return new WaitForSeconds(timeInBetweenHeals);
-            ChangeHealth(1);
+            timeSinceDamage += Time.deltaTime;
+            if (timeSinceDamage >= 15)
+            {
+                ChangeHealth(2);
+                yield return new WaitForSeconds(1f);
+            }
+            else if (timeSinceDamage >= 10)
+            {
+                ChangeHealth(1);
+                yield return new WaitForSeconds(1f);
+            }
+            yield return null;
         }
     }
 

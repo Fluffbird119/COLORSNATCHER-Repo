@@ -112,7 +112,7 @@ MonoBehaviour:
   knockbackDuration: 1
   rageDamageBuff: 1.5
   proceduralSpeed: 0
-  distanceSpeedMod: 5
+  distanceSpeedMod: 8
   reincarnates: 0
   healthScript: {fileID: 0}
   isStunned: 0
