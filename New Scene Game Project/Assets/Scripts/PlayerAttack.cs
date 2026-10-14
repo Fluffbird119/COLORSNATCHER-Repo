@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Animations;
+//using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
@@ -20,8 +20,6 @@ public class PlayerAttack : MonoBehaviour
     // this collider is turned on during the few frames when tentacle is swinging across screen
     [SerializeField] private PolygonCollider2D tentacleSwipeHitbox;
 
-    private AnimatorController eyeController;
-    private AnimatorStateTransition idleToBlink;
 
     private Sprite curSprite;
     private readonly List<Vector2> physicsShapePath = new();
@@ -35,19 +33,6 @@ public class PlayerAttack : MonoBehaviour
         }
 
         Instance = this;
-
-        eyeController = eyeAnim.runtimeAnimatorController as AnimatorController;
-        foreach (var layer in eyeController.layers)
-        {
-            foreach (var stateChild in layer.stateMachine.states)
-            {
-                if (stateChild.state.name == "Idle")
-                {
-                    //Debug.Log("Idle anim found");
-                    idleToBlink = stateChild.state.transitions[0];
-                }
-            }
-        }
         
         PolygonCollider2D[] colliders = eyeTentacle.GetComponents<PolygonCollider2D>();
 
@@ -91,16 +76,6 @@ public class PlayerAttack : MonoBehaviour
             curSprite.GetPhysicsShape(i, physicsShapePath);
             polygonCollider.SetPath(i, physicsShapePath);
         }
-    }
-
-    public void removeIdleToBlinkET()
-    {
-        idleToBlink.hasExitTime = false;
-    }
-
-    public void addIdleToBlinkET()
-    {
-        idleToBlink.hasExitTime = true;
     }
 
     // the blink eye animation should call this 
