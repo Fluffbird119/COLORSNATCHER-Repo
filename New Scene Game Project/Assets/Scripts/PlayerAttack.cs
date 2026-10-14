@@ -81,9 +81,9 @@ public class PlayerAttack : MonoBehaviour
 
     private void SetRagedBool(bool value)
     {
-        Debug.Log("Setting Rage Bool To " + (value ? "True" : "False"));
+        //Debug.Log("Setting Rage Bool To " + (value ? "True" : "False"));
         tentacleAnim.SetBool("Player Raging", value);
-        Debug.Log("Rage Bool Has Been Set To " + (tentacleAnim.GetBool("Player Raging") ? "True" : "False"));
+        //Debug.Log("Rage Bool Has Been Set To " + (tentacleAnim.GetBool("Player Raging") ? "True" : "False"));
     }
 
 
