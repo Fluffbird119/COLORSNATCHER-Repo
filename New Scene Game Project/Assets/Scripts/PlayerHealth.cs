@@ -79,6 +79,9 @@ public class PlayerHealth : MonoBehaviour
                 Destroy(enemy);
             }*/
 
+            Debug.Log("Ded");
+
+            health = 0;
             GameManager.Instance.StopCurrWaveRoutine();
             EnemyManager.Instance.DeleteEnemies();
             AudioManager.Instance.StopAll();
@@ -90,7 +93,7 @@ public class PlayerHealth : MonoBehaviour
             PlayerPowerUps.Instance.setIsRaged(false);
             PlayerPowerUps.Instance.setIsDashing(false);
             GameManager.Instance.killsThisWave = 0;
-            player.SetActive(false);
+            PlayerManager.Instance.SetPlayerActive(false);
         }
     }
 
@@ -196,8 +199,8 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetPlayerStuff()
     {
-        player.SetActive(true);
         ChangeHealth(maxHealth);
+        PlayerManager.Instance.SetPlayerActive(true);
         playerTransform.position = new Vector2(0, 0);
         player.layer = 7;
         vignetteOverride.intensity.Override(0f);
