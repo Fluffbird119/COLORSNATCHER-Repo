@@ -196,9 +196,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetPlayerStuff()
     {
+        player.SetActive(true);
         ChangeHealth(maxHealth);
         playerTransform.position = new Vector2(0, 0);
-        player.SetActive(true);
         player.layer = 7;
         vignetteOverride.intensity.Override(0f);
         bloomOverride.intensity.Override(baseBloomIntensity);
