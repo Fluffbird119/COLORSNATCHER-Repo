@@ -15,10 +15,12 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private GameObject eyeTentacle;
 
     // this collider is the one that is updated each frame for the tentacle
-    [SerializeField] private PolygonCollider2D polygonCollider;
+    private PolygonCollider2D polygonCollider;
 
     // this collider is turned on during the few frames when tentacle is swinging across screen
-    [SerializeField] private PolygonCollider2D tentacleSwipeHitbox;
+    private PolygonCollider2D tentacleSwipeHitbox;
+
+    private SpriteRenderer tentRenderer;
 
     private AnimatorController eyeController;
     private AnimatorStateTransition idleToBlink;
@@ -56,11 +58,18 @@ public class PlayerAttack : MonoBehaviour
         tentacleSwipeHitbox = colliders[1];
 
         tentacleSwipeHitbox.enabled = false;
+        polygonCollider.enabled = true;
+
+        tentRenderer = eyeTentacle.GetComponent<SpriteRenderer>();
     }
     private void Start()
     {
-        tentacleObject.SetActive(false);
+        //tentacleObject.SetActive(false);
+        tentRenderer.enabled = false;
         tentacleSwipeHitbox.enabled = false;
+        polygonCollider.enabled = false;
+        tentacleSwipeHitbox.enabled = false;
+        polygonCollider.enabled = true;
     }
     void Update()
     {
@@ -74,6 +83,7 @@ public class PlayerAttack : MonoBehaviour
     {
         Debug.Log("Setting Rage Bool To " + (value ? "True" : "False"));
         tentacleAnim.SetBool("Player Raging", value);
+        Debug.Log("Rage Bool Has Been Set To " + (tentacleAnim.GetBool("Player Raging") ? "True" : "False"));
     }
 
 
@@ -114,17 +124,23 @@ public class PlayerAttack : MonoBehaviour
     public void PauseEye()
     {
         eyeAnim.speed = 0;
-        tentacleObject.SetActive(true);
+        //tentacleObject.SetActive(true);
+        tentRenderer.enabled = true;
+        tentacleSwipeHitbox.enabled = false;
+        polygonCollider.enabled = true;
         tentacleAnim.SetTrigger("Tentacle Attack");
     }
 
     // the end of the tentecle animatiion should call this
     public void ResumeEye()
     {
-        tentacleObject.SetActive(false);
+        //tentacleObject.SetActive(false);
+        tentRenderer.enabled = false;
+        tentacleSwipeHitbox.enabled = false;
+        polygonCollider.enabled = false;
         eyeAnim.speed = 2f;
-        AnimatorStateInfo stateInfo = eyeAnim.GetCurrentAnimatorStateInfo(0);
-        eyeAnim.Play(stateInfo.shortNameHash, 0, stateInfo.normalizedTime + 0.1f);
+        /*AnimatorStateInfo stateInfo = eyeAnim.GetCurrentAnimatorStateInfo(0);
+        eyeAnim.Play(stateInfo.shortNameHash, 0, stateInfo.normalizedTime + 0.1f);*/
     }
 
     public void TurnOnSwipeHitbox()
