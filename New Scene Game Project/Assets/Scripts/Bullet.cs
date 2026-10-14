@@ -63,6 +63,7 @@ public class Bullet : MonoBehaviour
                 else
                 {
                     PlayerHealth.Instance.ChangeHealth(-1, 1);
+                    AudioManager.Instance.LaughTrack();
                 }
             }
         }
