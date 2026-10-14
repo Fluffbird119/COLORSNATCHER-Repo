@@ -68,8 +68,6 @@ public class PlayerAttack : MonoBehaviour
         tentRenderer.enabled = false;
         tentacleSwipeHitbox.enabled = false;
         polygonCollider.enabled = false;
-        tentacleSwipeHitbox.enabled = false;
-        polygonCollider.enabled = true;
     }
     void Update()
     {
