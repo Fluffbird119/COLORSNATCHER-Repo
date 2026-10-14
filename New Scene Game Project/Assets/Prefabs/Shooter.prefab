@@ -203,8 +203,8 @@ MonoBehaviour:
   firePoint: {fileID: 3049531179453528255}
   shootingRange: 200
   fireRate: 0.4
-  distanceRateIncrease: 2
-  distanceAccuracyIncrease: 3
+  distanceRateIncrease: 1.5
+  distanceAccuracyIncrease: 2.5
   distanceMovePredict: 0.3
   bulletSpeed: 25
   bulletDamage: 1
@@ -215,6 +215,7 @@ MonoBehaviour:
   knockbackForce: 3
   knockbackDuration: 0.15
   isWalker: 0
+  distanceSpeedMod: 0
   aimIncreaser: 1
   moveSpeed: 2
   isStunned: 0
