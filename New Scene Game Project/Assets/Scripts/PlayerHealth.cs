@@ -88,6 +88,7 @@ public class PlayerHealth : MonoBehaviour
             StopAllCoroutines();
 
             attackScript.ResumeEye();
+            player.layer = 9;
 
             youDiedMessageAndButton.SetActive(true);
             PlayerPowerUps.Instance.setIsRaged(false);
@@ -157,7 +158,7 @@ public class PlayerHealth : MonoBehaviour
         healthBarUIScript.ChangeHealthVisual();
     }
 
-    // i frames for 0.1 seconds after player takes damage
+    // i frames for 0.3 seconds after player takes damage
     private IEnumerator iFrames()
     {
         player.layer = 9;
