@@ -72,12 +72,12 @@ public class PlayerHealth : MonoBehaviour
     {
         if (health <= 0)
         {
-            /*GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 
-            foreach (GameObject enemy in enemyObjects)
+            foreach (GameObject bullet in bullets)
             {
-                Destroy(enemy);
-            }*/
+                Destroy(bullet);
+            }
 
             Debug.Log("Ded");
 
