@@ -15,12 +15,12 @@ public class GameManager : MonoBehaviour
     public GameObject trooperPrefab;
     public GameObject chunkyPrefab;
     //private int[] waveCount = new int[] { 10, 20, 20, 10, 10, 20, 15, 15, 30, 10, 20, 30 };
-    public float minSpawnBounds = 40f;
-    public float maxSpawnBounds = 60f;
-    public float arenaMinBoundsX = -70f;
-    public float arenaMaxBoundsX = 70f;
-    public float arenaMinBoundsY = -55f;
-    public float arenaMaxBoundsY = 35f;
+    public float minSpawnBounds = 55f;
+    public float maxSpawnBounds = 80f;
+    public float arenaMinBoundsX = -72f;
+    public float arenaMaxBoundsX = 72f;
+    public float arenaMinBoundsY = -58f;
+    public float arenaMaxBoundsY = 61f;
     public int killsThisWave = 0;
     public int waveNumber = 0;
     private Coroutine currWaveRoutine;
