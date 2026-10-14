@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
 
@@ -37,6 +38,7 @@ public class PlayerPowerUps : MonoBehaviour
     private bool isRaged = false;
     private float rageDrainRate;
     private float rageStache;
+    public static event Action<bool> RageStateChanged;
     #endregion
 
     [Header("Dash Variables")]
@@ -227,6 +229,7 @@ public class PlayerPowerUps : MonoBehaviour
     void RagePowerUpEffect()
     {
         isRaged = true;
+        RageStateChanged?.Invoke(true);
 
         if (!isDashing) {
             PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
@@ -255,6 +258,7 @@ public class PlayerPowerUps : MonoBehaviour
         yield return new WaitUntil(() => rage <= 0);
 
         isRaged = false;
+        RageStateChanged?.Invoke(false);
         rage = Mathf.Floor(Mathf.Log(2 * rageStache + 1, 2));
         if (rage >= maxRage)
         {
@@ -297,6 +301,7 @@ public class PlayerPowerUps : MonoBehaviour
     public void setIsRaged(bool value)
     {
         isRaged = value;
+        RageStateChanged?.Invoke(value);
     }
 
     public float getRage()

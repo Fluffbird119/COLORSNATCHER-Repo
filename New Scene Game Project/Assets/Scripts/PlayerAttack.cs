@@ -35,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
         Instance = this;
+        PlayerPowerUps.RageStateChanged += SetRagedBool;
 
         eyeController = eyeAnim.runtimeAnimatorController as AnimatorController;
         foreach (var layer in eyeController.layers)
@@ -67,6 +68,12 @@ public class PlayerAttack : MonoBehaviour
         {
             eyeAnim.SetTrigger("Blink Eye");
         }
+    }
+
+    private void SetRagedBool(bool value)
+    {
+        Debug.Log("Setting Rage Bool To " + (value ? "True" : "False"));
+        tentacleAnim.SetBool("Player Raging", value);
     }
 
 
@@ -130,5 +137,10 @@ public class PlayerAttack : MonoBehaviour
     {
         tentacleSwipeHitbox.enabled = false;
         polygonCollider.enabled = true;
+    }
+
+    private void OnDisable()
+    {
+        PlayerPowerUps.RageStateChanged -= SetRagedBool;
     }
 }
