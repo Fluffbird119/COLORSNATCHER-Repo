@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - VineAOE
   - BoundaryWall
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -53,6 +54,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 4241990395
+    locked: 0
+  - name: Bullet
+    uniqueID: 565390763
     locked: 0
   - name: Player
     uniqueID: 4184174423

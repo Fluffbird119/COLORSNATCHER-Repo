@@ -30,6 +30,7 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private float baseVignetteIntensity;
     private Coroutine currVigRoutine;
     private Coroutine curriFrameRoutine;
+    private float timeSinceDamage;
 
     private void Awake()
     {
@@ -71,19 +72,23 @@ public class PlayerHealth : MonoBehaviour
     {
         if (health <= 0)
         {
-            /*GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+            GameObject[] bullets = GameObject.FindGameObjectsWithTag("Bullet");
 
-            foreach (GameObject enemy in enemyObjects)
+            foreach (GameObject bullet in bullets)
             {
-                Destroy(enemy);
-            }*/
+                Destroy(bullet);
+            }
 
+            Debug.Log("Ded");
+
+            health = 0;
             GameManager.Instance.StopCurrWaveRoutine();
             EnemyManager.Instance.DeleteEnemies();
             AudioManager.Instance.StopAll();
             StopAllCoroutines();
 
             attackScript.ResumeEye();
+            player.layer = 9;
 
             youDiedMessageAndButton.SetActive(true);
             PlayerPowerUps.Instance.setIsRaged(false);
@@ -110,6 +115,7 @@ public class PlayerHealth : MonoBehaviour
             currVigRoutine = StartCoroutine(HitVignette());
             AudioManager.Instance.PlayerHitNoise();
             PlayerPowerUps.Instance.IncreaseRage(1f);
+            timeSinceDamage = 0f;
         }
 
         health += amount;
@@ -139,6 +145,7 @@ public class PlayerHealth : MonoBehaviour
             currVigRoutine = StartCoroutine(HitVignette());
             AudioManager.Instance.PlayerHitNoise();
             PlayerPowerUps.Instance.IncreaseRage(1f);
+            timeSinceDamage = 0f;
         }
 
         health += maxHealth * sign * percentage;
@@ -151,7 +158,7 @@ public class PlayerHealth : MonoBehaviour
         healthBarUIScript.ChangeHealthVisual();
     }
 
-    // i frames for 0.1 seconds after player takes damage
+    // i frames for 0.3 seconds after player takes damage
     private IEnumerator iFrames()
     {
         player.layer = 9;
@@ -194,8 +201,8 @@ public class PlayerHealth : MonoBehaviour
     public void ResetPlayerStuff()
     {
         ChangeHealth(maxHealth);
-        playerTransform.position = new Vector2(0, 0);
         PlayerManager.Instance.SetPlayerActive(true);
+        playerTransform.position = new Vector2(0, 0);
         player.layer = 7;
         vignetteOverride.intensity.Override(0f);
         bloomOverride.intensity.Override(baseBloomIntensity);
@@ -273,8 +280,18 @@ public class PlayerHealth : MonoBehaviour
         // yay we love while true loops
         while (true)
         {
-            yield return new WaitForSeconds(timeInBetweenHeals);
-            ChangeHealth(1);
+            timeSinceDamage += Time.deltaTime;
+            if (timeSinceDamage >= 15)
+            {
+                ChangeHealth(2);
+                yield return new WaitForSeconds(1f);
+            }
+            else if (timeSinceDamage >= 10)
+            {
+                ChangeHealth(1);
+                yield return new WaitForSeconds(1f);
+            }
+            yield return null;
         }
     }
 

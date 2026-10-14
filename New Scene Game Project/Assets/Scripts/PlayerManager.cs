@@ -42,4 +42,16 @@ public class PlayerManager : MonoBehaviour
             eye.sortingLayerName = "Default";
         }
     }
+
+    public void SetTentacleActive(bool state)
+    {
+        if (state)
+        {
+            
+        }
+        else
+        {
+            
+        }
+    }
 }

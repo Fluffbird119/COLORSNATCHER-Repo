@@ -74,6 +74,7 @@ public class EnemyScript : MonoBehaviour
                     currentHealth += 1;
                 }
                 speed *= 2f;
+                knockbackForce *= 1.1f;
                 transform.localScale *= 1.25f;
                 lastSpeedBoostTime = Time.time + Random.Range(-0.2f, 0.2f);
                 numSpeedBoosts++;

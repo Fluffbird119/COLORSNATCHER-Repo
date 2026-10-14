@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         {
             Transform playerTransform = collision.gameObject.transform.parent;
             rb.linearVelocity =  playerTransform.rotation * new Vector2(0, 1) * baseSpeed * 1.5f;
-            gameObject.transform.position = playerTransform.position + playerTransform.rotation * new Vector2(0, 1) * Vector2.Distance(gameObject.transform.position, playerTransform.position);
+            gameObject.transform.position = playerTransform.position + playerTransform.rotation * new Vector2(0, 1) * (Vector2.Distance(gameObject.transform.position, playerTransform.position) + 0.1f);
             parried = true;
             spriteRenderer.color = Color.red;
         }
@@ -62,7 +62,8 @@ public class Bullet : MonoBehaviour
                 }
                 else
                 {
-                    PlayerHealth.Instance.ChangeHealth(-1, 100);
+                    PlayerHealth.Instance.ChangeHealth(-1, 1);
+                    AudioManager.Instance.LaughTrack();
                 }
             }
         }
