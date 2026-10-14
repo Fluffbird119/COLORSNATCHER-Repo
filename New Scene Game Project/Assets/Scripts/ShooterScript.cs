@@ -101,7 +101,7 @@ public class ShooterScript : MonoBehaviour
             }
             RotateTowardsPlayer();
 
-            if ((Time.time >= nextFireTime) || (Vector2.Distance(playerTransform.position, transform.position) > 60f && Time.time >= reducedNextFireTime))
+            if ((Time.time >= nextFireTime) || (distance > 60f && Time.time >= reducedNextFireTime))
             {
                 Shoot();
                 nextFireTime = Time.time + (1f / fireRate);
