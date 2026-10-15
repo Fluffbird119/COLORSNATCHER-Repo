@@ -11,6 +11,7 @@ public class Bullet : MonoBehaviour
     private float damage = 1;
     private float baseSpeed;
     [SerializeField] private SpriteRenderer spriteRenderer;
+    private Vector3 playerColliderOffset = new Vector3(0.06916094f, -1.707474f, 0);
 
     void Start()
     {
@@ -35,7 +36,8 @@ public class Bullet : MonoBehaviour
         {
             Transform playerTransform = collision.gameObject.transform.parent;
             rb.linearVelocity =  playerTransform.rotation * new Vector2(0, 1) * baseSpeed * 1.5f;
-            gameObject.transform.position = playerTransform.position + playerTransform.rotation * new Vector2(0, 1) * (Vector2.Distance(gameObject.transform.position, playerTransform.position) + 0.1f);
+            Vector3 playerPos = playerTransform.position + playerColliderOffset;
+            gameObject.transform.position = playerPos + playerTransform.rotation * new Vector2(0, 1) * (Vector2.Distance(gameObject.transform.position, playerPos) + 0.1f);
             parried = true;
             spriteRenderer.color = Color.red;
         }
