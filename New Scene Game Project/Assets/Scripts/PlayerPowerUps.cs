@@ -23,6 +23,7 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] private Light2D playerLight;
     private float playerLightRadius;
     private float playerLightFallOff;
+    private bool cooldownsPaused;
 
     [Header("Rage Variables")]
     #region Rage Variables
@@ -91,6 +92,8 @@ public class PlayerPowerUps : MonoBehaviour
         }
 
         Instance = this;
+
+        DialogueSystem.DialogueStateChange += PauseCooldowns;
     }
 
     void Start()
@@ -199,7 +202,7 @@ public class PlayerPowerUps : MonoBehaviour
             }
         }
 
-        if (isRaged)
+        if (isRaged && !cooldownsPaused)
         {
             rage -= rageDrainRate * Time.deltaTime;
             rageBarUIScript.UpdateRageVisual();
@@ -340,6 +343,11 @@ public class PlayerPowerUps : MonoBehaviour
 
     private void RechargeDash()
     {
+        if (cooldownsPaused)
+        {
+            return;
+        }
+
         if (curDash1Cooldown < maxIndividualDashCooldown)
         {
             curDash1Cooldown += Time.deltaTime * (isRaged ? 1.5f : 1f);
@@ -458,6 +466,11 @@ public class PlayerPowerUps : MonoBehaviour
 #region Goop Ball Attack
     private void RechargeVine()
     {
+        if (cooldownsPaused)
+        {
+            return;
+        }
+        
         if (curVineCooldown < maxVineCooldown)
         {
             curVineCooldown += Time.deltaTime;
@@ -490,6 +503,13 @@ public class PlayerPowerUps : MonoBehaviour
     public float getVineMaxCooldown()
     {
         return maxVineCooldown;
+    }
+#endregion
+
+#region General Methods
+    private void PauseCooldowns(bool state)
+    {
+        cooldownsPaused = state;
     }
 #endregion
 }

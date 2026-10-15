@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -32,6 +33,8 @@ public class DialogueSystem : MonoBehaviour
     public GameObject blueBox;
 
     public bool isCutscenePlaying = false;
+
+    public static event Action<bool> DialogueStateChange;
 
     void Awake()
     {
@@ -234,6 +237,8 @@ public class DialogueSystem : MonoBehaviour
         {
             yield break;
         }
+
+        DialogueStateChange?.Invoke(true);
 
         if (cutsceneNumber == 1)
         {
@@ -693,5 +698,6 @@ public class DialogueSystem : MonoBehaviour
             StartDialogue(new string[] { "It was too late. The colors were long gone.", "The feelings and love had forever faded away." }, "none");
             isCutscenePlaying = false;
         }
+        DialogueStateChange?.Invoke(false);
     }
 }

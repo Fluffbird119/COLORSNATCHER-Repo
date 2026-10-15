@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
-using UnityEngine.UIElements;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -22,6 +22,7 @@ public class EnemyScript : MonoBehaviour
     private float lastSpeedBoostTime = 0f;
     private int numSpeedBoosts = 0;
     [SerializeField] private float distanceSpeedMod = 1f;
+    private float buffDistance = 50f;
     public bool reincarnates = false;
     private bool reincarnated = false;
     private bool isInDeathState = false;
@@ -42,6 +43,8 @@ public class EnemyScript : MonoBehaviour
     private Color lightColor;
     [SerializeField] private Color vineColor;
 
+    public static event Action<GameObject> EnemyDeath;
+
     void Start()
     {
         oldSpeed = speed;
@@ -60,6 +63,8 @@ public class EnemyScript : MonoBehaviour
             playerPowerUpScript = player.GetComponent<PlayerPowerUps>();
         }
         lastSpeedBoostTime = Time.time;
+        buffDistance = CameraSmoothFollowPlayer.centerEdgeDistance;
+        CameraSmoothFollowPlayer.ScreenSizeChange += UpdateBuffDistance;
     }
 
     void FixedUpdate()
@@ -76,7 +81,7 @@ public class EnemyScript : MonoBehaviour
                 speed *= 2f;
                 knockbackForce *= 1.1f;
                 transform.localScale *= 1.25f;
-                lastSpeedBoostTime = Time.time + Random.Range(-0.2f, 0.2f);
+                lastSpeedBoostTime = Time.time + UnityEngine.Random.Range(-0.2f, 0.2f);
                 numSpeedBoosts++;
             }
         }
@@ -94,7 +99,7 @@ public class EnemyScript : MonoBehaviour
                 Vector2 newPosition = Vector2.MoveTowards(
                     rb.position,
                     playerTransform.position,
-                    speed * ((distance > 50f) ? distanceSpeedMod : 1f) * Time.fixedDeltaTime
+                    speed * ((distance > buffDistance) ? distanceSpeedMod : 1f) * Time.fixedDeltaTime
                 );
                 rb.MovePosition(newPosition);
             }
@@ -203,7 +208,8 @@ public class EnemyScript : MonoBehaviour
         }
         PlayerPowerUps.Instance.IncreaseRage(1f);
         GameManager.Instance.killsThisWave++;
-        EnemyManager.Instance.RemoveEnemy(gameObject);
+        EnemyDeath?.Invoke(gameObject);
+        //EnemyManager.Instance.RemoveEnemy(gameObject);
         Destroy(gameObject);
     }
 
@@ -271,5 +277,10 @@ public class EnemyScript : MonoBehaviour
         {
             renderer.color = Color.white;
         }
+    }
+
+    private void UpdateBuffDistance(float centerEdgeDistance)
+    {
+        buffDistance = centerEdgeDistance;
     }
 }

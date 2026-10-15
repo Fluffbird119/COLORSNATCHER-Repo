@@ -30,6 +30,7 @@ public class ShooterScript : MonoBehaviour
     private float reducedNextFireTime = 0f;
     public bool isWalker = false;
     [SerializeField] private float distanceSpeedMod;
+    private float buffDistance;
     public bool aimIncreaser = false;
     public float moveSpeed = 2f;
     private float oldSpeed;
@@ -64,6 +65,8 @@ public class ShooterScript : MonoBehaviour
 
         oldSpeed = moveSpeed;
         animSpeed = animator.speed;
+        buffDistance = CameraSmoothFollowPlayer.centerEdgeDistance + 15f;
+        CameraSmoothFollowPlayer.ScreenSizeChange += UpdateBuffDistance;
     }
 
     void Update()
@@ -101,7 +104,7 @@ public class ShooterScript : MonoBehaviour
             }
             RotateTowardsPlayer();
 
-            if ((Time.time >= nextFireTime) || (distance > 60f && Time.time >= reducedNextFireTime))
+            if ((Time.time >= nextFireTime) || (distance > buffDistance && Time.time >= reducedNextFireTime))
             {
                 Shoot();
                 nextFireTime = Time.time + (1f / fireRate);
@@ -122,7 +125,7 @@ public class ShooterScript : MonoBehaviour
     {
         float distance = Vector2.Distance(playerTransform.position, transform.position);
         Vector2 direction = (playerTransform.position - transform.position).normalized;
-        rb.linearVelocity = direction * moveSpeed * ((distance > 50f) ? distanceSpeedMod : 1f);
+        rb.linearVelocity = direction * moveSpeed * ((distance > buffDistance) ? distanceSpeedMod : 1f);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
@@ -145,9 +148,9 @@ public class ShooterScript : MonoBehaviour
         Vector2 playerPosition = playerTransform.position;
         Vector2 firePointPosition = firePoint.position;
         float distance = Vector2.Distance(playerPosition, firePointPosition);
-        Vector2 fireDirection = (playerPosition + (distance > 60f ? (distanceMovePredict * playerRB.linearVelocity) : new Vector2(0, 0)) - firePointPosition).normalized;
+        Vector2 fireDirection = (playerPosition + (distance > buffDistance ? (distanceMovePredict * playerRB.linearVelocity) : new Vector2(0, 0)) - firePointPosition).normalized;
         float maxSpreadAngle;
-        if (Vector2.Distance(transform.position, playerTransform.position) > 50f)
+        if (Vector2.Distance(transform.position, playerTransform.position) > buffDistance)
         {
             maxSpreadAngle = Mathf.Max(1f - (accuracy * distanceAccuracyIncrease), 0) * 45f;
         }
@@ -305,5 +308,10 @@ public class ShooterScript : MonoBehaviour
         {
             renderer.color = Color.white;
         }
+    }
+
+    private void UpdateBuffDistance(float centerEdgeDistance)
+    {
+        buffDistance = centerEdgeDistance + 15f;
     }
 }

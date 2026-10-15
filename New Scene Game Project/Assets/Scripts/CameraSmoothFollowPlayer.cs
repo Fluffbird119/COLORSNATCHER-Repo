@@ -24,9 +24,9 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
 
     private Camera mainCam;
 
-    public static float centerEdgeDistance;
+    public static float centerEdgeDistance = 0f;
 
-    public static event Action<float> screenSizeChange;
+    public static event Action<float> ScreenSizeChange;
 
     private void Start()
     {
@@ -36,16 +36,6 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
         rightWallOffset = (float)(rightWall.transform.position.x - 0.5);
         topWallOffset = (float)(topWall.transform.position.y - 0.5);
         bottomWallOffset = (float)(bottomWall.transform.position.y + 0.5);
-
-        float mainCamHeight = mainCam.orthographicSize;
-        float mainCamWidth = mainCamHeight * mainCam.aspect;
-        float temp = centerEdgeDistance;
-        centerEdgeDistance = Mathf.Sqrt((mainCamHeight * mainCamHeight) + (mainCamWidth * mainCamWidth));
-        if (Mathf.Abs(temp - centerEdgeDistance) > 0.01)
-        {
-            screenSizeChange?.Invoke(centerEdgeDistance);
-        }
-        //Debug.Log("centerEdgeDistance: " + centerEdgeDistance);
     }
 
     private Vector3 velocity = Vector3.zero;
@@ -59,9 +49,12 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
         maxX = rightWallOffset - mainCamWidth;
         maxY = topWallOffset - mainCamHeight;
         minY = bottomWallOffset + mainCamHeight;
-        float halfHeight = mainCamHeight / 2;
-        float halfWidth = mainCamWidth / 2;
+        float temp = centerEdgeDistance;
         centerEdgeDistance = Mathf.Sqrt((mainCamHeight * mainCamHeight) + (mainCamWidth * mainCamWidth));
+        if (Mathf.Abs(temp - centerEdgeDistance) > 0.01)
+        {
+            ScreenSizeChange?.Invoke(centerEdgeDistance);
+        }
 
 
         // Calculate where the camera wants to go

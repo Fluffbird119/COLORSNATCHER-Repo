@@ -31,6 +31,7 @@ public class PlayerHealth : MonoBehaviour
     private Coroutine currVigRoutine;
     private Coroutine curriFrameRoutine;
     private float timeSinceDamage;
+    private bool healingPaused;
 
     private void Awake()
     {
@@ -281,6 +282,11 @@ public class PlayerHealth : MonoBehaviour
         // yay we love while true loops
         while (true)
         {
+            if (healingPaused)
+            {
+                yield return null;
+            }
+
             timeSinceDamage += Time.deltaTime;
             if (timeSinceDamage >= 15)
             {
@@ -304,5 +310,14 @@ public class PlayerHealth : MonoBehaviour
     public float GetMaxHealth()
     {
         return maxHealth;
+    }
+
+    private void PauseHealing(bool state)
+    {
+        healingPaused = state;
+        if (!state)
+        {
+            timeSinceDamage = 5f;
+        }
     }
 }

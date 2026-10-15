@@ -349,7 +349,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: ac2f8aeab2ca6c344922703dc93c60a1, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1837,6 +1837,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2258093042648269708, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 1230194025}
+    - target: {fileID: 2258093042648269708, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: enemyIndicatorPrefab
+      value: 
+      objectReference: {fileID: 2317295394916316212, guid: 4f4fa072da0789c4da2877f840f17988, type: 3}
     - target: {fileID: 3540514221490154813, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: m_Name
       value: GameManager
