@@ -342,12 +342,12 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (curDash1Cooldown < maxIndividualDashCooldown)
         {
-            curDash1Cooldown += Time.deltaTime;
+            curDash1Cooldown += Time.deltaTime * (isRaged ? 1.5f : 1f);
             curDash1Cooldown = Mathf.Clamp(curDash1Cooldown, 0f, maxIndividualDashCooldown);
         }
         else if (curDash2Cooldown < maxIndividualDashCooldown)
         {
-            curDash2Cooldown += Time.deltaTime;
+            curDash2Cooldown += Time.deltaTime * (isRaged ? 1.5f : 1f);
             curDash2Cooldown = Mathf.Clamp(curDash2Cooldown, 0f, maxIndividualDashCooldown);
         }
 
