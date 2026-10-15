@@ -493,7 +493,7 @@ public class GameManager : MonoBehaviour
         // float checkRadius = 1.5f;
         minSpawnBounds = CameraSmoothFollowPlayer.centerEdgeDistance + 1f;
         maxSpawnBounds = minSpawnBounds + 25f;
-        Debug.Log("Min Spawn Bounds: " + minSpawnBounds);
+        //Debug.Log("Min Spawn Bounds: " + minSpawnBounds);
         GameObject enemy;
         int maxAttempts = 30;
         for (int i = 0; i < count; i++)

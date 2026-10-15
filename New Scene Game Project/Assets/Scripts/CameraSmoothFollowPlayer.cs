@@ -45,7 +45,7 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
         {
             screenSizeChange?.Invoke(centerEdgeDistance);
         }
-        Debug.Log("centerEdgeDistance: " + centerEdgeDistance);
+        //Debug.Log("centerEdgeDistance: " + centerEdgeDistance);
     }
 
     private Vector3 velocity = Vector3.zero;
