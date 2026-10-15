@@ -283,4 +283,9 @@ public class EnemyScript : MonoBehaviour
     {
         buffDistance = centerEdgeDistance;
     }
+
+    void OnDestroy()
+    {
+        CameraSmoothFollowPlayer.ScreenSizeChange -= UpdateBuffDistance;
+    }
 }

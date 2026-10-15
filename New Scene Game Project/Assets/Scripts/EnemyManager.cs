@@ -13,6 +13,7 @@ public class EnemyManager : MonoBehaviour
     private List<GameObject> enemyIndicators = new List<GameObject>();
 
     private Vector3 playerColliderOffset = new Vector3(0.06916094f, -1.707474f, 0);
+    private float centerEdgeDistance;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class EnemyManager : MonoBehaviour
         Instance = this;
 
         EnemyScript.EnemyDeath += RemoveEnemy;
+        centerEdgeDistance = CameraSmoothFollowPlayer.centerEdgeDistance;
+        CameraSmoothFollowPlayer.ScreenSizeChange += UpdateCamSize;
     }
 
     void Update()
@@ -37,11 +40,13 @@ public class EnemyManager : MonoBehaviour
                     enemyIndicators.Add(Instantiate(enemyIndicatorPrefab, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)));
                 }
 
-                Vector3 direction = (enemies[i].transform.position - playerTransform.position).normalized;
-                float angleDegrees = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+                Vector3 direction = enemies[i].transform.position - playerTransform.position;
+                float angleDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-                enemyIndicators[i].transform.rotation = Quaternion.Euler(0, 0, angleDegrees);
-                enemyIndicators[i].transform.position = (direction * 5) + playerTransform.position + playerColliderOffset;
+                if (direction.magnitude < 20) 
+
+                enemyIndicators[i].transform.rotation = Quaternion.Euler(0, 0, angleDegrees - 90f);
+                enemyIndicators[i].transform.position = (direction * 10) + playerTransform.position + playerColliderOffset;
             }
         }
     }
@@ -81,6 +86,7 @@ public class EnemyManager : MonoBehaviour
                     enemyIndicatorsActive = true;
                     if (enemies.Count < 3)
                     {
+                        Destroy(enemyIndicators[i]);
                         enemyIndicators.RemoveAt(i);
                     }
                 }
@@ -92,5 +98,16 @@ public class EnemyManager : MonoBehaviour
     public void RemoveNulls()
     {
         enemies.RemoveAll(enemy => !enemy);
+    }
+
+    private void UpdateCamSize(float newSize)
+    {
+        centerEdgeDistance = newSize;
+    }
+
+    void OnDestroy()
+    {
+        EnemyScript.EnemyDeath -= RemoveEnemy;
+        CameraSmoothFollowPlayer.ScreenSizeChange -= UpdateCamSize;
     }
 }

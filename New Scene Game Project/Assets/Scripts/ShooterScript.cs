@@ -314,4 +314,9 @@ public class ShooterScript : MonoBehaviour
     {
         buffDistance = centerEdgeDistance + 15f;
     }
+
+    void OnDestroy()
+    {
+        CameraSmoothFollowPlayer.ScreenSizeChange -= UpdateBuffDistance;
+    }
 }

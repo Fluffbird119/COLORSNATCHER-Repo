@@ -128,7 +128,7 @@ public class PlayerAttack : MonoBehaviour
         polygonCollider.enabled = true;
     }
 
-    private void OnDisable()
+    void OnDestroy()
     {
         PlayerPowerUps.RageStateChanged -= SetRagedBool;
     }
