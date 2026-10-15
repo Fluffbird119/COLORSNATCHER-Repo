@@ -23,6 +23,8 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
 
     private Camera mainCam;
 
+    public static float centerEdgeDistance;
+
     private void Start()
     {
         mainCam = GetComponent<Camera>();
@@ -44,6 +46,9 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
         maxX = rightWallOffset - mainCamWidth;
         maxY = topWallOffset - mainCamHeight;
         minY = bottomWallOffset + mainCamHeight;
+        float halfHeight = mainCamHeight / 2;
+        float halfWidth = mainCamWidth / 2;
+        centerEdgeDistance = Mathf.Sqrt((halfHeight * halfHeight) + (halfWidth * halfWidth));
 
 
         // Calculate where the camera wants to go

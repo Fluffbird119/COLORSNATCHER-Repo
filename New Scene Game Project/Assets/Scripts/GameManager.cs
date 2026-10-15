@@ -44,6 +44,8 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         BackgroundManager.Instance.ChangeBackground(0);
         globalLight.intensity = 0.5f;
+        minSpawnBounds = CameraSmoothFollowPlayer.centerEdgeDistance;
+        maxSpawnBounds = minSpawnBounds + 25f;
         currWaveRoutine = StartCoroutine(WaveOne());
     }
 
