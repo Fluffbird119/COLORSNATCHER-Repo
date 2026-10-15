@@ -38,7 +38,8 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
         float mainCamWidth = mainCamHeight * mainCam.aspect;
         float halfHeight = mainCamHeight / 2;
         float halfWidth = mainCamWidth / 2;
-        centerEdgeDistance = Mathf.Sqrt((halfHeight * halfHeight) + (halfWidth * halfWidth));
+        centerEdgeDistance = Mathf.Sqrt((mainCamHeight * mainCamHeight) + (mainCamWidth * mainCamWidth));
+        Debug.Log("centerEdgeDistance: " + centerEdgeDistance);
     }
 
     private Vector3 velocity = Vector3.zero;
@@ -54,7 +55,7 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
         minY = bottomWallOffset + mainCamHeight;
         float halfHeight = mainCamHeight / 2;
         float halfWidth = mainCamWidth / 2;
-        centerEdgeDistance = Mathf.Sqrt((halfHeight * halfHeight) + (halfWidth * halfWidth));
+        centerEdgeDistance = Mathf.Sqrt((mainCamHeight * mainCamHeight) + (mainCamWidth * mainCamWidth));
 
 
         // Calculate where the camera wants to go
