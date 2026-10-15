@@ -33,6 +33,12 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
         rightWallOffset = (float)(rightWall.transform.position.x - 0.5);
         topWallOffset = (float)(topWall.transform.position.y - 0.5);
         bottomWallOffset = (float)(bottomWall.transform.position.y + 0.5);
+
+        float mainCamHeight = mainCam.orthographicSize;
+        float mainCamWidth = mainCamHeight * mainCam.aspect;
+        float halfHeight = mainCamHeight / 2;
+        float halfWidth = mainCamWidth / 2;
+        centerEdgeDistance = Mathf.Sqrt((halfHeight * halfHeight) + (halfWidth * halfWidth));
     }
 
     private Vector3 velocity = Vector3.zero;
