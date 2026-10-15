@@ -33,7 +33,7 @@ public class EnemyManager : MonoBehaviour
     {
         if (enemyIndicatorsActive)
         {
-            for (int i = 0; i < enemies.Count; i++)
+            for (int i = 0; i < enemies.Count; ++i)
             {
                 if (enemyIndicators.Count == i)
                 {
@@ -43,10 +43,19 @@ public class EnemyManager : MonoBehaviour
                 Vector3 direction = enemies[i].transform.position - playerTransform.position;
                 float angleDegrees = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-                if (direction.magnitude < 20) 
+                if (direction.magnitude < (centerEdgeDistance / 2f))
+                {
+                    enemyIndicators[i].GetComponent<SpriteRenderer>().enabled = false;
+                }
+                else
+                {
+                    enemyIndicators[i].GetComponent<SpriteRenderer>().enabled = true;
+                }
+
+                direction = direction.normalized;
 
                 enemyIndicators[i].transform.rotation = Quaternion.Euler(0, 0, angleDegrees - 90f);
-                enemyIndicators[i].transform.position = (direction * 10) + playerTransform.position + playerColliderOffset;
+                enemyIndicators[i].transform.position = (direction * 8) + playerTransform.position + playerColliderOffset;
             }
         }
     }
@@ -57,6 +66,10 @@ public class EnemyManager : MonoBehaviour
         if (enemies.Count >= 4)
         {
             enemyIndicatorsActive = false;
+            for (int i = 0; i < enemyIndicators.Count; i++)
+            {
+                enemyIndicators[i].GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
     }
 
@@ -66,6 +79,12 @@ public class EnemyManager : MonoBehaviour
         {
             Destroy(enemies[i]);
             enemies.RemoveAt(i);
+        }
+
+        for (int i = enemyIndicators.Count - 1; i >= 0; --i)
+        {
+            Destroy (enemyIndicators[i]);
+            enemyIndicators.RemoveAt(i);
         }
     }
 
