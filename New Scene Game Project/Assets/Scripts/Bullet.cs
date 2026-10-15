@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEditor.Analytics;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ public class Bullet : MonoBehaviour
     private float baseSpeed;
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Vector3 playerColliderOffset = new Vector3(0.06916094f, -1.707474f, 0);
+    private bool parryImmunityWindow = false;
 
     void Start()
     {
@@ -40,6 +42,7 @@ public class Bullet : MonoBehaviour
             gameObject.transform.position = playerPos + playerTransform.rotation * new Vector2(0, 1) * (Vector2.Distance(gameObject.transform.position, playerPos) + 0.1f);
             parried = true;
             spriteRenderer.color = Color.red;
+            StartCoroutine(RunParryImmunity());
         }
         else if (collision.CompareTag("Enemy") && parried)
         {
@@ -62,7 +65,7 @@ public class Bullet : MonoBehaviour
                 if (!parried) {
                     PlayerHealth.Instance.ChangeHealth(-damage);
                 }
-                else
+                else if (!parryImmunityWindow)
                 {
                     PlayerHealth.Instance.ChangeHealth(-1, 1);
                     AudioManager.Instance.LaughTrack();
@@ -99,7 +102,14 @@ public class Bullet : MonoBehaviour
 
     private void UnSlowBullet()
     {
-        rb.linearVelocity = baseSpeed* rb.linearVelocity.normalized;
+        rb.linearVelocity = baseSpeed * rb.linearVelocity.normalized;
         spriteRenderer.color = Color.white;
+    }
+
+    private IEnumerator RunParryImmunity()
+    {
+        parryImmunityWindow = true;
+        yield return new WaitForSeconds(0.1f);
+        parryImmunityWindow = false;
     }
 }

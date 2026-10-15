@@ -202,6 +202,7 @@ public class PlayerHealth : MonoBehaviour
     {
         ChangeHealth(maxHealth);
         PlayerManager.Instance.SetPlayerActive(true);
+        StartCoroutine(HealOverTime());
         playerTransform.position = new Vector2(0, 0);
         player.layer = 7;
         vignetteOverride.intensity.Override(0f);
