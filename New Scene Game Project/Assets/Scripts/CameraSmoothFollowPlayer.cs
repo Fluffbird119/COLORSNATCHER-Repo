@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class CameraSmoothFollowPlayer : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
 
     public static float centerEdgeDistance;
 
+    public static event Action<float> screenSizeChange;
+
     private void Start()
     {
         mainCam = GetComponent<Camera>();
@@ -36,9 +39,12 @@ public class CameraSmoothFollowPlayer : MonoBehaviour
 
         float mainCamHeight = mainCam.orthographicSize;
         float mainCamWidth = mainCamHeight * mainCam.aspect;
-        float halfHeight = mainCamHeight / 2;
-        float halfWidth = mainCamWidth / 2;
+        float temp = centerEdgeDistance;
         centerEdgeDistance = Mathf.Sqrt((mainCamHeight * mainCamHeight) + (mainCamWidth * mainCamWidth));
+        if (Mathf.Abs(temp - centerEdgeDistance) > 0.01)
+        {
+            screenSizeChange?.Invoke(centerEdgeDistance);
+        }
         Debug.Log("centerEdgeDistance: " + centerEdgeDistance);
     }
 
