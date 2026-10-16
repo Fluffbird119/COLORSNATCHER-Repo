@@ -30,9 +30,9 @@ public class CameraShake : MonoBehaviour
     {
         Vector3 basePosition = transform.localPosition - currentOffset;
 
-        if (currentShakeDuration > 0)
+        if (currentShakeDuration > 0 && shakeMagnitude > 0)
         {
-            float offset = Random.Range(-1f, 1f) * shakeMagnitude * strength * (PlayerPowerUps.Instance.getIsRaged() ? 1.5f : 1f);
+            float offset = Random.Range(-1f, 1f) * shakeMagnitude * strength * (PlayerPowerUps.Instance.getIsRaged() ? 1.2f : 1f);
 
             if (shakeAxis == ShakeAxis.Horizontal)
             {
@@ -44,7 +44,7 @@ public class CameraShake : MonoBehaviour
             }
 
             currentShakeDuration -= Time.deltaTime * dampingSpeed;
-            shakeMagnitude -= Time.deltaTime;
+            shakeMagnitude -= Mathf.Max(1, shakeMagnitude * 2) * Time.deltaTime;
         }
         else if (isShaking)
         {
