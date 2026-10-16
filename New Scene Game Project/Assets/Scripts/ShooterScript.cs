@@ -178,6 +178,7 @@ public class ShooterScript : MonoBehaviour
         {
             Vector2 knockbackDir = (transform.position - collision.transform.position).normalized;
             TakeDamage(1, knockbackDir);
+            CameraShake.Instance.Shake(0.1f, 0.3f, CameraShake.ShakeAxis.Horizontal);
 
             AudioManager.Instance.HitNoise();
         }
@@ -189,7 +190,7 @@ public class ShooterScript : MonoBehaviour
         {
             if (PlayerPowerUps.Instance.getIsRaged()) {
                 TakeDamage(1, new Vector2(0, 0));
-                CameraShake.Instance.Shake(0.2f, 0.3f, CameraShake.ShakeAxis.Horizontal);
+                CameraShake.Instance.Shake(0.2f, 0.5f, CameraShake.ShakeAxis.Horizontal);
             }
         }
     }
