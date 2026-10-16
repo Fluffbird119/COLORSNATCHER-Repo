@@ -258,8 +258,9 @@ MonoBehaviour:
   bulletDamage: 2
   bulletSizeMod: 1
   rageDamageBuff: 1.5
+  stunDamageBuff: 1.2
   accuracy: 0.75
-  maxHealth: 5
+  maxHealth: 7
   knockbackForce: 2
   knockbackDuration: 0.15
   isWalker: 1

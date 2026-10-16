@@ -16,6 +16,7 @@ public class EnemyScript : MonoBehaviour
     public float knockbackDuration = 0.2f;
     private bool isKnockedBack = false;
     public float rageDamageBuff = 1.5f;
+    public float stunDamageBuff = 1.2f;
     public bool proceduralSpeed = false;
     private Transform playerTransform;
     private Rigidbody2D rb;
@@ -161,8 +162,12 @@ public class EnemyScript : MonoBehaviour
             CameraShake.Instance.Shake(0.3f, 0.5f, CameraShake.ShakeAxis.Vertical);
         }
     }
-    public void TakeDamage(int damage, Vector2 knockbackDirection)
+    public void TakeDamage(float damage, Vector2 knockbackDirection)
     {
+        if (isStunned)
+        {
+            damage *= stunDamageBuff;
+        }
         if (PlayerPowerUps.Instance.getIsRaged())
         {
             currentHealth -= damage * rageDamageBuff;
@@ -242,7 +247,7 @@ public class EnemyScript : MonoBehaviour
             animator.speed = animSpeed;
             gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
-            currentHealth = (int)(maxHealth * 1.5f);
+            currentHealth = maxHealth * 1.5f;
             isInDeathState = false;
             rb.bodyType = originalBodyType;
             spriteRenderer.color = originalColor;
@@ -255,7 +260,7 @@ public class EnemyScript : MonoBehaviour
             yield return new WaitForSeconds(5f);
             gameObject.layer = LayerMask.NameToLayer("Default");
             reincarnated = true;
-            currentHealth = (int)(maxHealth * 1.5f);
+            currentHealth = maxHealth * 1.5f;
             isInDeathState = false;
             rb.bodyType = originalBodyType;
             speed *= 2.5f;

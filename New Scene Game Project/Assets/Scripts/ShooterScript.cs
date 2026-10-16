@@ -16,6 +16,7 @@ public class ShooterScript : MonoBehaviour
     [SerializeField] private float bulletDamage;
     [SerializeField] private float bulletSizeMod;
     public float rageDamageBuff = 1.5f;
+    public float stunDamageBuff = 1.2f;
     [Range(0f, 1f)]
     public float accuracy = 0.8f;
     public int maxHealth = 3;
@@ -234,8 +235,12 @@ public class ShooterScript : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damageAmount, Vector2 knockbackDirection)
+    public void TakeDamage(float damageAmount, Vector2 knockbackDirection)
     {
+        if (isStunned)
+        {
+            damageAmount *= stunDamageBuff;
+        }
         if (PlayerPowerUps.Instance.getIsRaged())
         {
             currentHealth -= damageAmount * rageDamageBuff;

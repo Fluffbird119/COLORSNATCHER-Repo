@@ -107,10 +107,11 @@ MonoBehaviour:
   playerPowerUpScript: {fileID: 0}
   speed: 2
   stoppingDistance: 0
-  maxHealth: 8
+  maxHealth: 10
   knockbackForce: 5
   knockbackDuration: 1
   rageDamageBuff: 1.5
+  stunDamageBuff: 1.2
   proceduralSpeed: 0
   distanceSpeedMod: 8
   reincarnates: 0

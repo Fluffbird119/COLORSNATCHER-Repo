@@ -81,7 +81,7 @@ public class PlayerHealth : MonoBehaviour
                 Destroy(bullet);
             }
 
-            Debug.Log("Ded");
+            //Debug.Log("Ded");
 
             health = 0;
             GameManager.Instance.StopCurrWaveRoutine();
