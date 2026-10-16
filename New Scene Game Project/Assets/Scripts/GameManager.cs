@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     private Coroutine currWaveRoutine;
     [SerializeField] private Light2D globalLight;
     private Coroutine lightOscillator;
+    private Color dimLight = new Color(0.8f, 0.8f, 0.8f, 1);
+    private Color darkLight = Color.black;
+    private Color brightLight = Color.white;
 
     public static GameManager Instance { get; private set; }
     private void Awake()
@@ -215,7 +218,8 @@ public class GameManager : MonoBehaviour
 
         PlayerPowerUps.Instance.beatenYellow = true;
         BackgroundManager.Instance.ChangeBackground(2);
-        globalLight.intensity = 0.4f;
+        globalLight.intensity = 0.2f;
+        globalLight.color = dimLight;
         PlayerHealth.Instance.ChangeHealth(1, 1f);
 
         currWaveRoutine = StartCoroutine(WaveSeven());
@@ -317,6 +321,7 @@ public class GameManager : MonoBehaviour
         PlayerPowerUps.Instance.beatenGreen = true;
         BackgroundManager.Instance.ChangeBackground(3);
         globalLight.intensity = 1.0f;
+        globalLight.color = brightLight;
         lightOscillator = StartCoroutine(OscillateLight(0.4f, 5f));
         PlayerHealth.Instance.ChangeHealth(1, 1f);
         

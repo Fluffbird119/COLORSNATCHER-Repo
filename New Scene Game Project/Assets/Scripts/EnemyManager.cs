@@ -103,7 +103,7 @@ public class EnemyManager : MonoBehaviour
                 if (enemies.Count <= 3)
                 {
                     enemyIndicatorsActive = true;
-                    if (enemies.Count < 3)
+                    if (enemies.Count < 3 && i < enemies.Count)
                     {
                         Destroy(enemyIndicators[i]);
                         enemyIndicators.RemoveAt(i);
