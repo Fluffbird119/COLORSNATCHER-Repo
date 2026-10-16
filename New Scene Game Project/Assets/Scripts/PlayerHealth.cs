@@ -46,6 +46,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         Instance = this;
+        DialogueSystem.DialogueStateChange += PauseHealing;
     }
 
     private void Start()
@@ -319,5 +320,10 @@ public class PlayerHealth : MonoBehaviour
         {
             timeSinceDamage = 5f;
         }
+    }
+
+    void OnDestroy()
+    {
+        DialogueSystem.DialogueStateChange -= PauseHealing;
     }
 }
