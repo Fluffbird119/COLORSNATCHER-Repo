@@ -7,6 +7,7 @@ public class VineBallScript : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     private Transform sprite;
     private Rigidbody2D rb;
+    private int hits = 0;
     void Start()
     {
         sprite = transform.GetChild(1);
@@ -22,15 +23,17 @@ public class VineBallScript : MonoBehaviour
         if (collision.CompareTag("Tentacle"))
         {
             rb.linearVelocity *= 1.1f;
+            ++hits;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        GameObject splat = null;
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Vector2 hitPoint = collision.GetContact(0).point;
 
-            Instantiate(vineStunAOEPrefab, hitPoint, Quaternion.identity);
+            splat = Instantiate(vineStunAOEPrefab, hitPoint, Quaternion.identity);
 
             Destroy(gameObject);
         }
@@ -38,9 +41,13 @@ public class VineBallScript : MonoBehaviour
         {
             Vector2 hitPoint = transform.position;
 
-            Instantiate(vineStunAOEPrefab, hitPoint, Quaternion.identity);
+            splat = Instantiate(vineStunAOEPrefab, hitPoint, Quaternion.identity);
 
             Destroy(gameObject);
+        }
+        if (splat != null)
+        {
+            splat.transform.localScale *= 1 + (hits / 5);
         }
     }    
 }
