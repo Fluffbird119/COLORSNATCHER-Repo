@@ -65,7 +65,9 @@ public class PlayerPowerUps : MonoBehaviour
     private bool isDashing = false;
 
     [SerializeField] private GameObject dashParticlePrefab;
+    [SerializeField] private GameObject rageDashParticlePrefab;
     private ParticleSystem particleSys;
+    private ParticleSystem rageParticleSys;
     #endregion
 
     [Header("Vine Attack Variables")]
@@ -113,6 +115,8 @@ public class PlayerPowerUps : MonoBehaviour
         VineBarObject.SetActive(false);
 
         particleSys = dashParticlePrefab.GetComponent<ParticleSystem>();
+        rageParticleSys = rageDashParticlePrefab.GetComponent<ParticleSystem>();
+
         playerRB = player.GetComponent<Rigidbody2D>();
 
         oldSpeed = PlayerMovement.Instance.GetSpeed();
@@ -241,6 +245,14 @@ public class PlayerPowerUps : MonoBehaviour
         if (!isDashing) {
             PlayerMovement.Instance.SetSpeed(oldSpeed * 1.5f);
         }
+        else
+        {
+            dashTrigger.enabled = true;
+            if (rageDashParticlePrefab != null && rageParticleSys != null && isRaged)
+            {
+                rageParticleSys.Play();
+            }
+        }
 
         // turn head and eye and tentacle red
         head.color = Color.red;
@@ -287,6 +299,11 @@ public class PlayerPowerUps : MonoBehaviour
             // rage ends in the middle of a dash
             playerLight.pointLightOuterRadius /= 1.2f;
             playerLight.falloffIntensity += 0.25f;
+            dashTrigger.enabled = false;
+            if (rageDashParticlePrefab != null && rageParticleSys != null && rageParticleSys.isPlaying)
+            {
+                rageParticleSys.Stop();
+            }
         }
 
         tentacleAnim.speed = 1f;
@@ -379,6 +396,10 @@ public class PlayerPowerUps : MonoBehaviour
             if (dashParticlePrefab != null && particleSys != null) {
                 particleSys.Play();
             }
+            if (rageDashParticlePrefab != null && rageParticleSys != null && isRaged)
+            {
+                rageParticleSys.Play();
+            }
 
             // set cooldown back to zero
             curDash1Cooldown = curDash2Cooldown;
@@ -447,6 +468,7 @@ public class PlayerPowerUps : MonoBehaviour
         isDashing = false;
         player.layer = 7;
         particleSys.Stop();
+        rageParticleSys.Stop();
         currDashRoutine = null;
     }
 
