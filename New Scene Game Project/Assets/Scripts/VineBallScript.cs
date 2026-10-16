@@ -8,6 +8,7 @@ public class VineBallScript : MonoBehaviour
     private Transform sprite;
     private Rigidbody2D rb;
     private int hits = 0;
+    [SerializeField] private float baseStartSizeMod = 0.6f;
     void Start()
     {
         sprite = transform.GetChild(1);
@@ -23,6 +24,7 @@ public class VineBallScript : MonoBehaviour
         if (collision.CompareTag("Tentacle"))
         {
             rb.linearVelocity *= 1.1f;
+            rb.linearVelocity *= HeadLookAtMouse.aimAngle * rb.linearVelocity;
             ++hits;
         }
     }
@@ -47,7 +49,7 @@ public class VineBallScript : MonoBehaviour
         }
         if (splat != null)
         {
-            splat.transform.localScale *= 1 + (hits / 5);
+            splat.transform.localScale *= baseStartSizeMod + (hits / 5);
         }
     }    
 }

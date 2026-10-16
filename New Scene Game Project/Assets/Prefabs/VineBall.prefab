@@ -74,7 +74,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -110792873
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: -1
   m_Sprite: {fileID: 8983958016212402426, guid: 651772ee1e91ba44aa6ad216e80dd343, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5055,10 +5055,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vineStunAOEPrefab: {fileID: 7733814492955380199, guid: 31ac3bef4fa07504986c29f83cde2bf4, type: 3}
   rotationSpeed: 5
-  arenaMinBoundsX: -70
-  arenaMaxBoundsX: 70
-  arenaMinBoundsY: -55
-  arenaMaxBoundsY: 35
+  baseStartSizeMod: 0.6
 --- !u!50 &3298688722783006151
 Rigidbody2D:
   serializedVersion: 5
@@ -5081,7 +5078,7 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 960
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -5102,7 +5099,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 960
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
