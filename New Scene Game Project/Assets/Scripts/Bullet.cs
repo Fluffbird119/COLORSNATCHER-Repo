@@ -68,15 +68,15 @@ public class Bullet : MonoBehaviour
             else
             {
                 Destroy(gameObject);
-            }
-            if (collision.gameObject.layer != LayerMask.NameToLayer("iframes")) {
-                if (!parried) {
-                    PlayerHealth.Instance.ChangeHealth(-damage);
-                }
-                else if (!parryImmunityWindow)
-                {
-                    PlayerHealth.Instance.ChangeHealth(-1, 1);
-                    AudioManager.Instance.LaughTrack();
+                if (collision.gameObject.layer != LayerMask.NameToLayer("iframes")) {
+                    if (!parried) {
+                        PlayerHealth.Instance.ChangeHealth(-damage);
+                    }
+                    else if (!parryImmunityWindow)
+                    {
+                        PlayerHealth.Instance.ChangeHealth(-1, 1);
+                        AudioManager.Instance.LaughTrack();
+                    }
                 }
             }
         }
