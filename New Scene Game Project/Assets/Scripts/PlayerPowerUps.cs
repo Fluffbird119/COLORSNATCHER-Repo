@@ -167,7 +167,9 @@ public class PlayerPowerUps : MonoBehaviour
             rageBarUIScript.UpdateRageVisual();
             curDash1Cooldown = maxIndividualDashCooldown;
             curDash2Cooldown = maxIndividualDashCooldown;
+            dashBarUIScript.UpdateDashVisual();
             curVineCooldown = maxVineCooldown;
+            vineBarUI.UpdateVineVisual();
         }
         #endif
 
@@ -391,7 +393,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         while (dashQueued) {
             dashTrigger.enabled = true;
-            currDashDuration = dashDuration;
+            currDashDuration = dashDuration * (isRaged ? 1.5f : 1f);
             if (isRaged)
             {
                 // activate dash burst
@@ -418,7 +420,7 @@ public class PlayerPowerUps : MonoBehaviour
             playerLight.pointLightOuterRadius *= 1.2f;
 
             dashQueued = false;
-            PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
+            PlayerMovement.Instance.SetSpeed(dashMoveSpeed * (isRaged ? 1.2f : 1f));
             player.layer = 6;
 
             float timeInDash = 0f;
@@ -502,7 +504,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     private void AddDash()
     {
-        if (currDashDuration < 2 * dashDuration)
+        if (currDashDuration < (isRaged ? 3 : 2) * dashDuration)
         currDashDuration += dashDuration / 3f;
     }
 #endregion
