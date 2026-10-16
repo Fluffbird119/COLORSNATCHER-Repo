@@ -48,9 +48,15 @@ public class CameraShake : MonoBehaviour
         }
         else if (isShaking)
         {
-            currentOffset = Vector3.zero;
-            ShakeFalloff(shakeMagnitude / 2f);
-            isShaking = false;
+            if (shakeMagnitude > 0.3f)
+            {
+                ShakeFalloff(shakeMagnitude / 2f);
+            }
+            else
+            {
+                currentOffset = Vector3.zero;
+                isShaking = false;
+            }
         }
 
         transform.localPosition = basePosition + currentOffset;
