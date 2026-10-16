@@ -19,6 +19,7 @@ public class CameraShake : MonoBehaviour
     private Vector3 currentOffset = Vector3.zero;
     private float currentShakeDuration = 0f;
     private bool isShaking = false;
+    private float strength = 0.75f;
 
     void Awake()
     {
@@ -31,7 +32,7 @@ public class CameraShake : MonoBehaviour
 
         if (currentShakeDuration > 0)
         {
-            float offset = Random.Range(-1f, 1f) * shakeMagnitude * (PlayerPowerUps.Instance.getIsRaged() ? 1.5f : 1f);
+            float offset = Random.Range(-1f, 1f) * shakeMagnitude * strength * (PlayerPowerUps.Instance.getIsRaged() ? 1.5f : 1f);
 
             if (shakeAxis == ShakeAxis.Horizontal)
             {
@@ -75,7 +76,7 @@ public class CameraShake : MonoBehaviour
         else
         {
             shakeMagnitude += magnitude * 0.5f;
-            currentShakeDuration = duration * 0.8f;
+            currentShakeDuration += duration * 0.5f;
         }
         isShaking = true;
     }
@@ -83,6 +84,6 @@ public class CameraShake : MonoBehaviour
     private void ShakeFalloff(float magnitude)
     {
         shakeMagnitude = magnitude;
-        currentShakeDuration += magnitude / 2f;
+        currentShakeDuration = magnitude / 2f;
     }
 }

@@ -119,6 +119,14 @@ public class EnemyScript : MonoBehaviour
         {
             StunEnemy();
         }
+        if (collision.CompareTag("Player"))
+        {
+            Debug.Log("Dashing Player Trigger");
+            if (PlayerPowerUps.Instance.getIsRaged()) {
+                TakeDamage(1, new Vector2(0, 0));
+                CameraShake.Instance.Shake(0.2f, 0.3f, CameraShake.ShakeAxis.Horizontal);
+            }
+        }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
