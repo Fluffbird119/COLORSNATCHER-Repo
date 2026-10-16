@@ -61,6 +61,10 @@ public class ShooterScript : MonoBehaviour
         {
             playerTransform = player.transform;
             playerRB = player.GetComponent<Rigidbody2D>();
+            if (playerRB == null)
+            {
+                playerRB = player.GetComponentInParent<Rigidbody2D>();
+            }
         }
 
         oldSpeed = moveSpeed;
@@ -186,7 +190,7 @@ public class ShooterScript : MonoBehaviour
         {
             StunEnemy();
         }
-        if (collision.CompareTag("Player") && collision.gameObject.layer == LayerMask.NameToLayer("Dashing"))
+        if (collision.CompareTag("Player"))
         {
             if (PlayerPowerUps.Instance.getIsRaged()) {
                 TakeDamage(1, new Vector2(0, 0));

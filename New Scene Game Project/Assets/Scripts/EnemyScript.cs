@@ -44,6 +44,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Color vineColor;
 
     public static event Action<GameObject> EnemyDeath;
+    public static event Action DashTriggerEnemyHit;
 
     void Start()
     {
@@ -121,7 +122,7 @@ public class EnemyScript : MonoBehaviour
         }
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("Dashing Player Trigger");
+            DashTriggerEnemyHit?.Invoke();
             if (PlayerPowerUps.Instance.getIsRaged()) {
                 TakeDamage(1, new Vector2(0, 0));
                 CameraShake.Instance.Shake(0.2f, 0.5f, CameraShake.ShakeAxis.Horizontal);

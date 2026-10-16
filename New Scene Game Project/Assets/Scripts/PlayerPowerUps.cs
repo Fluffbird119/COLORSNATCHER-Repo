@@ -55,6 +55,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     [SerializeField] private float dashMoveSpeed;
     [SerializeField] private float dashDuration;
+    private float currDashDuration;
     [SerializeField] private Collider2D dashTrigger;
     // private int numDashes = 0;
     private bool canDash = true;
@@ -95,6 +96,8 @@ public class PlayerPowerUps : MonoBehaviour
         Instance = this;
 
         DialogueSystem.DialogueStateChange += PauseCooldowns;
+        EnemyScript.DashTriggerEnemyHit += AddDash;
+        Bullet.DashTriggerBulletHit += AddDash;
     }
 
     void Start()
@@ -367,6 +370,7 @@ public class PlayerPowerUps : MonoBehaviour
     {
         while (dashQueued) {
             dashTrigger.enabled = true;
+            currDashDuration = dashDuration;
             if (isRaged)
             {
                 // activate dash burst
@@ -392,7 +396,12 @@ public class PlayerPowerUps : MonoBehaviour
             PlayerMovement.Instance.SetSpeed(dashMoveSpeed);
             player.layer = 6;
 
-            yield return new WaitForSeconds(dashDuration - 0.05f);
+            float timeInDash = 0f;
+            while (timeInDash < currDashDuration - 0.05f)
+            {
+                timeInDash += Time.deltaTime;
+                yield return null;
+            }
 
             canQueueDash = true;
 
@@ -464,6 +473,12 @@ public class PlayerPowerUps : MonoBehaviour
     {
         return maxIndividualDashCooldown;
     }
+
+    private void AddDash()
+    {
+        if (currDashDuration < 2 * dashDuration)
+        currDashDuration += dashDuration / 3f;
+    }
 #endregion
 
 #region Goop Ball Attack
@@ -513,6 +528,13 @@ public class PlayerPowerUps : MonoBehaviour
     private void PauseCooldowns(bool state)
     {
         cooldownsPaused = state;
+    }
+
+    void OnDestroy()
+    {
+        DialogueSystem.DialogueStateChange -= PauseCooldowns;
+        EnemyScript.DashTriggerEnemyHit -= AddDash;
+        Bullet.DashTriggerBulletHit -= AddDash;
     }
 #endregion
 }

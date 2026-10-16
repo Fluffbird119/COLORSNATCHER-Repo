@@ -1,5 +1,5 @@
 using System.Collections;
-using UnityEditor.Analytics;
+using System;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -14,6 +14,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     private Vector3 playerColliderOffset = new Vector3(0.06916094f, -1.707474f, 0);
     private bool parryImmunityWindow = false;
+    public static event Action DashTriggerBulletHit;
 
     void Start()
     {
@@ -60,7 +61,14 @@ public class Bullet : MonoBehaviour
         }
         else if (collision.CompareTag("Player"))
         {
-            Destroy(gameObject);
+            if (collision.isTrigger)
+            {
+                DashTriggerBulletHit?.Invoke();
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
             if (collision.gameObject.layer != LayerMask.NameToLayer("iframes")) {
                 if (!parried) {
                     PlayerHealth.Instance.ChangeHealth(-damage);
