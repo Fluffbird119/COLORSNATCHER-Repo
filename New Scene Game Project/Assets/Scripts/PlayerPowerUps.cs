@@ -100,6 +100,7 @@ public class PlayerPowerUps : MonoBehaviour
         DialogueSystem.DialogueStateChange += PauseCooldowns;
         EnemyScript.DashTriggerEnemyHit += AddDash;
         Bullet.DashTriggerBulletHit += AddDash;
+        ShooterScript.DashTriggerShooterHit += AddDash;
     }
 
     void Start()
@@ -557,6 +558,7 @@ public class PlayerPowerUps : MonoBehaviour
         DialogueSystem.DialogueStateChange -= PauseCooldowns;
         EnemyScript.DashTriggerEnemyHit -= AddDash;
         Bullet.DashTriggerBulletHit -= AddDash;
+        ShooterScript.DashTriggerShooterHit -= AddDash;
     }
 #endregion
 }

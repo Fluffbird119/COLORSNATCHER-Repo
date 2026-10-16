@@ -1,5 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -44,13 +44,14 @@ public class ShooterScript : MonoBehaviour
     private float lightFallOff;
     private Color lightColor;
     [SerializeField] private Color vineColor;
+    public static event Action DashTriggerShooterHit;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
 
-        nextFireTime = Time.time + Random.Range(0.3f, 1f);
+        nextFireTime = Time.time + UnityEngine.Random.Range(0.3f, 1f);
         reducedNextFireTime = Time.time + 3f;
 
         GameObject player = GameObject.FindWithTag("Player");
@@ -162,7 +163,7 @@ public class ShooterScript : MonoBehaviour
         {
             maxSpreadAngle = (1f - accuracy) * 45f;
         }
-        float randomAngle = Random.Range(-maxSpreadAngle, maxSpreadAngle);
+        float randomAngle = UnityEngine.Random.Range(-maxSpreadAngle, maxSpreadAngle);
         Quaternion spreadRotation = Quaternion.Euler(0, 0, randomAngle);
         Vector2 finalDirection = spreadRotation * fireDirection;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
@@ -192,6 +193,7 @@ public class ShooterScript : MonoBehaviour
         }
         if (collision.CompareTag("Player"))
         {
+            DashTriggerShooterHit?.Invoke();
             if (PlayerPowerUps.Instance.getIsRaged()) {
                 TakeDamage(1, new Vector2(0, 0));
                 CameraShake.Instance.Shake(0.2f, 0.5f, CameraShake.ShakeAxis.Horizontal);
