@@ -24,7 +24,7 @@ public class VineBallScript : MonoBehaviour
         if (collision.CompareTag("Tentacle"))
         {
             rb.linearVelocity *= 1.1f;
-            rb.linearVelocity *= HeadLookAtMouse.aimAngle * rb.linearVelocity;
+            rb.linearVelocity = HeadLookAtMouse.aimAngle * new Vector2(0, 1) * rb.linearVelocity.magnitude;
             ++hits;
         }
     }
