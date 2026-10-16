@@ -55,6 +55,7 @@ public class PlayerPowerUps : MonoBehaviour
 
     [SerializeField] private float dashMoveSpeed;
     [SerializeField] private float dashDuration;
+    [SerializeField] private Collider2D dashTrigger;
     // private int numDashes = 0;
     private bool canDash = true;
     private bool canQueueDash = true;
@@ -336,7 +337,7 @@ public class PlayerPowerUps : MonoBehaviour
         }
         else if (canQueueDash)
         {
-            Debug.Log("Queued Dash");
+            //Debug.Log("Queued Dash");
             dashQueued = true;
         }
     }
@@ -365,11 +366,12 @@ public class PlayerPowerUps : MonoBehaviour
     private IEnumerator StartDash()
     {
         while (dashQueued) {
-            // set the collider to be a trigger
+            dashTrigger.enabled = true;
             if (isRaged)
             {
                 // activate dash burst
             }
+
             if (dashParticlePrefab != null && particleSys != null) {
                 particleSys.Play();
             }
@@ -399,6 +401,7 @@ public class PlayerPowerUps : MonoBehaviour
 
         PlayerMovement.Instance.SetSpeed(dashMoveSpeed / 2f);
         player.layer = 9;
+        dashTrigger.enabled = false;
 
         canDash = true;
 

@@ -2160,25 +2160,9 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 554666074}
     - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: baseBloomIntensity
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: baseVignetteIntensity
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: youDiedMessageAndButton
       value: 
       objectReference: {fileID: 1207200887}
-    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: baseBloomIntensity.m_Value
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6200498255624669922, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
-      propertyPath: baseBloomIntensity.m_OverrideState
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
