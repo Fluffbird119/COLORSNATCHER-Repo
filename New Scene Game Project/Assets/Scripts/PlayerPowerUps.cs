@@ -160,6 +160,9 @@ public class PlayerPowerUps : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
+            beatenRed = true;
+            beatenYellow = true;
+            beatenGreen = true;
             rage = maxRage;
             rageBarUIScript.UpdateRageVisual();
             curDash1Cooldown = maxIndividualDashCooldown;

@@ -23,9 +23,16 @@ public class VineBallScript : MonoBehaviour
     {
         if (collision.CompareTag("Tentacle"))
         {
-            rb.linearVelocity *= 1.1f;
+            rb.linearVelocity *= 1.2f;
             rb.linearVelocity = HeadLookAtMouse.aimAngle * new Vector2(0, 1) * rb.linearVelocity.magnitude;
             ++hits;
+            AudioManager.Instance.HitNoise();
+        }
+        if (collision.CompareTag("Player"))
+        {
+            rb.linearVelocity *= 1.5f;
+            hits += 2;
+            AudioManager.Instance.HitNoise();
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -49,7 +56,7 @@ public class VineBallScript : MonoBehaviour
         }
         if (splat != null)
         {
-            splat.transform.localScale *= baseStartSizeMod + (hits / 5);
+            splat.transform.localScale = new Vector3(1, 1, 1) * (baseStartSizeMod + ((float)hits / 4f));
         }
     }    
 }
