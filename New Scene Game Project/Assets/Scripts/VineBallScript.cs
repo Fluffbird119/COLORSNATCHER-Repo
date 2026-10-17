@@ -9,10 +9,15 @@ public class VineBallScript : MonoBehaviour
     private Rigidbody2D rb;
     private int hits = 0;
     [SerializeField] private float baseStartSizeMod = 0.6f;
+    GameObject splat;
+
     void Start()
     {
         sprite = transform.GetChild(1);
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        splat = Instantiate(vineStunAOEPrefab, new Vector3(1000, 0, 0), Quaternion.identity);
+        splat.SetActive(false);
     }
     private void Update()
     {
@@ -28,7 +33,7 @@ public class VineBallScript : MonoBehaviour
             ++hits;
             AudioManager.Instance.HitNoise();
         }
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player")) // this hitbox that this trigger will hit is only active when player is dashing
         {
             rb.linearVelocity *= 1.5f;
             hits += 2;
@@ -37,26 +42,29 @@ public class VineBallScript : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        GameObject splat = null;
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Vector2 hitPoint = collision.GetContact(0).point;
 
-            splat = Instantiate(vineStunAOEPrefab, hitPoint, Quaternion.identity);
+            splat.SetActive(true);
+            splat.transform.position = hitPoint;
 
-            Destroy(gameObject);
+            gameObject.transform.position = new Vector3(1000, 0, 0);
+            gameObject.SetActive(false);
         }
         else if (collision.gameObject.CompareTag("BoundaryWall"))
         {
             Vector2 hitPoint = transform.position;
 
-            splat = Instantiate(vineStunAOEPrefab, hitPoint, Quaternion.identity);
+            splat.SetActive(true);
+            splat.transform.position = hitPoint;
 
-            Destroy(gameObject);
+            gameObject.transform.position = new Vector3(1000, 0, 0);
+            gameObject.SetActive(false);
         }
         if (splat != null)
         {
-            splat.transform.localScale = new Vector3(1, 1, 1) * (baseStartSizeMod + ((float)hits / 4f));
+            splat.transform.localScale = new Vector3(1, 1, 1) * (baseStartSizeMod + (hits / 4f));
         }
     }    
 }
