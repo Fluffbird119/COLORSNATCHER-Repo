@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -10,10 +11,13 @@ public class EnemyManager : MonoBehaviour
 
     [SerializeField] private Transform playerTransform;
     [SerializeField] private GameObject enemyIndicatorPrefab;
+    [SerializeField] private GameObject pickupPrefab;
     private List<GameObject> enemyIndicators = new List<GameObject>();
 
     private Vector3 playerColliderOffset = new Vector3(0.06916094f, -1.707474f, 0);
     private float centerEdgeDistance;
+    private float timeSinceKill = 0f;
+    private int enemiesRapidKilled = 0;
 
     private void Awake()
     {
@@ -31,6 +35,7 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        timeSinceKill += Time.deltaTime;
         if (enemyIndicatorsActive)
         {
             for (int i = 0; i < enemies.Count; ++i)
@@ -100,6 +105,16 @@ public class EnemyManager : MonoBehaviour
             if (enemies[i] == enemy)
             {
                 enemies.RemoveAt(i);
+                if (timeSinceKill <= 1f)
+                {
+                    ++enemiesRapidKilled;
+                }
+                else
+                {
+                    enemiesRapidKilled = 1;
+                }
+                timeSinceKill = 0f;
+                TrySpawnPickups(enemy.transform.position);
                 if (enemies.Count <= 3)
                 {
                     enemyIndicatorsActive = true;
@@ -111,6 +126,22 @@ public class EnemyManager : MonoBehaviour
                 }
                 return;
             }
+        }
+    }
+
+    private void TrySpawnPickups(Vector3 position)
+    {
+        if (Random.Range(-5f, enemiesRapidKilled) > 0)
+        {
+            GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
+            ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
+            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
+        }
+        if (Random.Range(-8f, enemiesRapidKilled) > 0)
+        {
+            GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
+            ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
+            pickupScript.CreateHealthPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
         }
     }
 

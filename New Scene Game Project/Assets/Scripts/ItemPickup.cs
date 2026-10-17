@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,27 @@ public class ItemPickup : MonoBehaviour
     public static event Action<float> OnRagePickup;
     private List<Action<float>> events = new() {OnHealthPickup, OnRagePickup};
     private int eventIndex = 0;
+    private float rotateSpeed = 3f;
+    private float splootSpeed = 2f;
+    private Vector3 direction;
+
+    void Start()
+    {
+        direction = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)) * new Vector2(0, 1);
+        StartCoroutine(SplootOut()):
+    }
+
+    private IEnumerator SplootOut()
+    {
+        float timeSplooting = 2;
+        while (timeSplooting > 0)
+        {
+            timeSplooting -= Time.deltaTime;
+            gameObject.transform.rotation = Quaternion.Euler(0, 0, gameObject.transform.rotation.z + timeSplooting * rotateSpeed);
+            gameObject.transform.position = gameObject.transform.position + direction * timeSplooting * splootSpeed;
+            yield return null;
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
