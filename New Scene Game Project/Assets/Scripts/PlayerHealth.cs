@@ -47,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
 
         Instance = this;
         DialogueSystem.DialogueStateChange += PauseHealing;
+        ItemPickup.OnHealthPickup += ChangeHealth;
     }
 
     private void Start()
@@ -325,5 +326,6 @@ public class PlayerHealth : MonoBehaviour
     void OnDestroy()
     {
         DialogueSystem.DialogueStateChange -= PauseHealing;
+        ItemPickup.OnHealthPickup -= ChangeHealth;
     }
 }
