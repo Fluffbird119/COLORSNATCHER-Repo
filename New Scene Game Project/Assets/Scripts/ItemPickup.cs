@@ -17,7 +17,7 @@ public class ItemPickup : MonoBehaviour
     void Start()
     {
         direction = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)) * new Vector2(0, 1);
-        StartCoroutine(SplootOut()):
+        StartCoroutine(SplootOut());
     }
 
     private IEnumerator SplootOut()
