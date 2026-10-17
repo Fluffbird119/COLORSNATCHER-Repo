@@ -45,6 +45,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindWithTag("Player");
+        GameObject temp = player.transform.parent.gameObject;
+        if (temp != null && temp.tag.CompareTo("Player") == 0)
+        {
+            player = temp;
+        }
         BackgroundManager.Instance.ChangeBackground(0);
         globalLight.intensity = 0.5f;
         currWaveRoutine = StartCoroutine(WaveOne());
@@ -124,6 +129,7 @@ public class GameManager : MonoBehaviour
         BackgroundManager.Instance.ChangeBackground(1);
         globalLight.intensity = 0.9f;
         PlayerHealth.Instance.ChangeHealth(1, 1f);
+        player.transform.position = new Vector2(0, 0);
 
         currWaveRoutine = StartCoroutine(WaveFour());
     }
@@ -221,6 +227,7 @@ public class GameManager : MonoBehaviour
         globalLight.intensity = 0.2f;
         globalLight.color = dimLight;
         PlayerHealth.Instance.ChangeHealth(1, 1f);
+        player.transform.position = new Vector2(0, 0);
 
         currWaveRoutine = StartCoroutine(WaveSeven());
     }
@@ -324,6 +331,7 @@ public class GameManager : MonoBehaviour
         globalLight.color = brightLight;
         lightOscillator = StartCoroutine(OscillateLight(0.4f, 5f));
         PlayerHealth.Instance.ChangeHealth(1, 1f);
+        player.transform.position = new Vector2(0, 0);
         
         currWaveRoutine = StartCoroutine(WaveTen());
     }

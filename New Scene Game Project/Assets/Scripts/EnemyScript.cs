@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     public float stunDamageBuff = 1.2f;
     public bool proceduralSpeed = false;
     private Transform playerTransform;
+    private Rigidbody2D playerRB;
     private Rigidbody2D rb;
     private float lastSpeedBoostTime = 0f;
     private int numSpeedBoosts = 0;
@@ -31,6 +32,9 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private PlayerHealth healthScript;
 
     [SerializeField] private bool isStunned;
+
+    [SerializeField] private bool isTeleporter = false;
+    private float closestDistance = 10000f;
 
     public float spriteAngleOffset = -90f;
 
@@ -56,6 +60,11 @@ public class EnemyScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
         GameObject player = GameObject.FindWithTag("Player");
+        GameObject temp = player.transform.parent.gameObject;
+        if (temp != null && temp.tag.CompareTo("Player") == 0)
+        {
+            player = temp;
+        }
         lightRadius = spotLight.pointLightOuterRadius;
         lightFallOff = spotLight.falloffIntensity;
         lightColor = spotLight.color;
@@ -63,6 +72,7 @@ public class EnemyScript : MonoBehaviour
         {
             playerTransform = player.transform;
             playerPowerUpScript = player.GetComponent<PlayerPowerUps>();
+            playerRB = player.GetComponent<Rigidbody2D>();
         }
         lastSpeedBoostTime = Time.time;
         buffDistance = CameraSmoothFollowPlayer.centerEdgeDistance;
@@ -96,6 +106,18 @@ public class EnemyScript : MonoBehaviour
             rb.rotation = targetAngle + spriteAngleOffset;
 
             float distance = Vector2.Distance(rb.position, playerTransform.position);
+            if (isTeleporter)
+            {
+                if (distance < closestDistance)
+                {
+                    closestDistance = Mathf.Max(distance, 30);
+                }
+                else if (distance > closestDistance + 20)
+                {
+                    Vector3 newDisplacement = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-15f, 15f)) * playerRB.linearVelocity.normalized * (closestDistance + 5);
+                    transform.position = playerTransform.position + newDisplacement;
+                }
+            }
             if (distance > stoppingDistance)
             {
                 Vector2 newPosition = Vector2.MoveTowards(

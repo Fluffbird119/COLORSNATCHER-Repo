@@ -9,6 +9,7 @@ TagManager:
   - VineAOE
   - BoundaryWall
   - Bullet
+  - Pickup
   layers:
   - Default
   - TransparentFX

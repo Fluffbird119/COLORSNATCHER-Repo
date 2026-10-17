@@ -10,14 +10,22 @@ public class ItemPickup : MonoBehaviour
     public static event Action<float> OnRagePickup;
     private List<Action<float>> events = new() {OnHealthPickup, OnRagePickup};
     private int eventIndex = 0;
-    private float rotateSpeed = 3f;
-    private float splootSpeed = 2f;
+    private float rotateSpeed = 150f;
+    private float splootSpeed = 3f;
     private Vector3 direction;
+    private SpriteRenderer spriteRenderer;
+    private float lifetime = 10f;
+    private static List<GameObject> itemPickups = new List<GameObject>();
 
     void Start()
     {
+        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
         direction = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)) * new Vector2(0, 1);
+        gameObject.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f));
+        itemPickups.Add(gameObject);
+        DialogueSystem.DialogueStateChange += DestroyOnDialogue;
         StartCoroutine(SplootOut());
+        Destroy(gameObject, lifetime);
     }
 
     private IEnumerator SplootOut()
@@ -26,8 +34,30 @@ public class ItemPickup : MonoBehaviour
         while (timeSplooting > 0)
         {
             timeSplooting -= Time.deltaTime;
-            gameObject.transform.rotation = Quaternion.Euler(0, 0, gameObject.transform.rotation.z + timeSplooting * rotateSpeed);
-            gameObject.transform.position = gameObject.transform.position + direction * timeSplooting * splootSpeed;
+            gameObject.transform.Rotate(new Vector3(0, 0, timeSplooting * rotateSpeed * Time.deltaTime));
+            gameObject.transform.position += direction * timeSplooting * splootSpeed * Time.deltaTime;
+            yield return null;
+        }
+        StartCoroutine(AttemptMerge());
+    }
+
+    private IEnumerator AttemptMerge()
+    {
+        int i = 0;
+        while (i < itemPickups.Count)
+        {
+            if (itemPickups[i] != gameObject && Vector3.Distance(itemPickups[i].transform.position, transform.position) < 5)
+            {
+                if (itemPickups[i].GetComponent<ItemPickup>().eventIndex == eventIndex)
+                {
+                    transform.localScale *= 1.2f;
+                    strength += itemPickups[i].GetComponent<ItemPickup>().strength;
+                    Destroy(itemPickups[i]);
+                    Debug.Log("Merged Item Pickups");
+                    yield break;
+                }
+            }
+            ++i;
             yield return null;
         }
     }
@@ -37,6 +67,7 @@ public class ItemPickup : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             events[eventIndex]?.Invoke(strength);
+            Destroy(gameObject);
         }
     }
 
@@ -44,11 +75,36 @@ public class ItemPickup : MonoBehaviour
     {
         eventIndex = 1;
         strength = value;
+        transform.localScale *= 1 + ((value - 1) / 10);
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.red;
+        }
+        else
+        {
+            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.red;
+        }
     }
 
     public void CreateHealthPickup(float value)
     {
         eventIndex = 0;
         strength = value;
+        transform.localScale *= 1 + ((value - 1) / 10);
+    }
+
+    private void DestroyOnDialogue(bool state)
+    {
+        if (state)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    void OnDestroy()
+    {
+        itemPickups.Remove(gameObject);
+        DialogueSystem.DialogueStateChange -= DestroyOnDialogue;
     }
 }

@@ -13,11 +13,11 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private GameObject enemyIndicatorPrefab;
     [SerializeField] private GameObject pickupPrefab;
     private List<GameObject> enemyIndicators = new List<GameObject>();
-
     private Vector3 playerColliderOffset = new Vector3(0.06916094f, -1.707474f, 0);
     private float centerEdgeDistance;
     private float timeSinceKill = 0f;
     private int enemiesRapidKilled = 0;
+    private bool playerRaged;
 
     private void Awake()
     {
@@ -31,6 +31,8 @@ public class EnemyManager : MonoBehaviour
         EnemyScript.EnemyDeath += RemoveEnemy;
         centerEdgeDistance = CameraSmoothFollowPlayer.centerEdgeDistance;
         CameraSmoothFollowPlayer.ScreenSizeChange += UpdateCamSize;
+        PlayerPowerUps.RageStateChanged += UpdateRage;
+        DialogueSystem.DialogueStateChange += HandleDialogueThings;
     }
 
     void Update()
@@ -131,13 +133,13 @@ public class EnemyManager : MonoBehaviour
 
     private void TrySpawnPickups(Vector3 position)
     {
-        if (Random.Range(-5f, enemiesRapidKilled) > 0)
+        if (playerRaged && Random.Range(-50f, enemiesRapidKilled) > 0)
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
-            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
+            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 20f)));
         }
-        if (Random.Range(-8f, enemiesRapidKilled) > 0)
+        if (Random.Range(-20f, enemiesRapidKilled) > 0)
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
@@ -155,9 +157,25 @@ public class EnemyManager : MonoBehaviour
         centerEdgeDistance = newSize;
     }
 
+    private void UpdateRage(bool state)
+    {
+        playerRaged = state;
+    }
+
+    private void HandleDialogueThings(bool state)
+    {
+        if (state)
+        {
+            DeleteEnemies();
+            enemiesRapidKilled = 0;
+        }
+    }
+
     void OnDestroy()
     {
         EnemyScript.EnemyDeath -= RemoveEnemy;
         CameraSmoothFollowPlayer.ScreenSizeChange -= UpdateCamSize;
+        PlayerPowerUps.RageStateChanged -= UpdateRage;
+        DialogueSystem.DialogueStateChange -= HandleDialogueThings;
     }
 }

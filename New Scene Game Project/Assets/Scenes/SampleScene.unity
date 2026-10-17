@@ -955,7 +955,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5016473435061172441, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
   m_PrefabInstance: {fileID: 8358882279293644888}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1381905456
+--- !u!1 &1346035390
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -963,27 +963,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1381905458}
-  - component: {fileID: 1381905457}
+  - component: {fileID: 1346035391}
+  - component: {fileID: 1346035392}
   m_Layer: 0
-  m_Name: gamejam(actually real this time)
+  m_Name: gamejam-actually fr this time trust bro
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!82 &1381905457
+--- !u!4 &1346035391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346035390}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.171705, y: -4.2510204, z: 0.52010196}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1563612243}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &1346035392
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381905456}
+  m_GameObject: {fileID: 1346035390}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: bb672a234bfab034fbb9914b724690cc, type: 3}
+  m_Resource: {fileID: 8300000, guid: 866ecd01b214a474d9df39405b0ab6d6, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.25
   m_Pitch: 1
@@ -1069,21 +1084,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!4 &1381905458
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1381905456}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.171705, y: -4.2510204, z: 0.52010196}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1563612243}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1491697020 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 300244448572705077, guid: 3ebf88504b7beb841af0c104394b7407, type: 3}
@@ -1130,10 +1130,10 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2021765443}
-  - {fileID: 1381905458}
-  - {fileID: 1612472988}
   - {fileID: 2110909485}
+  - {fileID: 1346035391}
   - {fileID: 899939010}
+  - {fileID: 1612472988}
   - {fileID: 738920595}
   - {fileID: 1994945619}
   - {fileID: 411857128}
@@ -1813,6 +1813,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2258093042648269708, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
+      propertyPath: pickupPrefab
+      value: 
+      objectReference: {fileID: 5835443815131485940, guid: 0c765056b86e56546b549e97fd7aa1f7, type: 3}
+    - target: {fileID: 2258093042648269708, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: playerTransform
       value: 
       objectReference: {fileID: 1230194025}
@@ -1851,7 +1855,7 @@ PrefabInstance:
     - target: {fileID: 4466368668784767222, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: yellowMusic
       value: 
-      objectReference: {fileID: 1381905457}
+      objectReference: {fileID: 1346035392}
     - target: {fileID: 4466368668784767222, guid: 9de92b87060bbd14f84db974b0753c1d, type: 3}
       propertyPath: tentacleSmack
       value: 

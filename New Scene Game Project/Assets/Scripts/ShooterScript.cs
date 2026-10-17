@@ -56,6 +56,11 @@ public class ShooterScript : MonoBehaviour
         reducedNextFireTime = Time.time + 3f;
 
         GameObject player = GameObject.FindWithTag("Player");
+        GameObject temp = player.transform.parent.gameObject;
+        if (temp != null && temp.tag.CompareTo("Player") == 0)
+        {
+            player = temp;
+        }
         lightRadius = spotLight.pointLightOuterRadius;
         lightFallOff = spotLight.falloffIntensity;
         lightColor = spotLight.color;

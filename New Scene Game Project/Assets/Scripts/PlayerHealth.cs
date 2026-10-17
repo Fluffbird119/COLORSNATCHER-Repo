@@ -68,7 +68,7 @@ public class PlayerHealth : MonoBehaviour
         }
 
         youDiedMessageAndButton.SetActive(false);
-        StartCoroutine(HealOverTime());
+        //StartCoroutine(HealOverTime());
     }
 
     private void Update()
@@ -205,7 +205,7 @@ public class PlayerHealth : MonoBehaviour
     {
         ChangeHealth(maxHealth);
         PlayerManager.Instance.SetPlayerActive(true);
-        StartCoroutine(HealOverTime());
+        //StartCoroutine(HealOverTime());
         playerTransform.position = new Vector2(0, 0);
         player.layer = 7;
         vignetteOverride.intensity.Override(0f);

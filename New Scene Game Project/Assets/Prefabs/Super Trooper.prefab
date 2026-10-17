@@ -264,7 +264,7 @@ MonoBehaviour:
   knockbackForce: 2
   knockbackDuration: 0.15
   isWalker: 1
-  distanceSpeedMod: 5
+  distanceSpeedMod: 3
   aimIncreaser: 0
   moveSpeed: 4
   isStunned: 0
