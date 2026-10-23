@@ -47,6 +47,8 @@ public class EnemyScript : MonoBehaviour
     private float lightFallOff;
     private Color lightColor;
     [SerializeField] private Color vineColor;
+    private float stunDuration = 0f;
+    private bool hardStunned = false;
 
     public static event Action<GameObject> EnemyDeath;
     public static event Action DashTriggerEnemyHit;
@@ -143,6 +145,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.CompareTag("VineAOE"))
         {
             StunEnemy();
+            hardStunned = true;
         }
         if (collision.CompareTag("Player"))
         {
@@ -151,6 +154,17 @@ public class EnemyScript : MonoBehaviour
                 TakeDamage(1, new Vector2(0, 0));
                 CameraShake.Instance.Shake(0.2f, 0.5f, CameraShake.ShakeAxis.Horizontal);
             }
+            if (PlayerPowerUps.Instance.gunked && !hardStunned)
+            {
+                if (stunDuration <= 0)
+                {
+                    StartCoroutine(StunEnemyDuration());
+                }
+                else
+                {
+                    stunDuration = 2f;
+                }
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -158,6 +172,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.CompareTag("VineAOE"))
         {
             StunEnemy();
+            hardStunned = true;
         }
     }
 
@@ -166,6 +181,7 @@ public class EnemyScript : MonoBehaviour
         if (collision.CompareTag("VineAOE"))
         {
             UnStunEnemy();
+            hardStunned = false;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
@@ -314,6 +330,18 @@ public class EnemyScript : MonoBehaviour
         {
             renderer.color = Color.white;
         }
+    }
+
+    private IEnumerator StunEnemyDuration()
+    {
+        stunDuration = 2f;
+        StunEnemy();
+        while (stunDuration > 0)
+        {
+            stunDuration -= Time.deltaTime;
+            yield return null;
+        }
+        UnStunEnemy();
     }
 
     private void UpdateBuffDistance(float centerEdgeDistance)

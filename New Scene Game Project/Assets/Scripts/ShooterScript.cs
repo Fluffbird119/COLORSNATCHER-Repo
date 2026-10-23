@@ -45,6 +45,9 @@ public class ShooterScript : MonoBehaviour
     private float lightFallOff;
     private Color lightColor;
     [SerializeField] private Color vineColor;
+    private float stunDuration;
+    private bool hardStunned;
+
     public static event Action DashTriggerShooterHit;
 
     void Start()
@@ -193,6 +196,7 @@ public class ShooterScript : MonoBehaviour
         if (collision.CompareTag("VineAOE"))
         {
             StunEnemy();
+            hardStunned = true;
         }
         if (collision.CompareTag("Player"))
         {
@@ -201,6 +205,17 @@ public class ShooterScript : MonoBehaviour
                 TakeDamage(1, new Vector2(0, 0));
                 CameraShake.Instance.Shake(0.2f, 0.5f, CameraShake.ShakeAxis.Horizontal);
             }
+            if (PlayerPowerUps.Instance.gunked && !hardStunned)
+            {
+                if (stunDuration <= 0)
+                {
+                    StartCoroutine(StunEnemyDuration());
+                }
+                else
+                {
+                    stunDuration = 2f;
+                }
+            }
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
@@ -208,6 +223,7 @@ public class ShooterScript : MonoBehaviour
         if (collision.CompareTag("VineAOE"))
         {
             StunEnemy();
+            hardStunned = true;
         }
     }
 
@@ -234,6 +250,7 @@ public class ShooterScript : MonoBehaviour
         if (collision.CompareTag("VineAOE"))
         {
             UnStunEnemy();
+            hardStunned = false;
         }
     }
 
@@ -331,6 +348,18 @@ public class ShooterScript : MonoBehaviour
         }
     }
 
+    private IEnumerator StunEnemyDuration()
+    {
+        stunDuration = 2f;
+        StunEnemy();
+        while (stunDuration > 0)
+        {
+            stunDuration -= Time.deltaTime;
+            yield return null;
+        }
+        UnStunEnemy();
+    }
+
     private void UpdateBuffDistance(float centerEdgeDistance)
     {
         buffDistance = centerEdgeDistance + 15f;
@@ -340,7 +369,6 @@ public class ShooterScript : MonoBehaviour
     {
         if (passedObject == gameObject)
         {
-            Debug.Log("Enemy ACTUALLY hit");
             TakeDamage(damageValue, new Vector2(0, 0));
             CameraShake.Instance.Shake(0.2f, damageValue / 2f, CameraShake.ShakeAxis.Horizontal);
         }

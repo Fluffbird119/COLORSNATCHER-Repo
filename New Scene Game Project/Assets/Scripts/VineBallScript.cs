@@ -49,14 +49,15 @@ public class VineBallScript : MonoBehaviour
         {
             Vector2 hitPoint = collision.GetContact(0).point;
             
-            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(hitPoint, 5);
-            foreach (Collider2D hitCollider in hitColliders)
-            {
-                GameObject other = hitCollider.gameObject;
-                if (other.CompareTag("Enemy"))
+            if (hits > 0) {
+                Collider2D[] hitColliders = Physics2D.OverlapCircleAll(hitPoint, 5);
+                foreach (Collider2D hitCollider in hitColliders)
                 {
-                    Debug.Log("Enemy hit for " + hits / 2f + " damage");
-                    BurstVineEnemyHit?.Invoke(other, hits / 2f);
+                    GameObject other = hitCollider.gameObject;
+                    if (other.CompareTag("Enemy"))
+                    {
+                        BurstVineEnemyHit?.Invoke(other, hits / 2f);
+                    }
                 }
             }
 

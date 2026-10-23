@@ -66,8 +66,10 @@ public class PlayerPowerUps : MonoBehaviour
 
     [SerializeField] private GameObject dashParticlePrefab;
     [SerializeField] private GameObject rageDashParticlePrefab;
+    [SerializeField] private GameObject gunkDashParticlePrefab;
     private ParticleSystem particleSys;
     private ParticleSystem rageParticleSys;
+    private ParticleSystem gunkParticleSys;
     #endregion
 
     [Header("Vine Attack Variables")]
@@ -80,10 +82,9 @@ public class PlayerPowerUps : MonoBehaviour
 
     [SerializeField] private float curVineCooldown;
     [SerializeField] private float maxVineCooldown;
-
     private GameObject vineBall;
-
     private VineBarUI vineBarUI;
+    public bool gunked;
     #endregion
 
 
@@ -120,6 +121,7 @@ public class PlayerPowerUps : MonoBehaviour
 
         particleSys = dashParticlePrefab.GetComponent<ParticleSystem>();
         rageParticleSys = rageDashParticlePrefab.GetComponent<ParticleSystem>();
+        gunkParticleSys = gunkDashParticlePrefab.GetComponent<ParticleSystem>();
 
         playerRB = player.GetComponent<Rigidbody2D>();
 
@@ -201,6 +203,29 @@ public class PlayerPowerUps : MonoBehaviour
         {
             rage -= rageDrainRate * Time.deltaTime;
             rageBarUIScript.UpdateRageVisual();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("VineAOE"))
+        {
+            gunked = isDashing;
+            if (isDashing)
+            {
+                if (gunkDashParticlePrefab != null && gunkParticleSys != null && gunked)
+                {   
+                    gunkParticleSys.Play();
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (gunked && collision.CompareTag("VineAOE"))
+        {
+            StartCoroutine(GunkDuration());
         }
     }
 
@@ -387,6 +412,10 @@ public class PlayerPowerUps : MonoBehaviour
             {
                 rageParticleSys.Play();
             }
+            if (gunkDashParticlePrefab != null && gunkParticleSys != null && gunked)
+            {
+                gunkParticleSys.Play();
+            }
 
             // set cooldown back to zero
             curDash1Cooldown = curDash2Cooldown;
@@ -456,6 +485,7 @@ public class PlayerPowerUps : MonoBehaviour
         player.layer = 7;
         particleSys.Stop();
         rageParticleSys.Stop();
+        gunkParticleSys.Stop();
         currDashRoutine = null;
     }
 
@@ -531,6 +561,23 @@ public class PlayerPowerUps : MonoBehaviour
     public float getVineMaxCooldown()
     {
         return maxVineCooldown;
+    }
+
+    private IEnumerator GunkDuration()
+    {
+        if (!gunked)
+        {
+            yield break;
+        }
+        yield return new WaitForSeconds(1f);
+        gunked = false;
+        if (isDashing)
+        {
+            if (gunkDashParticlePrefab != null && gunkParticleSys != null)
+            {   
+                gunkParticleSys.Stop();
+            }
+        }
     }
 #endregion
 

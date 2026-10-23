@@ -4,7 +4,7 @@ using System.Collections;
 
 public class VineAOEScript : MonoBehaviour
 {
-    private void Start()
+    private void OnEnable()
     {
         StartCoroutine(VineAOELastOnGround());
     }
