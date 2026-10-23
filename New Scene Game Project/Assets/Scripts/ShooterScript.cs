@@ -78,6 +78,7 @@ public class ShooterScript : MonoBehaviour
         animSpeed = animator.speed;
         buffDistance = CameraSmoothFollowPlayer.centerEdgeDistance + 15f;
         CameraSmoothFollowPlayer.ScreenSizeChange += UpdateBuffDistance;
+        VineBallScript.BurstVineEnemyHit += TakeVineBurstDamage;
     }
 
     void Update()
@@ -174,11 +175,7 @@ public class ShooterScript : MonoBehaviour
         Vector2 finalDirection = spreadRotation * fireDirection;
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
-        if (bulletRb != null)
-        {
-            bulletRb.linearVelocity = finalDirection * bulletSpeed;
-        }
+        bulletScript.Fire(finalDirection, bulletSpeed);
         bulletScript.SetSize(bulletSizeMod);
         bulletScript.SetDamage(bulletDamage);
     }
@@ -339,8 +336,19 @@ public class ShooterScript : MonoBehaviour
         buffDistance = centerEdgeDistance + 15f;
     }
 
+    private void TakeVineBurstDamage(GameObject passedObject, float damageValue)
+    {
+        if (passedObject == gameObject)
+        {
+            Debug.Log("Enemy ACTUALLY hit");
+            TakeDamage(damageValue, new Vector2(0, 0));
+            CameraShake.Instance.Shake(0.2f, damageValue / 2f, CameraShake.ShakeAxis.Horizontal);
+        }
+    }
+
     void OnDestroy()
     {
         CameraSmoothFollowPlayer.ScreenSizeChange -= UpdateBuffDistance;
+        VineBallScript.BurstVineEnemyHit -= TakeVineBurstDamage;
     }
 }

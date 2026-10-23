@@ -1,5 +1,5 @@
 using UnityEngine;
-using System.Collections;
+using System;
 
 public class VineBallScript : MonoBehaviour
 {
@@ -8,13 +8,16 @@ public class VineBallScript : MonoBehaviour
     private Transform sprite;
     private Rigidbody2D rb;
     private int hits = 0;
-    [SerializeField] private float baseStartSizeMod = 0.6f;
-    GameObject splat;
+    //[SerializeField] private float baseStartSizeMod = 0.6f;
+    private GameObject splat;
+    public static event Action<GameObject, float> BurstVineEnemyHit;
 
     void Start()
     {
         sprite = transform.GetChild(1);
         rb = gameObject.GetComponent<Rigidbody2D>();
+
+        hits = 0;
 
         splat = Instantiate(vineStunAOEPrefab, new Vector3(1000, 0, 0), Quaternion.identity);
         splat.SetActive(false);
@@ -45,6 +48,17 @@ public class VineBallScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Vector2 hitPoint = collision.GetContact(0).point;
+            
+            Collider2D[] hitColliders = Physics2D.OverlapCircleAll(hitPoint, 5);
+            foreach (Collider2D hitCollider in hitColliders)
+            {
+                GameObject other = hitCollider.gameObject;
+                if (other.CompareTag("Enemy"))
+                {
+                    Debug.Log("Enemy hit for " + hits / 2f + " damage");
+                    BurstVineEnemyHit?.Invoke(other, hits / 2f);
+                }
+            }
 
             splat.SetActive(true);
             splat.transform.position = hitPoint;
@@ -62,9 +76,9 @@ public class VineBallScript : MonoBehaviour
             gameObject.transform.position = new Vector3(1000, 0, 0);
             gameObject.SetActive(false);
         }
-        if (splat != null)
+        /*if (splat != null)
         {
             splat.transform.localScale = new Vector3(1, 1, 1) * (baseStartSizeMod + (hits / 4f));
-        }
+        }*/
     }    
 }

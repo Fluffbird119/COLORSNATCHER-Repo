@@ -16,10 +16,11 @@ public class ItemPickup : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private float lifetime = 10f;
     private static List<GameObject> itemPickups = new List<GameObject>();
+    [SerializeField] private Sprite[] sprites;
 
     void Start()
     {
-        spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
         direction = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f)) * new Vector2(0, 1);
         gameObject.transform.rotation = Quaternion.Euler(0, 0, UnityEngine.Random.Range(0f, 360f));
         itemPickups.Add(gameObject);
@@ -79,11 +80,13 @@ public class ItemPickup : MonoBehaviour
         if (spriteRenderer != null)
         {
             spriteRenderer.color = Color.red;
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
         }
         else
         {
-            spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.color = Color.red;
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
         }
     }
 
@@ -92,6 +95,15 @@ public class ItemPickup : MonoBehaviour
         eventIndex = 0;
         strength = value;
         transform.localScale *= 1 + ((value - 1) / 10);
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
+        }
+        else
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
+        }
     }
 
     private void DestroyOnDialogue(bool state)

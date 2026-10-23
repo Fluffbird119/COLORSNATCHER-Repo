@@ -77,6 +77,7 @@ public class EnemyScript : MonoBehaviour
         lastSpeedBoostTime = Time.time;
         buffDistance = CameraSmoothFollowPlayer.centerEdgeDistance;
         CameraSmoothFollowPlayer.ScreenSizeChange += UpdateBuffDistance;
+        VineBallScript.BurstVineEnemyHit += TakeVineBurstDamage;
     }
 
     void FixedUpdate()
@@ -320,8 +321,18 @@ public class EnemyScript : MonoBehaviour
         buffDistance = centerEdgeDistance;
     }
 
+    private void TakeVineBurstDamage(GameObject passedObject, float damageValue)
+    {
+        if (passedObject == gameObject)
+        {
+            TakeDamage(damageValue, new Vector2(0, 0));
+            CameraShake.Instance.Shake(0.2f, damageValue / 3f, CameraShake.ShakeAxis.Horizontal);
+        }
+    }
+
     void OnDestroy()
     {
         CameraSmoothFollowPlayer.ScreenSizeChange -= UpdateBuffDistance;
+        VineBallScript.BurstVineEnemyHit -= TakeVineBurstDamage;
     }
 }

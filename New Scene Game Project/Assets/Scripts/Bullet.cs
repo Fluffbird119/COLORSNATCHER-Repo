@@ -17,15 +17,8 @@ public class Bullet : MonoBehaviour
     public static event Action DashTriggerBulletHit;
 
     void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        
+    {   
         Destroy(gameObject, lifetime);
-    }
-
-    private void OnEnable()
-    {
-        baseSpeed = rb.linearVelocity.magnitude;
     }
 
     public void SetSize(float sizeMod)
@@ -36,6 +29,20 @@ public class Bullet : MonoBehaviour
     public void SetDamage(float damageValue)
     {
         damage = damageValue;
+    }
+
+    public void SetSpeed(float speedValue)
+    {
+        rb.linearVelocity = rb.linearVelocity.normalized * speedValue;
+        baseSpeed = speedValue;
+    }
+
+    // Always call this when firing a bullet! add whatever you want to this tho
+    public void Fire(Vector2 direction, float speed)
+    {
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = direction * speed;
+        baseSpeed = speed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

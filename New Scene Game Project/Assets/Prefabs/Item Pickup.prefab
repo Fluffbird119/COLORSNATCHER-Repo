@@ -124,7 +124,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 5.11
+  m_Radius: 5.6
 --- !u!114 &6058588040345925951
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,3 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a54eb663bb66342ac5745474ac35a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 8571517971705181888, guid: aee6e0c22f408574a9f09eb295196c85, type: 3}
+  - {fileID: -7325511144248747933, guid: 0fe6f367c8469994f859e7144f26f445, type: 3}
+  - {fileID: 763330236844255497, guid: 8c16a1748d3d5ff41b8b3f26ab14c95e, type: 3}
