@@ -19,8 +19,13 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        baseSpeed = rb.linearVelocity.magnitude;
+        
         Destroy(gameObject, lifetime);
+    }
+
+    private void OnEnable()
+    {
+        baseSpeed = rb.linearVelocity.magnitude;
     }
 
     public void SetSize(float sizeMod)

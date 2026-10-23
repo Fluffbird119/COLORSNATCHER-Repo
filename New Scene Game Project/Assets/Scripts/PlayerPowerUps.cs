@@ -81,6 +81,8 @@ public class PlayerPowerUps : MonoBehaviour
     [SerializeField] private float curVineCooldown;
     [SerializeField] private float maxVineCooldown;
 
+    private GameObject vineBall;
+
     private VineBarUI vineBarUI;
     #endregion
 
@@ -124,35 +126,13 @@ public class PlayerPowerUps : MonoBehaviour
         oldSpeed = PlayerMovement.Instance.GetSpeed();
         playerLightRadius = playerLight.pointLightOuterRadius;
         playerLightFallOff = playerLight.falloffIntensity;
+
+        vineBall = Instantiate(VineBallPrefab, new Vector3(1000, 0, 0), HeadLookAtMouse.aimAngle);
+        vineBall.SetActive(false);
     }
 
     void Update()
     {
-        /*
-        if (!isRaged && head.color == Color.red)
-        {
-            head.color = Color.white;
-            eye.color = Color.white;
-            attackTentacle.color = Color.white;
-            legTentacles.color = Color.white;
-
-            tentacleAnim.speed = 2f;
-            EyeAnim.speed = 2f;
-            PlayerAttack.Instance.addIdleToBlinkET();
-
-            PlayerMovement.Instance.SetSpeed(oldSpeed);
-        }
-        else if (!isDashing && head.color == Color.yellow)
-        {
-            head.color = Color.white;
-            eye.color = Color.white;
-            attackTentacle.color = Color.white;
-            legTentacles.color = Color.white;
-
-            PlayerMovement.Instance.SetSpeed(oldSpeed);
-            player.layer = 7;
-        }
-        */
         // wow look how hard it is to make debug keybinds only in editor derek
         #if UNITY_EDITOR 
         if (Input.GetKeyDown(KeyCode.F))
@@ -531,7 +511,8 @@ public class PlayerPowerUps : MonoBehaviour
     {
         curVineCooldown = 0;
 
-        GameObject vineBall = Instantiate(VineBallPrefab, vineBallStartingPoint.position, HeadLookAtMouse.aimAngle);
+        vineBall.SetActive(true);
+        vineBall.transform.position = vineBallStartingPoint.position;
         vineBall.GetComponent<Rigidbody2D>().AddForce(vineBallStartingPoint.up * fireForce, ForceMode2D.Impulse);
         ParticleSystem vineParticles = vineBall.transform.GetChild(0).GetComponent<ParticleSystem>();
         if (vineParticles != null)

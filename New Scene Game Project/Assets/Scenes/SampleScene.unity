@@ -2175,6 +2175,10 @@ PrefabInstance:
       propertyPath: youDiedMessageAndButton
       value: 
       objectReference: {fileID: 1207200887}
+    - target: {fileID: 6416862861533095968, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

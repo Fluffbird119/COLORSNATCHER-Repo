@@ -11,9 +11,7 @@ public class VineAOEScript : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
 
-        transform.position = new Vector2(1000, 1000);
-
-        yield return new WaitForFixedUpdate();
-        Destroy(gameObject);
+        gameObject.transform.position = new Vector2(1000, 0);
+        gameObject.SetActive(false);
     }
 }
