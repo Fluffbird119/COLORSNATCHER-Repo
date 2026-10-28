@@ -56,7 +56,7 @@ public class VineBallScript : MonoBehaviour
                     GameObject other = hitCollider.gameObject;
                     if (other.CompareTag("Enemy"))
                     {
-                        BurstVineEnemyHit?.Invoke(other, hits / 2f);
+                        BurstVineEnemyHit?.Invoke(other, hits);
                     }
                 }
             }

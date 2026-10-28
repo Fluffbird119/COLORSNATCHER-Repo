@@ -49,6 +49,8 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private Color vineColor;
     private float stunDuration = 0f;
     private bool hardStunned = false;
+    private float teleportDesire = 0f;
+    private float teleportCooldown = 0f;
 
     public static event Action<GameObject> EnemyDeath;
     public static event Action DashTriggerEnemyHit;
@@ -111,14 +113,20 @@ public class EnemyScript : MonoBehaviour
             float distance = Vector2.Distance(rb.position, playerTransform.position);
             if (isTeleporter)
             {
+                if (teleportCooldown > 0)
+                {
+                    teleportCooldown -= Time.deltaTime;
+                }
                 if (distance < closestDistance)
                 {
-                    closestDistance = Mathf.Max(distance, 30);
+                    closestDistance = Mathf.Max(distance, 20);
+                    teleportDesire = 0f;
                 }
-                else if (distance > closestDistance + 20)
+                else if ((distance > closestDistance + 5) && ((teleportDesire += Time.deltaTime) > 2f) && (teleportCooldown <= 0))
                 {
-                    Vector3 newDisplacement = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-15f, 15f)) * playerRB.linearVelocity.normalized * (closestDistance + 5);
+                    Vector3 newDisplacement = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-20f, 20f)) * playerRB.linearVelocity.normalized * (closestDistance + 10);
                     transform.position = playerTransform.position + newDisplacement;
+                    teleportCooldown = 5f;
                 }
             }
             if (distance > stoppingDistance)

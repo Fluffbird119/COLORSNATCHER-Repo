@@ -137,13 +137,13 @@ public class EnemyManager : MonoBehaviour
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
-            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 20f)));
+            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
         }
         if (Random.Range(-20f, enemiesRapidKilled) > 0)
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
-            pickupScript.CreateHealthPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
+            pickupScript.CreateHealthPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 5f)));
         }
     }
 
