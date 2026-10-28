@@ -119,13 +119,22 @@ public class EnemyScript : MonoBehaviour
                 }
                 if (distance < closestDistance)
                 {
-                    closestDistance = Mathf.Max(distance, 20);
+                    closestDistance = Mathf.Max(distance, 30);
                     teleportDesire = 0f;
                 }
                 else if ((distance > closestDistance + 5) && ((teleportDesire += Time.deltaTime) > 2f) && (teleportCooldown <= 0))
                 {
-                    Vector3 newDisplacement = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-20f, 20f)) * playerRB.linearVelocity.normalized * (closestDistance + 10);
-                    transform.position = playerTransform.position + newDisplacement;
+                    Vector3 newDisplacement;
+                    if (playerRB.linearVelocity.magnitude > 0)
+                    {
+                        newDisplacement = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-20f, 20f)) * playerRB.linearVelocity.normalized * closestDistance;
+                    }
+                    else
+                    {
+                        newDisplacement = Quaternion.Euler(0, 0, UnityEngine.Random.Range(-180, 180)) * new Vector3(0, 1, 0) * closestDistance;
+                    }
+                    StartCoroutine(Relocate(transform.position, playerTransform.position + newDisplacement));
+                    //transform.position = playerTransform.position + newDisplacement;
                     teleportCooldown = 5f;
                 }
             }
@@ -139,6 +148,27 @@ public class EnemyScript : MonoBehaviour
                 rb.MovePosition(newPosition);
             }
         }
+    }
+
+    private IEnumerator Relocate(Vector3 startPos, Vector3 endPos) {
+        float timeRelocating = 0f;
+        float relocateSpeed = Mathf.Max(40 - Vector3.Distance(startPos, endPos), 1.5f);
+        gameObject.layer = LayerMask.NameToLayer("NoCollide");
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.blue;
+        }
+        while (timeRelocating < 1)
+        {
+            timeRelocating = Mathf.Clamp01(timeRelocating + (relocateSpeed * Time.deltaTime));
+            transform.position = Vector3.Lerp(startPos, endPos, timeRelocating);
+            yield return null;
+        }
+        foreach (SpriteRenderer renderer in bodyParts)
+        {
+            renderer.color = Color.white;
+        }
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
