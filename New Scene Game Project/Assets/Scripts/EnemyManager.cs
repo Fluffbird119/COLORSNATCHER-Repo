@@ -138,23 +138,29 @@ public class EnemyManager : MonoBehaviour
 
     private void TrySpawnPickups(Vector3 position)
     {
-        if (playerRaged && Random.Range(-30f, enemiesRapidKilled) > 0)
-        {
-            GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
-            ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
-            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 20f)));
-        }
         if (Random.Range(-20f, enemiesRapidKilled) > 0)
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
             pickupScript.CreateHealthPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
         }
+        if (beatenRed && playerRaged && Random.Range(-30f, enemiesRapidKilled) > 0)
+        {
+            GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
+            ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
+            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 20f)));
+        }
         if (beatenYellow && Random.Range(-40f, enemiesRapidKilled) > 0)
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
             pickupScript.CreateDashPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 40f)));
+        }
+        if (beatenGreen && Random.Range(-60f, enemiesRapidKilled) > 0)
+        {
+            GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
+            ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
+            pickupScript.CreateGooPickup(1f);
         }
     }
 

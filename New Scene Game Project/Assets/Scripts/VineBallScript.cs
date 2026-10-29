@@ -65,6 +65,7 @@ public class VineBallScript : MonoBehaviour
             splat.transform.position = hitPoint;
 
             gameObject.transform.position = new Vector3(1000, 0, 0);
+            hits = 0;
             gameObject.SetActive(false);
         }
         else if (collision.gameObject.CompareTag("BoundaryWall"))
@@ -75,6 +76,7 @@ public class VineBallScript : MonoBehaviour
             splat.transform.position = hitPoint;
 
             gameObject.transform.position = new Vector3(1000, 0, 0);
+            hits = 0;
             gameObject.SetActive(false);
         }
         /*if (splat != null)

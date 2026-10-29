@@ -20,6 +20,7 @@ public class CameraShake : MonoBehaviour
     private float currentShakeDuration = 0f;
     private bool isShaking = false;
     private float strength = 0.75f;
+    private float shakeCap = 3f;
 
     void Awake()
     {
@@ -83,6 +84,10 @@ public class CameraShake : MonoBehaviour
         {
             shakeMagnitude += magnitude * 0.5f;
             currentShakeDuration += duration * 0.5f;
+            if (shakeMagnitude > shakeCap)
+            {
+                shakeMagnitude = shakeCap;
+            }
         }
         isShaking = true;
     }

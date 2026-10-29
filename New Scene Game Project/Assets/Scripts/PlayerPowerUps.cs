@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
+using Unity.VisualScripting;
 
 public class PlayerPowerUps : MonoBehaviour
 {
@@ -85,6 +86,8 @@ public class PlayerPowerUps : MonoBehaviour
     private GameObject vineBall;
     private VineBarUI vineBarUI;
     public bool gunked;
+    private bool gunkQueued = false;
+    private Coroutine gunkDurRoutine;
     #endregion
 
 
@@ -106,6 +109,7 @@ public class PlayerPowerUps : MonoBehaviour
         ShooterScript.DashTriggerShooterHit += AddDash;
         ItemPickup.OnRagePickup += IncreaseRage;
         ItemPickup.OnDashPickup += IncreaseDash;
+        ItemPickup.OnGooPickup += IncreaseGoo;
     }
 
     void Start()
@@ -211,22 +215,31 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (collision.CompareTag("VineAOE"))
         {
-            gunked = isDashing;
+            gunked = true;
             if (isDashing)
             {
                 if (gunkDashParticlePrefab != null && gunkParticleSys != null && gunked)
                 {   
                     gunkParticleSys.Play();
                 }
+                gunkQueued = true;
             }
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (gunked && collision.CompareTag("VineAOE"))
+        if (collision.CompareTag("VineAOE"))
         {
-            StartCoroutine(GunkDuration());
+            gunked = true;
+            if (!isDashing)
+            {
+                gunkDurRoutine = StartCoroutine(GunkDuration(0.2f));
+            }
+            else
+            {
+                gunkQueued = false;
+            }
         }
     }
 
@@ -412,6 +425,8 @@ public class PlayerPowerUps : MonoBehaviour
             curDash1Cooldown += amount;
             curDash2Cooldown = Mathf.Clamp(curDash2Cooldown, 0f, maxIndividualDashCooldown);
         }
+
+        dashBarUIScript.UpdateDashVisual();
     }
 
     private IEnumerator StartDash()
@@ -422,6 +437,10 @@ public class PlayerPowerUps : MonoBehaviour
             if (isRaged)
             {
                 // activate dash burst
+            }
+            if (gunkDurRoutine != null)
+            {
+                StopCoroutine(gunkDurRoutine);
             }
 
             if (dashParticlePrefab != null && particleSys != null) {
@@ -467,6 +486,8 @@ public class PlayerPowerUps : MonoBehaviour
         PlayerMovement.Instance.SetSpeed(dashMoveSpeed / 2f);
         player.layer = 9;
         dashTrigger.enabled = false;
+        gunked = gunkQueued;
+        gunkQueued = false;
 
         canDash = true;
 
@@ -534,8 +555,9 @@ public class PlayerPowerUps : MonoBehaviour
 
     private void AddDash()
     {
-        if (currDashDuration < (isRaged ? 3 : 2) * dashDuration)
-        currDashDuration += dashDuration / 3f;
+        if (currDashDuration < (isRaged ? 3 : 2) * dashDuration) {
+            currDashDuration += dashDuration / 3f;
+        }
     }
 #endregion
 
@@ -554,6 +576,13 @@ public class PlayerPowerUps : MonoBehaviour
 
             vineBarUI.UpdateVineVisual();
         }
+    }
+
+    private void IncreaseGoo(float amount)
+    {
+        curVineCooldown += amount;
+        curVineCooldown = Mathf.Clamp(curVineCooldown, 0f, maxVineCooldown);
+        vineBarUI.UpdateVineVisual();
     }
 
     private void ShootVineBall()
@@ -582,13 +611,13 @@ public class PlayerPowerUps : MonoBehaviour
         return maxVineCooldown;
     }
 
-    private IEnumerator GunkDuration()
+    private IEnumerator GunkDuration(float duration)
     {
         if (!gunked)
         {
             yield break;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(duration);
         gunked = false;
         if (isDashing)
         {
@@ -614,6 +643,7 @@ public class PlayerPowerUps : MonoBehaviour
         ShooterScript.DashTriggerShooterHit -= AddDash;
         ItemPickup.OnRagePickup -= IncreaseRage;
         ItemPickup.OnDashPickup -= IncreaseDash;
+        ItemPickup.OnGooPickup -= IncreaseGoo;
     }
 #endregion
 }

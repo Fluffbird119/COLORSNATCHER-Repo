@@ -250,7 +250,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 2855841578704052247, guid: 22aff7b80a0f2674e9512dcaf73e0a4e, type: 3}
   firePoint: {fileID: 3049531179453528255}
   shootingRange: 35
-  fireRate: 0.5
+  fireRate: 0.6
   distanceRateIncrease: 3
   distanceAccuracyIncrease: 5
   distanceMovePredict: 0

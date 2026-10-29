@@ -9,7 +9,8 @@ public class ItemPickup : MonoBehaviour
     public static event Action<float> OnHealthPickup;
     public static event Action<float> OnRagePickup;
     public static event Action<float> OnDashPickup;
-    private List<Action<float>> events = new() {OnHealthPickup, OnRagePickup, OnDashPickup};
+    public static event Action<float> OnGooPickup;
+    private List<Action<float>> events = new() {OnHealthPickup, OnRagePickup, OnDashPickup, OnGooPickup};
     private int eventIndex = 0;
     private float rotateSpeed = 150f;
     private float splootSpeed = 3f;
@@ -121,6 +122,24 @@ public class ItemPickup : MonoBehaviour
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
             spriteRenderer.color = Color.yellow;
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
+        }
+    }
+
+    public void CreateGooPickup(float value)
+    {
+        eventIndex = 3;
+        strength = value;
+        transform.localScale *= 1 + ((value - 1) / 10);
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.green;
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
+        }
+        else
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.green;
             spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
         }
     }
