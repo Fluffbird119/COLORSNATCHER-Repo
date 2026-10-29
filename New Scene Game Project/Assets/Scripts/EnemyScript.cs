@@ -51,6 +51,7 @@ public class EnemyScript : MonoBehaviour
     private bool hardStunned = false;
     private float teleportDesire = 0f;
     private float teleportCooldown = 0f;
+    private static float globalTeleportCooldown = 0f;
 
     public static event Action<GameObject> EnemyDeath;
     public static event Action DashTriggerEnemyHit;
@@ -117,13 +118,18 @@ public class EnemyScript : MonoBehaviour
                 {
                     teleportCooldown -= Time.deltaTime;
                 }
+                if (globalTeleportCooldown > 0)
+                {
+                    globalTeleportCooldown -= Time.deltaTime;
+                }
                 if (distance < closestDistance)
                 {
                     closestDistance = Mathf.Max(distance, 30);
                     teleportDesire = 0f;
                 }
-                else if ((distance > closestDistance + 5) && ((teleportDesire += Time.deltaTime) > 2f) && (teleportCooldown <= 0))
+                else if ((distance > (5 * closestDistance / 4) + 5) && ((teleportDesire += Time.deltaTime) > 2f) && (globalTeleportCooldown <= 0) && (teleportCooldown <= 0))
                 {
+                    globalTeleportCooldown = 1f;
                     Vector3 newDisplacement;
                     if (playerRB.linearVelocity.magnitude > 0)
                     {

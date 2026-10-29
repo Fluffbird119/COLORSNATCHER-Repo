@@ -129,7 +129,7 @@ public class Bullet : MonoBehaviour
     private IEnumerator RunParryImmunity()
     {
         parryImmunityWindow = true;
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         parryImmunityWindow = false;
     }
 }

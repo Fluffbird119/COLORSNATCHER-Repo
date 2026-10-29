@@ -18,6 +18,10 @@ public class EnemyManager : MonoBehaviour
     private float timeSinceKill = 0f;
     private int enemiesRapidKilled = 0;
     private bool playerRaged;
+    private bool beatenRed = false;
+    private bool beatenYellow = false;
+    private bool beatenGreen = false;
+
 
     private void Awake()
     {
@@ -33,6 +37,7 @@ public class EnemyManager : MonoBehaviour
         CameraSmoothFollowPlayer.ScreenSizeChange += UpdateCamSize;
         PlayerPowerUps.RageStateChanged += UpdateRage;
         DialogueSystem.DialogueStateChange += HandleDialogueThings;
+        GameManager.OnBossKill += BossKilled;
     }
 
     void Update()
@@ -107,7 +112,7 @@ public class EnemyManager : MonoBehaviour
             if (enemies[i] == enemy)
             {
                 enemies.RemoveAt(i);
-                if (timeSinceKill <= 1f)
+                if (timeSinceKill <= 3f)
                 {
                     ++enemiesRapidKilled;
                 }
@@ -133,17 +138,23 @@ public class EnemyManager : MonoBehaviour
 
     private void TrySpawnPickups(Vector3 position)
     {
-        if (playerRaged && Random.Range(-50f, enemiesRapidKilled) > 0)
+        if (playerRaged && Random.Range(-30f, enemiesRapidKilled) > 0)
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
-            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
+            pickupScript.CreateRagePickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 20f)));
         }
         if (Random.Range(-20f, enemiesRapidKilled) > 0)
         {
             GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
             ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
-            pickupScript.CreateHealthPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 5f)));
+            pickupScript.CreateHealthPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 10f)));
+        }
+        if (beatenYellow && Random.Range(-40f, enemiesRapidKilled) > 0)
+        {
+            GameObject pickup = Instantiate(pickupPrefab, position, Quaternion.identity);
+            ItemPickup pickupScript = pickup.GetComponent<ItemPickup>();
+            pickupScript.CreateDashPickup(Mathf.Floor(Random.Range(1f, 1f + enemiesRapidKilled / 40f)));
         }
     }
 
@@ -171,11 +182,28 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    private void BossKilled(string bossName)
+    {
+        switch (bossName)
+        {
+            case "red":
+                beatenRed = true;
+                break;
+            case "yellow":
+                beatenYellow = true;
+                break;
+            case "green":
+                beatenGreen = true;
+                break;
+        }
+    }
+
     void OnDestroy()
     {
         EnemyScript.EnemyDeath -= RemoveEnemy;
         CameraSmoothFollowPlayer.ScreenSizeChange -= UpdateCamSize;
         PlayerPowerUps.RageStateChanged -= UpdateRage;
         DialogueSystem.DialogueStateChange -= HandleDialogueThings;
+        GameManager.OnBossKill -= BossKilled;
     }
 }

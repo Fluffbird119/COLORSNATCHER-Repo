@@ -105,6 +105,7 @@ public class PlayerPowerUps : MonoBehaviour
         //Bullet.DashTriggerBulletHit += AddDash;
         ShooterScript.DashTriggerShooterHit += AddDash;
         ItemPickup.OnRagePickup += IncreaseRage;
+        ItemPickup.OnDashPickup += IncreaseDash;
     }
 
     void Start()
@@ -234,15 +235,18 @@ public class PlayerPowerUps : MonoBehaviour
     {
         if (beatenRed)
         {
-            rage += amount;
-
             if (isRaged)
             {
                 rageStache += amount;
+                rage += 15 * amount / (rageStache + 14);
             }
-            else if (rage > maxRage)
+            else
             {
-                rage = maxRage;
+                rage += amount;
+                if (rage > maxRage)
+                {
+                    rage = maxRage;
+                }
             }
 
             rageBarUIScript.UpdateRageVisual();
@@ -393,6 +397,21 @@ public class PlayerPowerUps : MonoBehaviour
         }
 
         dashBarUIScript.UpdateDashVisual();
+    }
+
+    private void IncreaseDash(float amount)
+    {
+        if (curDash1Cooldown < maxIndividualDashCooldown)
+        {
+            curDash1Cooldown += amount;
+            amount = curDash1Cooldown - maxIndividualDashCooldown;
+            curDash1Cooldown = Mathf.Clamp(curDash1Cooldown, 0f, maxIndividualDashCooldown);
+        }
+        if (curDash2Cooldown < maxIndividualDashCooldown && amount > 0)
+        {
+            curDash1Cooldown += amount;
+            curDash2Cooldown = Mathf.Clamp(curDash2Cooldown, 0f, maxIndividualDashCooldown);
+        }
     }
 
     private IEnumerator StartDash()
@@ -594,6 +613,7 @@ public class PlayerPowerUps : MonoBehaviour
         //Bullet.DashTriggerBulletHit -= AddDash;
         ShooterScript.DashTriggerShooterHit -= AddDash;
         ItemPickup.OnRagePickup -= IncreaseRage;
+        ItemPickup.OnDashPickup -= IncreaseDash;
     }
 #endregion
 }

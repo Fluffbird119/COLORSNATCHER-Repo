@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     private Color brightLight = Color.white;
 
     public static GameManager Instance { get; private set; }
+    public static event Action<string> OnBossKill;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -126,6 +128,7 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerPowerUps.Instance.beatenRed = true;
+        OnBossKill?.Invoke("red");
         BackgroundManager.Instance.ChangeBackground(1);
         globalLight.intensity = 0.9f;
         PlayerHealth.Instance.ChangeHealth(1, 1f);
@@ -223,6 +226,7 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerPowerUps.Instance.beatenYellow = true;
+        OnBossKill?.Invoke("yellow");
         BackgroundManager.Instance.ChangeBackground(2);
         globalLight.intensity = 0.2f;
         globalLight.color = dimLight;
@@ -326,6 +330,7 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
         PlayerPowerUps.Instance.beatenGreen = true;
+        OnBossKill?.Invoke("green");
         BackgroundManager.Instance.ChangeBackground(3);
         globalLight.intensity = 1.0f;
         globalLight.color = brightLight;
@@ -429,6 +434,25 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        int hoardDeaths = 0;
+        int currDeaths;
+        SpawnEnemies(trooperPrefab, 30);
+        SpawnEnemies(chunkyPrefab, 10);
+        while (hoardDeaths < 80)
+        {
+            if ((currDeaths = 40 - EnemyManager.Instance.NumEnemies()) > 5)
+            {
+                int split = UnityEngine.Random.Range(4, currDeaths + 1);
+                SpawnEnemies(trooperPrefab, split);
+                SpawnEnemies(chunkyPrefab, currDeaths - split);
+                hoardDeaths += currDeaths;
+            }
+            yield return null;
+        }
+        while (EnemyManager.Instance.NumEnemies() > 0)
+        {
+            yield return null;
+        }
         StartCoroutine(DialogueSystem.instance.StartCutscene(16));
         while (DialogueSystem.instance.isCutscenePlaying)
         {
@@ -516,20 +540,20 @@ public class GameManager : MonoBehaviour
             int attempts = 0;
             while (!validPositionFound && attempts < maxAttempts)
             {
-                float randomTheta = Random.Range(0f, 2f * Mathf.PI);
+                float randomTheta = UnityEngine.Random.Range(0f, 2f * Mathf.PI);
                 float randomDistance;
 
                 if (prefabToSpawn == speedEnemyPrefab)
                 {
-                    randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds * 0.5f);
+                    randomDistance = UnityEngine.Random.Range(minSpawnBounds, maxSpawnBounds * 0.5f);
                 }
                 else if (prefabToSpawn == sniperPrefab)
                 {
-                    randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds * 0.8f);
+                    randomDistance = UnityEngine.Random.Range(minSpawnBounds, maxSpawnBounds * 0.8f);
                 }
                 else
                 {
-                    randomDistance = Random.Range(minSpawnBounds, maxSpawnBounds);
+                    randomDistance = UnityEngine.Random.Range(minSpawnBounds, maxSpawnBounds);
                 }
 
                 spawnPosition = new Vector2(randomDistance * Mathf.Cos(randomTheta) + player.transform.position.x, randomDistance * Mathf.Sin(randomTheta) + player.transform.position.y);
@@ -545,7 +569,7 @@ public class GameManager : MonoBehaviour
             {
                 if (Vector2.Distance(player.transform.position, new Vector2(0, 0)) < minSpawnBounds)
                 {
-                    enemy = Instantiate(prefabToSpawn, new Vector2(30 * (int)Random.Range(-1, 2), 30 * (int)Random.Range(-1, 2)), Quaternion.identity);
+                    enemy = Instantiate(prefabToSpawn, new Vector2(30 * (int)UnityEngine.Random.Range(-1, 2), 30 * (int)UnityEngine.Random.Range(-1, 2)), Quaternion.identity);
                 }
                 else
                 {

@@ -400,7 +400,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "Killing! Woah, thats crazy! You're getting me riled up!!!" }, "yellow");
+            StartDialogue(new string[] { "Killing?! Woah, thats crazy! You're getting me riled up!!!"}, "yellow");
             while (isTalking)
             {
                 yield return null;
@@ -416,7 +416,7 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 6)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] { "Wow! You are really good at this! :D" }, "yellow");
+            StartDialogue(new string[] { "Wow! You are really good at this! :D", "You must be some kind of Color Snatcher!!"}, "yellow");
             while (isTalking)
             {
                 yield return null;

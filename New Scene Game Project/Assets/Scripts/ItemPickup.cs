@@ -8,7 +8,8 @@ public class ItemPickup : MonoBehaviour
     private float strength = 0;
     public static event Action<float> OnHealthPickup;
     public static event Action<float> OnRagePickup;
-    private List<Action<float>> events = new() {OnHealthPickup, OnRagePickup};
+    public static event Action<float> OnDashPickup;
+    private List<Action<float>> events = new() {OnHealthPickup, OnRagePickup, OnDashPickup};
     private int eventIndex = 0;
     private float rotateSpeed = 150f;
     private float splootSpeed = 3f;
@@ -17,7 +18,7 @@ public class ItemPickup : MonoBehaviour
     private float lifetime = 10f;
     private static List<GameObject> itemPickups = new List<GameObject>();
     [SerializeField] private Sprite[] sprites;
-
+    
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -102,6 +103,24 @@ public class ItemPickup : MonoBehaviour
         else
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
+        }
+    }
+
+    public void CreateDashPickup(float value)
+    {
+        eventIndex = 2;
+        strength = value;
+        transform.localScale *= 1 + ((value - 1) / 10);
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.yellow;
+            spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
+        }
+        else
+        {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+            spriteRenderer.color = Color.yellow;
             spriteRenderer.sprite = sprites[UnityEngine.Random.Range(0, 3)];
         }
     }
