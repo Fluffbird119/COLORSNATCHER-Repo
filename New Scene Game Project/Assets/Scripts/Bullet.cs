@@ -84,11 +84,11 @@ public class Bullet : MonoBehaviour
                     if (!parried) {
                         PlayerHealth.Instance.ChangeHealth(-damage);
                     }
-                    else if (!parryImmunityWindow)
+                    /*else if (!parryImmunityWindow)
                     {
                         PlayerHealth.Instance.ChangeHealth(-1, 1);
                         AudioManager.Instance.LaughTrack();
-                    }
+                    }*/
                 }
             }
         }
