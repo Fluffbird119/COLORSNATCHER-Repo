@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9bbf6459b25b954bbf7cc71e2c7cca3, type: 3}
   m_Name: TestAttack
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
+  sprite: {fileID: -4994045265728382883, guid: 62e3b1987fe3f274db2e9e0511cee8e3, type: 3}
   animation: {fileID: 0}
   preAtkAnim: 0
   atkAnim: 0
@@ -28,6 +28,7 @@ MonoBehaviour:
   - {x: 0, y: 0}
   dynamicEnd: 0
   startTransform: {fileID: 0}
+  shootPointTransform: {fileID: 0}
   transformToTrack: {fileID: 0}
   trackStrength: 0
   trackDuration: 0
