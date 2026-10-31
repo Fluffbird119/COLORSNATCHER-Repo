@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b765346dc206f7e4dbb6d11939160d82, type: 3}
   m_Name: CalmShooterEnemyBullet
   m_EditorClassIdentifier: 
-  Velocity: 0
-  Damage: 0
-  Lifetime: 0
+  Velocity: 40
+  Damage: 2
+  Lifetime: 10
   BulletColliderRadius: 0.55
-  BulletSprite: {fileID: 0}
+  BulletSprite: {fileID: -4994045265728382883, guid: 62e3b1987fe3f274db2e9e0511cee8e3, type: 3}
   SpriteAngleOffset: 0
-  ProjectileScale: {x: 1, y: 1, z: 1}
+  ProjectileScale: {x: 1.5, y: 1.5, z: 1}
