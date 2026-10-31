@@ -127,7 +127,10 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                RePoolObject();
+                if (!parried)
+                {
+                    RePoolObject();
+                }
                 if (collision.gameObject.layer != LayerMask.NameToLayer("iframes"))
                 {
                     if (!parried)
