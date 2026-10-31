@@ -11,10 +11,15 @@ public class BossAttackController : MonoBehaviour
     private PolygonCollider2D hitbox;
     private float damage;
     private Vector2[] startPoints = new Vector2[2]; // use 1 point for projectiles
+    private bool dynamicStart;
     private Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
+    private bool dynamicEnd;
+    private Transform startTransform;
     private Transform transformToTrack;
     private float trackStrength;
     private float trackDuration;
+    private bool telegraphs;
+    private Color telegraphColor;
     private float attackDuration;
     private float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth
     private float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
