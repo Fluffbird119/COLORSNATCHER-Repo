@@ -4,8 +4,8 @@ using UnityEngine;
 public class ComboAttack : ScriptableObject
 {
     public bool usesComboAttacks;
-    public GenericAttack[] genericAttacks;
-    public ComboAttack[] comboAttacks;
+    public BossAttackController[] genericAttacks;
+    public BossComboController[] comboAttacks;
     public float delay;
     public bool shuffled;
     public int numAttacksPerCombo;

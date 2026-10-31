@@ -9,9 +9,9 @@ public class BossPhase : ScriptableObject
     public MonoBehaviour idleBehavior; // what the boss does when not attacking
     public PolygonCollider2D hitbox;
     public float health;
-    public GenericAttack[] genericAttacks;
+    public BossAttackController[] genericAttacks;
     public int[] genericAttackAnimLinker; // the values held point to the associated anim state boolean
-    public ComboAttack[] comboAttacks;
+    public BossComboController[] comboAttacks;
     public int[] comboAttackAnimLinker; // the values held point to the associated anim state boolean
     public float cooldown;
     public int stamina;
