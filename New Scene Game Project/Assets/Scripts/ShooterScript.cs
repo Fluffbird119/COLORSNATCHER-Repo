@@ -5,16 +5,14 @@ using UnityEngine.Rendering.Universal;
 
 public class ShooterScript : MonoBehaviour
 {
-    public GameObject bulletPrefab;
+    [SerializeField] ProjectileScriptableObject bulletScriptableObject;
+
     public Transform firePoint;
     public float shootingRange = 8f;
     public float fireRate = 1.5f;
     [SerializeField] private float distanceRateIncrease = 3f;
     [SerializeField] private float distanceAccuracyIncrease = 5f;
     [SerializeField] private float distanceMovePredict = 0f;
-    public float bulletSpeed = 30f;
-    [SerializeField] private float bulletDamage;
-    [SerializeField] private float bulletSizeMod;
     public float rageDamageBuff = 1.5f;
     public float stunDamageBuff = 1.2f;
     [Range(0f, 1f)]
@@ -159,7 +157,7 @@ public class ShooterScript : MonoBehaviour
             return;
         }
 
-        if (bulletPrefab == null || firePoint == null) return;
+        if (firePoint == null) return;
         Vector2 playerPosition = playerTransform.position;
         Vector2 firePointPosition = firePoint.position;
         float distance = Vector2.Distance(playerPosition, firePointPosition);
@@ -176,11 +174,8 @@ public class ShooterScript : MonoBehaviour
         float randomAngle = UnityEngine.Random.Range(-maxSpreadAngle, maxSpreadAngle);
         Quaternion spreadRotation = Quaternion.Euler(0, 0, randomAngle);
         Vector2 finalDirection = spreadRotation * fireDirection;
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
-        Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.Fire(finalDirection, bulletSpeed);
-        bulletScript.SetSize(bulletSizeMod);
-        bulletScript.SetDamage(bulletDamage);
+
+        ProjectileManager.Instance.ShootProjectileTowardsDirection(bulletScriptableObject, firePoint, finalDirection);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

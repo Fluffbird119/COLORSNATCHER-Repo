@@ -42,15 +42,11 @@ public class ProjectileManager : MonoBehaviour
     private void OnRelease(GameObject pooledObject)
     {
         pooledObject.SetActive(false);
-
-        Rigidbody2D bulletRigidbody2D = pooledObject.GetComponent<Rigidbody2D>();
-        bulletRigidbody2D.linearVelocity = Vector3.zero;
-        bulletRigidbody2D.angularVelocity = 0f;
     }
 
     private void OnGet(GameObject pooledObject)
     {
-        pooledObject.SetActive(false);
+        pooledObject.SetActive(true);
     }
 
     private void OnDestroyItem(GameObject pooledObject)
@@ -74,10 +70,16 @@ public class ProjectileManager : MonoBehaviour
         ShootProjectile(projectileScriptableObject, firePoint, shootDirection);
     }
 
+    public void ShootProjectileTowardsDirection(ProjectileScriptableObject projectileScriptableObject, Transform firePoint, Vector2 direction) 
+    {
+        ShootProjectile(projectileScriptableObject, firePoint, direction);
+    }
+
     private void ShootProjectile(ProjectileScriptableObject projectileScriptableObject, Transform firePoint, Vector2 direction)
     {
         GameObject bullet = ProjectilePool.Get();
         Bullet bulletScript = bullet.GetComponent<Bullet>();
+
         bulletScript.PopulateBulletValues(projectileScriptableObject, firePoint, direction.normalized);
     }
 }

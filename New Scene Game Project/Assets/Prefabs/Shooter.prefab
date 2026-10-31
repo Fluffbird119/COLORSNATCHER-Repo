@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e5029ec4cf17ec4496d97f68e9b5698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletScriptableObject: {fileID: 11400000, guid: 3df4cc0a3c7465148b58589456a34d44, type: 2}
   bulletPrefab: {fileID: 2855841578704052247, guid: 22aff7b80a0f2674e9512dcaf73e0a4e, type: 3}
   firePoint: {fileID: 3049531179453528255}
   shootingRange: 200

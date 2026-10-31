@@ -1,11 +1,17 @@
 using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
+    struct AudioObject
+    {
+        string Name;
+        AudioSource AudioSource;
+    }
     public static AudioManager Instance { get; private set; }
 
     [Header("Music")]
+    List<AudioObject> MusicObjectList = new List<AudioObject>();
     [SerializeField] private AudioSource convoMusic;
     [SerializeField] private AudioSource yellowMusic;
     [SerializeField] private AudioSource blueMusic;

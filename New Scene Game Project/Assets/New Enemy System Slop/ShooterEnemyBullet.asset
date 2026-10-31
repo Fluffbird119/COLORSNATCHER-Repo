@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b765346dc206f7e4dbb6d11939160d82, type: 3}
+  m_Name: ShooterEnemyBullet
+  m_EditorClassIdentifier: 
+  Velocity: 25
+  Damage: 1
+  Lifetime: 10
+  BulletColliderRadius: 0.55
+  BulletSprite: {fileID: -4994045265728382883, guid: 62e3b1987fe3f274db2e9e0511cee8e3, type: 3}
+  SpriteAngleOffset: 0
+  ProjectileScale: {x: 1.2, y: 1.2, z: 1}

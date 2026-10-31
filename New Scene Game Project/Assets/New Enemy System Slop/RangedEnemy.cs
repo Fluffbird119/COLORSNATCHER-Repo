@@ -10,7 +10,4 @@ public class RangedEnemy : ScriptableObject
     public float DistanceRateIncrease;
     public float DistanceAccuracyIncrease;
     public float DistanceMovePredict;
-    public float Bulletspeed;
-    public float BulletDamage;
-
 }
