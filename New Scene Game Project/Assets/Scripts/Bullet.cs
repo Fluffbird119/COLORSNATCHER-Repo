@@ -185,6 +185,10 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator RunParryImmunity()
     {
+        if (parryImmunityWindow)
+        {
+            // this is here to stop the stupid warning from popping up that parryImmunityWindow is never read cuz the oneshot self parry is commented out
+        }
         parryImmunityWindow = true;
         yield return new WaitForSeconds(0.2f);
         parryImmunityWindow = false;
