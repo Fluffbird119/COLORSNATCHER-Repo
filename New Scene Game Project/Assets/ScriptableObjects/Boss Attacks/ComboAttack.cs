@@ -9,5 +9,4 @@ public class ComboAttack : ScriptableObject
     public float delay;
     public bool shuffled;
     public int numAttacksPerCombo;
-    public bool comboDone = false;
 }

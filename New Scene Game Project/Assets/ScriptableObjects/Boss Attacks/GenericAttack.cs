@@ -20,5 +20,4 @@ public class GenericAttack : ScriptableObject
     public float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     public bool isCustomAttack;
     public MonoBehaviour customScript;
-    public bool attackDone = false;
 }

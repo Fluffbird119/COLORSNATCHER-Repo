@@ -6,5 +6,4 @@ public class Boss : ScriptableObject
     public BossPhaseController[] phases;
     // smth for boss health bar
     public float health; // this purely effects the health bar, phase health is what matters
-    public bool bossDone = false;
 }

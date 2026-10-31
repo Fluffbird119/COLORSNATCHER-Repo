@@ -18,5 +18,4 @@ public class BossPhase : ScriptableObject
     public int staminaRegen;
     public bool isCustomPhase;
     public MonoBehaviour customPhaseScript;
-    public bool phaseDone = false;
 }
