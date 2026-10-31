@@ -3,6 +3,7 @@ using UnityEngine.Pool;
 
 public class ProjectileManager : MonoBehaviour
 {
+    [SerializeField] private Camera mainCamera;
     public ObjectPool<GameObject> ProjectilePool;
 
     [SerializeField] private GameObject bulletPrefab;
@@ -59,17 +60,24 @@ public class ProjectileManager : MonoBehaviour
 
     public void ShootProjectileTowardsMouse(ProjectileScriptableObject projectileScriptableObject, Transform firePoint)
     {
+        Vector3 mouseWorldPos = mainCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(Input.mousePosition.z)));
 
+        Vector2 shootDirection = (mouseWorldPos - firePoint.position).normalized;
+
+        ShootProjectile(projectileScriptableObject, firePoint, shootDirection);
     }
 
     public void ShootProjectileTowardsPoint(ProjectileScriptableObject projectileScriptableObject, Transform firePoint, Transform targetPoint)
     {
+        Vector2 shootDirection = (targetPoint.position - firePoint.position).normalized;
 
+        ShootProjectile(projectileScriptableObject, firePoint, shootDirection);
     }
-
 
     private void ShootProjectile(ProjectileScriptableObject projectileScriptableObject, Transform firePoint, Vector2 direction)
     {
-
+        GameObject bullet = ProjectilePool.Get();
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.PopulateBulletValues(projectileScriptableObject, firePoint, direction.normalized);
     }
 }
