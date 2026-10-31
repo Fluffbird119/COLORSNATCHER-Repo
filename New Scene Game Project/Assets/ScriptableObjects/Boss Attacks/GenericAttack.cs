@@ -15,6 +15,7 @@ public class GenericAttack : ScriptableObject
     public Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
     public bool dynamicEnd;
     public Transform startTransform;
+    public Transform shootPointTransform;
     public Transform transformToTrack;
     public float trackStrength;
     public float trackDuration;

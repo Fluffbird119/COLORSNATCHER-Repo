@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9bbf6459b25b954bbf7cc71e2c7cca3, type: 3}
+  m_Name: TestAttack
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
+  animation: {fileID: 0}
+  preAtkAnim: 0
+  atkAnim: 0
+  postAtkAnim: 0
+  hitbox: {fileID: 0}
+  damage: 0
+  startPoints:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  dynamicStart: 0
+  endPoints:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  dynamicEnd: 0
+  startTransform: {fileID: 0}
+  transformToTrack: {fileID: 0}
+  trackStrength: 0
+  trackDuration: 0
+  telegraphs: 0
+  telegraphColor: {r: 0, g: 0, b: 0, a: 0}
+  attackDuration: 0
+  pathCurveDepth: 0
+  pathSpeedCheckpoints: []
+  isCustomAttack: 0
+  customScript: {fileID: 0}
