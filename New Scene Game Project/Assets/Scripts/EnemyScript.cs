@@ -5,8 +5,6 @@ using UnityEngine.Rendering.Universal;
 
 public class EnemyScript : MonoBehaviour
 {
-    [SerializeField] private PlayerPowerUps playerPowerUpScript;
-
     public float speed = 3f;
     private float oldSpeed;
     public float stoppingDistance = 0f;
@@ -28,8 +26,6 @@ public class EnemyScript : MonoBehaviour
     public bool reincarnates = false;
     private bool reincarnated = false;
     private bool isInDeathState = false;
-
-    [SerializeField] private PlayerHealth healthScript;
 
     [SerializeField] private bool isStunned;
 
@@ -76,7 +72,6 @@ public class EnemyScript : MonoBehaviour
         if (player != null)
         {
             playerTransform = player.transform;
-            playerPowerUpScript = player.GetComponent<PlayerPowerUps>();
             playerRB = player.GetComponent<Rigidbody2D>();
         }
         lastSpeedBoostTime = Time.time;

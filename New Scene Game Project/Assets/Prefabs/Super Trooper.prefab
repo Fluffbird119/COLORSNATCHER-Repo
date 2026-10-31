@@ -127,8 +127,8 @@ GameObject:
   - component: {fileID: 5984809680287405731}
   - component: {fileID: 1123261327007499238}
   - component: {fileID: 3864631496647852325}
-  - component: {fileID: 412852580384354709}
   - component: {fileID: 2162422007497107685}
+  - component: {fileID: 412852580384354709}
   m_Layer: 0
   m_Name: Super Trooper
   m_TagString: Enemy
@@ -274,28 +274,6 @@ MonoBehaviour:
   animator: {fileID: 412852580384354709}
   spotLight: {fileID: 4202928430206541905}
   vineColor: {r: 0.047058824, g: 0.7137255, b: 0, a: 1}
---- !u!95 &412852580384354709
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8719147511489265977}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ede3d0afe359cb14c98a98f3f0441e1b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!60 &2162422007497107685
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -440,3 +418,25 @@ PolygonCollider2D:
       - {x: 7.2658577, y: -4.7834945}
       - {x: 7.1720805, y: -4.3146086}
   m_UseDelaunayMesh: 0
+--- !u!95 &412852580384354709
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8719147511489265977}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ede3d0afe359cb14c98a98f3f0441e1b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
