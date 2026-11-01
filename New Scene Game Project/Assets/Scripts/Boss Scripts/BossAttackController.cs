@@ -26,6 +26,7 @@ public class BossAttackController : MonoBehaviour
     private bool telegraphs;
     private Color telegraphColor;
     private float attackDuration;
+    private float startDelay;
     private float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth
     private float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     private bool isCustomAttack;
@@ -43,24 +44,32 @@ public class BossAttackController : MonoBehaviour
         if (!isCustomAttack)
         {
             sprite = attackScriptableObject.sprite;
+            spriteRenderer.sprite = sprite;
+
             animation = attackScriptableObject.animation;
             preAtkAnim = attackScriptableObject.preAtkAnim;
             atkAnim = attackScriptableObject.atkAnim;
             postAtkAnim = attackScriptableObject.postAtkAnim;
+
             hitbox = attackScriptableObject.hitbox;
             damage = attackScriptableObject.damage;
+
             startPoints = attackScriptableObject.startPoints;
             dynamicStart = attackScriptableObject.dynamicStart;
             endPoints = attackScriptableObject.endPoints;
             dynamicEnd = attackScriptableObject.dynamicEnd;
+
             startTransform = attackScriptableObject.startTransform;
             shootPointTransform = attackScriptableObject.shootPointTransform;
             transformToTrack = attackScriptableObject.transformToTrack;
             trackStrength = attackScriptableObject.trackStrength;
             trackDuration = attackScriptableObject.trackDuration;
+
             telegraphs = attackScriptableObject.telegraphs;
             telegraphColor = attackScriptableObject.telegraphColor;
+
             attackDuration = attackScriptableObject.attackDuration;
+            startDelay = attackScriptableObject.startDelay;
             pathCurveDepth = attackScriptableObject.pathCurveDepth;
             pathSpeedCheckpoints = attackScriptableObject.pathSpeedCheckpoints;
 

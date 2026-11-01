@@ -22,6 +22,7 @@ public class GenericAttack : ScriptableObject
     public bool telegraphs;
     public Color telegraphColor;
     public float attackDuration;
+    public float startDelay; // telegraphs during this delay, if that is enabled
     public float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth
     public float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     public bool isCustomAttack;
