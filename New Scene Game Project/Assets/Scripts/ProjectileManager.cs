@@ -27,7 +27,7 @@ public class ProjectileManager : MonoBehaviour
             actionOnRelease: OnRelease,
             actionOnGet: OnGet,
             actionOnDestroy: OnDestroyItem,
-            defaultCapacity: 20, // allocates memory for the first 20 objects
+            defaultCapacity: 40, // allocates memory for the first 40 objects
             collectionCheck: true
         );
     }
