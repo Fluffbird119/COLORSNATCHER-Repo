@@ -4,6 +4,7 @@ using System.Collections;
 
 public class VineAOEScript : MonoBehaviour
 {
+    public float vineLastOnGround = 5f;
     private void OnEnable()
     {
         StartCoroutine(VineAOELastOnGround());
@@ -11,7 +12,7 @@ public class VineAOEScript : MonoBehaviour
 
     private IEnumerator VineAOELastOnGround()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(vineLastOnGround);
 
         gameObject.transform.position = new Vector2(1000, 0);
         gameObject.SetActive(false);

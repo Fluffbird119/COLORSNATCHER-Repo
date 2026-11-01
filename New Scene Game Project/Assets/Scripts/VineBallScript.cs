@@ -1,5 +1,6 @@
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 public class VineBallScript : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class VineBallScript : MonoBehaviour
     private int hits = 0;
     //[SerializeField] private float baseStartSizeMod = 0.6f;
     private GameObject splat;
+    private GameObject splat2;
+    private GameObject splat3;
+
     public static event Action<GameObject, float> BurstVineEnemyHit;
 
     void Start()
@@ -21,6 +25,10 @@ public class VineBallScript : MonoBehaviour
 
         splat = Instantiate(vineStunAOEPrefab, new Vector3(1000, 0, 0), Quaternion.identity);
         splat.SetActive(false);
+        splat2 = Instantiate(vineStunAOEPrefab, new Vector3(1000, 0, 0), Quaternion.identity);
+        splat2.SetActive(false);
+        splat3 = Instantiate(vineStunAOEPrefab, new Vector3(1000, 0, 0), Quaternion.identity);
+        splat3.SetActive(false);
     }
     private void Update()
     {
@@ -61,10 +69,28 @@ public class VineBallScript : MonoBehaviour
                 }
             }
 
-            splat.SetActive(true);
-            splat.transform.position = hitPoint;
+            if (!splat.activeSelf)
+            {
+                splat.SetActive(true);
+                splat.transform.position = hitPoint;
+            }
+            else if (!splat2.activeSelf)
+            {
+                splat2.SetActive(true);
+                splat2.transform.position = hitPoint;
+            }
+            else if (!splat3.activeSelf)
+            {
+                splat3.SetActive(true);
+                splat3.transform.position = hitPoint;
+            }
+            else
+            {
+                GameObject tempBall = Instantiate(vineStunAOEPrefab, hitPoint, Quaternion.identity);
+                VineAOEScript vineAOE = tempBall.GetComponent<VineAOEScript>();
+                Destroy(tempBall, vineAOE.vineLastOnGround);
+            }
 
-            gameObject.transform.position = new Vector3(1000, 0, 0);
             hits = 0;
             gameObject.SetActive(false);
         }

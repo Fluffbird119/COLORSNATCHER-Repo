@@ -11,7 +11,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     [Header("Music")]
-    List<AudioObject> MusicObjectList = new List<AudioObject>();
+    [SerializeField] List<AudioObject> MusicObjectList = new List<AudioObject>();
     [SerializeField] private AudioSource convoMusic;
     [SerializeField] private AudioSource yellowMusic;
     [SerializeField] private AudioSource blueMusic;

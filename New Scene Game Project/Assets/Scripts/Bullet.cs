@@ -88,6 +88,8 @@ public class Bullet : MonoBehaviour
     {
         bulletRB.linearVelocity = Vector3.zero;
         bulletRB.angularVelocity = 0f;
+        parried = false;
+        spriteRenderer.color = Color.white;
 
         ProjectileManager.Instance.ProjectilePool.Release(gameObject);
     }
