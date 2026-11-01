@@ -164,16 +164,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletScriptableObject: {fileID: 11400000, guid: 3df4cc0a3c7465148b58589456a34d44, type: 2}
-  bulletPrefab: {fileID: 2855841578704052247, guid: 22aff7b80a0f2674e9512dcaf73e0a4e, type: 3}
   firePoint: {fileID: 3049531179453528255}
   shootingRange: 200
   fireRate: 0.4
   distanceRateIncrease: 1.5
   distanceAccuracyIncrease: 2.5
   distanceMovePredict: 0.3
-  bulletSpeed: 25
-  bulletDamage: 1
-  bulletSizeMod: 1.2
   rageDamageBuff: 1.5
   stunDamageBuff: 1.2
   accuracy: 0.1

@@ -527,6 +527,11 @@ public class GameManager : MonoBehaviour
 
     private void SpawnEnemies(GameObject prefabToSpawn, int count)
     {
+        StartCoroutine(SpawnEnemiesRoutine(prefabToSpawn, count));
+    }
+
+    private IEnumerator SpawnEnemiesRoutine(GameObject prefabToSpawn, int count)
+    {
         // float checkRadius = 1.5f;
         minSpawnBounds = CameraSmoothFollowPlayer.centerEdgeDistance + 1f;
         maxSpawnBounds = minSpawnBounds + 25f;
@@ -580,9 +585,11 @@ public class GameManager : MonoBehaviour
             {
                 enemy = Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
             }
-            if (enemy != null) {
+            if (enemy != null)
+            {
                 EnemyManager.Instance.AddEnemy(enemy);
             }
+            yield return new WaitForSeconds(0.05f);
         }
     }
 
