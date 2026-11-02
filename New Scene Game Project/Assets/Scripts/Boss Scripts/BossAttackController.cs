@@ -18,6 +18,7 @@ public class BossAttackController : MonoBehaviour
     private bool dynamicStart;
     private Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicEnd;
+    private RepositionInterface repositionScript;
     private Transform startTransform;
     private Transform shootPointTransform;
     private Transform transformToTrack;
@@ -58,6 +59,7 @@ public class BossAttackController : MonoBehaviour
             dynamicStart = attackScriptableObject.dynamicStart;
             endPoints = attackScriptableObject.endPoints;
             dynamicEnd = attackScriptableObject.dynamicEnd;
+            repositionScript = attackScriptableObject.repositionScript;
 
             startTransform = attackScriptableObject.startTransform;
             shootPointTransform = attackScriptableObject.shootPointTransform;
@@ -73,20 +75,64 @@ public class BossAttackController : MonoBehaviour
             pathCurveDepth = attackScriptableObject.pathCurveDepth;
             pathSpeedCheckpoints = attackScriptableObject.pathSpeedCheckpoints;
 
-            if (dynamicStart)
+            if (startPoints[1] != null) // the attack is a laser (2 start points)
             {
-                startPoints[0] = shootPointTransform.position;
-                if (startPoints[1] != null)
+                if (endPoints[1] == null)
                 {
-                    if (transformToTrack != null)
-                    {
-                        startPoints[1] = transformToTrack.position;
-                    }
+                    Debug.LogError("2 start points but 1 end point");
+                }
+
+                if (dynamicStart)
+                {
+                    Vector2 caster = shootPointTransform.position;
+                    startPoints[0] = startPoints[0] + caster;
+                    startPoints[1] = startPoints[1] + caster;
+                }
+                else
+                {
+                    repositionScript.Reposition(startTransform);
+                }
+
+                if (dynamicEnd)
+                {
+                    Vector2 caster = shootPointTransform.position;
+                    endPoints[0] = endPoints[0] + caster;
+                    endPoints[1] = endPoints[1] + caster;
+                }
+
+                if (transformToTrack)
+                {
+                    startPoints[1] = transformToTrack.position;
+                    endPoints[1] = transformToTrack.position;
                 }
             }
             else
             {
-                // send the startTransform to the correct position, rember shootPoint offset
+                if (endPoints[1] != null)
+                {
+                    Debug.LogError("1 start point but 2 end points");
+                }
+
+                if (dynamicStart)
+                {
+                    Vector2 caster = shootPointTransform.position;
+                    startPoints[0] = startPoints[0] + caster;
+                }
+                else
+                {
+                    repositionScript.Reposition(startTransform);
+                }
+
+                if (dynamicEnd)
+                {
+                    Vector2 caster = shootPointTransform.position;
+                    endPoints[0] = endPoints[0] + caster;
+                }
+
+                if (transformToTrack)
+                {
+                    endPoints[0] = transformToTrack.position;
+                }
             }
         }
         else

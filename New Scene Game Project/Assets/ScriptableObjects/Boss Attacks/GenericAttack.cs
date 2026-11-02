@@ -10,13 +10,14 @@ public class GenericAttack : ScriptableObject
     public bool postAtkAnim; // attack end animation state flag
     public PolygonCollider2D hitbox;
     public float damage;
-    public Vector2[] startPoints = new Vector2[2]; // use 1 point for projectiles
-    public bool dynamicStart;
-    public Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
-    public bool dynamicEnd;
+    public Vector2[] startPoints = new Vector2[2]; // use 1 point (2nd is null) for projectiles.  if dynamicEnd, these will serve as offsets from the shootPointTransform
+    public bool dynamicStart; // if false, moves the attacker to the set start positions
+    public Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles. if dynamicEnd, these will serve as offsets from the shootPointTransform
+    public bool dynamicEnd; // should typically be true if dynamicStart
+    public RepositionInterface repositionScript; // use this if dynamicStart is false
     public Transform startTransform;
     public Transform shootPointTransform;
-    public Transform transformToTrack;
+    public Transform transformToTrack; // if this is not null, the attack will target this
     public float trackStrength;
     public float trackDuration;
     public bool telegraphs;
