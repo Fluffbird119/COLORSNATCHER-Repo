@@ -11,10 +11,10 @@ public class BossAttackController : MonoBehaviour
     private bool compoundSprite;
     private float spriteHeight;
     private SpriteRenderer spriteRenderer;
-    private Animator animation;
-    /*private bool preAtkAnim; // attack wind up/telegraph state flag
-    private bool atkAnim; // attack animation state flag
-    private bool postAtkAnim; // attack end animation state flag*/
+    private Animator animator;
+    private bool preAtkAnim; // attack has a wind up/telegraph animation
+    private bool atkAnim; // attack has an animation
+    private bool postAtkAnim; // attack has an end animation
     private int preAtkAnimHash = Animator.StringToHash("preAtkAnim"); // not in the scriptable object
     private int atkAnimHash = Animator.StringToHash("atkAnim"); // not in the scriptable object
     private int postAtkAnimHash = Animator.StringToHash("postAtkAnim"); // not in the scriptable object
@@ -26,7 +26,8 @@ public class BossAttackController : MonoBehaviour
     private bool trackStart;
     private Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicEnd;
-    private Vector2[] currentPoints = new Vector2[2];
+    private Vector2[] currentPoints = new Vector2[2]; // not in the scriptable object
+    private Vector2[] startOffsets = new Vector2[2]; // not in the scriptable object
     private RepositionInterface repositionScript;
     private Transform startTransform;
     private Transform shootPointTransform;
@@ -52,7 +53,7 @@ public class BossAttackController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void ProccessScriptableObject() // update this to consider the offset of the arena
+    private void ProccessScriptableObject(Vector2 arenaOffset) // update this to consider the offset of the arena
     {
         isCustomAttack = attackScriptableObject.isCustomAttack;
         if (!isCustomAttack)
@@ -62,10 +63,10 @@ public class BossAttackController : MonoBehaviour
             spriteHeight = attackScriptableObject.spriteHeight;
             spriteRenderer.sprite = sprite;
 
-            animation = attackScriptableObject.animation;
-            /*preAtkAnim = attackScriptableObject.preAtkAnim;
+            animator = attackScriptableObject.animator;
+            preAtkAnim = attackScriptableObject.preAtkAnim;
             atkAnim = attackScriptableObject.atkAnim;
-            postAtkAnim = attackScriptableObject.postAtkAnim;*/
+            postAtkAnim = attackScriptableObject.postAtkAnim;
 
             hitbox = attackScriptableObject.hitbox;
             damage = attackScriptableObject.damage;
@@ -102,23 +103,33 @@ public class BossAttackController : MonoBehaviour
                     Debug.LogError("2 start points but 1 end point");
                 }
 
+
                 if (dynamicStart)
                 {
                     Vector2 caster = shootPointTransform.position;
+                    startOffsets[0] = startPoints[0];
                     startPoints[0] = startPoints[0] + caster;
-                    startPoints[1] = startPoints[1] + caster;
+                    startPoints[1] = startPoints[1] + startPoints[0];
                 }
                 else
                 {
                     Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
+                    startPoints[0] += arenaOffset;
+                    startPoints[1] += arenaOffset;
                     repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
                 }
 
                 if (dynamicEnd)
                 {
                     Vector2 caster = shootPointTransform.position;
+                    startOffsets[1] = endPoints[0];
                     endPoints[0] = endPoints[0] + caster;
-                    endPoints[1] = endPoints[1] + caster;
+                    endPoints[1] = endPoints[1] + endPoints[0];
+                }
+                else
+                {
+                    endPoints[0] += arenaOffset;
+                    endPoints[1] += arenaOffset;
                 }
 
                 if (transformToTrack)
@@ -145,6 +156,7 @@ public class BossAttackController : MonoBehaviour
                 else
                 {
                     Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
+                    startPoints[0] += arenaOffset;
                     repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
                 }
 
@@ -153,12 +165,19 @@ public class BossAttackController : MonoBehaviour
                     Vector2 caster = shootPointTransform.position;
                     endPoints[0] = endPoints[0] + caster;
                 }
+                else
+                {
+                    endPoints[0] += arenaOffset;
+                }
 
                 if (transformToTrack)
                 {
                     endPoints[0] = transformToTrack.position;
                 }
             }
+
+            currentPoints[0] = startPoints[0];
+            currentPoints[1] = startPoints[1];
         }
         else
         {
@@ -167,27 +186,29 @@ public class BossAttackController : MonoBehaviour
         attackDone = false;
     } // end ProccessScriptableObject()
 
-    public void StartAttack() // update this to consider the offset of the arena
+    public void StartAttack(Vector2 arenaOffset) // update this to consider the offset of the arena
     {
         // unpool
-        ProccessScriptableObject(); // this just reads in the info from the ScriptableObject, and updates the initial positions
+        ProccessScriptableObject(arenaOffset); // this just reads in the info from the ScriptableObject, and updates the initial positions
 
         attackRoutine = StartCoroutine(RunAttack());
     } // end StartAttack()
 
     private IEnumerator RunAttack()
     {
-        animation.SetBool(preAtkAnimHash, true);
-        animation.SetBool(atkAnimHash, false);
-        animation.SetBool(postAtkAnimHash, false);
+        animator.SetBool(preAtkAnimHash, true);
+        animator.SetBool(atkAnimHash, false);
+        animator.SetBool(postAtkAnimHash, false);
 
         Coroutine telegraphRoutine = StartCoroutine(TelegraphAttack());
         yield return new WaitForSeconds(startDelay);
         StopCoroutine(telegraphRoutine);
+        currentPoints[0] = startPoints[0];
+        currentPoints[0] = startPoints[0];
 
-        animation.SetBool(preAtkAnimHash, false);
-        animation.SetBool(atkAnimHash, true);
-        animation.SetBool(postAtkAnimHash, false);
+        animator.SetBool(preAtkAnimHash, false);
+        animator.SetBool(atkAnimHash, true);
+        animator.SetBool(postAtkAnimHash, false);
 
         float timeInAttack = 0f;
         while ((timeInAttack += Time.deltaTime) < attackDuration)
@@ -196,19 +217,8 @@ public class BossAttackController : MonoBehaviour
             {
                 if (transformToTrack)
                 {
-                    
-                }
-            }
-            else // handle projectile things
-            {
-                
-            }
-            if (transformToTrack)
-            {
-                Vector2 caster = transformToTrack.position;
-                
-                if (endPoints[1] != null) // laser tracking
-                {
+                    Vector2 caster = transformToTrack.position;
+
                     Vector2 realVsTargetOffset = caster - endPoints[1];
                     if (realVsTargetOffset.magnitude < trackStrength)
                     {
@@ -219,8 +229,19 @@ public class BossAttackController : MonoBehaviour
                         endPoints[1] = caster;
                     }
                 }
-                else // projectile tracking
+
+                if (startFollowsShooter)
                 {
+                    Vector2 caster = shootPointTransform.position;
+                    endPoints[0] = caster + startOffsets[1];
+                }
+            }
+            else // handle projectile things
+            {
+                if (transformToTrack)
+                {
+                    Vector2 caster = transformToTrack.position;
+
                     Vector2 realVsTargetOffset = caster - endPoints[0];
                     if (realVsTargetOffset.magnitude < trackStrength)
                     {
@@ -233,7 +254,7 @@ public class BossAttackController : MonoBehaviour
                 }
             }
 
-            // determine next position based on current position, end points, curveDepth etc.
+            // update currentPoints to the next position based on current position, end points, curveDepth etc.
 
             yield return null;
         }
@@ -278,8 +299,9 @@ public class BossAttackController : MonoBehaviour
 
                     if (startFollowsShooter)
                     {
-                        startPoints[0] = shootPointTransform.position;
-                        endPoints[0] = startPoints[0];
+                        caster = shootPointTransform.position;
+                        startPoints[0] = caster + startOffsets[0];
+                        endPoints[0] = caster + startOffsets[1];
                     }
                 }
                 else

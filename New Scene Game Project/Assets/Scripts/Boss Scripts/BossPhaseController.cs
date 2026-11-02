@@ -4,7 +4,7 @@ public class BossPhaseController : MonoBehaviour
 {
     private Sprite sprite;
     private Animator animation;
-    private bool[] animStates;
+    private AnimatorControllerParameter[] animStates;
     private MonoBehaviour idleBehavior; // what the boss does when not attacking
     private MonoBehaviour attackBehavior;
     private Rect arenaBounds;

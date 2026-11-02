@@ -6,10 +6,10 @@ public class GenericAttack : ScriptableObject
     public Sprite sprite;
     public bool compoundSprite; // useful for lasers. You can create a smaller sprite that acts as a section of the laser so it can dynamically resize. smaller sprites create less deformation
     public float spriteHeight;
-    public Animator animation; // animations MUST have boolean flags labeled "preAtkAnim", "atkAnim", and "postAtkAnim"
-    /*public bool preAtkAnim; // attack wind up/telegraph state flag
-    public bool atkAnim; // attack animation state flag
-    public bool postAtkAnim; // attack end animation state flag*/
+    public Animator animator; // animations MUST have boolean flags labeled "preAtkAnim", "atkAnim", and "postAtkAnim"
+    public bool preAtkAnim; // attack has a wind up/telegraph animation
+    public bool atkAnim; // attack has an animation
+    public bool postAtkAnim; // attack has an end animation
     public PolygonCollider2D hitbox;
     public float damage;
     public bool endOnHit; // generally true for projectiles, false for lasers
