@@ -26,9 +26,11 @@ public class BossAttackController : MonoBehaviour
     private bool trackStart;
     private Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicEnd;
+    private Vector2[] currentPoints = new Vector2[2];
     private RepositionInterface repositionScript;
     private Transform startTransform;
     private Transform shootPointTransform;
+    private bool startFollowsShooter;
     private Transform transformToTrack;
     private bool stopAtTarget;
     private float trackStrength;
@@ -50,7 +52,7 @@ public class BossAttackController : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
-    private void ProccessScriptableObject()
+    private void ProccessScriptableObject() // update this to consider the offset of the arena
     {
         isCustomAttack = attackScriptableObject.isCustomAttack;
         if (!isCustomAttack)
@@ -78,6 +80,7 @@ public class BossAttackController : MonoBehaviour
 
             startTransform = attackScriptableObject.startTransform;
             shootPointTransform = attackScriptableObject.shootPointTransform;
+            startFollowsShooter = attackScriptableObject.startFollowsShooter;
             transformToTrack = attackScriptableObject.transformToTrack;
             stopAtTarget = attackScriptableObject.stopAtTarget;
             trackStrength = attackScriptableObject.trackStrength;
@@ -162,15 +165,15 @@ public class BossAttackController : MonoBehaviour
             customScript = attackScriptableObject.customScript;
         }
         attackDone = false;
-    }
+    } // end ProccessScriptableObject()
 
-    public void StartAttack()
+    public void StartAttack() // update this to consider the offset of the arena
     {
         // unpool
         ProccessScriptableObject(); // this just reads in the info from the ScriptableObject, and updates the initial positions
 
         attackRoutine = StartCoroutine(RunAttack());
-    }
+    } // end StartAttack()
 
     private IEnumerator RunAttack()
     {
@@ -189,6 +192,17 @@ public class BossAttackController : MonoBehaviour
         float timeInAttack = 0f;
         while ((timeInAttack += Time.deltaTime) < attackDuration)
         {
+            if (endPoints[1] != null) // handle laser things
+            {
+                if (transformToTrack)
+                {
+                    
+                }
+            }
+            else // handle projectile things
+            {
+                
+            }
             if (transformToTrack)
             {
                 Vector2 caster = transformToTrack.position;
@@ -224,9 +238,10 @@ public class BossAttackController : MonoBehaviour
             yield return null;
         }
 
+        attackDone = true;
         yield break;
         // repool at the end of this coroutine
-    }
+    } // end RunAttack()
 
     private IEnumerator TelegraphAttack()
     {
@@ -235,17 +250,49 @@ public class BossAttackController : MonoBehaviour
             yield break;
         }
 
-        if (startPoints[1] != null) // laser type attack
+        while (true) // runs until the coroutine is ended
         {
-            if (transformToTrack)
+            if (startPoints[1] != null) // laser type attack
             {
-                // do laser tracking stuff. only consider the start point
+                if (transformToTrack) // laser tracking stuff
+                {
+                    Vector2 caster = transformToTrack.position;
+
+                    Vector2 realVsTargetOffset = caster - startPoints[1];
+                    if (realVsTargetOffset.magnitude < trackStrength)
+                    {
+                        if (trackStart)
+                        {
+                            startPoints[1] = realVsTargetOffset.normalized * trackStrength;
+                        }
+                        endPoints[1] = realVsTargetOffset.normalized * trackStrength;
+                    }
+                    else
+                    {
+                        if (trackStart)
+                        {
+                            startPoints[1] = caster;
+                        }
+                        endPoints[1] = caster;
+                    }
+
+                    if (startFollowsShooter)
+                    {
+                        startPoints[0] = shootPointTransform.position;
+                        endPoints[0] = startPoints[0];
+                    }
+                }
+                else
+                {
+                    // do static laser stuff. only consider the start points
+                }
+
+                // actually render the laser telegraph
             }
-            // do laser stuff
+            else
+            {
+                // do projectile stuff. shouldn't need to consider tracking
+            }
         }
-        else
-        {
-            // do projectile stuff. shouldn't need to consider tracking
-        }
-    }
+    } // end TelegraphAttack()
 }

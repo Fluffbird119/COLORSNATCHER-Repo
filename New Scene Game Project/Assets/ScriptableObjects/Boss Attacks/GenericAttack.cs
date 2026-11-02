@@ -21,6 +21,7 @@ public class GenericAttack : ScriptableObject
     public RepositionInterface repositionScript; // use this if dynamicStart is false
     public Transform startTransform;
     public Transform shootPointTransform;
+    public bool startFollowsShooter; // useful for lasers
     public Transform transformToTrack; // if this is not null, the attack will target this
     public bool stopAtTarget; // use for lasers if you don't want it to go past the player
     public float trackStrength;
@@ -29,7 +30,7 @@ public class GenericAttack : ScriptableObject
     public Color telegraphColor;
     public float attackDuration;
     public float startDelay; // telegraphs during this delay, if that is enabled
-    public float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth
+    public float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth. generally don't use this with tracking attacks
     public float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     public bool checkpointsByTime; // if this is set to true then attack duration is divided by the number of items instead
     public bool isCustomAttack;

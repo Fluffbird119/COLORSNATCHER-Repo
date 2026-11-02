@@ -6,6 +6,7 @@ public class BossPhaseController : MonoBehaviour
     private Animator animation;
     private bool[] animStates;
     private MonoBehaviour idleBehavior; // what the boss does when not attacking
+    private MonoBehaviour attackBehavior;
     private Rect arenaBounds;
     private PolygonCollider2D hitbox;
     private float health;
@@ -13,6 +14,7 @@ public class BossPhaseController : MonoBehaviour
     private int[] genericAttackAnimLinker; // the values held point to the associated anim state boolean
     private BossComboController[] comboAttacks;
     private int[] comboAttackAnimLinker; // the values held point to the associated anim state boolean
+    private Object currentAttack;
     private float cooldown;
     private int stamina;
     private int staminaRegen;

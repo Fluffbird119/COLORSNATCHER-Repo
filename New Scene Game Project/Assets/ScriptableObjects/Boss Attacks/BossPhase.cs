@@ -7,6 +7,7 @@ public class BossPhase : ScriptableObject
     public Animator animation;
     public bool[] animStates;
     public MonoBehaviour idleBehavior; // what the boss does when not attacking
+    public MonoBehaviour attackBehavior; // additional behaviors during an attack
     public Rect arenaBounds;
     public PolygonCollider2D hitbox;
     public float health;
@@ -14,6 +15,7 @@ public class BossPhase : ScriptableObject
     public int[] genericAttackAnimLinker; // the values held point to the associated anim state boolean
     public BossComboController[] comboAttacks;
     public int[] comboAttackAnimLinker; // the values held point to the associated anim state boolean
+    public Object currentAttack; // tracks the current attack, useful for custom scripts
     public float cooldown;
     public int stamina;
     public int staminaRegen;
