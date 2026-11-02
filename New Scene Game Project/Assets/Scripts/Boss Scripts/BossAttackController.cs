@@ -1,7 +1,5 @@
 using System.Collections;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+using System;
 using UnityEngine;
 
 public class BossAttackController : MonoBehaviour
@@ -47,6 +45,8 @@ public class BossAttackController : MonoBehaviour
     private MonoBehaviour customScript;
     private Coroutine attackRoutine; // not in the scriptable object
     public bool attackDone {get; private set;} = false; // not in the scriptable object
+    public static event Action<int> OnAttackLanding; // not in the scriptable object
+    public static event Action<GameObject> OnAttackCompletion; // not in the scriptable object
 
     private void Awake()
     {
@@ -188,7 +188,7 @@ public class BossAttackController : MonoBehaviour
 
     public void StartAttack(Vector2 arenaOffset) // update this to consider the offset of the arena
     {
-        // unpool
+        // the phase controller should handle unpooling
         ProccessScriptableObject(arenaOffset); // this just reads in the info from the ScriptableObject, and updates the initial positions
 
         attackRoutine = StartCoroutine(RunAttack());
@@ -260,8 +260,8 @@ public class BossAttackController : MonoBehaviour
         }
 
         attackDone = true;
-        yield break;
-        // repool at the end of this coroutine
+        OnAttackCompletion?.Invoke(gameObject);
+        // the phase controller should handle repooling
     } // end RunAttack()
 
     private IEnumerator TelegraphAttack()
