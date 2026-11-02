@@ -16,6 +16,7 @@ public class BossAttackController : MonoBehaviour
     private float damage;
     private Vector2[] startPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicStart;
+    private bool trackStart;
     private Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicEnd;
     private RepositionInterface repositionScript;
@@ -57,6 +58,7 @@ public class BossAttackController : MonoBehaviour
 
             startPoints = attackScriptableObject.startPoints;
             dynamicStart = attackScriptableObject.dynamicStart;
+            trackStart = attackScriptableObject.trackStart;
             endPoints = attackScriptableObject.endPoints;
             dynamicEnd = attackScriptableObject.dynamicEnd;
             repositionScript = attackScriptableObject.repositionScript;
@@ -90,7 +92,8 @@ public class BossAttackController : MonoBehaviour
                 }
                 else
                 {
-                    repositionScript.Reposition(startTransform);
+                    Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
+                    repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
                 }
 
                 if (dynamicEnd)
@@ -102,7 +105,10 @@ public class BossAttackController : MonoBehaviour
 
                 if (transformToTrack)
                 {
-                    startPoints[1] = transformToTrack.position;
+                    if (trackStart)
+                    {
+                        startPoints[1] = transformToTrack.position;
+                    }
                     endPoints[1] = transformToTrack.position;
                 }
             }
@@ -120,7 +126,8 @@ public class BossAttackController : MonoBehaviour
                 }
                 else
                 {
-                    repositionScript.Reposition(startTransform);
+                    Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
+                    repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
                 }
 
                 if (dynamicEnd)

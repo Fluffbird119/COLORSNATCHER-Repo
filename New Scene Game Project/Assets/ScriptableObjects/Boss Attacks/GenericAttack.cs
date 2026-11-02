@@ -12,6 +12,7 @@ public class GenericAttack : ScriptableObject
     public float damage;
     public Vector2[] startPoints = new Vector2[2]; // use 1 point (2nd is null) for projectiles.  if dynamicEnd, these will serve as offsets from the shootPointTransform
     public bool dynamicStart; // if false, moves the attacker to the set start positions
+    public bool trackStart;
     public Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles. if dynamicEnd, these will serve as offsets from the shootPointTransform
     public bool dynamicEnd; // should typically be true if dynamicStart
     public RepositionInterface repositionScript; // use this if dynamicStart is false
