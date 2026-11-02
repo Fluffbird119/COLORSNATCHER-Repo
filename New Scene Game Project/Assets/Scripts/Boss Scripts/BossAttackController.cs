@@ -1,5 +1,6 @@
 using System.Collections;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
@@ -7,13 +8,19 @@ public class BossAttackController : MonoBehaviour
 {
     [SerializeField] private GenericAttack attackScriptableObject;
     private Sprite sprite;
+    private bool compoundSprite;
+    private float spriteHeight;
     private SpriteRenderer spriteRenderer;
     private Animator animation;
-    private bool preAtkAnim; // attack wind up/telegraph state flag
+    /*private bool preAtkAnim; // attack wind up/telegraph state flag
     private bool atkAnim; // attack animation state flag
-    private bool postAtkAnim; // attack end animation state flag
+    private bool postAtkAnim; // attack end animation state flag*/
+    private int preAtkAnimHash = Animator.StringToHash("preAtkAnim"); // not in the scriptable object
+    private int atkAnimHash = Animator.StringToHash("atkAnim"); // not in the scriptable object
+    private int postAtkAnimHash = Animator.StringToHash("postAtkAnim"); // not in the scriptable object
     private PolygonCollider2D hitbox;
     private float damage;
+    private bool endOnHit;
     private Vector2[] startPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicStart;
     private bool trackStart;
@@ -23,6 +30,7 @@ public class BossAttackController : MonoBehaviour
     private Transform startTransform;
     private Transform shootPointTransform;
     private Transform transformToTrack;
+    private bool stopAtTarget;
     private float trackStrength;
     private float trackDuration;
     private bool telegraphs;
@@ -31,9 +39,11 @@ public class BossAttackController : MonoBehaviour
     private float startDelay;
     private float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth
     private float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
+    private bool checkpointsByTime;
     private bool isCustomAttack;
     private MonoBehaviour customScript;
-    public bool attackDone {get; private set;} = false;
+    private Coroutine attackRoutine; // not in the scriptable object
+    public bool attackDone {get; private set;} = false; // not in the scriptable object
 
     private void Awake()
     {
@@ -46,15 +56,18 @@ public class BossAttackController : MonoBehaviour
         if (!isCustomAttack)
         {
             sprite = attackScriptableObject.sprite;
+            compoundSprite = attackScriptableObject.compoundSprite;
+            spriteHeight = attackScriptableObject.spriteHeight;
             spriteRenderer.sprite = sprite;
 
             animation = attackScriptableObject.animation;
-            preAtkAnim = attackScriptableObject.preAtkAnim;
+            /*preAtkAnim = attackScriptableObject.preAtkAnim;
             atkAnim = attackScriptableObject.atkAnim;
-            postAtkAnim = attackScriptableObject.postAtkAnim;
+            postAtkAnim = attackScriptableObject.postAtkAnim;*/
 
             hitbox = attackScriptableObject.hitbox;
             damage = attackScriptableObject.damage;
+            endOnHit = attackScriptableObject.endOnHit;
 
             startPoints = attackScriptableObject.startPoints;
             dynamicStart = attackScriptableObject.dynamicStart;
@@ -66,6 +79,7 @@ public class BossAttackController : MonoBehaviour
             startTransform = attackScriptableObject.startTransform;
             shootPointTransform = attackScriptableObject.shootPointTransform;
             transformToTrack = attackScriptableObject.transformToTrack;
+            stopAtTarget = attackScriptableObject.stopAtTarget;
             trackStrength = attackScriptableObject.trackStrength;
             trackDuration = attackScriptableObject.trackDuration;
 
@@ -76,6 +90,7 @@ public class BossAttackController : MonoBehaviour
             startDelay = attackScriptableObject.startDelay;
             pathCurveDepth = attackScriptableObject.pathCurveDepth;
             pathSpeedCheckpoints = attackScriptableObject.pathSpeedCheckpoints;
+            checkpointsByTime = attackScriptableObject.checkpointsByTime;
 
             if (startPoints[1] != null) // the attack is a laser (2 start points)
             {
@@ -152,14 +167,85 @@ public class BossAttackController : MonoBehaviour
     public void StartAttack()
     {
         // unpool
-        ProccessScriptableObject();
+        ProccessScriptableObject(); // this just reads in the info from the ScriptableObject, and updates the initial positions
 
-        StartCoroutine(RunAttack());
+        attackRoutine = StartCoroutine(RunAttack());
     }
 
     private IEnumerator RunAttack()
     {
+        animation.SetBool(preAtkAnimHash, true);
+        animation.SetBool(atkAnimHash, false);
+        animation.SetBool(postAtkAnimHash, false);
+
+        Coroutine telegraphRoutine = StartCoroutine(TelegraphAttack());
+        yield return new WaitForSeconds(startDelay);
+        StopCoroutine(telegraphRoutine);
+
+        animation.SetBool(preAtkAnimHash, false);
+        animation.SetBool(atkAnimHash, true);
+        animation.SetBool(postAtkAnimHash, false);
+
+        float timeInAttack = 0f;
+        while ((timeInAttack += Time.deltaTime) < attackDuration)
+        {
+            if (transformToTrack)
+            {
+                Vector2 caster = transformToTrack.position;
+                
+                if (endPoints[1] != null) // laser tracking
+                {
+                    Vector2 realVsTargetOffset = caster - endPoints[1];
+                    if (realVsTargetOffset.magnitude < trackStrength)
+                    {
+                        endPoints[1] = realVsTargetOffset.normalized * trackStrength;
+                    }
+                    else
+                    {
+                        endPoints[1] = caster;
+                    }
+                }
+                else // projectile tracking
+                {
+                    Vector2 realVsTargetOffset = caster - endPoints[0];
+                    if (realVsTargetOffset.magnitude < trackStrength)
+                    {
+                        endPoints[0] = realVsTargetOffset.normalized * trackStrength;
+                    }
+                    else
+                    {
+                        endPoints[0] = caster;
+                    }
+                }
+            }
+
+            // determine next position based on current position, end points, curveDepth etc.
+
+            yield return null;
+        }
+
         yield break;
         // repool at the end of this coroutine
+    }
+
+    private IEnumerator TelegraphAttack()
+    {
+        if (!telegraphs)
+        {
+            yield break;
+        }
+
+        if (startPoints[1] != null) // laser type attack
+        {
+            if (transformToTrack)
+            {
+                // do laser tracking stuff. only consider the start point
+            }
+            // do laser stuff
+        }
+        else
+        {
+            // do projectile stuff. shouldn't need to consider tracking
+        }
     }
 }

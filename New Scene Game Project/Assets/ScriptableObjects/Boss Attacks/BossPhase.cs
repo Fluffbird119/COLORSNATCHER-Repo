@@ -7,6 +7,7 @@ public class BossPhase : ScriptableObject
     public Animator animation;
     public bool[] animStates;
     public MonoBehaviour idleBehavior; // what the boss does when not attacking
+    public Rect arenaBounds;
     public PolygonCollider2D hitbox;
     public float health;
     public BossAttackController[] genericAttacks;

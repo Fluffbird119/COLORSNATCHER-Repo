@@ -6,6 +6,7 @@ public class BossPhaseController : MonoBehaviour
     private Animator animation;
     private bool[] animStates;
     private MonoBehaviour idleBehavior; // what the boss does when not attacking
+    private Rect arenaBounds;
     private PolygonCollider2D hitbox;
     private float health;
     private BossAttackController[] genericAttacks;
