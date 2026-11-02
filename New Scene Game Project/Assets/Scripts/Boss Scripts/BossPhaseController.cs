@@ -3,7 +3,7 @@ using UnityEngine;
 public class BossPhaseController : MonoBehaviour
 {
     private Sprite sprite;
-    private Animator animation;
+    private Animator animator;
     private AnimatorControllerParameter[] animStates;
     private MonoBehaviour idleBehavior; // what the boss does when not attacking
     private MonoBehaviour attackBehavior;

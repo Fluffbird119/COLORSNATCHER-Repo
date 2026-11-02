@@ -4,7 +4,7 @@ using UnityEngine;
 public class BossPhase : ScriptableObject
 {
     public Sprite sprite;
-    public Animator animation;
+    public Animator animator;
     public AnimatorControllerParameter[] animStates;
     public MonoBehaviour idleBehavior; // what the boss does when not attacking
     public MonoBehaviour attackBehavior; // additional behaviors during an attack

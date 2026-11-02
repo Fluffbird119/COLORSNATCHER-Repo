@@ -45,12 +45,36 @@ public class BossAttackController : MonoBehaviour
     private MonoBehaviour customScript;
     private Coroutine attackRoutine; // not in the scriptable object
     public bool attackDone {get; private set;} = false; // not in the scriptable object
-    public static event Action<int> OnAttackLanding; // not in the scriptable object
+    public static event Action<float> OnAttackLanding; // not in the scriptable object
     public static event Action<GameObject> OnAttackCompletion; // not in the scriptable object
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("player"))
+        {
+            OnAttackLanding?.Invoke(damage);
+            if (endOnHit)
+            {
+                OnAttackCompletion?.Invoke(gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("player"))
+        {
+            OnAttackLanding?.Invoke(damage);
+            if (endOnHit)
+            {
+                OnAttackCompletion?.Invoke(gameObject);
+            }
+        }
     }
 
     private void ProccessScriptableObject(Vector2 arenaOffset) // update this to consider the offset of the arena
