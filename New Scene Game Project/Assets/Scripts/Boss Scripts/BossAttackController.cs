@@ -61,6 +61,7 @@ public class BossAttackController : MonoBehaviour
             if (endOnHit)
             {
                 OnAttackCompletion?.Invoke(gameObject);
+                StopCoroutine(attackRoutine);
             }
         }
     }
@@ -73,6 +74,7 @@ public class BossAttackController : MonoBehaviour
             if (endOnHit)
             {
                 OnAttackCompletion?.Invoke(gameObject);
+                StopCoroutine(attackRoutine);
             }
         }
     }
@@ -239,9 +241,10 @@ public class BossAttackController : MonoBehaviour
         {
             if (endPoints[1] != null) // handle laser things
             {
+                Vector2 caster;
                 if (transformToTrack)
                 {
-                    Vector2 caster = transformToTrack.position;
+                    caster = transformToTrack.position;
 
                     Vector2 realVsTargetOffset = caster - endPoints[1];
                     if (realVsTargetOffset.magnitude < trackStrength)
@@ -256,9 +259,15 @@ public class BossAttackController : MonoBehaviour
 
                 if (startFollowsShooter)
                 {
-                    Vector2 caster = shootPointTransform.position;
+                    caster = shootPointTransform.position;
                     endPoints[0] = caster + startOffsets[1];
                 }
+
+                float distanceToEnd0 = Vector2.Distance(currentPoints[0], endPoints[0]);
+                float distanceToEnd1 = Vector2.Distance(currentPoints[1], endPoints[1]);
+                // update currentPoints to the next position based on current position, end points, curveDepth etc.
+
+                //update rendering and such based on current points
             }
             else // handle projectile things
             {
@@ -276,9 +285,11 @@ public class BossAttackController : MonoBehaviour
                         endPoints[0] = caster;
                     }
                 }
-            }
 
-            // update currentPoints to the next position based on current position, end points, curveDepth etc.
+                // update currentPoints to the next position based on current position, end points, curveDepth etc.
+
+                transform.position = currentPoints[0];
+            }
 
             yield return null;
         }

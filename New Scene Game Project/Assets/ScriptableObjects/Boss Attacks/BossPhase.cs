@@ -11,11 +11,10 @@ public class BossPhase : ScriptableObject
     public Rect arenaBounds;
     public PolygonCollider2D hitbox;
     public float health;
-    public BossAttackController[] genericAttacks;
+    public GenericAttack[] genericAttacks;
     public int[] genericAttackAnimLinker; // the values held point to the associated anim state boolean
-    public BossComboController[] comboAttacks;
+    public ComboAttack[] comboAttacks;
     public int[] comboAttackAnimLinker; // the values held point to the associated anim state boolean
-    public Object currentAttack; // tracks the current attack, useful for custom scripts
     public float cooldown;
     public int stamina;
     public int staminaRegen;

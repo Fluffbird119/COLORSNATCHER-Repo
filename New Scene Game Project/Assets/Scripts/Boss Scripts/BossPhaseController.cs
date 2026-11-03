@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BossPhaseController : MonoBehaviour
@@ -10,15 +11,22 @@ public class BossPhaseController : MonoBehaviour
     private Rect arenaBounds;
     private PolygonCollider2D hitbox;
     private float health;
-    private BossAttackController[] genericAttacks;
+    private GenericAttack[] genericAttacks;
     private int[] genericAttackAnimLinker; // the values held point to the associated anim state boolean
-    private BossComboController[] comboAttacks;
+    private ComboAttack[] comboAttacks;
     private int[] comboAttackAnimLinker; // the values held point to the associated anim state boolean
-    private Object currentAttack;
-    private float cooldown;
+    public ScriptableObject currentAttack; // tracks the current attack, useful for custom scripts
+    private float cooldown; // starts when the current attack ends
     private int stamina;
+    private int currStamina;
     private int staminaRegen;
     private bool isCustomPhase;
     private MonoBehaviour customPhaseScript;
     public bool phaseDone {get; private set;} = false;
+    public static event Action<ScriptableObject> OnRunningAttack;
+
+    public void ForceRunAttack(ScriptableObject attack, bool interrupt)
+    {
+        // replaces the currentAttack with this attack. interrupting it if that is marked as true
+    }
 }
