@@ -46,7 +46,7 @@ public class BossAttackController : MonoBehaviour
     private Coroutine attackRoutine; // not in the scriptable object
     public bool attackDone {get; private set;} = false; // not in the scriptable object
     public static event Action<float> OnAttackLanding; // not in the scriptable object
-    public static event Action<GameObject> OnAttackCompletion; // not in the scriptable object
+    public static event Action<GameObject, bool> OnAttackCompletion; // not in the scriptable object
 
     private void Awake()
     {
@@ -60,7 +60,7 @@ public class BossAttackController : MonoBehaviour
             OnAttackLanding?.Invoke(damage);
             if (endOnHit)
             {
-                OnAttackCompletion?.Invoke(gameObject);
+                OnAttackCompletion?.Invoke(gameObject, true);
                 StopCoroutine(attackRoutine);
             }
         }
@@ -73,7 +73,7 @@ public class BossAttackController : MonoBehaviour
             OnAttackLanding?.Invoke(damage);
             if (endOnHit)
             {
-                OnAttackCompletion?.Invoke(gameObject);
+                OnAttackCompletion?.Invoke(gameObject, true);
                 StopCoroutine(attackRoutine);
             }
         }
@@ -264,7 +264,21 @@ public class BossAttackController : MonoBehaviour
                 }
 
                 float distanceToEnd0 = Vector2.Distance(currentPoints[0], endPoints[0]);
-                float distanceToEnd1 = Vector2.Distance(currentPoints[1], endPoints[1]);
+                //float distanceToEnd1 = Vector2.Distance(currentPoints[1], endPoints[1]);
+                float distanceFromStart0 = Vector2.Distance(currentPoints[0], startPoints[0]);
+                //float distanceFromStart1 = Vector2.Distance(currentPoints[1], startPoints[1]);
+                float totalDistance0 = distanceToEnd0 + distanceFromStart0;
+                //float totalDistance1 = distanceToEnd1 + distanceFromStart1;
+
+                int checkpointIndex;
+                if (!checkpointsByTime)
+                {
+                    checkpointIndex = Mathf.FloorToInt(Mathf.Clamp01(distanceFromStart0 / totalDistance0) * (pathSpeedCheckpoints.Length - 1));
+                }
+                else
+                {
+                    checkpointIndex = Mathf.FloorToInt(Mathf.Clamp01(timeInAttack / attackDuration) * (pathSpeedCheckpoints.Length - 1));
+                }
                 // update currentPoints to the next position based on current position, end points, curveDepth etc.
 
                 //update rendering and such based on current points
@@ -295,7 +309,7 @@ public class BossAttackController : MonoBehaviour
         }
 
         attackDone = true;
-        OnAttackCompletion?.Invoke(gameObject);
+        OnAttackCompletion?.Invoke(gameObject, false);
         // the phase controller should handle repooling
     } // end RunAttack()
 
