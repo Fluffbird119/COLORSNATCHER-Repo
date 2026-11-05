@@ -331,7 +331,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "I thought with all of my might that no mere gray little b---- could f---ing kill me.",
+            StartDialogue(new string[] { "I thought with all of my might that no mere gray little bitch could fucking kill me.",
                 "That my pure anger could be channeled into fire and fight.",
                 "Yet how could someone with no feelings possibly muster up the will to do this?",}, "red");
             while (isTalking)
@@ -347,7 +347,7 @@ public class DialogueSystem : MonoBehaviour
                 "You are nothing. You had no purpose, no meaning, no will. And that absence became the significance. You had nothing but a will to be something.",
                 "And that blind obsession due to a lack of anything else gave you the meaning and purpose to kill me",
                 "I assume you're going to kill the other color lords and take their feelings too?",
-                "Well good f___ing luck."}, "red");
+                "Well good fucking luck."}, "red");
             while (isTalking)
             {
                 yield return null;
@@ -421,7 +421,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "I HATE YOU!!!!!!!!!!!!!!!1!!!!1!!!1!!!!!" }, "player");
+            StartDialogue(new string[] { "I FUCKING HATE YOU!!!!!!!!!!!!!!!1!!!!1!!!1!!!!!" }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -502,7 +502,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "I CANT STOP! IM LIVING! IM FINALLY LIVING!", "DONT TRY TO STOP ME OR ILL KILL YOU HARDER" }, "player");
+            StartDialogue(new string[] { "I CANT STOP! IM LIVING! IM FINALLY LIVING!", "THIS IS JUST TOO FUN", "DONT TRY TO STOP ME OR ILL KILL YOU HARDER B****!!" }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -527,7 +527,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "I was born without color. My life was a void. But one day, I realized. You are all so full of color. Of emotion.",
+            StartDialogue(new string[] { "I was born without color. My life was a void. But now, I've realized! You are all so FULL of COLOR!! Of emotion!!!",
             "And I want it. I WANT IT!!!"}, "player");
             while (isTalking)
             {
@@ -549,8 +549,8 @@ public class DialogueSystem : MonoBehaviour
                 yield return null;
             }
             StartDialogue(new string[] { "What is this? I feel... fine. I feel satiated. I feel... good?", "I should stop here." ,
-            "but this feels so good...", "But I have to keep going. What if theres more? More good feelings. Like all of these ones!",
-            "I want good feelings! I love good feelings!"}, "player");
+            "But this feels so good... This is is so d*** EXCITING!", "I have to keep going. What if theres more? More good feelings. Like all of these ones!", 
+            "These ones THEY F***ING KEPT FROM ME!", "I want more good feelings! I love good feelings!!!"}, "player");
             StartDialogue(new string[] { "SLUDGE acquired, press 'E' to splooge",
                 "the gunk is supposed to stun enemies but it's lowkey bugged so use your imagination",
                 "nvm it's been fixed lol"}, "none");
@@ -573,32 +573,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "I can feel everything.", "I can sense everything.", "I want what you have." }, "player");
-            while (isTalking)
-            {
-                yield return null;
-            }
-            StartDialogue(new string[] { "FRIEND KILLER.", "BEGONE" }, "blue");
-            while (isTalking)
-            {
-                yield return null;
-            }
-            isCutscenePlaying = false;
-        }
-        else if (cutsceneNumber == 13)
-        {
-            isCutscenePlaying = true;
-            StartDialogue(new string[] { "And now, dear player, you have reached the end." }, "none");
-            while (isTalking)
-            {
-                yield return null;
-            }
-            StartDialogue(new string[] { "Murderer", "MURDERER", "MURDERERRRRRR" }, "blue");
-            while (isTalking)
-            {
-                yield return null;
-            }
-            StartDialogue(new string[] { "I can feel everything.", "I can sense everything.", "I want what you have." }, "player");
+            StartDialogue(new string[] { "I can FEEL EVERYTHING...", "I can sense everything!!", "I want what you have." }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -623,7 +598,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "But I'm doing it. I'm living. All these years I was a mindless corpse, but now I feel so REAL." }, "player");
+            StartDialogue(new string[] { "But I am doing it! I'm living! All these years I was a MINDLESS CORPSE, but now I feel so REAL!!" }, "player");
             while (isTalking)
             {
                 yield return null;
@@ -664,7 +639,7 @@ public class DialogueSystem : MonoBehaviour
                 yield return null;
             }
             StartDialogue(new string[] { "YES, I HAVE IT ALL. RAGE. EXCITEMENT. TRANQUILITY. SORROW",
-                "What... what is this last one? Why do I feel bad. WHY DO I FEEL REGRET?"}, "player");
+            "Wait... what was that last one?",  "Why do I feel bad. WHY DO I FEEL REGRET?!?"}, "player");
             while (isTalking)
             {
                 yield return null;
@@ -674,13 +649,14 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "Sadness. Empathy. You will feel what you have done.", "You will finally live in the context of the world and the brutality of the experiences you have carried out." }, "blue");
+            StartDialogue(new string[] { "Sadness. Empathy. You will feel what you have done.",
+            "You will finally live in the context of the world and the brutality of the experiences you have carried out." }, "blue");
             while (isTalking)
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "The passion of red. The fun of yellow. The peace of green. I... I ended it all.", "WHY DO I CARE.", "WHY DO I FEEL THIS WAY?",
-            "I DONT WANT TO FEEL. I DON't WANT TO CARE."}, "player");
+            StartDialogue(new string[] { "The passion of red. The fun of yellow. The peace of green. I... I ended it all.", "WHY SHOULD I CARE.", "WHY DO I FEEL THIS WAY???",
+            "I DONT WANT TO FEEL. I DON'T WANT TO CARE."}, "player");
             while (isTalking)
             {
                 yield return null;
@@ -690,7 +666,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 yield return null;
             }
-            StartDialogue(new string[] { "What does that mean? What do I do? WHAT DO I DO?", "COME BACKKKKKK" }, "player");
+            StartDialogue(new string[] { "What does that mean? What do I do? WHAT DO I DO?", "COME BAAAAAACKK" }, "player");
             while (isTalking)
             {
                 yield return null;
