@@ -588,7 +588,7 @@ public class DialogueSystem : MonoBehaviour
         else if (cutsceneNumber == 14)
         {
             isCutscenePlaying = true;
-            StartDialogue(new string[] { "You. I just need you! I NEED YOU" }, "player");
+            StartDialogue(new string[] { "You. I just need you! I F***ING NEED YOU" }, "player");
             while (isTalking)
             {
                 yield return null;
