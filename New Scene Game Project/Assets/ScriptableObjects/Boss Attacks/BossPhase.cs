@@ -15,6 +15,8 @@ public class BossPhase : ScriptableObject
     public int[] genericAttackAnimLinker; // the values held point to the associated anim state boolean
     public ComboAttack[] comboAttacks;
     public int[] comboAttackAnimLinker; // the values held point to the associated anim state boolean
+    public int[] staminaCost;  // size should be combined size of generic and combo attacks
+    public bool shuffled;
     public float cooldown;
     public int stamina;
     public int staminaRegen;

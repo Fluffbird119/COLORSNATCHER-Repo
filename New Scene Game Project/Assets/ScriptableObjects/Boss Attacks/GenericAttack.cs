@@ -12,7 +12,8 @@ public class GenericAttack : ScriptableObject
     public bool postAtkAnim; // attack has an end animation
     public PolygonCollider2D hitbox;
     public float damage;
-    public bool endOnHit; // generally true for projectiles, false for lasers
+    public int numHits; // number of times it can hit the player before ending. set to -1 to make it permanent
+    public float hitCooldown; // delay before it can hit the player again
     public Vector2[] startPoints = new Vector2[2]; // use 1 point (2nd is null) for projectiles.  if dynamicEnd, these will serve as offsets from the shootPointTransform
     public bool dynamicStart; // if false, moves the attacker to the set start positions
     public bool trackStart;
@@ -27,9 +28,10 @@ public class GenericAttack : ScriptableObject
     public float trackStrength;
     public float trackDuration;
     public bool telegraphs;
-    public Color telegraphColor;
+    public Color telegraphColor; // useful for testing/basic telegraphs
     public float attackDuration;
     public float startDelay; // telegraphs during this delay, if that is enabled
+    public float endDelay; // runs an ending animation if there is one. the hitbox will be disabled during this time
     public float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth. generally don't use this with tracking attacks
     public float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     public bool checkpointsByTime; // if this is set to true then attack duration is divided by the number of items instead

@@ -15,6 +15,8 @@ public class BossPhaseController : MonoBehaviour
     private int[] genericAttackAnimLinker; // the values held point to the associated anim state boolean
     private ComboAttack[] comboAttacks;
     private int[] comboAttackAnimLinker; // the values held point to the associated anim state boolean
+    private int[] staminaCost;
+    private bool shuffled;
     //public ScriptableObject currentAttack; // tracks the current attack, useful for custom scripts
     private float cooldown; // starts when the current attack ends
     private int stamina;

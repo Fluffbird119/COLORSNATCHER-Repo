@@ -18,7 +18,9 @@ public class BossAttackController : MonoBehaviour
     private int postAtkAnimHash = Animator.StringToHash("postAtkAnim"); // not in the scriptable object
     private PolygonCollider2D hitbox;
     private float damage;
-    private bool endOnHit;
+    private int numHits;
+    private float hitCooldown;
+    private float currHitCooldown = 0f; // not in the scriptable object
     private Vector2[] startPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicStart;
     private bool trackStart;
@@ -38,6 +40,7 @@ public class BossAttackController : MonoBehaviour
     private Color telegraphColor;
     private float attackDuration;
     private float startDelay;
+    private float endDelay;
     private float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth
     private float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     private bool checkpointsByTime;
@@ -55,11 +58,16 @@ public class BossAttackController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("player"))
+        if (currHitCooldown <= 0 && collision.gameObject.CompareTag("player"))
         {
             OnAttackLanding?.Invoke(damage);
-            if (endOnHit)
+            if (numHits > 0)
             {
+                --numHits;
+            }
+            if (numHits == 0)
+            {
+                // TODO run the end animation
                 OnAttackCompletion?.Invoke(gameObject, true);
                 StopCoroutine(attackRoutine);
             }
@@ -68,11 +76,16 @@ public class BossAttackController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("player"))
+        if (currHitCooldown <= 0 && collision.CompareTag("player"))
         {
             OnAttackLanding?.Invoke(damage);
-            if (endOnHit)
+            if (numHits > 0)
             {
+                --numHits;
+            }
+            if (numHits == 0)
+            {
+                // TODO run the end animation
                 OnAttackCompletion?.Invoke(gameObject, true);
                 StopCoroutine(attackRoutine);
             }
@@ -96,7 +109,8 @@ public class BossAttackController : MonoBehaviour
 
             hitbox = attackScriptableObject.hitbox;
             damage = attackScriptableObject.damage;
-            endOnHit = attackScriptableObject.endOnHit;
+            numHits = attackScriptableObject.numHits;
+            hitCooldown = attackScriptableObject.hitCooldown;
 
             startPoints = attackScriptableObject.startPoints;
             dynamicStart = attackScriptableObject.dynamicStart;
@@ -118,6 +132,7 @@ public class BossAttackController : MonoBehaviour
 
             attackDuration = attackScriptableObject.attackDuration;
             startDelay = attackScriptableObject.startDelay;
+            endDelay = attackScriptableObject.endDelay;
             pathCurveDepth = attackScriptableObject.pathCurveDepth;
             pathSpeedCheckpoints = attackScriptableObject.pathSpeedCheckpoints;
             checkpointsByTime = attackScriptableObject.checkpointsByTime;
@@ -214,7 +229,7 @@ public class BossAttackController : MonoBehaviour
 
     public void StartAttack(Vector2 arenaOffset) // update this to consider the offset of the arena
     {
-        // the phase controller should handle unpooling
+        // TODO the phase controller/combo controller should handle unpooling
         ProccessScriptableObject(arenaOffset); // this just reads in the info from the ScriptableObject, and updates the initial positions
 
         attackRoutine = StartCoroutine(RunAttack());
@@ -222,7 +237,7 @@ public class BossAttackController : MonoBehaviour
 
     private IEnumerator RunAttack()
     {
-        animator.SetBool(preAtkAnimHash, true);
+        animator.SetBool(preAtkAnimHash, preAtkAnim);
         animator.SetBool(atkAnimHash, false);
         animator.SetBool(postAtkAnimHash, false);
 
@@ -233,16 +248,25 @@ public class BossAttackController : MonoBehaviour
         currentPoints[0] = startPoints[0];
 
         animator.SetBool(preAtkAnimHash, false);
-        animator.SetBool(atkAnimHash, true);
+        animator.SetBool(atkAnimHash, atkAnim);
         animator.SetBool(postAtkAnimHash, false);
 
         float timeInAttack = 0f;
         while ((timeInAttack += Time.deltaTime) < attackDuration)
         {
+            if (currHitCooldown > 0)
+            {
+                currHitCooldown -= Time.deltaTime;
+            }
+            if (trackDuration > 0)
+            {
+                trackDuration -= Time.deltaTime;
+            }
+
             if (endPoints[1] != null) // handle laser things
             {
                 Vector2 caster;
-                if (transformToTrack)
+                if (trackDuration > 0 && transformToTrack)
                 {
                     caster = transformToTrack.position;
 
@@ -264,11 +288,11 @@ public class BossAttackController : MonoBehaviour
                 }
 
                 float distanceToEnd0 = Vector2.Distance(currentPoints[0], endPoints[0]);
-                //float distanceToEnd1 = Vector2.Distance(currentPoints[1], endPoints[1]);
+                float distanceToEnd1 = Vector2.Distance(currentPoints[1], endPoints[1]);
                 float distanceFromStart0 = Vector2.Distance(currentPoints[0], startPoints[0]);
-                //float distanceFromStart1 = Vector2.Distance(currentPoints[1], startPoints[1]);
+                float distanceFromStart1 = Vector2.Distance(currentPoints[1], startPoints[1]);
                 float totalDistance0 = distanceToEnd0 + distanceFromStart0;
-                //float totalDistance1 = distanceToEnd1 + distanceFromStart1;
+                float totalDistance1 = distanceToEnd1 + distanceFromStart1;
 
                 int checkpointIndex;
                 if (!checkpointsByTime)
@@ -279,13 +303,29 @@ public class BossAttackController : MonoBehaviour
                 {
                     checkpointIndex = Mathf.FloorToInt(Mathf.Clamp01(timeInAttack / attackDuration) * (pathSpeedCheckpoints.Length - 1));
                 }
-                // update currentPoints to the next position based on current position, end points, curveDepth etc.
 
-                //update rendering and such based on current points
+                // TODO figure out path curve depth chud
+                if (trackDuration > 0 && transformToTrack) // speed is not based on distance if it's tracking, since distance can change
+                {
+                    currentPoints[0] = (endPoints[0] - currentPoints[0]).normalized * pathSpeedCheckpoints[checkpointIndex];
+                    currentPoints[1] = (endPoints[1] - currentPoints[1]).normalized * pathSpeedCheckpoints[checkpointIndex];
+                }
+                else
+                {
+                    currentPoints[0] = pathSpeedCheckpoints[checkpointIndex] * totalDistance0 * (endPoints[0] - currentPoints[0]).normalized;
+                    currentPoints[1] = pathSpeedCheckpoints[checkpointIndex] * totalDistance1 * (endPoints[1] - currentPoints[1]).normalized;
+                }
+
+                if (startFollowsShooter)
+                {
+                    currentPoints[0] = endPoints[0];
+                }
+
+                // TODO update rendering and such based on current points. rember the stopsAtTarget bool for spriting
             }
             else // handle projectile things
             {
-                if (transformToTrack)
+                if (trackDuration > 0 && transformToTrack)
                 {
                     Vector2 caster = transformToTrack.position;
 
@@ -300,9 +340,25 @@ public class BossAttackController : MonoBehaviour
                     }
                 }
 
-                // update currentPoints to the next position based on current position, end points, curveDepth etc.
+                float distanceToEnd = Vector2.Distance(currentPoints[0], endPoints[0]);
+                float distanceFromStart = Vector2.Distance(currentPoints[0], startPoints[0]);
+                float totalDistance = distanceToEnd + distanceFromStart;
+
+                int checkpointIndex;
+                if (!checkpointsByTime)
+                {
+                    checkpointIndex = Mathf.FloorToInt(Mathf.Clamp01(distanceFromStart / totalDistance) * (pathSpeedCheckpoints.Length - 1));
+                }
+                else
+                {
+                    checkpointIndex = Mathf.FloorToInt(Mathf.Clamp01(timeInAttack / attackDuration) * (pathSpeedCheckpoints.Length - 1));
+                }
+
+                // TODO figure out path curve depth chud
+                currentPoints[0] = (endPoints[0] - currentPoints[0]).normalized * pathSpeedCheckpoints[checkpointIndex]; // speed is never based on distance
 
                 transform.position = currentPoints[0];
+                // TODO update rendering and such based on current point
             }
 
             yield return null;
@@ -310,7 +366,7 @@ public class BossAttackController : MonoBehaviour
 
         attackDone = true;
         OnAttackCompletion?.Invoke(gameObject, false);
-        // the phase controller should handle repooling
+        // TODO the phase controller/combo controller should handle repooling
     } // end RunAttack()
 
     private IEnumerator TelegraphAttack()
@@ -355,14 +411,48 @@ public class BossAttackController : MonoBehaviour
                 }
                 else
                 {
-                    // do static laser stuff. only consider the start points
+                    if (startFollowsShooter)
+                    {
+                        Vector2 caster = shootPointTransform.position;
+                        startPoints[0] = caster + startOffsets[0];
+                        endPoints[0] = caster + startOffsets[1];
+                    }
                 }
 
-                // actually render the laser telegraph
+                // TODO actually render the laser telegraph. only use start points
             }
             else
             {
-                // do projectile stuff. shouldn't need to consider tracking
+                if (trackStart && transformToTrack)
+                {
+                    Vector2 caster = transformToTrack.position;
+
+                    Vector2 realVsTargetOffset = caster - startPoints[1];
+                    if (realVsTargetOffset.magnitude < trackStrength)
+                    {
+                        endPoints[0] = realVsTargetOffset.normalized * trackStrength;
+                    }
+                    else
+                    {
+                        endPoints[0] = caster;
+                    }
+
+                    if (startFollowsShooter)
+                    {
+                        caster = shootPointTransform.position;
+                        startPoints[0] = caster + startOffsets[0];
+                    }
+                }
+                else
+                {
+                    if (startFollowsShooter)
+                    {
+                        Vector2 caster = shootPointTransform.position;
+                        startPoints[0] = caster + startOffsets[0];
+                    }
+                }
+
+                // TODO actually render projectile telegraph. use start and end point
             }
         }
     } // end TelegraphAttack()
