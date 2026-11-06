@@ -18,10 +18,12 @@ public class MeleeEnemy : ScriptableObject
     public GameObject HitParticlePrefab;
     public Sprite[] BodyParts;
     public bool IsTeleporter;
-    public Animator Animator;
-    public float EnemyLightRadius;
-    public float EnemyLightFallOff;
-    public Color EnemyLightColor;
+    public RuntimeAnimatorController Animator;
+    public Color LightColor;
+    public float LightIntensity;
+    public float LightRadius;
+    public float LightFallOff;
+    public Color32 vineColor = new Color32(12, 182, 0, 255);
 
     // hitbox stuff only works for one body part cuz fukc you
     public List<Vector2[]> PhysicsPaths = new List<Vector2[]>();

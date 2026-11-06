@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class RangedEnemy : ScriptableObject
 {
     public ProjectileScriptableObject RangedEnemyBullet;
-    public Transform FirePoint;
+    public GameObject EnemyVisalPrefab;
     public float ShootingRange;
     public float FireRate;
     public float DistanceRateIncrease;
@@ -18,16 +18,18 @@ public class RangedEnemy : ScriptableObject
     public int MaxHealth;
     public float KnockbackForce;
     public float KnockbackDuration;
-    public float IsWalker;
+    public bool IsWalker;
     public float DistanceSpeedMod;
     public bool AimIncreaser;
     public float MoveSpeed;
     public GameObject HitParticlePrefab;
     public Sprite[] BodyParts;
-    public Animator Animator;
+    public RuntimeAnimatorController Animator;
+    public Color LightColor;
+    public float LightIntensity;
     public float LightRadius;
     public float LightFallOff;
-    public Color LightColor;
+    public Color32 vineColor = new Color32(12, 182, 0, 255);
 
     // hitbox stuff only works for one body part cuz fukc you
     public List<Vector2[]> PhysicsPaths = new List<Vector2[]>();
@@ -35,11 +37,6 @@ public class RangedEnemy : ScriptableObject
 
     private void OnValidate()
     {
-        // as of me making this the firepoint is 0,0,0 for every ranged enemy so im just setting it to that
-        FirePoint.localPosition = Vector3.zero;
-        FirePoint.rotation = Quaternion.identity;
-        FirePoint.localScale = Vector3.one;
-
         // clean list in between updates in the scriptable object
         PhysicsPaths.Clear();
 
