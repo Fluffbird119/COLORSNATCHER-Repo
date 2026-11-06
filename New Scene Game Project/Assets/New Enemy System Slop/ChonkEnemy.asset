@@ -12,21 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f565d82b1e6589f42aa16fcadd0a336e, type: 3}
   m_Name: ChonkEnemy
   m_EditorClassIdentifier: 
-  Speed: 0
+  Speed: 3
   StoppingDistance: 0
-  MaxHealth: 0
-  KnockbackForce: 0
-  KnockbackDuration: 0
-  RageDamageBuff: 0
-  StunDamageBuff: 0
+  MaxHealth: 5
+  KnockbackForce: 5
+  KnockbackDuration: 1
+  RageDamageBuff: 1.5
+  StunDamageBuff: 1.2
   ProceduralSpeed: 0
-  DistanceSpeedMod: 0
+  DistanceSpeedMod: 5
   Reincarnates: 0
-  SpriteAngleOffset: 0
-  HitParticlePrefab: {fileID: 0}
-  BodyParts: []
+  SpriteAngleOffset: 90
+  HitParticlePrefab: {fileID: 7359391080089007259, guid: 5eb95f9b3cf85b347a7e129849f10eb0, type: 3}
+  BodyParts:
+  - {fileID: 3327998091030722509, guid: 2f1ba09bb10b3214ab90eee768a9df7b, type: 3}
   IsTeleporter: 0
-  Animator: {fileID: 0}
-  EnemyLightRadius: 0
-  EnemyLightFallOff: 0
-  EnemyLightColor: {r: 0, g: 0, b: 0, a: 0}
+  Animator: {fileID: 9100000, guid: 271c7572d0e59bc45808da93e8cf2733, type: 2}
+  LightColor: {r: 1, g: 0, b: 0, a: 1}
+  LightIntensity: 1
+  LightRadius: 10
+  LightFallOff: 0.5
+  vineColor:
+    serializedVersion: 2
+    rgba: 4278236684
