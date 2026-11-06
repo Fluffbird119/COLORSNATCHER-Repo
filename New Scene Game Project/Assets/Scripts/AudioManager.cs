@@ -38,61 +38,58 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        convoMusic.Play();
+        // start all then pause all but convo music since thats what game starts on
+        StartAll();
+        PauseAll();
+        convoMusic.UnPause();
     }
 
-    public void StopAll()
+    public void StartAll()
     {
-        convoMusic.Stop();
-        yellowMusic.Stop();
-        blueMusic.Stop();
-        redMusic.Stop();
-        greenMusic.Stop();
+        convoMusic.Play();
+        yellowMusic.Play();
+        blueMusic.Play();
+        redMusic.Play();
+        greenMusic.Play();
+    }
+
+    public void PauseAll()
+    {
+        convoMusic.Pause();
+        yellowMusic.Pause();
+        blueMusic.Pause();
+        redMusic.Pause();
+        greenMusic.Pause();
     }
 
     public void ConvoMusic()
     {
-        convoMusic.Play();
-        yellowMusic.Stop();
-        blueMusic.Stop();
-        redMusic.Stop();
-        greenMusic.Stop();
+        PauseAll();
+        convoMusic.UnPause();
     }
 
     public void RedMusic()
     {
-        convoMusic.Stop();
-        yellowMusic.Stop();
-        blueMusic.Stop();
-        redMusic.Play();
-        greenMusic.Stop();
+        PauseAll();
+        redMusic.UnPause();
     }
 
     public void YellowMuisc()
     {
-        convoMusic.Stop();
-        yellowMusic.Play();
-        blueMusic.Stop();
-        redMusic.Stop();
-        greenMusic.Stop();
+        PauseAll();
+        yellowMusic.UnPause();
     }
 
     public void GreenMusic()
     {
-        convoMusic.Stop();
-        yellowMusic.Stop();
-        blueMusic.Stop();
-        redMusic.Stop();
-        greenMusic.Play();
+        PauseAll();
+        greenMusic.UnPause();
     }
 
     public void BlueMuisc()
     {
-        convoMusic.Stop();
-        yellowMusic.Stop();
-        blueMusic.Play();
-        redMusic.Stop();
-        greenMusic.Stop();
+        PauseAll();
+        blueMusic.UnPause();
     }
 
     public void HitNoise()

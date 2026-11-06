@@ -87,7 +87,7 @@ public class PlayerHealth : MonoBehaviour
             health = 0;
             GameManager.Instance.StopCurrWaveRoutine();
             EnemyManager.Instance.DeleteEnemies();
-            AudioManager.Instance.StopAll();
+            AudioManager.Instance.PauseAll();
             StopAllCoroutines();
 
             attackScript.ResumeEye();

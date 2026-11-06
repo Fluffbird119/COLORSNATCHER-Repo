@@ -458,7 +458,7 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
-        AudioManager.Instance.StopAll();
+        AudioManager.Instance.PauseAll();
         
         yield return new WaitForSeconds(20f);
         Application.Quit();
