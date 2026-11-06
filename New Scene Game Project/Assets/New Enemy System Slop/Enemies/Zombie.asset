@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f565d82b1e6589f42aa16fcadd0a336e, type: 3}
+  m_Name: Zombie
+  m_EditorClassIdentifier: 
+  Speed: 0
+  StoppingDistance: 0
+  MaxHealth: 0
+  KnockbackForce: 0
+  KnockbackDuration: 0
+  RageDamageBuff: 0
+  StunDamageBuff: 0
+  ProceduralSpeed: 0
+  DistanceSpeedMod: 0
+  Reincarnates: 0
+  SpriteAngleOffset: 0
+  HitParticlePrefab: {fileID: 0}
+  BodyParts: []
+  IsTeleporter: 0
+  Animator: {fileID: 0}
+  LightColor: {r: 0, g: 0, b: 0, a: 255}
+  LightIntensity: 0
+  LightInnerRadius: 0
+  LightOuterRadius: 0
+  LightFallOff: 0
+  vineColor:
+    serializedVersion: 2
+    rgba: 4278236684

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class RangedEnemy : ScriptableObject
 {
     public ProjectileScriptableObject RangedEnemyBullet;
-    public GameObject EnemyVisalPrefab;
     public float ShootingRange;
     public float FireRate;
     public float DistanceRateIncrease;
@@ -25,9 +24,10 @@ public class RangedEnemy : ScriptableObject
     public GameObject HitParticlePrefab;
     public Sprite[] BodyParts;
     public RuntimeAnimatorController Animator;
-    public Color LightColor;
+    public Color LightColor = new Color(0, 0, 0, 255);
     public float LightIntensity;
-    public float LightRadius;
+    public float LightInnerRadius;
+    public float LightOuterRadius;
     public float LightFallOff;
     public Color32 vineColor = new Color32(12, 182, 0, 255);
 

@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9023c6f7acc9cbf42afc08b860e8cf84, type: 3}
+  m_Name: Shooter
+  m_EditorClassIdentifier: 
+  RangedEnemyBullet: {fileID: 11400000, guid: 3df4cc0a3c7465148b58589456a34d44, type: 2}
+  ShootingRange: 200
+  FireRate: 0.4
+  DistanceRateIncrease: 1.5
+  DistanceAccuracyIncrease: 2.5
+  DistanceMovePredict: 0.3
+  RageDamageBuff: 1.5
+  StunDamageBuff: 1.2
+  Accuracy: 0.1
+  MaxHealth: 3
+  KnockbackForce: 3
+  KnockbackDuration: 0.15
+  IsWalker: 0
+  DistanceSpeedMod: 0
+  AimIncreaser: 1
+  MoveSpeed: 2
+  HitParticlePrefab: {fileID: 7359391080089007259, guid: df16f1a3a1d9c8c4a95bf06941da5f5d, type: 3}
+  BodyParts:
+  - {fileID: -1721913998604347230, guid: ee5304acb1e08534a8f13131f288fbf3, type: 3}
+  Animator: {fileID: 9100000, guid: d181f654174eee940b6b235099e8c9a4, type: 2}
+  LightColor: {r: 1, g: 0.94509804, b: 0.53333336, a: 255}
+  LightIntensity: 0.5
+  LightInnerRadius: 0
+  LightOuterRadius: 10
+  LightFallOff: 0.5
+  vineColor:
+    serializedVersion: 2
+    rgba: 4278236684

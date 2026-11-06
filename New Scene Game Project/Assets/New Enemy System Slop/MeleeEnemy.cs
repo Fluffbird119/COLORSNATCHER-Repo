@@ -19,9 +19,10 @@ public class MeleeEnemy : ScriptableObject
     public Sprite[] BodyParts;
     public bool IsTeleporter;
     public RuntimeAnimatorController Animator;
-    public Color LightColor;
+    public Color LightColor = new Color(0, 0, 0, 255);
     public float LightIntensity;
-    public float LightRadius;
+    public float LightInnerRadius;
+    public float LightOuterRadius;
     public float LightFallOff;
     public Color32 vineColor = new Color32(12, 182, 0, 255);
 

@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: CalmShooter
   m_EditorClassIdentifier: 
   RangedEnemyBullet: {fileID: 11400000, guid: 05533154b2e240a4eb4b56f9dc9c2bef, type: 2}
-  EnemyVisalPrefab: {fileID: 0}
   ShootingRange: 200
   FireRate: 0.2
   DistanceRateIncrease: 3
@@ -35,7 +34,8 @@ MonoBehaviour:
   Animator: {fileID: 9100000, guid: f8fe4ae12f96aee46b5802c2a9d0d12c, type: 2}
   LightColor: {r: 0.65882355, g: 1, b: 0.53333336, a: 1}
   LightIntensity: 1
-  LightRadius: 10
+  LightInnerRadius: 0
+  LightOuterRadius: 10
   LightFallOff: 0.5
   vineColor:
     serializedVersion: 2

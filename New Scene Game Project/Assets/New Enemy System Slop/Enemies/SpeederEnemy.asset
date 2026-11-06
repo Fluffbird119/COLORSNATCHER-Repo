@@ -10,27 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f565d82b1e6589f42aa16fcadd0a336e, type: 3}
-  m_Name: ChonkEnemy
+  m_Name: SpeederEnemy
   m_EditorClassIdentifier: 
-  Speed: 3
+  Speed: 0.5
   StoppingDistance: 0
-  MaxHealth: 5
-  KnockbackForce: 5
-  KnockbackDuration: 1
+  MaxHealth: 2
+  KnockbackForce: 80
+  KnockbackDuration: 0.15
   RageDamageBuff: 1.5
   StunDamageBuff: 1.2
-  ProceduralSpeed: 0
-  DistanceSpeedMod: 5
+  ProceduralSpeed: 1
+  DistanceSpeedMod: 0.25
   Reincarnates: 0
-  SpriteAngleOffset: 90
-  HitParticlePrefab: {fileID: 7359391080089007259, guid: 5eb95f9b3cf85b347a7e129849f10eb0, type: 3}
+  SpriteAngleOffset: 180
+  HitParticlePrefab: {fileID: 8719147511489265977, guid: 8b7ef972b8097d84bac7b5d53bb62bd6, type: 3}
   BodyParts:
-  - {fileID: 3327998091030722509, guid: 2f1ba09bb10b3214ab90eee768a9df7b, type: 3}
+  - {fileID: 5438952532028320831, guid: c4ec686678220c64db7f4b9dc0ab1309, type: 3}
   IsTeleporter: 0
-  Animator: {fileID: 9100000, guid: 271c7572d0e59bc45808da93e8cf2733, type: 2}
-  LightColor: {r: 1, g: 0, b: 0, a: 1}
-  LightIntensity: 1
-  LightRadius: 10
+  Animator: {fileID: 0}
+  LightColor: {r: 1, g: 0.94509804, b: 0.53333336, a: 255}
+  LightIntensity: 0.5
+  LightInnerRadius: 0
+  LightOuterRadius: 10
   LightFallOff: 0.5
   vineColor:
     serializedVersion: 2
