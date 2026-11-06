@@ -12,26 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f565d82b1e6589f42aa16fcadd0a336e, type: 3}
   m_Name: Zombie
   m_EditorClassIdentifier: 
-  Speed: 0
+  Speed: 3
   StoppingDistance: 0
-  MaxHealth: 0
-  KnockbackForce: 0
-  KnockbackDuration: 0
-  RageDamageBuff: 0
-  StunDamageBuff: 0
+  MaxHealth: 3
+  KnockbackForce: 15
+  KnockbackDuration: 1
+  RageDamageBuff: 1.5
+  StunDamageBuff: 1.2
   ProceduralSpeed: 0
-  DistanceSpeedMod: 0
-  Reincarnates: 0
-  SpriteAngleOffset: 0
-  HitParticlePrefab: {fileID: 0}
-  BodyParts: []
+  DistanceSpeedMod: 5
+  Reincarnates: 1
+  SpriteAngleOffset: 180
+  HitParticlePrefab: {fileID: 7359391080089007259, guid: ed937c33d9ffa4440a4c141695f3c918, type: 3}
+  BodyParts:
+  - {fileID: 6999994996909277871, guid: 37f0f67068c8a9247966c08aebe8850b, type: 3}
   IsTeleporter: 0
-  Animator: {fileID: 0}
-  LightColor: {r: 0, g: 0, b: 0, a: 255}
-  LightIntensity: 0
+  Animator: {fileID: 9100000, guid: 0ebb7195a9aa9d04c9ac1cfbfff68e71, type: 2}
+  LightColor: {r: 0.65882355, g: 1, b: 0.53333336, a: 255}
+  LightIntensity: 1
   LightInnerRadius: 0
-  LightOuterRadius: 0
-  LightFallOff: 0
+  LightOuterRadius: 10
+  LightFallOff: 0.5
   vineColor:
     serializedVersion: 2
     rgba: 4278236684

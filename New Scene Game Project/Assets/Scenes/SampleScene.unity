@@ -1065,6 +1065,10 @@ PrefabInstance:
       propertyPath: rageBarUIScript
       value: 
       objectReference: {fileID: 590160078}
+    - target: {fileID: 2762492558423917729, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 4414217126195252004, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
       propertyPath: cam
       value: 
@@ -1125,6 +1129,10 @@ PrefabInstance:
       propertyPath: youDiedMessageAndButton
       value: 
       objectReference: {fileID: 1207200887}
+    - target: {fileID: 7944602113072084358, guid: 1540a2f29765e0a47ac5fe0876f641dc, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

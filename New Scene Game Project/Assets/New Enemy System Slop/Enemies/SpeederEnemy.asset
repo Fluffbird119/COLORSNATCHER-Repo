@@ -23,11 +23,11 @@ MonoBehaviour:
   DistanceSpeedMod: 0.25
   Reincarnates: 0
   SpriteAngleOffset: 180
-  HitParticlePrefab: {fileID: 8719147511489265977, guid: 8b7ef972b8097d84bac7b5d53bb62bd6, type: 3}
+  HitParticlePrefab: {fileID: 7359391080089007259, guid: df16f1a3a1d9c8c4a95bf06941da5f5d, type: 3}
   BodyParts:
   - {fileID: 5438952532028320831, guid: c4ec686678220c64db7f4b9dc0ab1309, type: 3}
   IsTeleporter: 0
-  Animator: {fileID: 0}
+  Animator: {fileID: 9100000, guid: 12468703c02108946b9c5edba1445afa, type: 2}
   LightColor: {r: 1, g: 0.94509804, b: 0.53333336, a: 255}
   LightIntensity: 0.5
   LightInnerRadius: 0

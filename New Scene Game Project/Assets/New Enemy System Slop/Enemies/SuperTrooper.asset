@@ -12,30 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9023c6f7acc9cbf42afc08b860e8cf84, type: 3}
   m_Name: SuperTrooper
   m_EditorClassIdentifier: 
-  RangedEnemyBullet: {fileID: 0}
-  ShootingRange: 0
-  FireRate: 0
-  DistanceRateIncrease: 0
-  DistanceAccuracyIncrease: 0
+  RangedEnemyBullet: {fileID: 11400000, guid: 109b556868aa9824cb482671eaca56cf, type: 2}
+  ShootingRange: 35
+  FireRate: 0.6
+  DistanceRateIncrease: 3
+  DistanceAccuracyIncrease: 5
   DistanceMovePredict: 0
-  RageDamageBuff: 0
-  StunDamageBuff: 0
-  Accuracy: 0
-  MaxHealth: 0
-  KnockbackForce: 0
-  KnockbackDuration: 0
-  IsWalker: 0
-  DistanceSpeedMod: 0
+  RageDamageBuff: 1.5
+  StunDamageBuff: 1.2
+  Accuracy: 0.75
+  MaxHealth: 7
+  KnockbackForce: 2
+  KnockbackDuration: 0.15
+  IsWalker: 1
+  DistanceSpeedMod: 3
   AimIncreaser: 0
-  MoveSpeed: 0
-  HitParticlePrefab: {fileID: 0}
-  BodyParts: []
-  Animator: {fileID: 0}
-  LightColor: {r: 0, g: 0, b: 0, a: 255}
-  LightIntensity: 0
+  MoveSpeed: 4
+  HitParticlePrefab: {fileID: 7359391080089007259, guid: e812884516822064d9a3a49c8b6248da, type: 3}
+  BodyParts:
+  - {fileID: 4008254519776165908, guid: 1b5c8b0e3d07a4342854289b80994bfa, type: 3}
+  Animator: {fileID: 9100000, guid: ede3d0afe359cb14c98a98f3f0441e1b, type: 2}
+  LightColor: {r: 0, g: 0.84313726, b: 1, a: 255}
+  LightIntensity: 1
   LightInnerRadius: 0
-  LightOuterRadius: 0
-  LightFallOff: 0
+  LightOuterRadius: 10
+  LightFallOff: 0.5
   vineColor:
     serializedVersion: 2
     rgba: 4278236684
