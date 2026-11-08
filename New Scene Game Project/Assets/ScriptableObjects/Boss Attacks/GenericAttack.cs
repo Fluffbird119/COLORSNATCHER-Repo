@@ -33,6 +33,7 @@ public class GenericAttack : ScriptableObject
     public float startDelay; // telegraphs during this delay, if that is enabled
     public float endDelay; // runs an ending animation if there is one. the hitbox will be disabled during this time
     public float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth. generally don't use this with tracking attacks
+    public float curveTime;
     public float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     public bool checkpointsByTime; // if this is set to true then attack duration is divided by the number of items instead
     public bool isCustomAttack;

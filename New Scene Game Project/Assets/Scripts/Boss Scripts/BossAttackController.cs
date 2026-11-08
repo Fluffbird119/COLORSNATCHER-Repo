@@ -1,6 +1,7 @@
 using System.Collections;
 using System;
 using UnityEngine;
+using System.IO;
 
 public class BossAttackController : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class BossAttackController : MonoBehaviour
     private float startDelay;
     private float endDelay;
     private float pathCurveDepth; // makes it curve from start to end. the path will move clockwise for positive depth
+    private float curveTime;
     private float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     private bool checkpointsByTime;
     private bool isCustomAttack;
@@ -54,6 +56,7 @@ public class BossAttackController : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        hitbox = gameObject.GetComponent<PolygonCollider2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -67,7 +70,7 @@ public class BossAttackController : MonoBehaviour
             }
             if (numHits == 0)
             {
-                // TODO run the end animation
+                StartCoroutine(RunAttackEnd());
                 OnAttackCompletion?.Invoke(gameObject, true);
                 StopCoroutine(attackRoutine);
             }
@@ -85,7 +88,7 @@ public class BossAttackController : MonoBehaviour
             }
             if (numHits == 0)
             {
-                // TODO run the end animation
+                StartCoroutine(RunAttackEnd());
                 OnAttackCompletion?.Invoke(gameObject, true);
                 StopCoroutine(attackRoutine);
             }
@@ -107,7 +110,17 @@ public class BossAttackController : MonoBehaviour
             atkAnim = attackScriptableObject.atkAnim;
             postAtkAnim = attackScriptableObject.postAtkAnim;
 
-            hitbox = attackScriptableObject.hitbox;
+            hitbox.pathCount = attackScriptableObject.hitbox.pathCount;
+            for (int i = 0; i < attackScriptableObject.hitbox.pathCount; i++)
+            {
+                hitbox.SetPath(i, attackScriptableObject.hitbox.GetPath(i));
+            }
+            hitbox.isTrigger = attackScriptableObject.hitbox.isTrigger;
+            hitbox.sharedMaterial = attackScriptableObject.hitbox.sharedMaterial;
+            hitbox.offset = attackScriptableObject.hitbox.offset;
+            hitbox.usedByEffector = attackScriptableObject.hitbox.usedByEffector;
+            hitbox.compositeOperation = attackScriptableObject.hitbox.compositeOperation;
+
             damage = attackScriptableObject.damage;
             numHits = attackScriptableObject.numHits;
             hitCooldown = attackScriptableObject.hitCooldown;
@@ -134,6 +147,7 @@ public class BossAttackController : MonoBehaviour
             startDelay = attackScriptableObject.startDelay;
             endDelay = attackScriptableObject.endDelay;
             pathCurveDepth = attackScriptableObject.pathCurveDepth;
+            curveTime = attackScriptableObject.curveTime;
             pathSpeedCheckpoints = attackScriptableObject.pathSpeedCheckpoints;
             checkpointsByTime = attackScriptableObject.checkpointsByTime;
 
@@ -247,6 +261,8 @@ public class BossAttackController : MonoBehaviour
         currentPoints[0] = startPoints[0];
         currentPoints[0] = startPoints[0];
 
+        hitbox.enabled = true;
+
         animator.SetBool(preAtkAnimHash, false);
         animator.SetBool(atkAnimHash, atkAnim);
         animator.SetBool(postAtkAnimHash, false);
@@ -261,6 +277,10 @@ public class BossAttackController : MonoBehaviour
             if (trackDuration > 0)
             {
                 trackDuration -= Time.deltaTime;
+            }
+            if (curveTime > 0)
+            {
+                curveTime -= Time.deltaTime;
             }
 
             if (endPoints[1] != null) // handle laser things
@@ -304,21 +324,95 @@ public class BossAttackController : MonoBehaviour
                     checkpointIndex = Mathf.FloorToInt(Mathf.Clamp01(timeInAttack / attackDuration) * (pathSpeedCheckpoints.Length - 1));
                 }
 
-                // TODO figure out path curve depth chud
+                Vector2[] targetPoints = new Vector2[2]
+                {
+                    endPoints[0],
+                    endPoints[1]
+                }; // defaults to the end points until path curve is determined
+
+                if (pathCurveDepth != 0 && curveTime > 0) // determines path curve
+                {
+                    Vector2[] offsets = new Vector2[2]
+                    {
+                        endPoints[0] - startPoints[0],
+                        endPoints[1] - startPoints[1]
+                    };
+
+                    float[] halfMagnitudes = new float[2]
+                    {
+                        offsets[0].magnitude / 2,
+                        offsets[1].magnitude / 2
+                    };
+
+                    Vector2[] midPoints = new Vector2[2]
+                    {
+                        offsets[0].normalized * halfMagnitudes[0] + startPoints[0],
+                        offsets[1].normalized * halfMagnitudes[1] + startPoints[1]
+                    };
+
+                    int depthSign = pathCurveDepth < 0 ? -1 : 1;
+
+                    Vector2[] centerDirections = new Vector2[2]
+                    {
+                        new Vector2(depthSign * offsets[0].y, -depthSign * offsets[0].x).normalized,
+                        new Vector2(depthSign * offsets[1].y, -depthSign * offsets[1].x).normalized
+                    };
+
+                    Vector2[] circleCenters = new Vector2[2]
+                    {
+                        midPoints[0] + (pathCurveDepth - (Mathf.Pow(halfMagnitudes[0], 2) / pathCurveDepth)) / 2 * centerDirections[0],
+                        midPoints[1] + (pathCurveDepth - (Mathf.Pow(halfMagnitudes[1], 2) / pathCurveDepth)) / 2 * centerDirections[1]
+                    };
+
+                    float[] radiuses = new float[2]
+                    {
+                        Vector2.Distance(endPoints[0], circleCenters[0]),
+                        Vector2.Distance(endPoints[1], circleCenters[1])
+                    };
+
+                    Vector2[] currPointOffsets = new Vector2[2]
+                    {
+                        currentPoints[0] - circleCenters[0],
+                        currentPoints[1] - circleCenters[1]
+                    };
+
+                    float[] currAngles = new float[2]
+                    {
+                        Mathf.Atan2(currPointOffsets[0][1], currPointOffsets[0][0]),
+                        Mathf.Atan2(currPointOffsets[1][1], currPointOffsets[1][0])
+                    };
+
+                    if (trackDuration > 0 && transformToTrack) // speed is not based on distance if it's tracking, since distance can change
+                    {
+                        currAngles[0] += depthSign * pathSpeedCheckpoints[checkpointIndex] / (2 * radiuses[0]);
+                        currAngles[1] += depthSign * pathSpeedCheckpoints[checkpointIndex] / (2 * radiuses[1]);
+                    }
+                    else
+                    {
+                        currAngles[0] += depthSign * totalDistance0 * pathSpeedCheckpoints[checkpointIndex] / (2 * radiuses[0]);
+                        currAngles[1] += depthSign * totalDistance1 * pathSpeedCheckpoints[checkpointIndex] / (2 * radiuses[1]);
+                    }
+
+                    targetPoints[0] = radiuses[0] * (Quaternion.Euler(0, 0, currAngles[0]) * new Vector2(0, 1));
+                    targetPoints[1] = radiuses[1] * (Quaternion.Euler(0, 0, currAngles[1]) * new Vector2(0, 1));
+
+                    // TODO figure out detection and handling for overshooting the end point. or don't. idc
+                }
+
                 if (trackDuration > 0 && transformToTrack) // speed is not based on distance if it's tracking, since distance can change
                 {
-                    currentPoints[0] = (endPoints[0] - currentPoints[0]).normalized * pathSpeedCheckpoints[checkpointIndex];
-                    currentPoints[1] = (endPoints[1] - currentPoints[1]).normalized * pathSpeedCheckpoints[checkpointIndex];
+                    currentPoints[0] = (targetPoints[0] - currentPoints[0]).normalized * pathSpeedCheckpoints[checkpointIndex];
+                    currentPoints[1] = (targetPoints[1] - currentPoints[1]).normalized * pathSpeedCheckpoints[checkpointIndex];
                 }
                 else
                 {
-                    currentPoints[0] = pathSpeedCheckpoints[checkpointIndex] * totalDistance0 * (endPoints[0] - currentPoints[0]).normalized;
-                    currentPoints[1] = pathSpeedCheckpoints[checkpointIndex] * totalDistance1 * (endPoints[1] - currentPoints[1]).normalized;
+                    currentPoints[0] = pathSpeedCheckpoints[checkpointIndex] * totalDistance0 * (targetPoints[0] - currentPoints[0]).normalized;
+                    currentPoints[1] = pathSpeedCheckpoints[checkpointIndex] * totalDistance1 * (targetPoints[1] - currentPoints[1]).normalized;
                 }
 
                 if (startFollowsShooter)
                 {
-                    currentPoints[0] = endPoints[0];
+                    currentPoints[0] = endPoints[0]; // endPoints overrides target points here
                 }
 
                 // TODO update rendering and such based on current points. rember the stopsAtTarget bool for spriting
@@ -456,4 +550,18 @@ public class BossAttackController : MonoBehaviour
             }
         }
     } // end TelegraphAttack()
+
+    private IEnumerator RunAttackEnd()
+    {
+        animator.SetBool(preAtkAnimHash, false);
+        animator.SetBool(atkAnimHash, false);
+        animator.SetBool(postAtkAnimHash, postAtkAnim);
+
+        hitbox.enabled = false;
+        yield return new WaitForSeconds(endDelay);
+
+        animator.SetBool(preAtkAnimHash, false);
+        animator.SetBool(atkAnimHash, false);
+        animator.SetBool(postAtkAnimHash, false);
+    } // end RunAttackEnd()
 }
