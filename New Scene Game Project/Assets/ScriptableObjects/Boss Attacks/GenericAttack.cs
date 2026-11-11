@@ -23,8 +23,9 @@ public class GenericAttack : ScriptableObject
     public Transform startTransform;
     public Transform shootPointTransform;
     public bool startFollowsShooter; // useful for lasers
+    public bool trackingAttack;
     public Transform transformToTrack; // if this is not null, the attack will target this
-    public bool stopAtTarget; // use for lasers if you don't want it to go past the player
+    public bool stopAtTarget; // use for lasers if you don't want it to go past the player. use for non tracking projectiles to not need to worry about attack duration
     public float trackStrength;
     public float trackDuration;
     public bool telegraphs;
@@ -36,6 +37,7 @@ public class GenericAttack : ScriptableObject
     public float curveTime;
     public float[] pathSpeedCheckpoints; // divides the distance of the path by the number of items
     public bool checkpointsByTime; // if this is set to true then attack duration is divided by the number of items instead
+    public bool speedByDistance; // typically do not do this for tracking attacks
     public bool isCustomAttack;
     public MonoBehaviour customScript;
 }
