@@ -1,8 +1,10 @@
 using System.Collections;
 using System;
 using UnityEngine;
-using System.IO;
-using Unity.Mathematics;
+
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(PolygonCollider2D))]
+[RequireComponent(typeof(SimpleTelegraphRenderer))]
 
 public class BossAttackController : MonoBehaviour
 {
@@ -40,7 +42,9 @@ public class BossAttackController : MonoBehaviour
     private float trackStrength;
     private float trackDuration;
     private bool telegraphs;
+    private bool usesSimpleTelegraph;
     private Color telegraphColor;
+    private SimpleTelegraphRenderer telegraphRenderer;
     private float attackDuration;
     private float startDelay;
     private float endDelay;
@@ -60,7 +64,8 @@ public class BossAttackController : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        hitbox = gameObject.GetComponent<PolygonCollider2D>();
+        hitbox = GetComponent<PolygonCollider2D>();
+        telegraphRenderer = GetComponent<SimpleTelegraphRenderer>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -146,6 +151,7 @@ public class BossAttackController : MonoBehaviour
             trackDuration = attackScriptableObject.trackDuration;
 
             telegraphs = attackScriptableObject.telegraphs;
+            usesSimpleTelegraph = attackScriptableObject.usesSimpleTelegraph;
             telegraphColor = attackScriptableObject.telegraphColor;
 
             attackDuration = attackScriptableObject.attackDuration;
@@ -271,7 +277,10 @@ public class BossAttackController : MonoBehaviour
 
         Coroutine telegraphRoutine = StartCoroutine(TelegraphAttack());
         yield return new WaitForSeconds(startDelay);
+        
         StopCoroutine(telegraphRoutine);
+        telegraphRenderer.SetActive(false);
+
         currentPoints[0] = startPoints[0];
         currentPoints[0] = startPoints[0];
 
@@ -486,7 +495,7 @@ public class BossAttackController : MonoBehaviour
                     Vector2 currPointOffset = currentPoints[0] - circleCenter;
                     float currAngle = Mathf.Atan2(currPointOffset.y, currPointOffset.x);
 
-                    if (!speedByDistance) // speed is not based on distance if it's tracking, since distance can change
+                    if (!speedByDistance) // speed should not be based on distance if it's tracking, since distance can change
                     {
                         currAngle += depthSign * pathSpeedCheckpoints[checkpointIndex] / (2 * radius);
                     }
@@ -535,6 +544,11 @@ public class BossAttackController : MonoBehaviour
         if (!telegraphs)
         {
             yield break;
+        }
+
+        if (usesSimpleTelegraph)
+        {
+            telegraphRenderer.SetActive(true);
         }
 
         while (true) // runs until the coroutine is ended
@@ -614,6 +628,10 @@ public class BossAttackController : MonoBehaviour
                 }
 
                 // TODO actually render projectile telegraph. use start and end point
+                if (usesSimpleTelegraph)
+                {
+                    telegraphRenderer.SetPositions(startPoints[0], endPoints[0]);
+                }
             }
         }
     } // end TelegraphAttack()

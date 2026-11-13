@@ -29,7 +29,8 @@ public class GenericAttack : ScriptableObject
     public float trackStrength;
     public float trackDuration;
     public bool telegraphs;
-    public Color telegraphColor; // useful for testing/basic telegraphs
+    public bool usesSimpleTelegraph; // useful for testing/basic telegraphs
+    public Color telegraphColor; // used for simple telegraph
     public float attackDuration;
     public float startDelay; // telegraphs during this delay, if that is enabled
     public float endDelay; // runs an ending animation if there is one. the hitbox will be disabled during this time
