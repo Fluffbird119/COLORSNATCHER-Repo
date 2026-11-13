@@ -277,7 +277,7 @@ public class BossAttackController : MonoBehaviour
 
         Coroutine telegraphRoutine = StartCoroutine(TelegraphAttack());
         yield return new WaitForSeconds(startDelay);
-        
+
         StopCoroutine(telegraphRoutine);
         telegraphRenderer.SetActive(false);
 
@@ -549,6 +549,7 @@ public class BossAttackController : MonoBehaviour
         if (usesSimpleTelegraph)
         {
             telegraphRenderer.SetActive(true);
+            telegraphRenderer.SetColor(telegraphColor);
         }
 
         while (true) // runs until the coroutine is ended
@@ -594,7 +595,11 @@ public class BossAttackController : MonoBehaviour
                     }
                 }
 
-                // TODO actually render the laser telegraph. only use start points
+                // TODO handle good telegraph rendering
+                if (usesSimpleTelegraph)
+                {
+                    telegraphRenderer.SetPositions(startPoints[0], startPoints[1]);
+                }
             }
             else
             {
@@ -627,7 +632,7 @@ public class BossAttackController : MonoBehaviour
                     }
                 }
 
-                // TODO actually render projectile telegraph. use start and end point
+                // TODO handle good telegraph rendering
                 if (usesSimpleTelegraph)
                 {
                     telegraphRenderer.SetPositions(startPoints[0], endPoints[0]);
