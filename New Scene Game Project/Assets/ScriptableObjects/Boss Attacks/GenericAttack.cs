@@ -39,5 +39,5 @@ public class GenericAttack : ScriptableObject
     public bool checkpointsByTime; // if this is set to true then attack duration is divided by the number of items instead
     public bool speedByDistance; // typically do not do this for tracking attacks
     public bool isCustomAttack;
-    public MonoBehaviour customScript;
+    public CustomAttackInterface customScript;
 }

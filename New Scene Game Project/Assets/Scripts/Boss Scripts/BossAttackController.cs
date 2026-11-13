@@ -50,8 +50,9 @@ public class BossAttackController : MonoBehaviour
     private bool checkpointsByTime;
     private bool speedByDistance;
     private bool isCustomAttack;
-    private MonoBehaviour customScript;
+    private CustomAttackInterface customScript;
     private Coroutine attackRoutine; // not in the scriptable object
+    private bool flagToEnd = false; // not in the scriptable object
     public bool attackDone {get; private set;} = false; // not in the scriptable object
     public static event Action<float> OnAttackLanding; // not in the scriptable object
     public static event Action<GameObject, bool> OnAttackCompletion; // not in the scriptable object
@@ -244,6 +245,7 @@ public class BossAttackController : MonoBehaviour
             customScript = attackScriptableObject.customScript;
         }
         attackDone = false;
+        flagToEnd = false;
     } // end ProccessScriptableObject()
 
     public void StartAttack(Vector2 arenaOffset) // update this to consider the offset of the arena
@@ -251,7 +253,14 @@ public class BossAttackController : MonoBehaviour
         // TODO the phase controller/combo controller should handle unpooling
         ProccessScriptableObject(arenaOffset); // this just reads in the info from the ScriptableObject, and updates the initial positions
 
-        attackRoutine = StartCoroutine(RunAttack());
+        if (isCustomAttack)
+        {
+            attackRoutine = StartCoroutine(customScript.RunAttack()); // still tracks the coroutine to enable interruptions
+        }
+        else
+        {
+            attackRoutine = StartCoroutine(RunAttack());
+        }
     } // end StartAttack()
 
     private IEnumerator RunAttack()
@@ -275,6 +284,13 @@ public class BossAttackController : MonoBehaviour
         float timeInAttack = 0f;
         while ((timeInAttack += Time.deltaTime) < attackDuration)
         {
+            if (flagToEnd)
+            {
+                StartCoroutine(RunAttackEnd());
+                OnAttackCompletion?.Invoke(gameObject, false);
+                yield break;
+            }
+
             if (currHitCooldown > 0)
             {
                 currHitCooldown -= Time.deltaTime;
@@ -423,9 +439,7 @@ public class BossAttackController : MonoBehaviour
                 // TODO update rendering and such based on current points. rember the stopsAtTarget bool for spriting
             }
             else // handle projectile things
-            {
-                // TODO check stopAtTarget and endpoint to see if the attack should end
-                
+            {   
                 if (trackDuration > 0 && trackingAttack)
                 {
                     Vector2 caster = transformToTrack.position;
@@ -488,11 +502,21 @@ public class BossAttackController : MonoBehaviour
 
                 if (!speedByDistance)
                 {
-                    currentPoints[0] = (targetPoint - currentPoints[0]).normalized * pathSpeedCheckpoints[checkpointIndex];
+                    Vector2 targetOffset = targetPoint - currentPoints[0];
+                    if (targetOffset.magnitude > (endPoints[0] - currentPoints[0]).magnitude)
+                    {
+                        flagToEnd = true;
+                    }
+                    currentPoints[0] = targetOffset.normalized * pathSpeedCheckpoints[checkpointIndex];
                 }
                 else
                 {
-                    currentPoints[0] = pathSpeedCheckpoints[checkpointIndex] * totalDistance * (targetPoint - currentPoints[0]).normalized;
+                    Vector2 targetOffset = targetPoint - currentPoints[0];
+                    if (targetOffset.magnitude > (endPoints[0] - currentPoints[0]).magnitude)
+                    {
+                        flagToEnd = true;
+                    }
+                    currentPoints[0] = pathSpeedCheckpoints[checkpointIndex] * totalDistance * targetOffset.normalized;
                 }
 
                 transform.position = currentPoints[0];
@@ -502,7 +526,6 @@ public class BossAttackController : MonoBehaviour
             yield return null;
         }
 
-        attackDone = true;
         OnAttackCompletion?.Invoke(gameObject, false);
         // TODO the phase controller/combo controller should handle repooling
     } // end RunAttack()
@@ -597,6 +620,8 @@ public class BossAttackController : MonoBehaviour
 
     private IEnumerator RunAttackEnd()
     {
+        attackDone = true;
+
         animator.SetBool(preAtkAnimHash, false);
         animator.SetBool(atkAnimHash, false);
         animator.SetBool(postAtkAnimHash, postAtkAnim);
