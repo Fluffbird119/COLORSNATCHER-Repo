@@ -25,18 +25,21 @@ public class BossAttackController : MonoBehaviour
     private int numHits;
     private float hitCooldown;
     private float currHitCooldown = 0f; // not in the scriptable object
+    private bool onePoint;
     private Vector2[] startPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicStart;
     private bool trackStart;
     private Vector2[] endPoints = new Vector2[2]; // use 1 point for projectiles
     private bool dynamicEnd;
     private Vector2[] currentPoints = new Vector2[2]; // not in the scriptable object
+    private Vector2[] currentVelocities = new Vector2[2]; //not in the scriptable object
     private Vector2[] startOffsets = new Vector2[2]; // not in the scriptable object
     private RepositionInterface repositionScript;
     private Transform startTransform;
     private Transform shootPointTransform;
     private bool startFollowsShooter;
     private bool trackingAttack;
+    private bool momentumTrack;
     private Transform transformToTrack;
     private bool stopAtTarget;
     private float trackStrength;
@@ -134,6 +137,7 @@ public class BossAttackController : MonoBehaviour
             numHits = attackScriptableObject.numHits;
             hitCooldown = attackScriptableObject.hitCooldown;
 
+            onePoint = attackScriptableObject.onePoint;
             startPoints = attackScriptableObject.startPoints;
             dynamicStart = attackScriptableObject.dynamicStart;
             trackStart = attackScriptableObject.trackStart;
@@ -146,6 +150,7 @@ public class BossAttackController : MonoBehaviour
             startFollowsShooter = attackScriptableObject.startFollowsShooter;
             transformToTrack = attackScriptableObject.transformToTrack;
             trackingAttack = attackScriptableObject.trackingAttack;
+            momentumTrack = attackScriptableObject.momentumTrack;
             stopAtTarget = attackScriptableObject.stopAtTarget;
             trackStrength = attackScriptableObject.trackStrength;
             trackDuration = attackScriptableObject.trackDuration;
@@ -163,14 +168,8 @@ public class BossAttackController : MonoBehaviour
             speedByDistance = attackScriptableObject.speedByDistance;
             checkpointsByTime = attackScriptableObject.checkpointsByTime;
 
-            if (startPoints[1] != null) // the attack is a laser (2 start points)
+            if (!onePoint) // the attack is a laser (2 start points)
             {
-                if (endPoints[1] == null)
-                {
-                    Debug.LogError("2 start points but 1 end point");
-                }
-
-
                 if (dynamicStart)
                 {
                     Vector2 caster = shootPointTransform.position;
@@ -210,11 +209,6 @@ public class BossAttackController : MonoBehaviour
             }
             else
             {
-                if (endPoints[1] != null)
-                {
-                    Debug.LogError("1 start point but 2 end points");
-                }
-
                 if (dynamicStart)
                 {
                     Vector2 caster = shootPointTransform.position;
@@ -282,7 +276,9 @@ public class BossAttackController : MonoBehaviour
         telegraphRenderer.SetActive(false);
 
         currentPoints[0] = startPoints[0];
-        currentPoints[0] = startPoints[0];
+        currentPoints[1] = startPoints[1];
+        currentVelocities[0] = (endPoints[0] - currentPoints[0]).normalized * pathSpeedCheckpoints[0];
+        currentVelocities[1] = (!onePoint) ? (endPoints[1] - currentPoints[1]).normalized * pathSpeedCheckpoints[0] : new Vector2(0, 0);
 
         hitbox.enabled = true;
 
@@ -313,12 +309,14 @@ public class BossAttackController : MonoBehaviour
                 curveTime -= Time.deltaTime;
             }
 
-            if (endPoints[1] != null) // handle laser things
+            if (!onePoint) // handle laser things
             {
                 Vector2 caster;
                 if (trackDuration > 0 && trackingAttack)
                 {
-                    caster = transformToTrack.position;
+                    Move(ref endPoints[1], transformToTrack.position, trackStrength * 4f);
+                    
+                    /*caster = transformToTrack.position;
 
                     Vector2 realVsTargetOffset = caster - endPoints[1];
                     if (realVsTargetOffset.magnitude < trackStrength)
@@ -328,7 +326,7 @@ public class BossAttackController : MonoBehaviour
                     else
                     {
                         endPoints[1] = caster;
-                    }
+                    }*/
                 }
 
                 if (startFollowsShooter)
@@ -412,7 +410,7 @@ public class BossAttackController : MonoBehaviour
                         Mathf.Atan2(currPointOffsets[1].y, currPointOffsets[1].x)
                     };
 
-                    if (!speedByDistance) // speed is not based on distance if it's tracking, since distance can change
+                    if (!speedByDistance) // speed should not based on distance if it's tracking, since distance can change
                     {
                         currAngles[0] += depthSign * pathSpeedCheckpoints[checkpointIndex] / (2 * radiuses[0]);
                         currAngles[1] += depthSign * pathSpeedCheckpoints[checkpointIndex] / (2 * radiuses[1]);
@@ -426,19 +424,48 @@ public class BossAttackController : MonoBehaviour
                     targetPoints[0] = radiuses[0] * (Quaternion.Euler(0, 0, currAngles[0]) * new Vector2(0, 1));
                     targetPoints[1] = radiuses[1] * (Quaternion.Euler(0, 0, currAngles[1]) * new Vector2(0, 1));
 
+                    currentVelocities[0] = targetPoints[0] - currentPoints[0];
+                    currentVelocities[1] = targetPoints[0] - currentPoints[0];
+
                     // TODO figure out detection and handling for overshooting the end point. or don't. idc
                 }
-
-                if (!speedByDistance) // handles speed that is not based on distance
+                else if (trackDuration > 0 && trackingAttack) // handles the velocity stuff with a tracking laser. only the second point is affected
                 {
-                    currentPoints[0] = (targetPoints[0] - currentPoints[0]).normalized * pathSpeedCheckpoints[checkpointIndex];
-                    currentPoints[1] = (targetPoints[1] - currentPoints[1]).normalized * pathSpeedCheckpoints[checkpointIndex];
+                    if (momentumTrack)
+                    {
+                        Vector2[] pointOffsets =
+                        {
+                            targetPoints[1] - currentPoints[1],
+                            currentVelocities[1]
+                        };
+                        float offsetAngleSign = Mathf.Sign(Vector2.SignedAngle(pointOffsets[0], pointOffsets[1]));
+                        currentVelocities[1] = Quaternion.Euler(0, 0, offsetAngleSign * trackStrength) * currentVelocities[1];
+                        currentVelocities[1] = currentVelocities[1].normalized * pathSpeedCheckpoints[checkpointIndex] * (speedByDistance ? totalDistance1 : 1f);
+                    }
+                    else
+                    {
+                        Move(ref currentVelocities[1], (targetPoints[1] - currentPoints[1]).normalized * pathSpeedCheckpoints[checkpointIndex] * (speedByDistance ? totalDistance1 : 1f), trackStrength);
+                    }
+                }
+                else // handles default laser velocity
+                {
+                    currentVelocities[0] = currentVelocities[0].normalized * pathSpeedCheckpoints[checkpointIndex] * (speedByDistance ? totalDistance0 : 1f);
+                    currentVelocities[1] = currentVelocities[1].normalized * pathSpeedCheckpoints[checkpointIndex] * (speedByDistance ? totalDistance1 : 1f);
+                }
+
+                currentPoints[0] += currentVelocities[0];
+                currentPoints[1] += currentVelocities[1];
+
+                /*if (!speedByDistance) // handles speed that is not based on distance
+                {
+                    Move(ref currentPoints[0], targetPoints[0], pathSpeedCheckpoints[checkpointIndex]);
+                    Move(ref currentPoints[1], targetPoints[1], pathSpeedCheckpoints[checkpointIndex]);
                 }
                 else
                 {
-                    currentPoints[0] = pathSpeedCheckpoints[checkpointIndex] * totalDistance0 * (targetPoints[0] - currentPoints[0]).normalized;
-                    currentPoints[1] = pathSpeedCheckpoints[checkpointIndex] * totalDistance1 * (targetPoints[1] - currentPoints[1]).normalized;
-                }
+                    Move(ref currentPoints[0], targetPoints[0], pathSpeedCheckpoints[checkpointIndex] * totalDistance0);
+                    Move(ref currentPoints[1], targetPoints[1], pathSpeedCheckpoints[checkpointIndex] * totalDistance1);
+                }*/
 
                 if (startFollowsShooter)
                 {
@@ -451,7 +478,9 @@ public class BossAttackController : MonoBehaviour
             {   
                 if (trackDuration > 0 && trackingAttack)
                 {
-                    Vector2 caster = transformToTrack.position;
+                    Move(ref endPoints[0], transformToTrack.position, trackStrength * 2f);
+
+                    /*Vector2 caster = transformToTrack.position;
 
                     Vector2 realVsTargetOffset = caster - endPoints[0];
                     if (realVsTargetOffset.magnitude < trackStrength)
@@ -461,7 +490,7 @@ public class BossAttackController : MonoBehaviour
                     else
                     {
                         endPoints[0] = caster;
-                    }
+                    }*/
                 }
 
                 float distanceToEnd = Vector2.Distance(currentPoints[0], endPoints[0]);
@@ -506,10 +535,36 @@ public class BossAttackController : MonoBehaviour
 
                     targetPoint = radius * (Quaternion.Euler(0, 0, currAngle) * new Vector2(0, 1));
 
+                    
+                    currentVelocities[0] = targetPoint - currentPoints[0];
                     // TODO figure out detection and handling for overshooting the end point. or don't. idc
                 }
+                else if (trackDuration > 0 && trackingAttack) // handles the velocity stuff with a tracking laser. only the second point is affected
+                {
+                    if (momentumTrack)
+                    {
+                        Vector2[] pointOffsets =
+                        {
+                            targetPoint - currentPoints[0],
+                            currentVelocities[0]
+                        };
+                        float offsetAngleSign = Mathf.Sign(Vector2.SignedAngle(pointOffsets[0], pointOffsets[1]));
+                        currentVelocities[0] = Quaternion.Euler(0, 0, offsetAngleSign * trackStrength) * currentVelocities[0];
+                        currentVelocities[0] = currentVelocities[0].normalized * pathSpeedCheckpoints[checkpointIndex] * (speedByDistance ? totalDistance : 1f);
+                    }
+                    else
+                    {
+                        Move(ref currentVelocities[0], (targetPoint - currentPoints[0]).normalized * pathSpeedCheckpoints[checkpointIndex] * (speedByDistance ? totalDistance : 1f), trackStrength);
+                    }
+                }
+                else // handles default laser velocity
+                {
+                    currentVelocities[0] = currentVelocities[0].normalized * pathSpeedCheckpoints[checkpointIndex] * (speedByDistance ? totalDistance : 1f);
+                }
 
-                if (!speedByDistance)
+                currentPoints[0] += currentVelocities[0];
+
+                /*if (!speedByDistance)
                 {
                     Vector2 targetOffset = targetPoint - currentPoints[0];
                     if (targetOffset.magnitude > (endPoints[0] - currentPoints[0]).magnitude)
@@ -526,7 +581,7 @@ public class BossAttackController : MonoBehaviour
                         flagToEnd = true;
                     }
                     currentPoints[0] = pathSpeedCheckpoints[checkpointIndex] * totalDistance * targetOffset.normalized;
-                }
+                }*/
 
                 transform.position = currentPoints[0];
                 // TODO update rendering and such based on current point
@@ -554,7 +609,7 @@ public class BossAttackController : MonoBehaviour
 
         while (true) // runs until the coroutine is ended
         {
-            if (startPoints[1] != null) // laser type attack
+            if (!onePoint) // laser type attack
             {
                 if (trackingAttack) // laser tracking stuff
                 {
@@ -656,4 +711,17 @@ public class BossAttackController : MonoBehaviour
         animator.SetBool(atkAnimHash, false);
         animator.SetBool(postAtkAnimHash, false);
     } // end RunAttackEnd()
+
+    private void Move(ref Vector2 source, Vector2 destination, float speed)
+    {
+        if (Vector2.Distance(source, destination) <= speed)
+        {
+            source = destination;
+        }
+        else
+        {
+            Vector2 offset = destination - source;
+            source += offset.normalized * speed;
+        }
+    }
 }

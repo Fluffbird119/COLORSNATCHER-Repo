@@ -14,6 +14,7 @@ public class GenericAttack : ScriptableObject
     public float damage;
     public int numHits; // number of times it can hit the player before ending. set to -1 to make it permanent
     public float hitCooldown; // delay before it can hit the player again
+    public bool onePoint; // use for projectiles
     public Vector2[] startPoints = new Vector2[2]; // use 1 point (2nd is null) for projectiles.  if dynamicEnd, these will serve as offsets from the shootPointTransform
     public bool dynamicStart; // if false, moves the attacker to the set start positions
     public bool trackStart;
@@ -24,6 +25,7 @@ public class GenericAttack : ScriptableObject
     public Transform shootPointTransform;
     public bool startFollowsShooter; // useful for lasers
     public bool trackingAttack;
+    public bool momentumTrack;
     public Transform transformToTrack; // if this is not null, the attack will target this
     public bool stopAtTarget; // use for lasers if you don't want it to go past the player. use for non tracking projectiles to not need to worry about attack duration
     public float trackStrength;
