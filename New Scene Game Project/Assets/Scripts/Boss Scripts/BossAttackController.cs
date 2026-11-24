@@ -624,7 +624,6 @@ public class BossAttackController : MonoBehaviour
         }
 
         EndAttack(false);
-        // TODO the phase controller/combo controller should handle repooling
     } // end RunAttack()
 
     private IEnumerator TelegraphAttack()
@@ -745,6 +744,7 @@ public class BossAttackController : MonoBehaviour
         animator.SetBool(postAtkAnimHash, false);
 
         CanPoolAttack?.Invoke(gameObject);
+        // TODO the phase controller/combo controller should handle repooling
     } // end RunAttackEnd()
 
     private void Move(ref Vector2 source, Vector2 destination, float speed)
