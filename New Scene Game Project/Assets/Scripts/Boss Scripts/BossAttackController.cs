@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class BossAttackController : MonoBehaviour
 {
-    [SerializeField] private GenericAttack attackScriptableObject;
+    private GenericAttack attackScriptableObject; // not in scriptable object (obviously)
     private Sprite sprite;
     private bool compoundSprite;
     private float spriteHeight;
@@ -63,6 +63,7 @@ public class BossAttackController : MonoBehaviour
     public bool attackDone {get; private set;} = false; // not in the scriptable object
     public static event Action<float> OnAttackLanding; // not in the scriptable object
     public static event Action<GameObject, bool> OnAttackCompletion; // not in the scriptable object
+    public static event Action<GameObject> CanPoolAttack; // not in the scriptable object
 
     private void Awake()
     {
@@ -73,7 +74,7 @@ public class BossAttackController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (currHitCooldown <= 0 && collision.gameObject.CompareTag("player"))
+        if (!isCustomAttack && currHitCooldown <= 0 && collision.gameObject.CompareTag("player"))
         {
             OnAttackLanding?.Invoke(damage);
             if (numHits > 0)
@@ -82,16 +83,14 @@ public class BossAttackController : MonoBehaviour
             }
             if (numHits == 0)
             {
-                StartCoroutine(RunAttackEnd());
-                OnAttackCompletion?.Invoke(gameObject, true);
-                StopCoroutine(attackRoutine);
+                EndAttack(true);
             }
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (currHitCooldown <= 0 && collision.CompareTag("player"))
+        if (!isCustomAttack && currHitCooldown <= 0 && collision.CompareTag("player"))
         {
             OnAttackLanding?.Invoke(damage);
             if (numHits > 0)
@@ -100,14 +99,12 @@ public class BossAttackController : MonoBehaviour
             }
             if (numHits == 0)
             {
-                StartCoroutine(RunAttackEnd());
-                OnAttackCompletion?.Invoke(gameObject, true);
-                StopCoroutine(attackRoutine);
+                EndAttack(true);
             }
         }
     }
 
-    private void ProccessScriptableObject(Vector2 arenaOffset) // update this to consider the offset of the arena
+    private void ProccessScriptableObject(Vector2 arenaOffset, bool overridePosition, Vector2 positionOverride) // update this to consider the offset of the arena (this may already be done idfk)
     {
         isCustomAttack = attackScriptableObject.isCustomAttack;
         if (!isCustomAttack)
@@ -170,32 +167,46 @@ public class BossAttackController : MonoBehaviour
 
             if (!onePoint) // the attack is a laser (2 start points)
             {
-                if (dynamicStart)
+                if (overridePosition)
                 {
-                    Vector2 caster = shootPointTransform.position;
                     startOffsets[0] = startPoints[0];
-                    startPoints[0] = startPoints[0] + caster;
-                    startPoints[1] = startPoints[1] + startPoints[0];
-                }
-                else
-                {
-                    Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
-                    startPoints[0] += arenaOffset;
-                    startPoints[1] += arenaOffset;
-                    repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
-                }
-
-                if (dynamicEnd)
-                {
-                    Vector2 caster = shootPointTransform.position;
                     startOffsets[1] = endPoints[0];
-                    endPoints[0] = endPoints[0] + caster;
+
+                    startPoints[0] = startPoints[0] + positionOverride;
+                    startPoints[1] = startPoints[1] + startPoints[0];
+
+                    endPoints[0] = endPoints[0] + positionOverride;
                     endPoints[1] = endPoints[1] + endPoints[0];
                 }
                 else
                 {
-                    endPoints[0] += arenaOffset;
-                    endPoints[1] += arenaOffset;
+                    if (dynamicStart)
+                    {
+                        Vector2 caster = shootPointTransform.position;
+                        startOffsets[0] = startPoints[0];
+                        startPoints[0] = startPoints[0] + caster;
+                        startPoints[1] = startPoints[1] + startPoints[0];
+                    }
+                    else
+                    {
+                        Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
+                        startPoints[0] += arenaOffset;
+                        startPoints[1] += arenaOffset;
+                        repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
+                    }
+
+                    if (dynamicEnd)
+                    {
+                        Vector2 caster = shootPointTransform.position;
+                        startOffsets[1] = endPoints[0];
+                        endPoints[0] = endPoints[0] + caster;
+                        endPoints[1] = endPoints[1] + endPoints[0];
+                    }
+                    else
+                    {
+                        endPoints[0] += arenaOffset;
+                        endPoints[1] += arenaOffset;
+                    }
                 }
 
                 if (trackingAttack)
@@ -209,29 +220,37 @@ public class BossAttackController : MonoBehaviour
             }
             else
             {
-                if (dynamicStart)
+                if (overridePosition)
                 {
-                    Vector2 caster = shootPointTransform.position;
-                    startPoints[0] = startPoints[0] + caster;
+                    startPoints[0] = startPoints[0] + positionOverride;
+                    endPoints[0] = endPoints[0] + positionOverride;
                 }
                 else
                 {
-                    Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
-                    startPoints[0] += arenaOffset;
-                    repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
+                    if (dynamicStart)
+                    {
+                        Vector2 caster = shootPointTransform.position;
+                        startPoints[0] = startPoints[0] + caster;
+                    }
+                    else
+                    {
+                        Vector2 caster = startTransform.position - shootPointTransform.position; // calculates and casts the offset
+                        startPoints[0] += arenaOffset;
+                        repositionScript.Reposition(startTransform, startPoints[0] + caster, transformToTrack);
+                    }
+
+                    if (dynamicEnd)
+                    {
+                        Vector2 caster = shootPointTransform.position;
+                        endPoints[0] = endPoints[0] + caster;
+                    }
+                    else
+                    {
+                        endPoints[0] += arenaOffset;
+                    }
                 }
 
-                if (dynamicEnd)
-                {
-                    Vector2 caster = shootPointTransform.position;
-                    endPoints[0] = endPoints[0] + caster;
-                }
-                else
-                {
-                    endPoints[0] += arenaOffset;
-                }
-
-                if (trackingAttack)
+                if (trackingAttack && trackStart)
                 {
                     endPoints[0] = transformToTrack.position;
                 }
@@ -248,20 +267,34 @@ public class BossAttackController : MonoBehaviour
         flagToEnd = false;
     } // end ProccessScriptableObject()
 
-    public void StartAttack(Vector2 arenaOffset) // update this to consider the offset of the arena
+    public void StartAttack(GenericAttack attackInfo, Vector2 arenaOffset, bool overridePosition, Vector2 positionOverride) // update this to consider the offset of the arena
     {
         // TODO the phase controller/combo controller should handle unpooling
-        ProccessScriptableObject(arenaOffset); // this just reads in the info from the ScriptableObject, and updates the initial positions
+        attackScriptableObject = attackInfo;
+        ProccessScriptableObject(arenaOffset, overridePosition, positionOverride); // this just reads in the info from the ScriptableObject, and updates the initial positions
 
         if (isCustomAttack)
         {
             attackRoutine = StartCoroutine(customScript.RunAttack()); // still tracks the coroutine to enable interruptions
+            customScript.OnCustomAttackCompletion += EndAttack;
         }
         else
         {
             attackRoutine = StartCoroutine(RunAttack());
         }
     } // end StartAttack()
+
+    private void EndAttack(bool isPremature)
+    {
+        if (isCustomAttack)
+        {
+            customScript.OnCustomAttackCompletion -= EndAttack;
+        }
+        
+        StartCoroutine(RunAttackEnd());
+        OnAttackCompletion?.Invoke(gameObject, isPremature);
+        StopCoroutine(attackRoutine);
+    }
 
     private IEnumerator RunAttack()
     {
@@ -289,11 +322,9 @@ public class BossAttackController : MonoBehaviour
         float timeInAttack = 0f;
         while ((timeInAttack += Time.deltaTime) < attackDuration)
         {
-            if (flagToEnd)
+            if (flagToEnd) // idrk why this is still here. currently is never true
             {
-                StartCoroutine(RunAttackEnd());
-                OnAttackCompletion?.Invoke(gameObject, false);
-                yield break;
+                EndAttack(false);
             }
 
             if (currHitCooldown > 0)
@@ -427,7 +458,7 @@ public class BossAttackController : MonoBehaviour
                     currentVelocities[0] = targetPoints[0] - currentPoints[0];
                     currentVelocities[1] = targetPoints[0] - currentPoints[0];
 
-                    // TODO figure out detection and handling for overshooting the end point. or don't. idc
+                    // TODO figure out detection and handling for overshooting the end point. or don't. idc. Don't do this anyone who is seeing this. It is bad and scary and would mess things up. Use curve/attack duration for this effect instead
                 }
                 else if (trackDuration > 0 && trackingAttack) // handles the velocity stuff with a tracking laser. only the second point is affected
                 {
@@ -584,13 +615,13 @@ public class BossAttackController : MonoBehaviour
                 }*/
 
                 transform.position = currentPoints[0];
-                // TODO update rendering and such based on current point
+                // TODO update rendering and such based on current point. There shouldn't really need to be anything here. The animator should handle allat
             }
 
             yield return null;
         }
 
-        OnAttackCompletion?.Invoke(gameObject, false);
+        EndAttack(false);
         // TODO the phase controller/combo controller should handle repooling
     } // end RunAttack()
 
@@ -710,6 +741,8 @@ public class BossAttackController : MonoBehaviour
         animator.SetBool(preAtkAnimHash, false);
         animator.SetBool(atkAnimHash, false);
         animator.SetBool(postAtkAnimHash, false);
+
+        CanPoolAttack?.Invoke(gameObject);
     } // end RunAttackEnd()
 
     private void Move(ref Vector2 source, Vector2 destination, float speed)
@@ -723,5 +756,5 @@ public class BossAttackController : MonoBehaviour
             Vector2 offset = destination - source;
             source += offset.normalized * speed;
         }
-    }
+    } // end Move()
 }
