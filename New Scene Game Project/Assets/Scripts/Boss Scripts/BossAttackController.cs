@@ -263,8 +263,10 @@ public class BossAttackController : MonoBehaviour
         {
             customScript = attackScriptableObject.customScript;
         }
+
         attackDone = false;
         flagToEnd = false;
+        attackRoutine = null;
     } // end ProccessScriptableObject()
 
     public void StartAttack(GenericAttack attackInfo, Vector2 arenaOffset, bool overridePosition, Vector2 positionOverride) // update this to consider the offset of the arena
@@ -284,13 +286,13 @@ public class BossAttackController : MonoBehaviour
         }
     } // end StartAttack()
 
-    private void EndAttack(bool isPremature)
+    public void EndAttack(bool isPremature)
     {
         if (isCustomAttack)
         {
             customScript.OnCustomAttackCompletion -= EndAttack;
         }
-        
+
         StartCoroutine(RunAttackEnd());
         OnAttackCompletion?.Invoke(gameObject, isPremature);
         StopCoroutine(attackRoutine);

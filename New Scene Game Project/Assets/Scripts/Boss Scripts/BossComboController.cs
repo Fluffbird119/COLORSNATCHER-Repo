@@ -1,28 +1,31 @@
 using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class BossComboController : MonoBehaviour
 {
     private ComboAttack comboScriptableObject; // not in the scriptable object (obviously)
-    private bool usesComboAttacks;
-    private GenericAttack[] genericAttacks;
-    private ComboAttack[] comboAttacks;
+    private List<GenericAttack> genericAttacks;
+    private List<ComboAttack> comboAttacks;
     private float delay;
     private bool preserveAttackEndPos;
+    private Vector2 attackEndPos; // not in the scriptable object
     private bool isChain;
     private bool useLeader;
     private bool shuffled;
+    private bool repeatable;
     private int numAttacksPerCombo;
-    private Rect arena;
+    private GameObject arena;
+    private int attackIndex; // not in the scriptable object
     private GameObject currentAttack; // not in the scriptable object
+    private Coroutine comboRoutine; // not in the scriptable object
     public bool comboDone {get; private set;} = false; // not in the scriptable object
     public static event Action<ScriptableObject> OnRunningAttack; // not in the scriptable object
     public static event Action<GameObject, bool> OnComboCompletion; // not in the scriptable object
 
-    private void ProccessScriptableObject(Vector2 arenaOffset)
+    private void ProccessScriptableObject()
     {
-        usesComboAttacks = comboScriptableObject.usesComboAttacks;
-
         genericAttacks = comboScriptableObject.genericAttacks;
         comboAttacks = comboScriptableObject.comboAttacks;
 
@@ -32,18 +35,91 @@ public class BossComboController : MonoBehaviour
         useLeader = comboScriptableObject.useLeader;
 
         shuffled = comboScriptableObject.shuffled;
+        repeatable = comboScriptableObject.repeatable;
         numAttacksPerCombo = comboScriptableObject.numAttacksPerCombo;
 
+        arena = comboScriptableObject.arena;
+
+        attackEndPos = new Vector2(0, 0);
+        attackIndex = shuffled ? UnityEngine.Random.Range(0, genericAttacks.Count + comboAttacks.Count) : 0;
+        currentAttack = null;
+        comboRoutine = null;
         comboDone = false;
     }
 
-    public void StartCombo()
+    public void StartCombo(ComboAttack comboInfo)
     {
-        
+        comboScriptableObject = comboInfo;
+        ProccessScriptableObject();
+
+        BossAttackController.OnAttackCompletion += AttackEnded;
+
+        comboRoutine = StartCoroutine(RunCombo());
     }
 
-    public void RunCombo()
+    public void EndCombo(bool isPremature) // ending prematurely will typically not do anything
     {
-        
+        StopCoroutine(comboRoutine);
+        BossAttackController.OnAttackCompletion -= AttackEnded;
+        OnComboCompletion?.Invoke(gameObject, isPremature);
+    }
+
+    private IEnumerator RunCombo()
+    {
+        for (int i = 0; i < numAttacksPerCombo; ++i)
+        {
+            if (attackIndex >= genericAttacks.Count)
+            {
+                BossComboController comboController = null;
+                // TODO unpool combo, set comboController to its script
+
+                comboController.StartCombo(comboAttacks[attackIndex - genericAttacks.Count]);
+            }
+            else
+            {
+                BossAttackController attackController = null;
+                // TODO unpool attack, set attackController to its script
+                attackController.StartAttack(genericAttacks[attackIndex], arena.transform.position, preserveAttackEndPos || useLeader, currentAttack == null ? attackEndPos : currentAttack.transform.position);
+            }
+
+            if (shuffled)
+            {
+                if (!repeatable)
+                {
+                    if (attackIndex >= genericAttacks.Count)
+                    {
+                        comboAttacks.RemoveAt(attackIndex);
+                    }
+                    else
+                    {
+                        genericAttacks.RemoveAt(attackIndex);
+                    }
+                }
+
+                attackIndex = UnityEngine.Random.Range(0, genericAttacks.Count + comboAttacks.Count);
+            }
+            else
+            {
+                ++attackIndex;
+            }
+
+            yield return new WaitForSeconds(delay);
+        }
+    }
+
+    private void AttackEnded(GameObject attackObject, bool isPremature)
+    {
+        if (attackObject != currentAttack)
+        {
+            return;
+        }
+
+        if (isPremature && isChain)
+        {
+            EndCombo(true);
+        }
+
+        attackEndPos = currentAttack.transform.position;
+        currentAttack = null;
     }
 }
