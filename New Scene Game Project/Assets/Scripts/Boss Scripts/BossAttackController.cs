@@ -76,6 +76,7 @@ public class BossAttackController : MonoBehaviour
     {
         if (!isCustomAttack && currHitCooldown <= 0 && collision.gameObject.CompareTag("player"))
         {
+            currHitCooldown = hitCooldown;
             OnAttackLanding?.Invoke(damage);
             if (numHits > 0)
             {
@@ -92,6 +93,7 @@ public class BossAttackController : MonoBehaviour
     {
         if (!isCustomAttack && currHitCooldown <= 0 && collision.CompareTag("player"))
         {
+            currHitCooldown = hitCooldown;
             OnAttackLanding?.Invoke(damage);
             if (numHits > 0)
             {
@@ -262,6 +264,7 @@ public class BossAttackController : MonoBehaviour
         else
         {
             customScript = attackScriptableObject.customScript;
+            customScript.OnCustomAttackCompletion += EndCustomAttack;
         }
 
         attackDone = false;
@@ -277,8 +280,7 @@ public class BossAttackController : MonoBehaviour
 
         if (isCustomAttack)
         {
-            attackRoutine = StartCoroutine(customScript.RunAttack()); // still tracks the coroutine to enable interruptions
-            customScript.OnCustomAttackCompletion += EndAttack;
+            attackRoutine = StartCoroutine(customScript.RunAttack()); // still tracks the coroutine. No reason for this
         }
         else
         {
@@ -290,13 +292,26 @@ public class BossAttackController : MonoBehaviour
     {
         if (isCustomAttack)
         {
-            customScript.OnCustomAttackCompletion -= EndAttack;
+            customScript.OnCustomAttackCompletion -= EndCustomAttack;
+            customScript.EndAttack();
+            attackRoutine = null;
+        }
+        else
+        {
+            StartCoroutine(RunAttackEnd());
+            StopAllCoroutines();
+            telegraphRenderer.SetActive(false);
         }
 
-        StartCoroutine(RunAttackEnd());
         OnAttackCompletion?.Invoke(gameObject, isPremature);
-        StopCoroutine(attackRoutine);
-    }
+    } // end EndAttack()
+
+    private void EndCustomAttack(bool isPremature) // serves as a way to wrap up the container attack once the custom attack finishes
+    {
+        customScript.OnCustomAttackCompletion -= EndCustomAttack;
+        attackRoutine = null;
+        OnAttackCompletion?.Invoke(gameObject, isPremature);
+    } // end EndCustomAttack()
 
     private IEnumerator RunAttack()
     {
@@ -307,7 +322,10 @@ public class BossAttackController : MonoBehaviour
         Coroutine telegraphRoutine = StartCoroutine(TelegraphAttack());
         yield return new WaitForSeconds(startDelay);
 
-        StopCoroutine(telegraphRoutine);
+        if (telegraphRoutine != null)
+        {
+            StopCoroutine(telegraphRoutine);
+        }
         telegraphRenderer.SetActive(false);
 
         currentPoints[0] = startPoints[0];
@@ -637,6 +655,10 @@ public class BossAttackController : MonoBehaviour
         {
             telegraphRenderer.SetActive(true);
             telegraphRenderer.SetColor(telegraphColor);
+        }
+        else
+        {
+            telegraphRenderer.SetActive(false);
         }
 
         while (true) // runs until the coroutine is ended

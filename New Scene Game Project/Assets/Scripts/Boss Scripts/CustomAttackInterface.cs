@@ -5,4 +5,5 @@ public interface CustomAttackInterface
 {
     event Action<bool> OnCustomAttackCompletion;
     public IEnumerator RunAttack();
+    public void EndAttack();
 }

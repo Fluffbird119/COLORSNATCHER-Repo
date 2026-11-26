@@ -19,9 +19,10 @@ public class BossComboController : MonoBehaviour
     private GameObject arena;
     private int attackIndex; // not in the scriptable object
     private GameObject currentAttack; // not in the scriptable object
+    private List<GameObject> activeAttacks; // not in the scriptable object
     private Coroutine comboRoutine; // not in the scriptable object
     public bool comboDone {get; private set;} = false; // not in the scriptable object
-    public static event Action<ScriptableObject> OnRunningAttack; // not in the scriptable object
+    public static event Action<ScriptableObject, GameObject> OnRunningAttack; // not in the scriptable object
     public static event Action<GameObject, bool> OnComboCompletion; // not in the scriptable object
 
     private void ProccessScriptableObject()
@@ -59,8 +60,30 @@ public class BossComboController : MonoBehaviour
 
     public void EndCombo(bool isPremature) // ending prematurely will typically not do anything
     {
-        StopCoroutine(comboRoutine);
+        if (comboRoutine != null)
+        {
+            StopCoroutine(comboRoutine);
+        }
+
         BossAttackController.OnAttackCompletion -= AttackEnded;
+        if (isPremature)
+        {
+            foreach (GameObject attack in activeAttacks)
+            {
+                if (attack.TryGetComponent<BossAttackController>(out var attackScript))
+                {
+                    attackScript.EndAttack(true);
+                }
+                else
+                {
+                    if (attack.TryGetComponent<BossComboController>(out var comboScript))
+                    {
+                        comboScript.EndCombo(true);
+                    }
+                }
+            }
+        }
+
         OnComboCompletion?.Invoke(gameObject, isPremature);
     }
 
@@ -71,14 +94,14 @@ public class BossComboController : MonoBehaviour
             if (attackIndex >= genericAttacks.Count)
             {
                 BossComboController comboController = null;
-                // TODO unpool combo, set comboController to its script
+                // TODO unpool combo, set comboController to its script. also add it to activeAttacks and current attack (when applicable)
 
                 comboController.StartCombo(comboAttacks[attackIndex - genericAttacks.Count]);
             }
             else
             {
                 BossAttackController attackController = null;
-                // TODO unpool attack, set attackController to its script
+                // TODO unpool attack, set attackController to its script. also add it to activeAttacks and current attack (when applicable)
                 attackController.StartAttack(genericAttacks[attackIndex], arena.transform.position, preserveAttackEndPos || useLeader, currentAttack == null ? attackEndPos : currentAttack.transform.position);
             }
 
@@ -105,10 +128,16 @@ public class BossComboController : MonoBehaviour
 
             yield return new WaitForSeconds(delay);
         }
+        while (activeAttacks.Count > 0)
+        {
+            yield return null;
+        }
+        EndCombo(false);
     }
 
     private void AttackEnded(GameObject attackObject, bool isPremature)
     {
+        activeAttacks.Remove(attackObject);
         if (attackObject != currentAttack)
         {
             return;
